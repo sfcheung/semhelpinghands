@@ -1,8 +1,7 @@
 Package: semhelpinghands
 Title: Helper Functions for Structural Equation Modeling
 Version: 0.0.0.9001
-Authors@R: c(
-    person(given = "Shu Fai",
+Authors@R: person(given = "Shu Fai",
            family = "Cheung",
            role = c("aut", "cre"),
            email = "shufai.cheung@gmail.com",
@@ -11,7 +10,7 @@ Description: A collection of functions used in doing, teaching, and learining
              structural equation modeling.
 URL: https://sfcheung.github.io/semhelpinghands/ 
 BugReports: https://github.com/sfcheung/semhelpinghands/issues
-Depends: R (>= 4.1.1)
+Depends: R (>= 4.1.0)
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

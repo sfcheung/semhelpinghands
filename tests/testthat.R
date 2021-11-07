@@ -1,4 +1,4 @@
 library(testthat)
 library(semhelpinghands)
 
-test_check("semhelpinghands")
+#test_check("semhelpinghands")
