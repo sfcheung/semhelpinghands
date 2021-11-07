@@ -26,4 +26,4 @@ remotes::install_github("sfcheung/semhelpinghands")
 
 This is the webpage for this package:
 
-https://sfcheung.github.io/semptools/
+https://sfcheung.github.io/semhelpinghands/
