@@ -1,0 +1,105 @@
+---
+title: "Bootstrap Confidence Interval for Standardized Solution in lavaan"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Bootstrap Confidence Interval for Standardized Solution in lavaan}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(width = 132)
+```
+
+# What `standardizedSolution_boot_ci()` Does
+
+In `lavaan`, if bootstrapping is requested, the standard errors and
+confidence intervals in the standardized solutions are computed by delta method
+using the variance-covariance matrix of the bootstrap estimates. The intervals
+are symmetric about the point estimates and are not the usual bootstrap
+percentile confidence intervals users expect when bootstrapping is conducted.
+
+`standardizedSolution_boot_ci()` accepts an `lavaan::lavaan-class` object fitted
+with `se = "bootstrap"` and form the percentile confidence intervals based on the
+bootstrap estimates stored in the object.
+
+# Data and Model
+
+An mediation model example adapted from the official `lavaan` website is used
+(https://lavaan.ugent.be/tutorial/mediation.html).
+
+```{r}
+library(lavaan)
+set.seed(1234)
+n <- 100
+X <- runif(n) - .5
+M <- 0.20*X + rnorm(n)
+Y <- 0.17*M + rnorm(n)
+Data <- data.frame(X = X, Y = Y, M = M)
+model <- ' # direct effect
+             Y ~ c*X
+           # mediator
+             M ~ a*X
+             Y ~ b*M
+           # indirect effect (a*b)
+             ab := a*b
+           # total effect
+             total := c + (a*b)
+         '
+```
+
+```{r echo = FALSE}
+if (file.exists("standardizedSolution_boot_ci_data.rds")) {
+    fit <- readRDS("standardizedSolution_boot_ci_data.rds")
+  } else {
+    fit <- sem(model,
+               data = Data,
+               se = "bootstrap",
+               bootstrap = 5000,
+               parallel ="snow", ncpus = 8)
+    saveRDS(fit, "standardizedSolution_boot_ci_data.rds")
+  }
+```
+
+This model is fitted with `se = "bootstrap"`:
+
+```{r eval = FALSE}
+fit <- sem(model,
+           data = Data,
+           se = "bootstrap",
+           bootstrap = 5000,
+           parallel ="snow", ncpus = 8)
+```
+
+This is the standardized solution with delta-method confidence intervals:
+
+```{r}
+standardizedSolution(fit)
+```
+
+# Form Bootstrap Percentile CIs for Standardized Solution
+
+To form bootstrap percentile confidence intervals for the standardized
+solution, simply use `standardizedSolution_boot_ci()` instead of
+`lavaan::standardizedSolution()`:
+
+```{r}
+library(semhelpinghands)
+ci_boot <- standardizedSolution_boot_ci(fit)
+ci_boot
+```
+
+The bootstrap percentile confidence intervals are appended to the right
+of the original output of `lavaan::standardizedSolution()`. 
+
+# Note
+
+The function `standardizedSolution_boot_ci()` takes some time to run because
+it retrieves the estimates of the unstandardized solution in each bootstrap
+sample and computes the estimates in the standardized solution. Therefore,
+if 5,000 bootstrap samples are requested, this process is repeated 5,000 times.
+Nevertheless, it is still much faster than fitting the model 5,000 times again.
