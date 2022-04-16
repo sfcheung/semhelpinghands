@@ -80,7 +80,7 @@ standardizedSolution_boot_ci <- function(object,
     boot_est <- split(boot_est0, row(boot_est0))
     out_all <- t(sapply(boot_est, fct_i, p_est = p_est, p_free = p_free))
     # Could have used boot's method but quantile() is good enough.
-    boot_ci <- t(apply(out_all, 2, quantile, probs = c((1 - level) / 2,
+    boot_ci <- t(apply(out_all, 2, stats::quantile, probs = c((1 - level) / 2,
                                                         1 - (1 - level) / 2),
                                              na.rm = TRUE))
     colnames(boot_ci) <- c("boot.ci.lower", "boot.ci.upper")
