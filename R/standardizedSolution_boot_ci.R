@@ -57,12 +57,12 @@ standardizedSolution_boot_ci <- function(object,
     if (inherits(boot_est0, "try-error")) {
         stop("Bootstrapping estimates not found. Was se = 'boot'?")
       }
-    if (lavaan::parameterTable(object)$op %in% "==") {
+    if (any(lavaan::parameterTable(object)$op %in% "==")) {
         stop("Models with equality constraint(s) not yet supported.")
       }
     std_args <- list(...)
     ptable <- lavaan::parameterTable(object)
-    p_free <- ptable$free
+    p_free <- ptable$free > 0
     p_est  <- ptable$est
     fct_i <- function(est_i, p_est, p_free) {
         p_est[p_free] <- est_i
