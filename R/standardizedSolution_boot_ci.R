@@ -15,6 +15,10 @@
 #' @param type The type of standard estimates. The same argument of
 #'  [lavaan::standardizedSolution()], and support all values supported by
 #'  [lavaan::standardizedSolution()]. Default is `"std.all"`.
+#' 
+#' @param save_boot_est_std Whether the bootstrap estimates of the standardized
+#'  solution are saved. If saved, will be stored in the attribute `boot_est_std`.
+#'  Default is `FALSE`.
 #'
 #' @param ... Other arguments to be passed to [lavaan::standardizedSolution()].
 #'
@@ -49,6 +53,7 @@
 standardizedSolution_boot_ci <- function(object,
                                          level = .95,
                                          type = "std.all",
+                                         save_boot_est_std = FALSE,
                                          ...) {
     if (!inherits(object, "lavaan")) {
         stop("The object must be a lavaan-class object.")
@@ -93,5 +98,8 @@ standardizedSolution_boot_ci <- function(object,
                                         ...)
     out_final <- cbind(out, boot_ci)
     class(out_final) <- class(out)
+    if (save_boot_est_std) {
+        attr(out_final, "boot_est_std") <- out_all
+      }
     out_final
   }

@@ -22,29 +22,36 @@ set.seed(1234)
 system.time(fit <- cfa(model = model,
                        data = HolzingerSwineford1939,
                        se = "boot",
-                       bootstrap = 5000,
-                       parallel ="snow", ncpus = 8))
-ci_boot <- standardizedSolution_boot_ci(fit)
+                       bootstrap = 100))
+ci_boot <- standardizedSolution_boot_ci(fit, save_boot_est_std = TRUE)
 
 get_std <- function(object) {
     lavaan::standardizedSolution(object)$est.std
   }
 fit2 <- update(fit, se = "none")
 set.seed(1234)
-boot_ci_test <- bootstrapLavaan(fit2, R = 5000,
-                                FUN = get_std,
-                                parallel = "snow",
-                                ncpus = 8)
-alpha <- .95
-ci_test <- t(apply(boot_ci_test, 2, quantile, probs = c((1 - alpha) / 2,
-                   1 - (1 - alpha) / 2),
-                   na.rm = TRUE))
-cbind(ci_boot[, c("ci.lower", "ci.upper")], ci_test)
-test_that("Compare boot ci with equality constraints", {
+boot_ci_test <- bootstrapLavaan(fit2, R = 100,
+                                FUN = get_std)
+
+test_that("Compare boot estimates directly", {
     expect_equal(
-        ci_test,
-        as.matrix(ci_boot[, c("boot.ci.lower", "boot.ci.upper")]),
-        tolerance = .005,
+        attr(ci_boot, "boot_est_std"),
+        boot_ci_test,
         ignore_attr = TRUE
       )
   })
+
+
+# alpha <- .95
+# ci_test <- t(apply(boot_ci_test, 2, quantile, probs = c((1 - alpha) / 2,
+#                    1 - (1 - alpha) / 2),
+#                    na.rm = TRUE))
+# cbind(ci_boot[, c("ci.lower", "ci.upper")], ci_test)
+# test_that("Compare boot ci with equality constraints", {
+#     expect_equal(
+#         ci_test,
+#         as.matrix(ci_boot[, c("boot.ci.lower", "boot.ci.upper")]),
+#         tolerance = .005,
+#         ignore_attr = TRUE
+#       )
+#   })
