@@ -68,9 +68,6 @@ standardizedSolution_boot_ci <- function(object,
         stop("Bootstrapping estimates not found. Was se = 'boot'?")
       }
     if (!force_run) {
-        if (any(lavaan::parameterTable(object)$op %in% "==")) {
-            stop("Models with equality constraint(s) not yet supported.")
-          }
       }
     std_args <- list(...)
     ptable <- lavaan::parameterTable(object)
