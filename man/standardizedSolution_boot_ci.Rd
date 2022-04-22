@@ -4,7 +4,14 @@
 \alias{standardizedSolution_boot_ci}
 \title{Percentile Bootstrap CIs for Standardized Solution}
 \usage{
-standardizedSolution_boot_ci(object, level = 0.95, type = "std.all", ...)
+standardizedSolution_boot_ci(
+  object,
+  level = 0.95,
+  type = "std.all",
+  save_boot_est_std = FALSE,
+  force_run = FALSE,
+  ...
+)
 }
 \arguments{
 \item{object}{A \linkS4class{lavaan} object, fitted with 'se = "boot"'.}
@@ -15,6 +22,14 @@ is .95.}
 \item{type}{The type of standard estimates. The same argument of
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}, and support all values supported by
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}. Default is \code{"std.all"}.}
+
+\item{save_boot_est_std}{Whether the bootstrap estimates of the standardized
+solution are saved. If saved, will be stored in the attribute \code{boot_est_std}.
+Default is \code{FALSE}.}
+
+\item{force_run}{If \code{TRUE}, will skip checks and run on models not tested.
+For internal use and should be set to \code{TRUE}. Default is
+\code{FALSE}.}
 
 \item{...}{Other arguments to be passed to \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 }
