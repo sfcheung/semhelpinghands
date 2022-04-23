@@ -1,20 +1,18 @@
-(This is the webpage for this package: https://sfcheung.github.io/semhelpinghands/)
+This is the GitHub webpage for this package:
+
+https://sfcheung.github.io/semhelpinghands/)
 
 # semhelpinghands
 
-An assortment of functions that I wrote for my own use
-in structural equation modeling (SEM) (currently, only one function).
-I have no plan to submit this package to CRAN, for now. I use a package to
-store these unrelated functions such that I can make use of the help pages
-and examples, to help my "future self" to know what they are.
+An assortment of helper functions for doing structural equation modeling
+(SEM), mainly by [lavaan::lavaan()]. This package is not for implementing
+advanced statistical procedures. They are functions for tasks that come
+in handy for doing SEM in general, including understanding and interpreting
+the output.
 
-Do not propose any functions to this package. If you have anything useful
-for SEM, I recommend you to propose to `semTools`
-(https://github.com/simsem/semTools). I also use `semTools` myself. This package
-is just for things I need but not in `semTools` or other packages.
-
-Nevertheless, if you are interested in anything in this package,
-you are certainly welcome to install it and use them.
+Many of the tasks can be done by basic R code. However, these functions can
+help users who are not familiar with R programming or use R only occasionally
+to do these tasks without writing their own code.
 
 # Installation
 
