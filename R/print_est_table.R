@@ -20,6 +20,9 @@ print.est_table <- function(x,
                             nd = 3,
                             empty_cells = "--",
                             group_first = FALSE) {
+    if (is.null(attr(x, "v_ind"))) {
+        return(NextMethod())
+      }
     grouped <- attr(x, "grouped")
     group_first <- attr(x, "group_first")
     if (grouped) {
