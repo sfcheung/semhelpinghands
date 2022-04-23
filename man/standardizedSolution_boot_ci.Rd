@@ -10,6 +10,7 @@ standardizedSolution_boot_ci(
   type = "std.all",
   save_boot_est_std = FALSE,
   force_run = FALSE,
+  boot_delta_ratio = FALSE,
   ...
 )
 }
@@ -30,6 +31,11 @@ Default is \code{FALSE}.}
 \item{force_run}{If \code{TRUE}, will skip checks and run on models not tested.
 For internal use and should be set to \code{TRUE}. Default is
 \code{FALSE}.}
+
+\item{boot_delta_ratio}{The ratio of (a) the distance of the bootstrap
+confidence limit from the point estimate to (b)
+the distance of the delta-method limit from the
+point estimate.}
 
 \item{...}{Other arguments to be passed to \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 }

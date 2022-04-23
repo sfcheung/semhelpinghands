@@ -24,6 +24,11 @@
 #'                  For internal use and should be set to `TRUE`. Default is
 #'                  `FALSE`.
 #'
+#' @param boot_delta_ratio The ratio of (a) the distance of the bootstrap
+#'                         confidence limit from the point estimate to (b)
+#'                         the distance of the delta-method limit from the
+#'                         point estimate.
+#'
 #' @param ... Other arguments to be passed to [lavaan::standardizedSolution()].
 #'
 #' @author Shu Fai Cheung (shufai.cheung@gmail.com)
@@ -59,6 +64,7 @@ standardizedSolution_boot_ci <- function(object,
                                          type = "std.all",
                                          save_boot_est_std = FALSE,
                                          force_run = FALSE,
+                                         boot_delta_ratio = FALSE,
                                          ...) {
     if (!inherits(object, "lavaan")) {
         stop("The object must be a lavaan-class object.")
@@ -90,6 +96,16 @@ standardizedSolution_boot_ci <- function(object,
                                         level = level,
                                         ...)
     out_final <- cbind(out, boot_ci)
+    if (boot_delta_ratio) {
+        tmp1 <- abs(out_final$boot.ci.lower - out_final$est.std) /
+                                 abs(out_final$ci.lower - out_final$est.std)
+        tmp2 <- abs(out_final$boot.ci.upper - out_final$est.std) /
+                                 abs(out_final$ci.upper - out_final$est.std)
+        tmp1[is.infinite(tmp1) | is.nan(tmp1)] <- NA
+        tmp2[is.infinite(tmp2) | is.nan(tmp2)] <- NA
+        out_final$ratio.lower <- tmp1
+        out_final$ratio.upper <- tmp2
+      }
     class(out_final) <- class(out)
     if (save_boot_est_std) {
         attr(out_final, "boot_est_std") <- out_all
