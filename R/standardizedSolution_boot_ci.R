@@ -113,3 +113,45 @@ std_i <- function(est_i, p_est, p_free, object, std_args, type) {
                                         output = "data.frame"))
     do.call(lavaan::standardizedSolution, std_args1)$est.std
   }
+
+check_std_i <- function(object, type, std_args) {
+    # Work-in-progress
+    # Not used for now
+    # Do one bootstrap with bootstrapLavaan(),
+    #   with est and std
+    # Put est as boot, and see if std_i can reproduce std
+    fct <- function(fit, std_type, std_args) {
+        args0 <- utils::modifyList(std_args,
+                                   list(object = fit,
+                                        type = std_type,
+                                        se = FALSE,
+                                        zstat = FALSE,
+                                        pvalue = FALSE,
+                                        ci = FALSE,
+                                        output = "data.frame"))
+        list(coef = lavaan::coef(fit),
+             est.std = do.call(lavaan::standardizedSolution, args0)$est.std)
+      }
+    object_noboot <- lavaan::update(object, se = "none")
+    out_test <- lavaan::bootstrapLavaan(object_noboot,
+                                        R = 1,
+                                        type = "ordinary",
+                                        FUN = fct,
+                                        warn = -1L,
+                                        std_type = type,
+                                        std_args = std_args)
+    object_test <- object
+    object_test@boot$coef <- out_test[[1]]
+    ptable <- lavaan::parameterTable(object)
+    boot_std_test <- std_i(est_i = out_test[[1]],
+                           p_est = ptable$est,
+                           p_free = ptable$free > 0,
+                           object = object,
+                           std_args = std_args,
+                           type = type)
+    if (!isTRUE(all.equal(boot_std_test, out_test[[2]]))) {
+      return(FALSE)
+    } else {
+      return(TRUE)
+    }
+  }
