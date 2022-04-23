@@ -5,7 +5,7 @@
 \title{Group Estimates By Dependent Variables}
 \usage{
 group_by_dvs(
-  lavaan_out,
+  object,
   ...,
   col_name = "est",
   add_prefix = TRUE,
@@ -13,6 +13,8 @@ group_by_dvs(
 )
 }
 \arguments{
+\item{object}{A \linkS4class{lavaan} object, fitted with 'se = "boot"'.}
+
 \item{...}{Optional arguments to be passed to
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}.}
 
@@ -30,8 +32,6 @@ by groups first and then by
 independent variables Ignored if
 the model has only one group.
 Default is \code{FALSE}.}
-
-\item{object}{A \linkS4class{lavaan} object, fitted with 'se = "boot"'.}
 }
 \value{
 A data frame.

@@ -50,21 +50,21 @@
 #'
 #' @export
 
-group_by_dvs <- function(lavaan_out,
+group_by_dvs <- function(object,
                          ...,
                          col_name = "est",
                          add_prefix = TRUE,
                          group_first = FALSE) {
-    if (!inherits(lavaan_out, "lavaan")) {
-        stop("lavaan_out not a lavaan-class object.")
+    if (!inherits(object, "lavaan")) {
+        stop("object not a lavaan-class object.")
       }
-    p_est <- lavaan::parameterEstimates(lavaan_out,
+    p_est <- lavaan::parameterEstimates(object,
                                         ...)
     if (all(is.na(match(col_name, colnames(p_est))))) {
         stop(paste(dQuote(col_name),
               "not in the column names of the parameter estimate table."))
       }
-    grouped <- lavaan::lavInspect(lavaan_out, "ngroups") > 1
+    grouped <- lavaan::lavInspect(object, "ngroups") > 1
     dvs <- unique(p_est[p_est$op == "~", "lhs"])
     p_est_list <- sapply(dvs, function(x, p_est) {
                           out <- p_est[(p_est$lhs == x) &
