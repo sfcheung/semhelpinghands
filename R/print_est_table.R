@@ -21,11 +21,13 @@ print.est_table <- function(x,
                             empty_cells = "--",
                             group_first = FALSE) {
     if (is.null(attr(x, "v_ind"))) {
-        return(NextMethod())
+        class(x) <- class(x)[which(class(x) != "est_table")]
+        NextMethod()
+        return(invisible(x))
       }
     grouped <- attr(x, "grouped")
     group_first <- attr(x, "group_first")
-    if (grouped) {
+    if (isTRUE(grouped)) {
         out <- format_est_mat(x,
                               v_ind = attr(x, "v_ind"),
                               gp_ind = attr(x, "gp_ind"),
@@ -40,4 +42,5 @@ print.est_table <- function(x,
       }
     x <- out
     NextMethod()
+    return(invisible(x))
   }
