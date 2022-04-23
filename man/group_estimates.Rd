@@ -4,7 +4,7 @@
 \alias{group_estimates}
 \alias{group_by_dvs}
 \alias{group_by_ivs}
-\title{Group Estimates By Dependent Variables}
+\title{Group Estimates By Dependent or Independent Variables}
 \usage{
 group_by_dvs(
   object,
@@ -44,7 +44,7 @@ the model has only one group.
 Default is \code{FALSE}.}
 }
 \value{
-A data frame.
+A data-frame-like object of the class \code{est_table}.
 }
 \description{
 Groups parameter estimates or other information such as

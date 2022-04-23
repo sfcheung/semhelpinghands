@@ -1,11 +1,11 @@
-#' @title Group Estimates By Dependent Variables
+#' @title Group Estimates By Dependent or Independent Variables
 #'
 #' @description Groups parameter estimates or other information such as
 #'               p-values into a table with dependent variables as columns
 #'               and independent variables as rows, or a transpose of
 #'               this table.
 #'
-#' @return A data frame.
+#' @return A data-frame-like object of the class `est_table`.
 #'
 #' @param object A [lavaan-class] object, fitted with 'se = "boot"'.
 #'
@@ -86,6 +86,15 @@ group_by_dvs <- function(object,
     if (!add_prefix) {
         colnames(out) <- gsub(paste0(col_name, "_"), "",
                               colnames(out))
+      }
+    class(out) <- c("est_table", class(out))
+    attr(out, "grouped") <- grouped
+    attr(out, "group_first") <- group_first
+    attr(out, "v_ind") <- 1
+    if (grouped) {
+        attr(out, "gp_ind") <- ifelse(group_first, 1, 2)
+      } else {
+        attr(out, "gp_ind") <- NA
       }
     out
   }

@@ -60,29 +60,33 @@ NA, NA, -0.00327088762324575), .Dim = c(3L, 8L), .Dimnames = list(
 
 
 test_that("Test against know results", {
-    expect_equal(
-        est_grouped,
-        est_grouped_ans
+    expect_true(
+        all.equal(est_grouped,
+                  est_grouped_ans,
+                  check.attributes = FALSE)
       )
   })
 test_that("Test against know results", {
-    expect_equal(
-        est_grouped_gp,
-        est_grouped_gp_ans
+    expect_true(
+        all.equal(est_grouped_gp,
+                  est_grouped_gp_ans,
+                  check.attributes = FALSE)
       )
   })
 
 
 test_that("Test against know results", {
-    expect_equal(
-        est_grouped_ivs,
-        est_grouped_ivs_ans
+    expect_true(
+        all.equal(est_grouped_ivs,
+                  est_grouped_ivs_ans,
+                  check.attributes = FALSE)
       )
   })
 test_that("Test against know results", {
-    expect_equal(
-        est_grouped_gp_ivs,
-        est_grouped_gp_ivs_ans
+    expect_true(
+        all.equal(est_grouped_gp_ivs,
+                  est_grouped_gp_ivs_ans,
+                  check.attributes = FALSE)
       )
   })
 
