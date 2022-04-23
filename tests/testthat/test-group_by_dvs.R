@@ -42,6 +42,23 @@ NA, NA, 0.216741145006698, 0.260859641018626, NA, NA), est_y3 = c(NA,
 NA, 0.372224774343152, 0.29070267615556, NA, NA, 0.0962380871786314,
 -0.00327088762324575)), row.names = c(NA, -8L), class = "data.frame")
 
+est_grouped_ivs <- group_by_ivs(fit)
+est_grouped_gp_ivs <- group_by_ivs(fit_gp)
+
+est_grouped_ivs_ans <- structure(c(0.205762144483444, 0.149078624898469, NA, 0.380568486727359, 
+NA, 0.295393228140568, 0.162192077222678, 0.230428486323587, 
+NA, NA, NA, 0.0443298135482514), .Dim = 3:4, .Dimnames = list(
+    c("est_y1", "est_y2", "est_y3"), c("x1", "x2", "x3", "y2"
+    )))
+est_grouped_gp_ivs_ans <- structure(c(0.20954050563671, 0.0356595509573325, NA, 0.258194633693387, 
+0.225628736501381, NA, 0.242853996647183, NA, 0.372224774343152,
+0.483540060686917, NA, 0.29070267615556, 0.245745030252482, 0.216741145006698, 
+NA, 0.120904062683077, 0.260859641018626, NA, NA, NA, 0.0962380871786314, 
+NA, NA, -0.00327088762324575), .Dim = c(3L, 8L), .Dimnames = list(
+    c("est_y1", "est_y2", "est_y3"), c("x1_1", "x1_2", "x2_1",
+    "x2_2", "x3_1", "x3_2", "y2_1", "y2_2")))
+
+
 test_that("Test against know results", {
     expect_equal(
         est_grouped,
@@ -54,3 +71,18 @@ test_that("Test against know results", {
         est_grouped_gp_ans
       )
   })
+
+
+test_that("Test against know results", {
+    expect_equal(
+        est_grouped_ivs,
+        est_grouped_ivs_ans
+      )
+  })
+test_that("Test against know results", {
+    expect_equal(
+        est_grouped_gp_ivs,
+        est_grouped_gp_ivs_ans
+      )
+  })
+

@@ -84,6 +84,32 @@ group_by_dvs <- function(object,
     out
   }
 
+#' @describeIn group_by_dvs Similar to [group_by_dvs] but with dvs as rows.
+#' @export
+
+group_by_ivs <- function(object,
+                         ...,
+                         col_name = "est",
+                         add_prefix = TRUE,
+                         group_first = FALSE) {
+    out <- group_by_dvs(object, ...,
+                        col_name = col_name,
+                        add_prefix = add_prefix,
+                        group_first = group_first)
+    char_col <- colnames(out) %in% c("iv", "group")
+    char_names <- colnames(out)[char_col]
+    out_numeric <- out[, !char_col]
+    out1 <- t(out_numeric)
+    if (length(char_names) == 1) {
+        colnames(out1) <- out[, char_names]
+      } else {
+        tmp <- paste(out[, char_names[1]],
+                     out[, char_names[2]], sep = "_")
+        colnames(out1) <- tmp
+      }
+    out1
+  }
+
 get_columns <- function(col_name,
                         p_est_list,
                         grouped = FALSE,

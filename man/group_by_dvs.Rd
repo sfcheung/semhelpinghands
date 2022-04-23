@@ -2,9 +2,18 @@
 % Please edit documentation in R/group_by_dvs.R
 \name{group_by_dvs}
 \alias{group_by_dvs}
+\alias{group_by_ivs}
 \title{Group Estimates By Dependent Variables}
 \usage{
 group_by_dvs(
+  object,
+  ...,
+  col_name = "est",
+  add_prefix = TRUE,
+  group_first = FALSE
+)
+
+group_by_ivs(
   object,
   ...,
   col_name = "est",
@@ -41,6 +50,11 @@ It groups parameter estimates or other information such as
 p-values into a table with dependent variables as columns
 and independent variables as rows.
 }
+\section{Functions}{
+\itemize{
+\item \code{group_by_ivs}: Similar to \link{group_by_dvs} but with dvs as rows.
+}}
+
 \examples{
 
 library(lavaan)
