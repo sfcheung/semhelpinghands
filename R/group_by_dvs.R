@@ -1,8 +1,9 @@
 #' @title Group Estimates By Dependent Variables
 #'
-#' @description It groups parameter estimates or other information such as
+#' @description Groups parameter estimates or other information such as
 #'               p-values into a table with dependent variables as columns
-#'               and independent variables as rows.
+#'               and independent variables as rows, or a transpose of
+#'               this table.
 #'
 #' @return A data frame.
 #'
@@ -47,7 +48,12 @@
 #' fit <- sem(model, data = dat, fixed.x = FALSE)
 #' parameterEstimates(fit)
 #' group_by_dvs(fit)
+#' group_by_ivs(fit)
 #'
+#' @name group_estimates
+NULL
+
+#' @rdname group_estimates
 #' @export
 
 group_by_dvs <- function(object,
@@ -84,7 +90,7 @@ group_by_dvs <- function(object,
     out
   }
 
-#' @describeIn group_by_dvs Similar to [group_by_dvs] but with dvs as rows.
+#' @rdname group_estimates
 #' @export
 
 group_by_ivs <- function(object,
@@ -110,6 +116,7 @@ group_by_ivs <- function(object,
     out1
   }
 
+#' @noRd
 get_columns <- function(col_name,
                         p_est_list,
                         grouped = FALSE,
@@ -135,25 +142,32 @@ get_columns <- function(col_name,
                   SIMPLIFY = FALSE)
     out
   }
-# Merge all the list of columns
+
+#' @noRd
 `%merge%` <- function(x, y) {
     merge(x,
           y,
           by = c("iv"),
           all = TRUE)
   }
+
+#' @noRd
 `%mergegp%` <- function(x, y) {
     merge(x,
           y,
           by = c("iv", "group"),
           all = TRUE)
   }
+
+#' @noRd
 `%mergegp1st%` <- function(x, y) {
     merge(x,
           y,
           by = c("group", "iv"),
           all = TRUE)
   }
+
+#' @noRd
 merge_columns <- function(col_list,
                           grouped = FALSE,
                           group_first = FALSE) {
