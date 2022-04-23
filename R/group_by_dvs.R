@@ -91,11 +91,15 @@ group_by_dvs <- function(object,
     attr(out, "grouped") <- grouped
     attr(out, "group_first") <- group_first
     attr(out, "v_ind") <- 1
+    attr(out, "gps") <- NA
     if (grouped) {
         attr(out, "gp_ind") <- ifelse(group_first, 1, 2)
+        attr(out, "v_ind") <- ifelse(group_first, 2, 1)
+        attr(out, "gps") <- out[, attr(out, "gp_ind")]
       } else {
         attr(out, "gp_ind") <- NA
       }
+    attr(out, "ivs") <- out[, attr(out, "v_ind")]
     out
   }
 
