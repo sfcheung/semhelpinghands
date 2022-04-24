@@ -7,7 +7,7 @@
 #'
 #' @return A data-frame-like object of the class `est_table`.
 #'
-#' @param object A [lavaan-class] object, fitted with 'se = "boot"'.
+#' @param object A [lavaan-class] object.
 #'
 #' @param ... Optional arguments to be passed to
 #'            [lavaan::parameterEstimates()].
