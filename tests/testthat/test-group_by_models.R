@@ -33,22 +33,31 @@ fit2 <- sem(mod2, dat, group = "gp")
 fit1_nogroup <- sem(mod1, dat)
 fit2_nogroup <- sem(mod2, dat)
 
-out1 <- merge_model_estimates(list(model1 = fit1,
+out1 <- group_by_models(list(model1 = fit1,
                                   model2 = fit2),
                              standardized = TRUE,
                              col_names = c("std.all", "se"))
-head(dplyr::filter(out1, op == "~"))
+#head(dplyr::filter(out1, op == "~"))
 
-out2 <- merge_model_estimates(list(model1 = fit1_nogroup,
+out2 <- group_by_models(list(model1 = fit1_nogroup,
                                    model2 = fit2_nogroup),
                              standardized = TRUE,
                              col_names = c("std.all", "se"))
-head(dplyr::filter(out2, op == "~"))
+#head(dplyr::filter(out2, op == "~"))
 
-out3 <- merge_model_estimates(list(model1 = fit1,
+out3 <- group_by_models(list(model1 = fit1,
                                   model2 = fit2),
                              standardized = TRUE,
                              col_names = c("std.all", "se"),
                              group_first = TRUE)
-head(dplyr::filter(out3, op == "~"))
-tail(dplyr::filter(out3, op == "~"))
+#head(dplyr::filter(out3, op == "~"))
+#tail(dplyr::filter(out3, op == "~"))
+
+
+test_that("Test against know results", {
+    expect_true(
+        all.equal(est_grouped,
+                  est_grouped_ans,
+                  check.attributes = FALSE)
+      )
+  })

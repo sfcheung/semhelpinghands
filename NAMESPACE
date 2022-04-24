@@ -3,4 +3,5 @@
 S3method(print,est_table)
 export(group_by_dvs)
 export(group_by_ivs)
+export(group_by_models)
 export(standardizedSolution_boot_ci)
