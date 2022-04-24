@@ -91,13 +91,13 @@ group_by_dvs <- function(object,
     attr(out, "grouped") <- grouped
     attr(out, "group_first") <- group_first
     attr(out, "v_ind") <- 1
-    attr(out, "gps") <- NA
+    attr(out, "gps") <- NULL
     if (grouped) {
         attr(out, "gp_ind") <- ifelse(group_first, 1, 2)
         attr(out, "v_ind") <- ifelse(group_first, 2, 1)
         attr(out, "gps") <- out[, attr(out, "gp_ind")]
       } else {
-        attr(out, "gp_ind") <- NA
+        attr(out, "gp_ind") <- NULL
       }
     attr(out, "ivs") <- out[, attr(out, "v_ind")]
     out
@@ -115,17 +115,41 @@ group_by_ivs <- function(object,
                         col_name = col_name,
                         add_prefix = add_prefix,
                         group_first = group_first)
-    char_col <- colnames(out) %in% c("iv", "group")
-    char_names <- colnames(out)[char_col]
-    out_numeric <- out[, !char_col]
-    out1 <- t(out_numeric)
-    if (length(char_names) == 1) {
-        colnames(out1) <- out[, char_names]
+    v_ind <- attr(out, "v_ind")
+    gp_ind <- attr(out, "gp_ind")
+    ivs <- attr(out, "ivs")
+    gps <- attr(out, "gps")
+    if (group_first) {
+        char_col <- c(gp_ind, v_ind)
       } else {
-        tmp <- paste(out[, char_names[1]],
-                     out[, char_names[2]], sep = "_")
-        colnames(out1) <- tmp
+        char_col <- c(v_ind, gp_ind)
       }
+    char_names <- colnames(out)[char_col]
+    out_numeric <- out[, -char_col]
+    out1 <- t(out_numeric)
+    out1 <- as.data.frame(out1)
+    if (is.null(gps)) {
+        colnames(out1) <- ivs
+      } else {
+        if (group_first) {
+            tmp <- paste0(gps,
+                         ".",
+                         ivs)
+            colnames(out1) <- tmp
+          } else {
+            tmp <- paste0(ivs,
+                         ".",
+                         gps)
+            colnames(out1) <- tmp
+          }
+      }
+    out1 <- cbind(dv = rownames(out1), out1)
+    class(out1) <- class(out)
+    et_att <- c("v_ind", "gp_ind", "ivs", "gps", "grouped", "group_first")
+    for (att_i in et_att) {
+        attr(out1, att_i) <- attr(out, att_i)
+      }
+    attr(out1, "by_ivs") <- TRUE
     out1
   }
 

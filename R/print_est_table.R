@@ -27,7 +27,8 @@ print.est_table <- function(x,
       }
     grouped <- attr(x, "grouped")
     group_first <- attr(x, "group_first")
-    if (isTRUE(grouped)) {
+    by_ivs <- attr(x, "by_iv")
+    if (isTRUE(grouped) & !isTRUE(by_ivs)) {
         out <- format_est_mat(x,
                               v_ind = attr(x, "v_ind"),
                               gp_ind = attr(x, "gp_ind"),
@@ -36,7 +37,7 @@ print.est_table <- function(x,
                               na_print = empty_cells)
       } else {
         out <- format_est_mat(x,
-                              v_ind = attr(x, "v_ind"),
+                              v_ind = 1,
                               nd = nd,
                               na_print = empty_cells)
       }

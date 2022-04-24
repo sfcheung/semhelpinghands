@@ -45,18 +45,21 @@ NA, 0.372224774343152, 0.29070267615556, NA, NA, 0.0962380871786314,
 est_grouped_ivs <- group_by_ivs(fit)
 est_grouped_gp_ivs <- group_by_ivs(fit_gp)
 
-est_grouped_ivs_ans <- structure(c(0.205762144483444, 0.149078624898469, NA, 0.380568486727359, 
-NA, 0.295393228140568, 0.162192077222678, 0.230428486323587, 
-NA, NA, NA, 0.0443298135482514), .Dim = 3:4, .Dimnames = list(
-    c("est_y1", "est_y2", "est_y3"), c("x1", "x2", "x3", "y2"
-    )))
-est_grouped_gp_ivs_ans <- structure(c(0.20954050563671, 0.0356595509573325, NA, 0.258194633693387, 
-0.225628736501381, NA, 0.242853996647183, NA, 0.372224774343152,
-0.483540060686917, NA, 0.29070267615556, 0.245745030252482, 0.216741145006698, 
-NA, 0.120904062683077, 0.260859641018626, NA, NA, NA, 0.0962380871786314, 
-NA, NA, -0.00327088762324575), .Dim = c(3L, 8L), .Dimnames = list(
-    c("est_y1", "est_y2", "est_y3"), c("x1_1", "x1_2", "x2_1",
-    "x2_2", "x3_1", "x3_2", "y2_1", "y2_2")))
+est_grouped_ivs_ans <- structure(list(dv = c("est_y1", "est_y2", "est_y3"), x1 = c(0.205762144483444, 
+0.149078624898469, NA), x2 = c(0.380568486727359, NA, 0.295393228140568
+), x3 = c(0.162192077222678, 0.230428486323587, NA), y2 = c(NA,
+NA, 0.0443298135482514)), class = "data.frame", row.names = c("est_y1", 
+"est_y2", "est_y3"), v_ind = 1, ivs = c("x1", "x2", "x3", "y2"
+), grouped = FALSE, group_first = FALSE, by_ivs = TRUE)
+est_grouped_gp_ivs_ans <- structure(list(dv = c("est_y1", "est_y2", "est_y3"), x1.1 = c(0.20954050563671, 
+0.0356595509573325, NA), x1.2 = c(0.258194633693387, 0.225628736501381,
+NA), x2.1 = c(0.242853996647183, NA, 0.372224774343152), x2.2 = c(0.483540060686917,
+NA, 0.29070267615556), x3.1 = c(0.245745030252482, 0.216741145006698,
+NA), x3.2 = c(0.120904062683077, 0.260859641018626, NA), y2.1 = c(NA,
+NA, 0.0962380871786314), y2.2 = c(NA, NA, -0.00327088762324575
+)), class = "data.frame", row.names = c("est_y1", "est_y2", "est_y3"
+), v_ind = 1, gp_ind = 2, ivs = c("x1", "x1", "x2", "x2", "x3",
+"x3", "y2", "y2"), gps = c(1L, 2L, 1L, 2L, 1L, 2L, 1L, 2L), grouped = TRUE, group_first = FALSE, by_ivs = TRUE) 
 
 
 test_that("Test against know results", {
