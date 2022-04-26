@@ -7,10 +7,11 @@ Authors@R: person(given = "Shu Fai",
            email = "shufai.cheung@gmail.com",
            comment = c(ORCID = "0000-0002-9871-9448"))
 Description: An assortment of helper functions for doing structural equation
-             modeling (SEM), mainly by 'lavaan'. This package is not for
-             implementing advanced statistical procedures. Its functions
-             are for tasks that come in handy for doing SEM in general,
-             including understanding and interpreting the output.
+             modeling (SEM), mainly by 'lavaan'. Most of them are
+             time-saving functions for common tasks in
+             doing SEM and reading the output. This package
+             is not for functions that 
+             implement advanced statistical procedures. 
 URL: https://sfcheung.github.io/semhelpinghands/ 
 BugReports: https://github.com/sfcheung/semhelpinghands/issues
 Depends: R (>= 4.1.0)
