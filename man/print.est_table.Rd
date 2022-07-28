@@ -25,3 +25,6 @@ the row variables. Default is \code{FALSE}.}
 \description{
 Print method for an 'est_table' object
 }
+\author{
+Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
+}

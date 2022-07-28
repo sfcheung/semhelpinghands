@@ -54,5 +54,5 @@ group_by_models(fit_more, col_names = c("est", "pvalue"))
 
 }
 \author{
-Shu Fai Cheung (shufai.cheung@gmail.com)
+Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
 }
