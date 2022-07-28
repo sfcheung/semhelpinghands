@@ -111,26 +111,26 @@ group_by_models <- function(output_list,
 #' @noRd
 
 `%mergemod%` <- function(x, y) {
-    merge(x,
+    suppressWarnings(merge(x,
           y,
           by = c("lhs", "op", "rhs", "group"),
-          all = TRUE)
+          all = TRUE))
   }
 
 #' @noRd
 
 `%mergemodgp1st%` <- function(x, y) {
-    merge(x,
+    suppressWarnings(merge(x,
           y,
           by = c("group", "lhs", "op", "rhs"),
-          all = TRUE)
+          all = TRUE))
   }
 
 #' @noRd
 
 `%mergemod2%` <- function(x, y) {
-    merge(x,
+    suppressWarnings(merge(x,
           y,
           by = c("lhs", "op", "rhs"),
-          all = TRUE)
+          all = TRUE))
   }
