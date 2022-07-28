@@ -1,4 +1,4 @@
-#' # An internal function
+#' An internal function
 #'
 #' @param x The object to be printed.
 #' @param rowname_ind A vector of the column numbers that
