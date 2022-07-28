@@ -20,7 +20,7 @@
 #'  supported by the `estimator` argument of
 #'  [lavaan::lavaan()] and its wrappers.
 #'
-#' @author Shu Fai Cheung (shufai.cheung@gmail.com)
+#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
 #'

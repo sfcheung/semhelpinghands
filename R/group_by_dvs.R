@@ -27,7 +27,7 @@
 #'                    the model has only one group.
 #'                    Default is `FALSE`.
 #'
-#' @author Shu Fai Cheung (shufai.cheung@gmail.com)
+#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
 #'

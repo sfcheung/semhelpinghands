@@ -12,6 +12,7 @@
 #' @param group_first If the object has a column for groups,
 #'                    whether group will be printed before
 #'                    the row variables. Default is `FALSE`.
+#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @export
 
