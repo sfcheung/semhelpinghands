@@ -50,8 +50,12 @@ displayed, for visualizing and understanding how the estimates
 of free parameters is found.
 
 It will refit the model by the update method of
-\link[lavaan:lavaan-class]{lavaan::lavaan}, setting \code{se = "none"} and \code{test = "standard"} because they have no impact effect on the minimization
+\link[lavaan:lavaan-class]{lavaan::lavaan}, setting \code{se = "none"} and \code{test = "standard"} because they have no impact on the minimization
 process.
+
+This and related functions are adapted from the package \code{semunpack}.
+The version in this package will be revised to be an
+advanced version intended for diagnostic purpose in real studies.
 }
 \section{Methods (by generic)}{
 \itemize{
@@ -64,8 +68,6 @@ process.
 
 \examples{
 
-# Adapted from the example for CFA in lavaan::cfa().
-# Using only two of the factors
 library(lavaan)
 HS.model <-
 '
@@ -83,6 +85,7 @@ plot(fit_h, params = c("visual=~x2", "visual=~x3",
                        "visual~~textual"),
             last_n = 10,
             orientation = "vertical")
+#' @importFrom lavaan coef
 }
 \author{
 Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
