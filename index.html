@@ -12,8 +12,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Helper Functions for Structural Equation Modeling">
-<meta property="og:description" content="A collection of functions used in doing, teaching, and learining
-             structural equation modeling.">
+<meta property="og:description" content="An assortment of helper functions for doing structural equation
+             modeling (SEM), mainly by lavaan. Most of them are
+             time-saving functions for common tasks in
+             doing SEM and reading the output. This package
+             is not for functions that
+             implement advanced statistical procedures.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -34,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">semhelpinghands</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9004</span>
       </span>
     </div>
 
@@ -82,19 +86,19 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p>(This is the webpage for this package: <a href="https://sfcheung.github.io/semhelpinghands/" class="external-link uri">https://sfcheung.github.io/semhelpinghands/</a>)</p>
+<p>This is the GitHub webpage for this package:</p>
+<p><a href="https://sfcheung.github.io/semhelpinghands/" class="external-link uri">https://sfcheung.github.io/semhelpinghands/</a>)</p>
 <div class="section level1">
 <div class="page-header"><h1 id="semhelpinghands">semhelpinghands<a class="anchor" aria-label="anchor" href="#semhelpinghands"></a>
 </h1></div>
-<p>An assortment of functions that I wrote for my own use in structural equation modeling (SEM) (currently, only one function). I have no plan to submit this package to CRAN, for now. I use a package to store these unrelated functions such that I can make use of the help pages and examples, to help my “future self” to know what they are.</p>
-<p>Do not propose any functions to this package. If you have anything useful for SEM, I recommend you to propose to <code>semTools</code> (<a href="https://github.com/simsem/semTools" class="external-link uri">https://github.com/simsem/semTools</a>). I also use <code>semTools</code> myself. This package is just for things I need but not in <code>semTools</code> or other packages.</p>
-<p>Nevertheless, if you are interested in anything in this package, you are certainly welcome to install it and use them.</p>
+<p>An assortment of helper functions for doing structural equation modeling (SEM), mainly by [lavaan::lavaan()]. This package is not for implementing advanced statistical procedures. They are functions for tasks that come in handy for doing SEM in general, including understanding and interpreting the output.</p>
+<p>Many of the tasks can be done by basic R code. However, these functions can help users who are not familiar with R programming or use R only occasionally to do these tasks without writing their own code.</p>
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
 <p>The latest development version at GitHub can be installed by <code>remotes::install_github()</code>:</p>
-<pre><code><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sfcheung/semhelpinghands"</span><span class="op">)</span></code></pre>
+<pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sfcheung/semhelpinghands"</span><span class="op">)</span></span></code></pre>
 </div>
 
   </div>
@@ -144,7 +148,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

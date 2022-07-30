@@ -25,7 +25,28 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/add_sig.html</loc>
+  </url>
+  <url>
+    <loc>/reference/compare_estimators.html</loc>
+  </url>
+  <url>
+    <loc>/reference/filter_by.html</loc>
+  </url>
+  <url>
+    <loc>/reference/group_by_models.html</loc>
+  </url>
+  <url>
+    <loc>/reference/group_estimates.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.est_table.html</loc>
+  </url>
+  <url>
+    <loc>/reference/record_history.html</loc>
   </url>
   <url>
     <loc>/reference/standardizedSolution_boot_ci.html</loc>

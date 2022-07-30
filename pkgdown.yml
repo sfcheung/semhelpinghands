@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 2.0.2
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   semhelpinghands: semhelpinghands.html
   standardizedSolution_boot_ci: standardizedSolution_boot_ci.html
-last_built: 2022-04-17T02:00Z
+last_built: 2022-07-30T14:25Z
 
