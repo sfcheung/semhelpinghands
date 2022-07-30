@@ -15,7 +15,7 @@
 #'  "standard"` because they have no impact on the minimization
 #'  process.
 #'
-#'  This and related functions are adapted from the package [semunpack].
+#'  This and related functions are adapted from the package `semunpack`.
 #'  The version in this package will be revised to be an
 #'  advanced version intended for diagnostic purpose in real studies.
 #'
