@@ -1,6 +1,6 @@
-skip_on_cran()
-skip_if(!interactive(),
-        message = "standardizedSolution_boot_ci not tested if not interactive")
+# skip_on_cran()
+# skip_if(!interactive(),
+#         message = "standardizedSolution_boot_ci not tested if not interactive")
 
 library(testthat)
 library(semhelpinghands)
@@ -29,30 +29,26 @@ set.seed(1234)
 system.time(fit <- sem(model,
                        data = Data,
                        se = "boot",
-                       bootstrap = 5000,
-                       parallel ="snow", ncpus = 8))
+                       bootstrap = 100))
 
-ci_boot <- standardizedSolution_boot_ci(fit)
+ci_boot <- standardizedSolution_boot_ci(fit, save_boot_est_std = TRUE)
 
 get_std <- function(object) {
     lavaan::standardizedSolution(object)$est.std
   }
-fit2 <- update(fit, se = "none")
+# fit2 <- update(fit, se = "none")
+fit2 <- sem(model,
+            data = Data,
+            se = "none",
+            bootstrap = 100)
 set.seed(1234)
-boot_ci_test <- bootstrapLavaan(fit2, R = 5000,
-                                FUN = get_std,
-                                parallel = "snow",
-                                ncpus = 8)
-alpha <- .95
-ci_test <- t(apply(boot_ci_test, 2, quantile, probs = c((1 - alpha) / 2,
-                   1 - (1 - alpha) / 2),
-                   na.rm = TRUE))
+boot_ci_test <- bootstrapLavaan(fit2, R = 100,
+                                FUN = get_std)
 
-test_that("Compare boot ci", {
+test_that("Compare boot estimates directly", {
     expect_equal(
-        ci_test,
-        as.matrix(ci_boot[, c("boot.ci.lower", "boot.ci.upper")]),
-        tolerance = .005,
+        attr(ci_boot, "boot_est_std"),
+        boot_ci_test,
         ignore_attr = TRUE
       )
   })

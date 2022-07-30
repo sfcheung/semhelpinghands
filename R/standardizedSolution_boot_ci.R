@@ -16,9 +16,22 @@
 #'  [lavaan::standardizedSolution()], and support all values supported by
 #'  [lavaan::standardizedSolution()]. Default is `"std.all"`.
 #'
+#' @param save_boot_est_std Whether the bootstrap estimates of the standardized
+#'  solution are saved. If saved, will be stored in the attribute `boot_est_std`.
+#'  Default is `FALSE`.
+#'
+#' @param force_run If `TRUE`, will skip checks and run on models not tested.
+#'                  For internal use and should be set to `TRUE`. Default is
+#'                  `FALSE`.
+#'
+#' @param boot_delta_ratio The ratio of (a) the distance of the bootstrap
+#'                         confidence limit from the point estimate to (b)
+#'                         the distance of the delta-method limit from the
+#'                         point estimate.
+#'
 #' @param ... Other arguments to be passed to [lavaan::standardizedSolution()].
 #'
-#' @author Shu Fai Cheung (shufai.cheung@gmail.com)
+#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
 #'
@@ -49,6 +62,9 @@
 standardizedSolution_boot_ci <- function(object,
                                          level = .95,
                                          type = "std.all",
+                                         save_boot_est_std = FALSE,
+                                         force_run = FALSE,
+                                         boot_delta_ratio = FALSE,
                                          ...) {
     if (!inherits(object, "lavaan")) {
         stop("The object must be a lavaan-class object.")
@@ -57,31 +73,19 @@ standardizedSolution_boot_ci <- function(object,
     if (inherits(boot_est0, "try-error")) {
         stop("Bootstrapping estimates not found. Was se = 'boot'?")
       }
-    if (any(lavaan::parameterTable(object)$op %in% "==")) {
-        stop("Models with equality constraint(s) not yet supported.")
+    if (!force_run) {
       }
     std_args <- list(...)
     ptable <- lavaan::parameterTable(object)
     p_free <- ptable$free > 0
     p_est  <- ptable$est
-    fct_i <- function(est_i, p_est, p_free) {
-        p_est[p_free] <- est_i
-        GLIST_i <- lavaan::lav_model_set_parameters(object@Model,
-                                                           est_i)@GLIST
-        std_args1 <- utils::modifyList(std_args,
-                                       list(object = object,
-                                            type = type,
-                                            est = p_est,
-                                            GLIST = GLIST_i,
-                                            se = FALSE,
-                                            zstat = FALSE,
-                                            pvalue = FALSE,
-                                            ci = FALSE,
-                                            output = "data.frame"))
-        do.call(lavaan::standardizedSolution, std_args1)$est.std
-      }
     boot_est <- split(boot_est0, row(boot_est0))
-    out_all <- t(sapply(boot_est, fct_i, p_est = p_est, p_free = p_free))
+    out_all <- t(sapply(boot_est, std_i,
+                        p_est = p_est,
+                        p_free = p_free,
+                        object = object,
+                        type = type,
+                        std_args = std_args))
     # Could have used boot's method but quantile() is good enough.
     boot_ci <- t(apply(out_all, 2, stats::quantile, probs = c((1 - level) / 2,
                                                         1 - (1 - level) / 2),
@@ -92,6 +96,78 @@ standardizedSolution_boot_ci <- function(object,
                                         level = level,
                                         ...)
     out_final <- cbind(out, boot_ci)
+    if (boot_delta_ratio) {
+        tmp1 <- abs(out_final$boot.ci.lower - out_final$est.std) /
+                                 abs(out_final$ci.lower - out_final$est.std)
+        tmp2 <- abs(out_final$boot.ci.upper - out_final$est.std) /
+                                 abs(out_final$ci.upper - out_final$est.std)
+        tmp1[is.infinite(tmp1) | is.nan(tmp1)] <- NA
+        tmp2[is.infinite(tmp2) | is.nan(tmp2)] <- NA
+        out_final$ratio.lower <- tmp1
+        out_final$ratio.upper <- tmp2
+      }
     class(out_final) <- class(out)
+    if (save_boot_est_std) {
+        attr(out_final, "boot_est_std") <- out_all
+      }
     out_final
+  }
+
+std_i <- function(est_i, p_est, p_free, object, std_args, type) {
+    p_est[p_free] <- est_i
+    GLIST_i <- lavaan::lav_model_set_parameters(object@Model,
+                                                        est_i)@GLIST
+    std_args1 <- utils::modifyList(std_args,
+                                    list(object = object,
+                                        type = type,
+                                        est = p_est,
+                                        GLIST = GLIST_i,
+                                        se = FALSE,
+                                        zstat = FALSE,
+                                        pvalue = FALSE,
+                                        ci = FALSE,
+                                        output = "data.frame"))
+    do.call(lavaan::standardizedSolution, std_args1)$est.std
+  }
+
+check_std_i <- function(object, type, std_args) {
+    # Work-in-progress
+    # Not used for now
+    # Do one bootstrap with bootstrapLavaan(),
+    #   with est and std
+    # Put est as boot, and see if std_i can reproduce std
+    fct <- function(fit, std_type, std_args) {
+        args0 <- utils::modifyList(std_args,
+                                   list(object = fit,
+                                        type = std_type,
+                                        se = FALSE,
+                                        zstat = FALSE,
+                                        pvalue = FALSE,
+                                        ci = FALSE,
+                                        output = "data.frame"))
+        list(coef = lavaan::coef(fit),
+             est.std = do.call(lavaan::standardizedSolution, args0)$est.std)
+      }
+    object_noboot <- lavaan::update(object, se = "none")
+    out_test <- lavaan::bootstrapLavaan(object_noboot,
+                                        R = 1,
+                                        type = "ordinary",
+                                        FUN = fct,
+                                        warn = -1L,
+                                        std_type = type,
+                                        std_args = std_args)
+    object_test <- object
+    object_test@boot$coef <- out_test[[1]]
+    ptable <- lavaan::parameterTable(object)
+    boot_std_test <- std_i(est_i = out_test[[1]],
+                           p_est = ptable$est,
+                           p_free = ptable$free > 0,
+                           object = object,
+                           std_args = std_args,
+                           type = type)
+    if (!isTRUE(all.equal(boot_std_test, out_test[[2]]))) {
+      return(FALSE)
+    } else {
+      return(TRUE)
+    }
   }
