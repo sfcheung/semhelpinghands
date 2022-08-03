@@ -47,7 +47,7 @@
 #'                        "visual~~textual"),
 #'             last_n = 10,
 #'             orientation = "vertical")
-#' #' @importFrom lavaan coef
+#' @importFrom lavaan coef
 #' @export
 #'
 #' @order 1
@@ -71,7 +71,7 @@ record_history <- function(object) {
 #' @noRd
 
 out2matrix <- function(out, pnames, fit) {
-    out1 <- lapply(out, gsub, pattern = ":", replacement = "")
+    out1 <- lapply(out, gsub, pattern = ":", replacement = " ")
     out1 <- lapply(out1, function(x) as.numeric(
                       scan(text = x,
                           what = "",
