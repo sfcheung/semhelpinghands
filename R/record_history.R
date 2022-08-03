@@ -296,10 +296,10 @@ print.fit_history <- function(x, n_iterations = 10, digits = 3, ...) {
           "iterations:\n")
     }
   cnames <- colnames(x)
-  out <- x1[2:n_iterations, -1]
+  out <- x1[seq_len(n_iterations), -1]
   out <- as.data.frame(lapply(out, formatC, digits = digits, format = "f"),
                        check.names = FALSE)
-  out1 <- cbind(iteration = x1[2:n_iterations, 1], out)
+  out1 <- cbind(iteration = x1[seq_len(n_iterations), 1], out)
   colnames(out1) <- cnames
   print(out1, ...)
   #fit_recorded
