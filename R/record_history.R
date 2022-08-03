@@ -64,6 +64,7 @@ record_history <- function(object) {
                          fit = fit1)
     attr(capmat, "fit_recorded") <- fit1
     attr(capmat, "original_call") <- stats::getCall(object)
+    attr(capmat, "original_output") <- cap
     class(capmat) <- c("fit_history", class(capmat))
     capmat
   }
