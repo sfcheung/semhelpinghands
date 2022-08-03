@@ -47,7 +47,7 @@
 #'                        "visual~~textual"),
 #'             last_n = 10,
 #'             orientation = "vertical")
-#' #' @importFrom lavaan coef
+#' @importFrom lavaan coef
 #' @export
 #'
 #' @order 1
@@ -64,6 +64,7 @@ record_history <- function(object) {
                          fit = fit1)
     attr(capmat, "fit_recorded") <- fit1
     attr(capmat, "original_call") <- stats::getCall(object)
+    attr(capmat, "original_output") <- cap
     class(capmat) <- c("fit_history", class(capmat))
     capmat
   }
@@ -71,7 +72,7 @@ record_history <- function(object) {
 #' @noRd
 
 out2matrix <- function(out, pnames, fit) {
-    out1 <- lapply(out, gsub, pattern = ":", replacement = "")
+    out1 <- lapply(out, gsub, pattern = ":", replacement = " ")
     out1 <- lapply(out1, function(x) as.numeric(
                       scan(text = x,
                           what = "",
@@ -296,10 +297,10 @@ print.fit_history <- function(x, n_iterations = 10, digits = 3, ...) {
           "iterations:\n")
     }
   cnames <- colnames(x)
-  out <- x1[2:n_iterations, -1]
+  out <- x1[seq_len(n_iterations), -1]
   out <- as.data.frame(lapply(out, formatC, digits = digits, format = "f"),
                        check.names = FALSE)
-  out1 <- cbind(iteration = x1[2:n_iterations, 1], out)
+  out1 <- cbind(iteration = x1[seq_len(n_iterations), 1], out)
   colnames(out1) <- cnames
   print(out1, ...)
   #fit_recorded
