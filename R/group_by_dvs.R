@@ -7,10 +7,14 @@
 #'
 #' @return A data-frame-like object of the class `est_table`.
 #'
-#' @param object A [lavaan-class] object.
+#' @param object A [lavaan-class] object or the output of
+#'                [lavaan::parameterEstimates()] or
+#'                [lavaan::standardizedSolution()].
 #'
 #' @param ... Optional arguments to be passed to
-#'            [lavaan::parameterEstimates()].
+#'            [lavaan::parameterEstimates()]. Ignored if object is an
+#'            output of [lavaan::parameterEstimates()] or
+#'                [lavaan::standardizedSolution()].
 #'
 #' @param col_name The column name of information to be
 #'                 grouped. Default is `"est"`. It accepts

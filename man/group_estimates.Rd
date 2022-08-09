@@ -23,10 +23,14 @@ group_by_ivs(
 )
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object.}
+\item{object}{A \linkS4class{lavaan} object or the output of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
 \item{...}{Optional arguments to be passed to
-\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}.}
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}. Ignored if object is an
+output of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
 \item{col_name}{The column name of information to be
 grouped. Default is \code{"est"}. It accepts

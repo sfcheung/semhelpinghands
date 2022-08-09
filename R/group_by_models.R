@@ -6,9 +6,16 @@
 #' @return A data-frame-like object of the class `est_table`.
 #'
 #' @param output_list A named list of [lavaan-class] objects,
+#'                    a named list of the output of
+#'                    [lavaan::parameterEstimates()],
+#'                    or a named list of the output of
+#'                    [lavaan::standardizedSolution()].
 #'
 #' @param ... Optional arguments to be passed to
-#'            [lavaan::parameterEstimates()].
+#'            [lavaan::parameterEstimates()]. Ignored
+#'            if the elements in output_list are the results of
+#'            [lavaan::parameterEstimates()] or
+#'            [lavaan::standardizedSolution()].
 #'
 #' @param col_names A vector of the column names in the
 #'                  parameter estimate tables to be included.
