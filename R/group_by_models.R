@@ -57,13 +57,26 @@ group_by_models <- function(output_list,
                             col_names = "est",
                             group_first = FALSE,
                             model_first = TRUE) {
-    if (!all(sapply(output_list, function(x) inherits(x, "lavaan")))) {
-        stop("All objects in output_list msut be lavaan-class object.")
+    output_type <- all_type(output_list)
+    if (is.na(output_type)) {
+        stop("output_list is invalid. Not of the same types or not of the accepted types.")
       }
     if (is.null(names(output_list))) {
         stop("output_list must be a named list.")
       }
-    grouped <- lavaan::lavInspect(output_list[[1]], "ngroups") > 1
+    if (output_type == "lavaan") {
+        grouped <- lavaan::lavInspect(output_list[[1]], "ngroups") > 1
+      } else {
+        if (!("group" %in% colnames(output_list[[1]]))) {
+            grouped <- FALSE
+          } else {
+            if (length(unique(output_list[[1]]$group)) > 1) {
+                grouped <- TRUE
+              } else {
+                grouped = FALSE
+              }
+          }
+      }
     if (grouped) {
         if (group_first) {
             m <- c("group", "lhs", "op", "rhs")
@@ -75,10 +88,14 @@ group_by_models <- function(output_list,
       }
     k <- length(output_list)
     model_names <- names(output_list)
-    p_est_list <- sapply(output_list,
-                         lavaan::parameterEstimates,
-                         ...,
-                         simplify = FALSE, USE.NAMES = TRUE)
+    if (output_type == "lavaan") {
+        p_est_list <- sapply(output_list,
+                            lavaan::parameterEstimates,
+                            ...,
+                            simplify = FALSE, USE.NAMES = TRUE)
+      } else {
+        p_est_list <- output_list
+      }
     est_list_tmp <- sapply(p_est_list,
                            function(x) {
                               x[, c(m, col_names)]
