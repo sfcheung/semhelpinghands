@@ -7,10 +7,14 @@
 #'
 #' @return A data-frame-like object of the class `est_table`.
 #'
-#' @param object A [lavaan-class] object.
+#' @param object A [lavaan-class] object or the output of
+#'                [lavaan::parameterEstimates()] or
+#'                [lavaan::standardizedSolution()].
 #'
 #' @param ... Optional arguments to be passed to
-#'            [lavaan::parameterEstimates()].
+#'            [lavaan::parameterEstimates()]. Ignored if object is an
+#'            output of [lavaan::parameterEstimates()] or
+#'                [lavaan::standardizedSolution()].
 #'
 #' @param col_name The column name of information to be
 #'                 grouped. Default is `"est"`. It accepts
@@ -61,16 +65,21 @@ group_by_dvs <- function(object,
                          col_name = "est",
                          add_prefix = TRUE,
                          group_first = FALSE) {
-    if (!inherits(object, "lavaan")) {
-        stop("object not a lavaan-class object.")
+    object_type <- check_lavaan_type(object)
+    if (is.na(object_type)) {
+        stop("object is not of the accepted types.")
       }
-    p_est <- lavaan::parameterEstimates(object,
-                                        ...)
+    if (object_type == "lavaan") {
+        p_est <- lavaan::parameterEstimates(object,
+                                            ...)
+      } else {
+        p_est <- object
+      }
     if (all(is.na(match(col_name, colnames(p_est))))) {
         stop(paste(dQuote(col_name),
               "not in the column names of the parameter estimate table."))
       }
-    grouped <- lavaan::lavInspect(object, "ngroups") > 1
+    grouped <- is_grouped(object)
     dvs <- unique(p_est[p_est$op == "~", "lhs"])
     p_est_list <- sapply(dvs, function(x, p_est) {
                           out <- p_est[(p_est$lhs == x) &
