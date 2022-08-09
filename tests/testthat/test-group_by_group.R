@@ -30,19 +30,22 @@ y2 ~ x3
 "
 fit2 <- sem(mod2, dat, group = "gp")
 
-fit1_nogroup <- sem(mod1, dat)
-fit2_nogroup <- sem(mod2, dat)
+est1 <- parameterEstimates(fit1)
+est1gp1 <- est1[est1$group == 1, ]
+est1gp2 <- est1[est1$group == 2, ]
+std1 <- standardizedSolution(fit1)
+std1gp1 <- std1[std1$group == 1, ]
+std1gp2 <- std1[std1$group == 2, ]
 
-out1 <- group_by_models(list(model1 = fit1,
-                                  model2 = fit2),
-                             standardized = TRUE,
-                             col_names = c("std.all", "se"))
+out1 <- group_by_models(list(gpOne = est1gp1,
+                             gpTwo = est1gp2),
+                             col_names = c("est", "se"))
 #head(dplyr::filter(out1, op == "~"))
 
-out2 <- group_by_models(list(model1 = fit1_nogroup,
-                                   model2 = fit2_nogroup),
+out2 <- group_by_models(list(gpOne = std1gp1,
+                             gpTwo = std1gp2),
                              standardized = TRUE,
-                             col_names = c("std.all", "se"))
+                             col_names = c("est.std", "se"))
 #head(dplyr::filter(out2, op == "~"))
 
 out3 <- group_by_models(list(model1 = fit1,
