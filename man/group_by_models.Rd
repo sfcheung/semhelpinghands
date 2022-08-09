@@ -13,10 +13,17 @@ group_by_models(
 )
 }
 \arguments{
-\item{output_list}{A named list of \linkS4class{lavaan} objects,}
+\item{output_list}{A named list of \linkS4class{lavaan} objects,
+a named list of the output of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}},
+or a named list of the output of
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
 \item{...}{Optional arguments to be passed to
-\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}.}
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}. Ignored
+if the elements in output_list are the results of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
 \item{col_names}{A vector of the column names in the
 parameter estimate tables to be included.
