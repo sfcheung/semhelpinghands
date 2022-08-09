@@ -6,9 +6,16 @@
 #' @return A data-frame-like object of the class `est_table`.
 #'
 #' @param output_list A named list of [lavaan-class] objects,
+#'                    a named list of the output of
+#'                    [lavaan::parameterEstimates()],
+#'                    or a named list of the output of
+#'                    [lavaan::standardizedSolution()].
 #'
 #' @param ... Optional arguments to be passed to
-#'            [lavaan::parameterEstimates()].
+#'            [lavaan::parameterEstimates()]. Ignored
+#'            if the elements in output_list are the results of
+#'            [lavaan::parameterEstimates()] or
+#'            [lavaan::standardizedSolution()].
 #'
 #' @param col_names A vector of the column names in the
 #'                  parameter estimate tables to be included.
@@ -57,13 +64,14 @@ group_by_models <- function(output_list,
                             col_names = "est",
                             group_first = FALSE,
                             model_first = TRUE) {
-    if (!all(sapply(output_list, function(x) inherits(x, "lavaan")))) {
-        stop("All objects in output_list msut be lavaan-class object.")
+    output_type <- all_type(output_list)
+    if (is.na(output_type)) {
+        stop("output_list is invalid. Not of the same types or not of the accepted types.")
       }
     if (is.null(names(output_list))) {
         stop("output_list must be a named list.")
       }
-    grouped <- lavaan::lavInspect(output_list[[1]], "ngroups") > 1
+    grouped <- is_grouped(output_list[[1]])
     if (grouped) {
         if (group_first) {
             m <- c("group", "lhs", "op", "rhs")
@@ -75,10 +83,14 @@ group_by_models <- function(output_list,
       }
     k <- length(output_list)
     model_names <- names(output_list)
-    p_est_list <- sapply(output_list,
-                         lavaan::parameterEstimates,
-                         ...,
-                         simplify = FALSE, USE.NAMES = TRUE)
+    if (output_type == "lavaan") {
+        p_est_list <- sapply(output_list,
+                            lavaan::parameterEstimates,
+                            ...,
+                            simplify = FALSE, USE.NAMES = TRUE)
+      } else {
+        p_est_list <- output_list
+      }
     est_list_tmp <- sapply(p_est_list,
                            function(x) {
                               x[, c(m, col_names)]
