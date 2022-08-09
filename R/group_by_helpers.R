@@ -27,3 +27,21 @@ all_type <- function(x) {
     if (length(out0) != 1) return(NA)
     return(out0)
   }
+
+is_grouped <- function(x) {
+    output_type <- check_lavaan_type(x)
+    if (output_type == "lavaan") {
+        grouped <- lavaan::lavInspect(x, "ngroups") > 1
+      } else {
+        if (!("group" %in% colnames(x))) {
+            grouped <- FALSE
+          } else {
+            if (length(unique(x$group)) > 1) {
+                grouped <- TRUE
+              } else {
+                grouped = FALSE
+              }
+          }
+      }
+    grouped
+  }

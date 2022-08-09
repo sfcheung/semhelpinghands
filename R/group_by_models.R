@@ -64,19 +64,7 @@ group_by_models <- function(output_list,
     if (is.null(names(output_list))) {
         stop("output_list must be a named list.")
       }
-    if (output_type == "lavaan") {
-        grouped <- lavaan::lavInspect(output_list[[1]], "ngroups") > 1
-      } else {
-        if (!("group" %in% colnames(output_list[[1]]))) {
-            grouped <- FALSE
-          } else {
-            if (length(unique(output_list[[1]]$group)) > 1) {
-                grouped <- TRUE
-              } else {
-                grouped = FALSE
-              }
-          }
-      }
+    grouped <- is_grouped(output_list[[1]])
     if (grouped) {
         if (group_first) {
             m <- c("group", "lhs", "op", "rhs")
