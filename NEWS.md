@@ -7,3 +7,4 @@
   group parameter estimates.
 - Add `record_history()` to record optimization history.
 - Add `filter_by()` for selecting rows in a parameter estimates table.
+- Add `group_by_group()` to group parameter estimates.
