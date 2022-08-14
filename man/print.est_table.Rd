@@ -18,9 +18,7 @@ notation will never be used.)}
 \item{empty_cells}{String to be printed for empty cells
 or cells with no values. Default is \code{"--"}.}
 
-\item{group_first}{If the object has a column for groups,
-whether group will be printed before
-the row variables. Default is \code{FALSE}.}
+\item{group_first}{Not used.}
 }
 \description{
 Print method for an 'est_table' object

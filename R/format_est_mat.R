@@ -23,7 +23,11 @@ format_est_mat <- function(x,
       } else {
         gn <- NULL
       }
-    out <- x[-c(v_ind, gp_ind)]
+    if (!is.null(v_ind)) {
+        out <- x[-c(v_ind, gp_ind)]
+      } else {
+        out <- x
+      }
     fct <- function(x) {
         if (is.na(x)) {
             out <- na_print
@@ -41,7 +45,9 @@ format_est_mat <- function(x,
             rownames(out2) <- paste0(vn, "[", gn, "]")
           }
       } else {
-        rownames(out2) <- vn
+        if (!is.null(v_ind)) {
+            rownames(out2) <- vn
+          }
       }
     return(out2)
   }
