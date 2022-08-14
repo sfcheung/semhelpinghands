@@ -7,7 +7,9 @@
 add_sig(object, ..., standardized = FALSE, na_str = "", use = "pvalue")
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object.}
+\item{object}{A \linkS4class{lavaan} object or the output
+of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
 \item{...}{Optional arguments to be passed to
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
@@ -22,11 +24,16 @@ will be called. If \code{FALSE}, the default,
 with no significant tests. For example, fixed
 parameters. Default is \code{""}.}
 
-\item{use}{A character vector of one or two
-elements. If one of them is \code{"pvalue"},
-\emph{p}-values will be used. If one of them is
-\code{"ci"}, confidence intervals will be used.
-Can use both by \code{c("pvalue", "ci")}.}
+\item{use}{A character vector of one or more
+elements. If \code{"pvalue"} is in the vector,
+\emph{p}-values will be used. If
+\code{"ci"} is in the vector, confidence intervals will be used.
+If \code{"boot.ci"} is in the vector and the columns
+\code{boot.ci.lower} and \code{boot.ci.upper} are available,
+these columns will be used.
+Note that \code{ci.lower} and \code{ci.upper} can also
+be bootstrap confidence intervals in some tables if
+\code{se = "boot"} is used.}
 }
 \value{
 The output of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
@@ -41,7 +48,8 @@ parameter is significant.
 \details{
 The function calls \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}} and check the columns
-\code{pvalue} and/or \code{ci.lower} and \code{ci.upper} and
+\code{pvalue}, \code{ci.lower} and \code{ci.upper}, and \code{boot.ci.lower}
+and \code{boot.ci.upper} and
 then insert columns to denote for each parameter estimate
 whether it is significant.
 }
