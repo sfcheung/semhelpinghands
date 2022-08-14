@@ -109,6 +109,7 @@ group_by_dvs <- function(object,
         attr(out, "gp_ind") <- NULL
       }
     attr(out, "ivs") <- out[, attr(out, "v_ind")]
+    rownames(out) <- seq_len(nrow(out))
     out
   }
 
@@ -159,6 +160,7 @@ group_by_ivs <- function(object,
         attr(out1, att_i) <- attr(out, att_i)
       }
     attr(out1, "by_ivs") <- TRUE
+    rownames(out1) <- seq_len(nrow(out1))
     out1
   }
 

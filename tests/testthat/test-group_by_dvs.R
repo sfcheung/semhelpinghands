@@ -102,3 +102,6 @@ test_that("Different inputs", {
     expect_true(identical(est_grouped_gp, est_grouped_gp_est))
   })
 
+
+
+

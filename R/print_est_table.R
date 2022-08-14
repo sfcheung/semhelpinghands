@@ -9,9 +9,7 @@
 #'           notation will never be used.)
 #' @param empty_cells String to be printed for empty cells
 #'                    or cells with no values. Default is `"--"`.
-#' @param group_first If the object has a column for groups,
-#'                    whether group will be printed before
-#'                    the row variables. Default is `FALSE`.
+#' @param group_first Not used.
 #' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @export
@@ -31,14 +29,16 @@ print.est_table <- function(x,
     by_ivs <- attr(x, "by_iv")
     if (isTRUE(grouped) & !isTRUE(by_ivs)) {
         out <- format_est_mat(x,
-                              v_ind = attr(x, "v_ind"),
-                              gp_ind = attr(x, "gp_ind"),
+                              # v_ind = attr(x, "v_ind"),
+                              # gp_ind = attr(x, "gp_ind"),
+                              v_ind = NULL,
+                              gp_ind = NULL,
                               group_first = group_first,
                               nd = nd,
                               na_print = empty_cells)
       } else {
         out <- format_est_mat(x,
-                              v_ind = 1,
+                              v_ind = NULL,
                               nd = nd,
                               na_print = empty_cells)
       }
