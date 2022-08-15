@@ -7,7 +7,7 @@
 #' @details It records the minimization history when a model is fitted
 #'  by [lavaan::lavaan()] or its wrappers (e.g., [lavaan::sem()] or
 #'  [lavaan::cfa()]). The recorded history can then be plotted or
-#'  displayed, for visualizing and understanding how the estimates
+#'  displayed, for visualizing how the estimates
 #'  of free parameters is found.
 #'
 #'  It will refit the model by the update method of
@@ -28,8 +28,8 @@
 #'
 #' @examples
 #'
-# Adapted from the example for CFA in lavaan::cfa().
-# Using only two of the factors
+#' # Adapted from the example for CFA in lavaan::cfa().
+#' # Using only two of the factors
 #' library(lavaan)
 #' HS.model <-
 #' '
