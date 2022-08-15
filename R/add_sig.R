@@ -4,11 +4,12 @@
 #'  parameter is significant.
 #'
 #' @details The function calls [lavaan::parameterEstimates()] or
-#'  [lavaan::standardizedSolution()] and check the columns
+#'  [lavaan::standardizedSolution()] and checks the columns
 #'  `pvalue`, `ci.lower` and `ci.upper`, and `boot.ci.lower`
 #'  and `boot.ci.upper` and
 #'  then insert columns to denote for each parameter estimate
-#'  whether it is significant.
+#'  whether it is significant based on the
+#'  requested criteria.
 #'
 #' @return The output of [lavaan::parameterEstimates()] or
 #'  [lavaan::standardizedSolution()], with one or two columns
@@ -25,13 +26,16 @@
 #'  is needed. If `TRUE`, [lavaan::standardizedSolution()]
 #'  will be called. If `FALSE`, the default,
 #'  [lavaan::parameterEstimates()] will be called.
+#'  Ignored if a table if estimates is supplied.
 #' @param na_str The string to be used for parameters
 #'  with no significant tests. For example, fixed
 #'  parameters. Default is `""`.
 #' @param use A character vector of one or more
-#'  elements. If `"pvalue"` is in the vector,
+#'  strings. If `"pvalue"` is in the vector,
 #'  *p*-values will be used. If
-#'  `"ci"` is in the vector, confidence intervals will be used.
+#'  `"ci"` is in the vector, confidence intervals
+#'  appeared on `ci.lower` and `ci.uppwr`
+#'   will be used.
 #'  If `"boot.ci"` is in the vector and the columns
 #'  `boot.ci.lower` and `boot.ci.upper` are available,
 #'  these columns will be used.
@@ -41,6 +45,8 @@
 #'
 #' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
+#' @seealso [lavaan::parameterEstimates()]
+#'          and [lavaan::standardizedSolution()]
 #' @examples
 #'
 #' library(lavaan)
