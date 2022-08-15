@@ -1,10 +1,10 @@
-#' @title Percentile Bootstrap CIs for Standardized Solution
+#' @title Bootstrap CIs for Standardized Solution
 #'
 #' @description It receives a [lavaan::lavaan-class] object fitted with
-#'   bootstrapping standard errors requested and forms the percentile
+#'   bootstrapping standard errors requested and forms the 
 #'   confidence intervals for the standardized solution.
 #'
-#' @return The output of [lavaan::standardizedSolution()], with percentile
+#' @return The output of [lavaan::standardizedSolution()], with
 #'   bootstrap confidence intervals appended to the right.
 #'
 #' @param object A [lavaan-class] object, fitted with 'se = "boot"'.
@@ -17,11 +17,12 @@
 #'  [lavaan::standardizedSolution()]. Default is `"std.all"`.
 #'
 #' @param save_boot_est_std Whether the bootstrap estimates of the standardized
-#'  solution are saved. If saved, will be stored in the attribute `boot_est_std`.
-#'  Default is `FALSE`.
+#'  solution are saved. If saved, they will be stored in the attribute `boot_est_std`.
+#'  Default is `TRUE`.
 #'
-#' @param force_run If `TRUE`, will skip checks and run on models not tested.
-#'                  For internal use and should be set to `TRUE`. Default is
+#' @param force_run If `TRUE`, will skip checks and run models without checking
+#'                  the estimates.
+#'                  For internal use. Default is
 #'                  `FALSE`.
 #'
 #' @param boot_delta_ratio The ratio of (a) the distance of the bootstrap
@@ -33,6 +34,7 @@
 #'
 #' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
+#' @seelaso [lavaan::standardizedSolution()]
 #' @examples
 #'
 #' library(lavaan)
@@ -62,7 +64,7 @@
 standardizedSolution_boot_ci <- function(object,
                                          level = .95,
                                          type = "std.all",
-                                         save_boot_est_std = FALSE,
+                                         save_boot_est_std = TRUE,
                                          force_run = FALSE,
                                          boot_delta_ratio = FALSE,
                                          ...) {
@@ -113,6 +115,9 @@ standardizedSolution_boot_ci <- function(object,
     out_final
   }
 
+# Generate the function for bootstrapping.
+#' @noRd
+
 std_i <- function(est_i, p_est, p_free, object, std_args, type) {
     p_est[p_free] <- est_i
     GLIST_i <- lavaan::lav_model_set_parameters(object@Model,
@@ -129,6 +134,8 @@ std_i <- function(est_i, p_est, p_free, object, std_args, type) {
                                         output = "data.frame"))
     do.call(lavaan::standardizedSolution, std_args1)$est.std
   }
+
+#' @noRd
 
 check_std_i <- function(object, type, std_args) {
     # Work-in-progress
