@@ -10,7 +10,11 @@ add_sig(object, ..., standardized = FALSE, na_str = "", use = "pvalue")
 \item{object}{A \linkS4class{lavaan} object
 or the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
-\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.
+May also work on an \code{est_table}-class
+object returned by functions
+like \code{\link[=group_by_dvs]{group_by_dvs()}} but there
+is no guarantee.}
 
 \item{...}{Optional arguments to be
 passed to

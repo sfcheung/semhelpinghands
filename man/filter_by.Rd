@@ -5,13 +5,17 @@
 \title{Filter a Parameter Estimates
 Table}
 \usage{
-filter_by(x, op = NULL, lhs = NULL, rhs = NULL, group = NULL, fit = NULL)
+filter_by(object, op = NULL, lhs = NULL, rhs = NULL, group = NULL, fit = NULL)
 }
 \arguments{
-\item{x}{The output of
+\item{object}{The output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}},
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}, or
-a \code{lavaan.data.frame} object.}
+a \code{lavaan.data.frame} object.
+May also work on an \code{est_table}-class
+object returned by functions
+like \code{\link[=group_by_dvs]{group_by_dvs()}} but there
+is no guarantee.}
 
 \item{op}{A character vector of the
 operators (\code{op}) for filtering.

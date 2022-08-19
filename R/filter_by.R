@@ -16,10 +16,14 @@
 #' @return The filtered version of the
 #' input object.
 #'
-#' @param x The output of
+#' @param object The output of
 #' [lavaan::parameterEstimates()],
 #' [lavaan::standardizedSolution()], or
 #' a `lavaan.data.frame` object.
+#' May also work on an `est_table`-class
+#' object returned by functions
+#' like [group_by_dvs()] but there
+#' is no guarantee.
 #'
 #' @param op A character vector of the
 #' operators (`op`) for filtering.
@@ -87,13 +91,13 @@
 #'
 #' @export
 
-filter_by <- function(x,
+filter_by <- function(object,
                       op = NULL,
                       lhs = NULL,
                       rhs = NULL,
                       group = NULL,
                       fit = NULL) {
-    out <- x
+    out <- object
     if (!is.null(op)) {
         i_op <- out$op %in% op
       } else {
@@ -125,6 +129,6 @@ filter_by <- function(x,
         i_gp <- TRUE
       }
     out <- out[i_op & i_lhs & i_rhs & i_gp, ]
-    class(out) <- class(x)
+    class(out) <- class(object)
     out
   }

@@ -8,7 +8,7 @@
 #' @return A data-frame-like object of
 #' the class `est_table`.
 #'
-#' @param output_list A named list of
+#' @param object_list A named list of
 #' [lavaan-class] objects, a named list
 #' of the output of
 #' [lavaan::parameterEstimates()], or a
@@ -19,7 +19,7 @@
 #' passed to
 #' [lavaan::parameterEstimates()].
 #' Ignored if the elements in
-#' output_list are the results of
+#' object_list are the results of
 #' [lavaan::parameterEstimates()] or
 #' [lavaan::standardizedSolution()].
 #'
@@ -74,19 +74,19 @@
 #'
 #' @export
 
-group_by_models <- function(output_list,
+group_by_models <- function(object_list,
                             ...,
                             col_names = "est",
                             group_first = FALSE,
                             model_first = TRUE) {
-    output_type <- all_type(output_list)
+    output_type <- all_type(object_list)
     if (is.na(output_type)) {
-        stop("output_list is invalid. Not of the same types or not of the accepted types.")
+        stop("object_list is invalid. Not of the same types or not of the accepted types.")
       }
-    if (is.null(names(output_list))) {
-        stop("output_list must be a named list.")
+    if (is.null(names(object_list))) {
+        stop("object_list must be a named list.")
       }
-    grouped <- is_grouped(output_list[[1]])
+    grouped <- is_grouped(object_list[[1]])
     if (grouped) {
         if (group_first) {
             m <- c("group", "lhs", "op", "rhs")
@@ -96,15 +96,15 @@ group_by_models <- function(output_list,
       } else {
         m <- c("lhs", "op", "rhs")
       }
-    k <- length(output_list)
-    model_names <- names(output_list)
+    k <- length(object_list)
+    model_names <- names(object_list)
     if (output_type == "lavaan") {
-        p_est_list <- sapply(output_list,
+        p_est_list <- sapply(object_list,
                             lavaan::parameterEstimates,
                             ...,
                             simplify = FALSE, USE.NAMES = TRUE)
       } else {
-        p_est_list <- output_list
+        p_est_list <- object_list
       }
     est_list_tmp <- sapply(p_est_list,
                            function(x) {

@@ -26,6 +26,10 @@
 #' or the output of
 #' [lavaan::parameterEstimates()] or
 #' [lavaan::standardizedSolution()].
+#' May also work on an `est_table`-class
+#' object returned by functions
+#' like [group_by_dvs()] but there
+#' is no guarantee.
 #'
 #' @param ... Optional arguments to be
 #' passed to

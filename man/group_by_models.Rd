@@ -5,7 +5,7 @@
 \title{Group Estimates By Models}
 \usage{
 group_by_models(
-  output_list,
+  object_list,
   ...,
   col_names = "est",
   group_first = FALSE,
@@ -13,7 +13,7 @@ group_by_models(
 )
 }
 \arguments{
-\item{output_list}{A named list of
+\item{object_list}{A named list of
 \linkS4class{lavaan} objects, a named list
 of the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}, or a
@@ -24,7 +24,7 @@ named list of the output of
 passed to
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}.
 Ignored if the elements in
-output_list are the results of
+object_list are the results of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
