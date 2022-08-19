@@ -4,7 +4,8 @@
 \alias{record_history}
 \alias{plot.fit_history}
 \alias{print.fit_history}
-\title{Record the Minimization History}
+\title{Record the Minimization
+History}
 \usage{
 record_history(object)
 
@@ -13,56 +14,82 @@ record_history(object)
 \method{print}{fit_history}(x, n_iterations = 10, digits = 3, ...)
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object.}
+\item{object}{A \linkS4class{lavaan}
+object.}
 
-\item{x}{A \code{fit_history} class object, the output of \code{\link[=record_history]{record_history()}}.}
+\item{x}{A \code{fit_history} class
+object, the output of
+\code{\link[=record_history]{record_history()}}.}
 
-\item{params}{The names of parameters to be plotted. Must be the
-names of one or more columns in \code{x}.}
+\item{params}{A character vector of
+the names of parameters to be
+plotted. Must be the names of one or
+more columns in \code{x}.}
 
-\item{last_n}{The lass \code{n} iterations to be plotted. Default is -1,
+\item{last_n}{The lass \code{n} iterations
+to be plotted. Default is -1,
 plotting all iterations.}
 
-\item{orientation}{The orientation of the plot. Either \code{"horizontal"}
-(the default) or \code{"vertical"}.}
+\item{orientation}{The orientation of
+the plot. Either \code{"horizontal"} (the
+default) or \code{"vertical"}.}
 
-\item{...}{Optional arguments. To be passed to the print method of data frame.}
+\item{...}{Optional arguments. To be
+passed to the print method of data
+frame.}
 
-\item{n_iterations}{The number of iterations to print. Default is 10,
-printing the first 10 iterations (or all iterations, if
-the number of iterations is less than 10).}
+\item{n_iterations}{The number of
+iterations to print. Default is 10,
+printing the first 10 iterations (or
+all iterations, if the number of
+iterations is less than 10).}
 
-\item{digits}{The number of digits to be displayed. Default is 3.}
+\item{digits}{The number of digits to
+be displayed. Default is 3.}
 }
 \value{
-A \code{fit_history}-class object with a plot method.
+A \code{fit_history}-class object
+with a `plot`` method.
 }
 \description{
-Record the minimization history when a model is fitted
-by \code{\link[lavaan:lavaan]{lavaan::lavaan()}} or its wrappers (e.g., \code{\link[lavaan:sem]{lavaan::sem()}} or
+Record the minimization
+history when a model is fitted by
+\code{\link[lavaan:lavaan]{lavaan::lavaan()}} or its wrappers
+(e.g., \code{\link[lavaan:sem]{lavaan::sem()}} or
 \code{\link[lavaan:cfa]{lavaan::cfa()}}).
 }
 \details{
-It records the minimization history when a model is fitted
-by \code{\link[lavaan:lavaan]{lavaan::lavaan()}} or its wrappers (e.g., \code{\link[lavaan:sem]{lavaan::sem()}} or
-\code{\link[lavaan:cfa]{lavaan::cfa()}}). The recorded history can then be plotted or
-displayed, for visualizing how the estimates
-of free parameters is found.
+It records the minimization
+history when a model is fitted by
+\code{\link[lavaan:lavaan]{lavaan::lavaan()}} or its wrappers
+(e.g., \code{\link[lavaan:sem]{lavaan::sem()}} or
+\code{\link[lavaan:cfa]{lavaan::cfa()}}). The recorded
+history can then be plotted or
+displayed, for visualizing how the
+estimates of free parameters is
+found.
 
-It will refit the model by the update method of
-\link[lavaan:lavaan-class]{lavaan::lavaan}, setting \code{se = "none"} and \code{test = "standard"} because they have no impact on the minimization
-process.
+It will refit the model by the
+\verb{update`` method of [lavaan::lavaan-class], setting }se =
+"none"\code{and}test = "standard"`
+because they have no impact on the
+minimization process.
 
-This and related functions are adapted from the package \code{semunpack}.
-The version in this package will be revised to be an
-advanced version intended for diagnostic purpose in real studies.
+This and related functions are
+adapted from the package \code{semunpack}.
+The version in this package will be
+revised to be an advanced version
+intended for diagnostic purpose in
+real studies.
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{plot}: The plot method for the output of
+\item \code{plot}: The plot
+method for the output of
 \code{\link[=record_history]{record_history()}}.
 
-\item \code{print}: The print method for the output of
+\item \code{print}: The print
+method for the output of
 \code{\link[=record_history]{record_history()}}.
 }}
 
@@ -87,7 +114,9 @@ plot(fit_h, params = c("visual=~x2", "visual=~x3",
                        "visual~~textual"),
             last_n = 10,
             orientation = "vertical")
+
 }
 \author{
-Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
+Shu Fai Cheung
+\url{https://orcid.org/0000-0002-9871-9448}
 }

@@ -1,30 +1,44 @@
-#' @title Record the Minimization History
+#' @title Record the Minimization
+#' History
 #'
-#' @description Record the minimization history when a model is fitted
-#'  by [lavaan::lavaan()] or its wrappers (e.g., [lavaan::sem()] or
-#'  [lavaan::cfa()]).
+#' @description Record the minimization
+#' history when a model is fitted by
+#' [lavaan::lavaan()] or its wrappers
+#' (e.g., [lavaan::sem()] or
+#' [lavaan::cfa()]).
 #'
-#' @details It records the minimization history when a model is fitted
-#'  by [lavaan::lavaan()] or its wrappers (e.g., [lavaan::sem()] or
-#'  [lavaan::cfa()]). The recorded history can then be plotted or
-#'  displayed, for visualizing how the estimates
-#'  of free parameters is found.
+#' @details It records the minimization
+#' history when a model is fitted by
+#' [lavaan::lavaan()] or its wrappers
+#' (e.g., [lavaan::sem()] or
+#' [lavaan::cfa()]). The recorded
+#' history can then be plotted or
+#' displayed, for visualizing how the
+#' estimates of free parameters is
+#' found.
 #'
-#'  It will refit the model by the update method of
-#'  [lavaan::lavaan-class], setting `se = "none"` and `test =
-#'  "standard"` because they have no impact on the minimization
-#'  process.
+#' It will refit the model by the
+#' `update`` method of
+#' [lavaan::lavaan-class], setting `se =
+#' "none"` and `test = "standard"`
+#' because they have no impact on the
+#' minimization process.
 #'
-#'  This and related functions are adapted from the package `semunpack`.
-#'  The version in this package will be revised to be an
-#'  advanced version intended for diagnostic purpose in real studies.
+#' This and related functions are
+#' adapted from the package `semunpack`.
+#' The version in this package will be
+#' revised to be an advanced version
+#' intended for diagnostic purpose in
+#' real studies.
 #'
-#' @return
-#' A `fit_history`-class object with a plot method.
+#' @return A `fit_history`-class object
+#' with a `plot`` method.
 #'
-#' @param object A [lavaan-class] object.
+#' @param object A [lavaan-class]
+#' object.
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
 #'
@@ -47,6 +61,7 @@
 #'                        "visual~~textual"),
 #'             last_n = 10,
 #'             orientation = "vertical")
+#'
 #' @importFrom lavaan coef
 #' @export
 #'
@@ -135,20 +150,34 @@ plot_history_param <- function(param,
     #      ...)
   }
 
-#' @param x A `fit_history` class object, the output of [record_history()].
-#' @param params The names of parameters to be plotted. Must be the
-#'               names of one or more columns in `x`.
-#' @param last_n The lass `n` iterations to be plotted. Default is -1,
-#'               plotting all iterations.
-#' @param orientation The orientation of the plot. Either `"horizontal"`
-#'               (the default) or `"vertical"`.
-#' @param ... Additional arguments. To be passed to [plot.default()]
+#' @param x A `fit_history` class
+#' object, the output of
+#' [record_history()].
+#'
+#' @param params A character vector of
+#' the names of parameters to be
+#' plotted. Must be the names of one or
+#' more columns in `x`.
+#'
+#' @param last_n The lass `n` iterations
+#' to be plotted. Default is -1,
+#' plotting all iterations.
+#'
+#' @param orientation The orientation of
+#' the plot. Either `"horizontal"` (the
+#' default) or `"vertical"`.
+#'
+#' @param ... Additional arguments. To
+#' be passed to [plot.default()]
 #'
 #' @export
-#' @describeIn record_history The plot method for the output of
-#'                            [record_history()].
+#' @describeIn record_history The plot
+#' method for the output of
+#' [record_history()].
+#'
 #' @order 2
 #' @importFrom graphics axTicks axis mtext par title
+
 plot.fit_history <- function(x,
                              params,
                              last_n = -1,
@@ -274,14 +303,24 @@ plot.fit_history <- function(x,
     invisible()
   }
 
-#' @param n_iterations The number of iterations to print. Default is 10,
-#'                     printing the first 10 iterations (or all iterations, if
-#'                     the number of iterations is less than 10).
-#' @param digits The number of digits to be displayed. Default is 3.
-#' @param ... Optional arguments. To be passed to the print method of data frame.
+#' @param n_iterations The number of
+#' iterations to print. Default is 10,
+#' printing the first 10 iterations (or
+#' all iterations, if the number of
+#' iterations is less than 10).
+#'
+#' @param digits The number of digits to
+#' be displayed. Default is 3.
+#'
+#' @param ... Optional arguments. To be
+#' passed to the print method of data
+#' frame.
+#'
 #' @export
-#' @describeIn record_history The print method for the output of
-#'                            [record_history()].
+#' @describeIn record_history The print
+#' method for the output of
+#' [record_history()].
+#'
 #' @order 3
 
 print.fit_history <- function(x, n_iterations = 10, digits = 3, ...) {
