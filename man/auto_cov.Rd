@@ -96,10 +96,10 @@ m ~ x
 y ~ m + z + zm
 m ~~ z + zm
 "
-fit <- sem(mod0, dat, meanstructure = TRUE, fixed.x = FALSE)
+fit <- sem(mod0, dat, fixed.x = FALSE)
 mod0_cov <- add_exo_cov(mod0)
 cat(mod0_cov)
-fit_cov <- sem(mod0_cov, dat, meanstructure = TRUE, fixed.x = FALSE)
+fit_cov <- sem(mod0_cov, dat, fixed.x = FALSE)
 
 mod1 <-
 "

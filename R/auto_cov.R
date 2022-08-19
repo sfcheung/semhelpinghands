@@ -74,10 +74,10 @@
 #' y ~ m + z + zm
 #' m ~~ z + zm
 #' "
-#' fit <- sem(mod0, dat, meanstructure = TRUE, fixed.x = FALSE)
+#' fit <- sem(mod0, dat, fixed.x = FALSE)
 #' mod0_cov <- add_exo_cov(mod0)
 #' cat(mod0_cov)
-#' fit_cov <- sem(mod0_cov, dat, meanstructure = TRUE, fixed.x = FALSE)
+#' fit_cov <- sem(mod0_cov, dat, fixed.x = FALSE)
 #'
 #' mod1 <-
 #' "
@@ -108,7 +108,8 @@ add_exo_cov <- function(model, FUN = "sem", print = TRUE) {
     out <- paste0(model, "\n",
                   "# Added by auto_exo_cov\n",
                   auto_exo_cov(model = model,
-                                FUN = FUN))
+                               FUN = FUN,
+                               print = FALSE))
     if (print) {
         cat(out)
       }
