@@ -1,40 +1,60 @@
-#' @title Bootstrap CIs for Standardized Solution
+#' @title Bootstrap CIs for Standardized
+#' Solution
 #'
-#' @description It receives a [lavaan::lavaan-class] object fitted with
-#'   bootstrapping standard errors requested and forms the
-#'   confidence intervals for the standardized solution.
+#' @description It receives a
+#' [lavaan::lavaan-class] object fitted
+#' with bootstrapping standard errors
+#' requested and forms the confidence
+#' intervals for the standardized
+#' solution.
 #'
-#' @return The output of [lavaan::standardizedSolution()], with
-#'   bootstrap confidence intervals appended to the right.
+#' @return The output of
+#' [lavaan::standardizedSolution()],
+#' with bootstrap confidence intervals
+#' appended to the right.
 #'
-#' @param object A [lavaan-class] object, fitted with 'se = "boot"'.
+#' @param object A [lavaan-class]
+#' object, fitted with 'se = "boot"'.
 #'
-#' @param level The level of confidence of the confidence intervals. Default
-#'  is .95.
+#' @param level The level of confidence
+#' of the confidence intervals. Default
+#' is .95.
 #'
-#' @param type The type of standard estimates. The same argument of
-#'  [lavaan::standardizedSolution()], and support all values supported by
-#'  [lavaan::standardizedSolution()]. Default is `"std.all"`.
+#' @param type The type of standard
+#' estimates. The same argument of
+#' [lavaan::standardizedSolution()],
+#' and support all values supported by
+#' [lavaan::standardizedSolution()].
+#' Default is `"std.all"`.
 #'
-#' @param save_boot_est_std Whether the bootstrap estimates of the standardized
-#'  solution are saved. If saved, they will be stored in the attribute `boot_est_std`.
-#'  Default is `TRUE`.
+#' @param save_boot_est_std Whether the
+#' bootstrap estimates of the
+#' standardized solution are saved. If
+#' saved, they will be stored in the
+#' attribute `boot_est_std`. Default is
+#' `TRUE`.
 #'
-#' @param force_run If `TRUE`, will skip checks and run models without checking
-#'                  the estimates.
-#'                  For internal use. Default is
-#'                  `FALSE`.
+#' @param force_run If `TRUE`, will skip
+#' checks and run models without
+#' checking the estimates. For internal
+#' use. Default is `FALSE`.
 #'
-#' @param boot_delta_ratio The ratio of (a) the distance of the bootstrap
-#'                         confidence limit from the point estimate to (b)
-#'                         the distance of the delta-method limit from the
-#'                         point estimate.
+#' @param boot_delta_ratio The ratio of
+#' (a) the distance of the bootstrap
+#' confidence limit from the point
+#' estimate to (b) the distance of the
+#' delta-method limit from the point
+#' estimate.
 #'
-#' @param ... Other arguments to be passed to [lavaan::standardizedSolution()].
+#' @param ... Other arguments to be
+#' passed to
+#' [lavaan::standardizedSolution()].
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @seealso [lavaan::standardizedSolution()]
+#'
 #' @examples
 #'
 #' library(lavaan)
