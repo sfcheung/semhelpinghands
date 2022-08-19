@@ -31,14 +31,14 @@
 #' @return
 #' [add_exo_cov()] returns a one-element
 #' character vector of the syntax, with
-#' lines separated by "\n". The
+#' lines separated by "\\n". The
 #' generated syntax is appended to the
 #' input model syntax.
 #'
 #' [auto_exo_cov()] returns a
 #' one-element character vector of the
 #' generated syntax, with lines
-#' separated by "\n".
+#' separated by "\\n".
 #'
 #' @param model The model syntax to
 #' which the covariances are to be
