@@ -59,8 +59,15 @@
 
 compare_estimators <- function(object,
                                estimators = NULL) {
-    outs <- lapply(estimators,
-                   function(x) lavaan::update(object, estimator = x))
+    call0 <- stats::getCall(object)
+    call1 <- call0
+    for (i in 2:length(call0)) {
+        call1[[i]] <- eval(call0[[i]], parent.frame())
+      }
+    outs <- lapply(estimators, function(x) {
+                      call1$estimator <- x
+                      eval(call1)
+                    })
     names(outs) <- estimators
     outs
   }
