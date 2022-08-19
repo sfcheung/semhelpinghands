@@ -1,11 +1,8 @@
-This is the GitHub webpage for this package:
-
-https://sfcheung.github.io/semhelpinghands/)
-
 # semhelpinghands
 
 An assortment of helper functions for doing structural equation modeling
-(SEM), mainly by [lavaan::lavaan()]. This package is not for implementing
+(SEM), mainly by `lavaan::lavaan()` and its wrappers, such as
+`lavaan::sem()` and `lavaan::cfa()`. This package is not for implementing
 advanced statistical procedures. They are functions for tasks that come
 in handy for doing SEM in general, including understanding and interpreting
 the output.
