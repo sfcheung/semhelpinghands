@@ -93,7 +93,7 @@ standardizedSolution_boot_ci <- function(object,
       }
     boot_est0 <- try(lavaan::lavTech(object, "boot"), silent = TRUE)
     if (inherits(boot_est0, "try-error")) {
-        stop("Bootstrapping estimates not found. Was se = 'boot'?")
+        stop("Bootstrapping estimates not found. Was se = 'boot' or 'bootstrap'?")
       }
     if (!force_run) {
       }
@@ -108,15 +108,29 @@ standardizedSolution_boot_ci <- function(object,
                         object = object,
                         type = type,
                         std_args = std_args))
-    # Could have used boot's method but quantile() is good enough.
-    boot_ci <- t(apply(out_all, 2, stats::quantile, probs = c((1 - level) / 2,
-                                                        1 - (1 - level) / 2),
-                                             na.rm = TRUE))
-    colnames(boot_ci) <- c("boot.ci.lower", "boot.ci.upper")
     out <- lavaan::standardizedSolution(object,
                                         type = type,
                                         level = level,
                                         ...)
+    est_org <- out$est.std
+    boot_tmp <- list(t0 = est_org,
+                      t = out_all,
+                      R = nrow(out_all))
+    # Adapted from boot
+    boot_ci <- sapply(seq_along(est_org), function(x) {
+                          if (all(abs(out_all[, x] -
+                                      mean(out_all[, x], na.rm = TRUE)) <
+                                      1e-8) ||
+                              all(is.na(out_all[, x]))) {
+                              return(c(NA, NA))
+                            }
+                          boot::boot.ci(boot_tmp,
+                                index = x,
+                                type = "perc",
+                                conf = level)$percent[4:5]
+                        })
+    boot_ci <- t(boot_ci)
+    colnames(boot_ci) <- c("boot.ci.lower", "boot.ci.upper")
     out_final <- cbind(out, boot_ci)
     if (boot_delta_ratio) {
         tmp1 <- abs(out_final$boot.ci.lower - out_final$est.std) /
