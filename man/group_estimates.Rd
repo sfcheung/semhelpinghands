@@ -4,7 +4,8 @@
 \alias{group_estimates}
 \alias{group_by_dvs}
 \alias{group_by_ivs}
-\title{Group Estimates By Dependent or Independent Variables}
+\title{Group Estimates By Dependent
+or Independent Variables}
 \usage{
 group_by_dvs(
   object,
@@ -23,38 +24,66 @@ group_by_ivs(
 )
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object or the output of
+\item{object}{A \linkS4class{lavaan} object
+or the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
-\item{...}{Optional arguments to be passed to
-\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}. Ignored if object is an
-output of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\item{...}{Optional arguments to be
+passed to
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}.
+Ignored if `object`` is an output of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
-\item{col_name}{The column name of information to be
-grouped. Default is \code{"est"}. It accepts
-only one name.}
+\item{col_name}{The column name of
+information to be grouped. Default is
+\code{"est"}. It accepts only one name.}
 
-\item{add_prefix}{If \code{TRUE}, the default,
-\code{colname} will be added as
+\item{add_prefix}{If \code{TRUE}, the
+default, \code{col_name} will be added as
 prefix to the column names of the
 output.}
 
-\item{group_first}{If \code{TRUE}, the rows will be grouped
-by groups first and then by
-independent variables Ignored if
-the model has only one group.
-Default is \code{FALSE}.}
+\item{group_first}{If \code{TRUE}, the
+rows will be grouped by groups first
+and then by independent variables
+Ignored if the model has only one
+group. Default is \code{FALSE}.}
 }
 \value{
-A data-frame-like object of the class \code{est_table}.
+A data-frame-like object of
+the class \code{est_table}.
 }
 \description{
-Groups parameter estimates or other information such as
-p-values into a table with dependent variables as columns
-and independent variables as rows, or a transpose of
-this table.
+Groups parameter
+estimates or other information such
+as p-values into a table with
+dependent variables as columns and
+independent variables as rows, or a
+transpose of this table.
+}
+\details{
+It gets a \linkS4class{lavaan}
+object or the output of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}} and
+group selected columns by "dependent"
+variables \code{\link[=group_by_dvs]{group_by_dvs()}} or by
+"independent" variables
+\code{\link[=group_by_ivs]{group_by_ivs()}}.
+
+"Dependent" variables are defined
+as variables on the left hand side
+of the operator \code{~}.
+
+"Independent" variables are defined
+as variables on the right hand side
+of the operator \code{~}.
+
+Note that a variable can both be
+a "dependent" variable and an
+"independent" variable in a model.
 }
 \examples{
 
@@ -79,5 +108,6 @@ group_by_ivs(fit)
 
 }
 \author{
-Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
+Shu Fai Cheung
+\url{https://orcid.org/0000-0002-9871-9448}
 }
