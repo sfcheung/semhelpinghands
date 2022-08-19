@@ -2,13 +2,13 @@
 % Please edit documentation in R/standardizedSolution_boot_ci.R
 \name{standardizedSolution_boot_ci}
 \alias{standardizedSolution_boot_ci}
-\title{Percentile Bootstrap CIs for Standardized Solution}
+\title{Bootstrap CIs for Standardized Solution}
 \usage{
 standardizedSolution_boot_ci(
   object,
   level = 0.95,
   type = "std.all",
-  save_boot_est_std = FALSE,
+  save_boot_est_std = TRUE,
   force_run = FALSE,
   boot_delta_ratio = FALSE,
   ...
@@ -25,11 +25,12 @@ is .95.}
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}. Default is \code{"std.all"}.}
 
 \item{save_boot_est_std}{Whether the bootstrap estimates of the standardized
-solution are saved. If saved, will be stored in the attribute \code{boot_est_std}.
-Default is \code{FALSE}.}
+solution are saved. If saved, they will be stored in the attribute \code{boot_est_std}.
+Default is \code{TRUE}.}
 
-\item{force_run}{If \code{TRUE}, will skip checks and run on models not tested.
-For internal use and should be set to \code{TRUE}. Default is
+\item{force_run}{If \code{TRUE}, will skip checks and run models without checking
+the estimates.
+For internal use. Default is
 \code{FALSE}.}
 
 \item{boot_delta_ratio}{The ratio of (a) the distance of the bootstrap
@@ -40,12 +41,12 @@ point estimate.}
 \item{...}{Other arguments to be passed to \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 }
 \value{
-The output of \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}, with percentile
+The output of \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}, with
 bootstrap confidence intervals appended to the right.
 }
 \description{
 It receives a \link[lavaan:lavaan-class]{lavaan::lavaan} object fitted with
-bootstrapping standard errors requested and forms the percentile
+bootstrapping standard errors requested and forms the
 confidence intervals for the standardized solution.
 }
 \examples{
@@ -72,6 +73,9 @@ summary(fit)
 
 standardizedSolution_boot_ci(fit)
 
+}
+\seealso{
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
 }
 \author{
 Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}

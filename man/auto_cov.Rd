@@ -29,14 +29,14 @@ printed by \code{\link[=cat]{cat()}}. Default is
 \value{
 \code{\link[=add_exo_cov]{add_exo_cov()}} returns a one-element
 character vector of the syntax, with
-lines separated by "\n". The
+lines separated by "\\n". The
 generated syntax is appended to the
 input model syntax.
 
 \code{\link[=auto_exo_cov]{auto_exo_cov()}} returns a
 one-element character vector of the
 generated syntax, with lines
-separated by "\n".
+separated by "\\n".
 }
 \description{
 It generates the

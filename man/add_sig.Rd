@@ -7,51 +7,68 @@
 add_sig(object, ..., standardized = FALSE, na_str = "", use = "pvalue")
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object or the output
-of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
-\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
-
-\item{...}{Optional arguments to be passed to
+\item{object}{A \linkS4class{lavaan} object
+or the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
-\item{standardized}{Whether standardized solution
-is needed. If \code{TRUE}, \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
-will be called. If \code{FALSE}, the default,
-\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} will be called.}
+\item{...}{Optional arguments to be
+passed to
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
-\item{na_str}{The string to be used for parameters
-with no significant tests. For example, fixed
-parameters. Default is \code{""}.}
+\item{standardized}{Whether
+standardized solution is needed. If
+\code{TRUE},
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}} will
+be called. If \code{FALSE}, the default,
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} will
+be called. Ignored if a table if
+estimates is supplied.}
 
-\item{use}{A character vector of one or more
-elements. If \code{"pvalue"} is in the vector,
-\emph{p}-values will be used. If
-\code{"ci"} is in the vector, confidence intervals will be used.
-If \code{"boot.ci"} is in the vector and the columns
-\code{boot.ci.lower} and \code{boot.ci.upper} are available,
-these columns will be used.
-Note that \code{ci.lower} and \code{ci.upper} can also
-be bootstrap confidence intervals in some tables if
-\code{se = "boot"} is used.}
+\item{na_str}{The string to be used
+for parameters with no significant
+tests. For example, fixed parameters.
+Default is \code{""}.}
+
+\item{use}{A character vector of one
+or more strings. If \code{"pvalue"} is in
+the vector, \emph{p}-values will be used.
+If \code{"ci"} is in the vector,
+confidence intervals appeared in
+\code{ci.lower} and \code{ci.upper} will be
+used. If \code{"boot.ci"} is in the vector
+and the columns \code{boot.ci.lower} and
+\code{boot.ci.upper} are available, these
+columns will be used. Note that
+\code{ci.lower} and \code{ci.upper} can also be
+bootstrap confidence intervals in
+some tables if \code{se = "boot"} is used.}
 }
 \value{
-The output of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
-\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}, with one or two columns
-inserted after the parameter estimates to denote the
-significant test results.
+The output of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}},
+with one or two columns inserted
+after the parameter estimates to
+denote the significant test results.
 }
 \description{
-Insert columns to denote whether a
-parameter is significant.
+It inserts columns to
+denote whether a parameter is
+significant.
 }
 \details{
-The function calls \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
-\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}} and check the columns
-\code{pvalue}, \code{ci.lower} and \code{ci.upper}, and \code{boot.ci.lower}
-and \code{boot.ci.upper} and
-then insert columns to denote for each parameter estimate
-whether it is significant.
+The function calls
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}} and
+checks the columns \code{pvalue},
+\code{ci.lower} and \code{ci.upper}, and/or
+\code{boot.ci.lower} and \code{boot.ci.upper}
+and then inserts columns to denote
+for each parameter estimate whether
+it is significant based on the
+requested criteria.
 }
 \examples{
 
@@ -77,6 +94,11 @@ add_sig(fit, standardized = TRUE, use = "ci")
 add_sig(fit, standardized = TRUE, use = c("ci", "pvalue"))
 
 }
+\seealso{
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} and
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
+}
 \author{
-Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
+Shu Fai Cheung
+\url{https://orcid.org/0000-0002-9871-9448}
 }

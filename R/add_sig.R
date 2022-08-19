@@ -1,52 +1,72 @@
 #' @title Add Significant Test Results
 #'
-#' @description Insert columns to denote whether a
-#'  parameter is significant.
+#' @description It inserts columns to
+#' denote whether a parameter is
+#' significant.
 #'
-#' @details The function calls [lavaan::parameterEstimates()] or
-#'  [lavaan::standardizedSolution()] and checks the columns
-#'  `pvalue`, `ci.lower` and `ci.upper`, and `boot.ci.lower`
-#'  and `boot.ci.upper` and
-#'  then insert columns to denote for each parameter estimate
-#'  whether it is significant based on the
-#'  requested criteria.
+#' @details The function calls
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()] and
+#' checks the columns `pvalue`,
+#' `ci.lower` and `ci.upper`, and/or
+#' `boot.ci.lower` and `boot.ci.upper`
+#' and then inserts columns to denote
+#' for each parameter estimate whether
+#' it is significant based on the
+#' requested criteria.
 #'
-#' @return The output of [lavaan::parameterEstimates()] or
-#'  [lavaan::standardizedSolution()], with one or two columns
-#'  inserted after the parameter estimates to denote the
-#'  significant test results.
+#' @return The output of
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()],
+#' with one or two columns inserted
+#' after the parameter estimates to
+#' denote the significant test results.
 #'
-#' @param object A [lavaan-class] object or the output
-#'               of [lavaan::parameterEstimates()] or
-#'               [lavaan::standardizedSolution()].
-#' @param ... Optional arguments to be passed to
-#'  [lavaan::parameterEstimates()] or
-#'  [lavaan::standardizedSolution()].
-#' @param standardized Whether standardized solution
-#'  is needed. If `TRUE`, [lavaan::standardizedSolution()]
-#'  will be called. If `FALSE`, the default,
-#'  [lavaan::parameterEstimates()] will be called.
-#'  Ignored if a table if estimates is supplied.
-#' @param na_str The string to be used for parameters
-#'  with no significant tests. For example, fixed
-#'  parameters. Default is `""`.
-#' @param use A character vector of one or more
-#'  strings. If `"pvalue"` is in the vector,
-#'  *p*-values will be used. If
-#'  `"ci"` is in the vector, confidence intervals
-#'  appeared on `ci.lower` and `ci.uppwr`
-#'   will be used.
-#'  If `"boot.ci"` is in the vector and the columns
-#'  `boot.ci.lower` and `boot.ci.upper` are available,
-#'  these columns will be used.
-#'  Note that `ci.lower` and `ci.upper` can also
-#'  be bootstrap confidence intervals in some tables if
-#'  `se = "boot"` is used.
+#' @param object A [lavaan-class] object
+#' or the output of
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()].
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @param ... Optional arguments to be
+#' passed to
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()].
 #'
-#' @seealso [lavaan::parameterEstimates()]
-#'          and [lavaan::standardizedSolution()]
+#' @param standardized Whether
+#' standardized solution is needed. If
+#' `TRUE`,
+#' [lavaan::standardizedSolution()] will
+#' be called. If `FALSE`, the default,
+#' [lavaan::parameterEstimates()] will
+#' be called. Ignored if a table if
+#' estimates is supplied.
+#'
+#' @param na_str The string to be used
+#' for parameters with no significant
+#' tests. For example, fixed parameters.
+#' Default is `""`.
+#'
+#' @param use A character vector of one
+#' or more strings. If `"pvalue"` is in
+#' the vector, *p*-values will be used.
+#' If `"ci"` is in the vector,
+#' confidence intervals appeared in
+#'  `ci.lower` and `ci.upper` will be
+#' used. If `"boot.ci"` is in the vector
+#' and the columns `boot.ci.lower` and
+#' `boot.ci.upper` are available, these
+#' columns will be used. Note that
+#' `ci.lower` and `ci.upper` can also be
+#' bootstrap confidence intervals in
+#' some tables if `se = "boot"` is used.
+#'
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
+#'
+#' @seealso
+#' [lavaan::parameterEstimates()] and
+#' [lavaan::standardizedSolution()]
+#'
 #' @examples
 #'
 #' library(lavaan)
@@ -77,8 +97,9 @@ add_sig <- function(object,
                     standardized = FALSE,
                     na_str = "",
                     use = "pvalue") {
-    use <- match.arg(use, choices = c("pvalue", "ci", "boot.ci"), several.ok = TRUE)
-    args0 <- list(...)
+    use <- match.arg(use,
+                     choices = c("pvalue", "ci", "boot.ci"),
+                     several.ok = TRUE)
     if (inherits(object, "lavaan")) {
         if (standardized) {
             out <- lavaan::standardizedSolution(object, ...)
@@ -144,6 +165,5 @@ add_sig <- function(object,
       } else {
         out2 <- out
       }
-    # class(out2) <- class(out)
     out2
   }
