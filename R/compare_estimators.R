@@ -1,26 +1,37 @@
-#' @title Refit a 'lavaan'-Model by Several Estimators
+#' @title Refit a 'lavaan'-Model by
+#' Several Estimators
 #'
-#' @description Refit a model in 'lavaan' by several
-#'  lavaan-supported estimators
+#' @description Refit a model in
+#' 'lavaan' by several lavaan-supported
+#' estimators
 #'
-#' @details The function simply use [lapply()] and
-#'  [update()] to rerun the analysis once for each
-#'  of the estimator using `update(object, estimator = "x"`,
-#'  `x` being the estimator.
+#' @details The function simply uses
+#' [lapply()] and [update()] to rerun
+#' the analysis once for each of the
+#' estimator using `update(object,
+#' estimator = "x"`, `x` being the
+#' estimator.
 #'
-#' The results can then be compared using [group_by_models()].
+#' The results can then be compared
+#' using [group_by_models()].
 #'
-#' @return A list of `lavaan` outputs, each of them is
-#'  an update of the original output using one of the
-#'  estimator.
+#' @return A list of `lavaan` outputs,
+#' each of them is an update of the
+#' original output using one of the
+#' estimators.
 #'
-#' @param object A [lavaan-class] object.
+#' @param object A [lavaan-class]
+#' object.
 #'
-#' @param estimators A character vector of the estimator
-#'  supported by the `estimator` argument of
-#'  [lavaan::lavaan()] and its wrappers.
+#' @param estimators A character vector
+#' of the estimator supported by the
+#' `estimator` argument of
+#' [lavaan::lavaan()] and its wrappers,
+#' such as [lavaan::sem()] and
+#' [lavaan::cfa()],
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
 #'
@@ -48,8 +59,15 @@
 
 compare_estimators <- function(object,
                                estimators = NULL) {
-    outs <- lapply(estimators,
-                   function(x) lavaan::update(object, estimator = x))
+    call0 <- stats::getCall(object)
+    call1 <- call0
+    for (i in 2:length(call0)) {
+        call1[[i]] <- eval(call0[[i]], parent.frame())
+      }
+    outs <- lapply(estimators, function(x) {
+                      call1$estimator <- x
+                      eval(call1)
+                    })
     names(outs) <- estimators
     outs
   }

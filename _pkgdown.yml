@@ -1,0 +1,28 @@
+destination: docs
+
+url: https://sfcheung.github.io/semhelpinghands/
+template:
+  bootstrap: 5
+
+reference:
+- title: Parameter Estimates Tables Manipulation
+  desc:  >
+    Functions for manipulating parameter estimates tables
+- contents:
+  - add_sig
+  - filter_by
+  - group_by_dvs
+  - group_by_groups
+  - group_by_models
+  - print.est_table
+- title: Compare Methods
+- contents:
+  - compare_estimators
+- title: Bootstrapping
+- contents:
+  - standardizedSolution_boot_ci
+- title: Other Helpers
+- contents:
+  - record_history
+  - auto_cov
+

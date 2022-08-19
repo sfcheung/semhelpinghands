@@ -1,38 +1,75 @@
 #' @title Add Significant Test Results
 #'
-#' @description Insert columns to denote whether a
-#'  parameter is significant.
+#' @description It inserts columns to
+#' denote whether a parameter is
+#' significant.
 #'
-#' @details The function calls [lavaan::parameterEstimates()] or
-#'  [lavaan::standardizedSolution()] and check the columns
-#'  `pvalue` and/or `ci.lower` and `ci.upper` and
-#'  then insert columns to denote for each parameter estimate
-#'  whether it is significant.
+#' @details The function calls
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()] and
+#' checks the columns `pvalue`,
+#' `ci.lower` and `ci.upper`, and/or
+#' `boot.ci.lower` and `boot.ci.upper`
+#' and then inserts columns to denote
+#' for each parameter estimate whether
+#' it is significant based on the
+#' requested criteria.
 #'
+#' @return The output of
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()],
+#' with one or two columns inserted
+#' after the parameter estimates to
+#' denote the significant test results.
 #'
-#' @return The output of [lavaan::parameterEstimates()] or
-#'  [lavaan::standardizedSolution()], with one or two columns
-#'  inserted after the parameter estimates to denote the
-#'  significant test results.
+#' @param object A [lavaan-class] object
+#' or the output of
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()].
+#' May also work on an `est_table`-class
+#' object returned by functions
+#' like [group_by_dvs()] but there
+#' is no guarantee.
 #'
-#' @param object A [lavaan-class] object.
-#' @param ... Optional arguments to be passed to
-#'  [lavaan::parameterEstimates()] or
-#'  [lavaan::standardizedSolution()].
-#' @param standardized Whether standardized solution
-#'  is needed. If `TRUE`, [lavaan::standardizedSolution()]
-#'  will be called. If `FALSE`, the default,
-#'  [lavaan::parameterEstimates()] will be called.
-#' @param na_str The string to be used for parameters
-#'  with no significant tests. For example, fixed
-#'  parameters. Default is `""`.
-#' @param use A character vector of one or two
-#'  elements. If one of them is `"pvalue"`,
-#'  *p*-values will be used. If one of them is
-#'  `"ci"`, confidence intervals will be used.
-#'  Can use both by `c("pvalue", "ci")`.
+#' @param ... Optional arguments to be
+#' passed to
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()].
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @param standardized Whether
+#' standardized solution is needed. If
+#' `TRUE`,
+#' [lavaan::standardizedSolution()] will
+#' be called. If `FALSE`, the default,
+#' [lavaan::parameterEstimates()] will
+#' be called. Ignored if a table if
+#' estimates is supplied.
+#'
+#' @param na_str The string to be used
+#' for parameters with no significant
+#' tests. For example, fixed parameters.
+#' Default is `""`.
+#'
+#' @param use A character vector of one
+#' or more strings. If `"pvalue"` is in
+#' the vector, *p*-values will be used.
+#' If `"ci"` is in the vector,
+#' confidence intervals appeared in
+#'  `ci.lower` and `ci.upper` will be
+#' used. If `"boot.ci"` is in the vector
+#' and the columns `boot.ci.lower` and
+#' `boot.ci.upper` are available, these
+#' columns will be used. Note that
+#' `ci.lower` and `ci.upper` can also be
+#' bootstrap confidence intervals in
+#' some tables if `se = "boot"` is used.
+#'
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
+#'
+#' @seealso
+#' [lavaan::parameterEstimates()] and
+#' [lavaan::standardizedSolution()]
 #'
 #' @examples
 #'
@@ -64,8 +101,9 @@ add_sig <- function(object,
                     standardized = FALSE,
                     na_str = "",
                     use = "pvalue") {
-    use <- match.arg(use, choices = c("pvalue", "ci"), several.ok = TRUE)
-    args0 <- list(...)
+    use <- match.arg(use,
+                     choices = c("pvalue", "ci", "boot.ci"),
+                     several.ok = TRUE)
     if (inherits(object, "lavaan")) {
         if (standardized) {
             out <- lavaan::standardizedSolution(object, ...)
@@ -80,7 +118,7 @@ add_sig <- function(object,
             standardized <- FALSE
           }
       }
-    if ("pvalue" %in% use) {
+    if (("pvalue" %in% use) && !is.null(out$pvalue)) {
         pvalue <- out$pvalue
         psig <- stats::symnum(pvalue,
                             corr = FALSE,
@@ -90,37 +128,46 @@ add_sig <- function(object,
       } else {
         psig <- NULL
       }
-    if ("ci" %in% use) {
+    if (("ci" %in% use) && !is.null(out$ci.lower) &&
+                           !is.null(out$ci.upper)) {
         ci_chk <- ((out$ci.lower > 0) | (out$ci.upper < 0)) &
                   (out$ci.lower != out$ci.upper)
-        if ("level" %in% names(args0)) {
-            level = args0$level
-          } else {
-            level = .95
-          }
         csig <- ifelse(ci_chk, "Sig", "  ")
       } else {
         csig <- NULL
+      }
+    if (("boot.ci" %in% use) && !is.null(out$boot.ci.lower) &&
+                                !is.null(out$boot.ci.upper)) {
+        bci_chk <- ((out$boot.ci.lower > 0) | (out$boot.ci.upper < 0)) &
+                   (out$boot.ci.lower != out$boot.ci.upper)
+        bcsig <- ifelse(bci_chk, "Sig", "  ")
+      } else {
+        bcsig <- NULL
       }
     if (standardized) {
         k <- which(colnames(out) == "est.std")
       } else {
         k <- which(colnames(out) == "est")
       }
-    if (identical(use, "pvalue")) {
-        out0 <- data.frame(sig = format(psig))
-        k0 <- 1
-      } else if (identical(use, "ci")) {
-        out0 <- data.frame(ci.sig = format(csig))
-        k0 <- 1
-      } else {
-        out0 <- data.frame(sig = format(psig),
-                           ci.sig = format(csig))
-        k0 <- 2
+    out0 <- NULL
+    if ("pvalue" %in% use) {
+        out0 <- cbind(out0, sig = format(psig))
       }
-    out2 <- data.frame(out[c(1:k)],
-                        out0,
-                        out[c((k + k0):ncol(out))])
-    class(out2) <- class(out)
+    if ("ci" %in% use) {
+        out0 <- cbind(out0, ci = format(csig))
+      }
+    if ("boot.ci" %in% use) {
+        out0 <- cbind(out0, boot.ci = format(bcsig))
+      }
+    k0 <- ncol(out0)
+    k1 <- ncol(out)
+    if (!is.null(k0)) {
+        out2 <- out
+        tmp <- cbind(out0, out[, (k + 1):k1, drop = FALSE])
+        out2[, (k + 1):(k1 + k0)] <- tmp
+        colnames(out2)[(k + 1):(k1 + k0)] <- colnames(tmp)
+      } else {
+        out2 <- out
+      }
     out2
   }
