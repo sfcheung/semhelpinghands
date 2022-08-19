@@ -1,31 +1,50 @@
-#' @title Filter a Table by Common Fields
+#' @title Filter a Parameter Estimates
+#' Table
 #'
-#' @description Filter parameter estimates table and
-#'    similar tables by common fields.
+#' @description Filter parameter
+#' estimates table and similar tables
+#' in`lavaan` by common fields such as
+#' `op` (operator).
 #'
-#' @details This functions accept the output
-#'  of [lavaan::parameterEstimates()]
-#'  and [lavaan::standardizedSolution()]
-#'  and filter the rows by commonly used field.
+#' @details This functions accepts the
+#'  output of
+#'  [lavaan::parameterEstimates()] and
+#'  [lavaan::standardizedSolution()] and
+#'  filter the rows by commonly used
+#'  field.
 #'
-#' @return The filter version of the input object.
+#' @return The filtered version of the
+#' input object.
 #'
-#' @param x The output of [lavaan::parameterEstimates()],
-#'  [lavaan::standardizedSolution()], or a
-#'  `lavaan.data.frame` object.
-#' @param op A character vector of the operators (`op`)
-#'  for filtering. Common operators are `"~"`,
-#'  `"~~"`, `"=~"`, `":="`, and "`~1`".
-#' @param lhs A character vector of names in the `lhs` column.
-#' @param rhs A character vector of names in the `rhs` column.
-#' @param group A vector of either the group numbers in the
-#'  `group` column of the labels of the groups.
-#'  If labels are supplied, the original fit object
-#'  must be supplied for extracting the group labels.
-#' @param fit The original fit object. Usd when `group`
-#'  is a vector of the group labels.
+#' @param x The output of
+#' [lavaan::parameterEstimates()],
+#' [lavaan::standardizedSolution()], or
+#' a `lavaan.data.frame` object.
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @param op A character vector of the
+#' operators (`op`) for filtering.
+#' Common operators are `"~"`, `"~~"`,
+#' `"=~"`, `":="`, and "`~1`".
+#'
+#' @param lhs A character vector of
+#' names in the `lhs` column.
+#'
+#' @param rhs A character vector of
+#' names in the `rhs` column.
+#'
+#' @param group A vector of either the
+#' group numbers in the `group` column
+#' of the labels of the groups. If
+#' labels are supplied, the original fit
+#' object must be supplied for
+#' extracting the group labels.
+#'
+#' @param fit The original fit object.
+#'  Usd when `group` is a vector of the
+#'  group labels.
+#'
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
 #'
