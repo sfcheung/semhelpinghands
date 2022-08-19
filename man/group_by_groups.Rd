@@ -13,59 +13,69 @@ group_by_groups(
 )
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object or the output of
+\item{object}{A \linkS4class{lavaan} object
+or the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
-\item{...}{Optional arguments to be passed to
-\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}. Ignored if object is an
-output of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
+\item{...}{Optional arguments to be
+passed to
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}.
+Ignored if object is an output of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 
-\item{col_names}{A vector of the column names in the
-parameter estimate tables to be included.
+\item{col_names}{A vector of the
+column names in the parameter
+estimate tables to be included.
 Default is \code{"est"}.}
 
-\item{group_first}{If \code{TRUE}, the columns will be grouped
-by groups first and then by
-columns in the parameter estimates
-tables. Default is \code{TRUE}.}
+\item{group_first}{If \code{TRUE}, the
+columns will be grouped by groups
+first and then by columns in the
+parameter estimates tables. Default
+is \code{TRUE}.}
 
-\item{group_labels}{A character vector of group labels.
-Will be assigned to group id = 1, 3, 3,
-etc. If not provided. will try to be
-retrieved from \code{object} if it is
-a \link[lavaan:lavaan-class]{lavaan::lavaan} object.}
+\item{group_labels}{A character
+vector of group labels. Will be
+assigned to group id = 1, 2, 3, etc.
+If not provided. will try to be
+retrieved from \code{object} if it is a
+\link[lavaan:lavaan-class]{lavaan::lavaan} object.}
 }
 \value{
-A data-frame-like object of the class \code{est_table}.
+A data-frame-like object of
+the class \code{est_table}.
 }
 \description{
-Groups parameter estimates or other information such as
-p-values into a table with groups as columns
-and parameters as rows.
+Groups parameter
+estimates or other information such
+as \emph{p}-values into a table with
+groups as columns and parameters as
+rows.
 }
 \examples{
 
-# TODO: Amend
 library(lavaan)
 set.seed(5478374)
-n <- 50
+n <- 100
 x <- runif(n) - .5
 m <- .40 * x + rnorm(n, 0, sqrt(1 - .40))
 y <- .30 * m + rnorm(n, 0, sqrt(1 - .30))
-dat <- data.frame(x = x, y = y, m = m)
+city <- sample(c("City Alpha", "City Beta"), 100,
+               replace = TRUE)
+dat <- data.frame(x = x, y = y, m = m, city = city)
 model <-
 '
-m ~ a*x
-y ~ b*m
-ab := a*b
+m ~ c(a1, a2)*x
+y ~ c(b1, b2)*m
+a1b1 := a1*b1
+a2b2 := a2*b2
 '
-
-fit <- sem(model, data = dat, fixed.x = FALSE)
+fit <- sem(model, data = dat, fixed.x = FALSE,
+           group = "city")
 parameterEstimates(fit)
-group_by_dvs(fit)
-group_by_ivs(fit)
+group_by_groups(fit)
 
 }
 \author{

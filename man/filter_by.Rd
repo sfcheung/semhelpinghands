@@ -2,43 +2,60 @@
 % Please edit documentation in R/filter_by.R
 \name{filter_by}
 \alias{filter_by}
-\title{Filter a Table by Common Fields}
+\title{Filter a Parameter Estimates
+Table}
 \usage{
-filter_by(x, op = NULL, lhs = NULL, rhs = NULL, group = NULL, fit = NULL)
+filter_by(object, op = NULL, lhs = NULL, rhs = NULL, group = NULL, fit = NULL)
 }
 \arguments{
-\item{x}{The output of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}},
-\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}, or a
-\code{lavaan.data.frame} object.}
+\item{object}{The output of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}},
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}, or
+a \code{lavaan.data.frame} object.
+May also work on an \code{est_table}-class
+object returned by functions
+like \code{\link[=group_by_dvs]{group_by_dvs()}} but there
+is no guarantee.}
 
-\item{op}{A character vector of the operators (\code{op})
-for filtering. Common operators are \code{"~"},
-\code{"~~"}, \code{"=~"}, \code{":="}, and "\code{~1}".}
+\item{op}{A character vector of the
+operators (\code{op}) for filtering.
+Common operators are \code{"~"}, \code{"~~"},
+\code{"=~"}, \code{":="}, and "\code{~1}".}
 
-\item{lhs}{A character vector of names in the \code{lhs} column.}
+\item{lhs}{A character vector of
+names in the \code{lhs} column.}
 
-\item{rhs}{A character vector of names in the \code{rhs} column.}
+\item{rhs}{A character vector of
+names in the \code{rhs} column.}
 
-\item{group}{A vector of either the group numbers in the
-\code{group} column of the labels of the groups.
-If labels are supplied, the original fit object
-must be supplied for extracting the group labels.}
+\item{group}{A vector of either the
+group numbers in the \code{group} column
+of the labels of the groups. If
+labels are supplied, the original fit
+object must be supplied for
+extracting the group labels.}
 
-\item{fit}{The original fit object. Usd when \code{group}
-is a vector of the group labels.}
+\item{fit}{The original fit object.
+Usd when \code{group} is a vector of the
+group labels.}
 }
 \value{
-The filter version of the input object.
+The filtered version of the
+input object.
 }
 \description{
-Filter parameter estimates table and
-similar tables by common fields.
+Filter parameter
+estimates table and similar tables
+in\code{lavaan} by common fields such as
+\code{op} (operator).
 }
 \details{
-This functions accept the output
-of \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}
-and \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
-and filter the rows by commonly used field.
+This functions accepts the
+output of
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} and
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}} and
+filter the rows by commonly used
+field.
 }
 \examples{
 
@@ -81,5 +98,6 @@ filter_by(est_gp, op = ":=")
 
 }
 \author{
-Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
+Shu Fai Cheung
+\url{https://orcid.org/0000-0002-9871-9448}
 }

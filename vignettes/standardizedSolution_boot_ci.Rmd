@@ -23,13 +23,13 @@ using the variance-covariance matrix of the bootstrap estimates. The intervals
 are symmetric about the point estimates and are not the usual bootstrap
 percentile confidence intervals users expect when bootstrapping is conducted.
 
-`standardizedSolution_boot_ci()` accepts an `lavaan::lavaan-class` object fitted
-with `se = "bootstrap"` and form the percentile confidence intervals based on the
-bootstrap estimates stored in the object.
+`standardizedSolution_boot_ci()` accepts a `lavaan::lavaan-class` object fitted
+with `se = "bootstrap"` (or `se = "boot"`) and forms the percentile
+confidence intervals based on the bootstrap estimates stored in the object.
 
 # Data and Model
 
-An mediation model example adapted from the official `lavaan` website is used
+A mediation model example adapted from the official `lavaan` website is used
 (https://lavaan.ugent.be/tutorial/mediation.html).
 
 ```{r}
@@ -53,16 +53,15 @@ model <- ' # direct effect
 ```
 
 ```{r echo = FALSE}
-if (file.exists("standardizedSolution_boot_ci_data.rds")) {
-    fit <- readRDS("standardizedSolution_boot_ci_data.rds")
-  } else {
-    fit <- sem(model,
-               data = Data,
-               se = "bootstrap",
-               bootstrap = 5000,
-               parallel ="snow", ncpus = 8)
-    saveRDS(fit, "standardizedSolution_boot_ci_data.rds")
-  }
+fit <- semhelpinghands:::std_boot_ci_v_fit
+# std_boot_ci_v_fit <- sem(model,
+#             data = Data,
+#             se = "bootstrap",
+#             bootstrap = 5000,
+#             parallel ="snow", ncpus = 8)
+# usethis::use_data(std_boot_ci_v_fit,
+#                   internal = TRUE,
+#                   overwrite = TRUE)
 ```
 
 This model is fitted with `se = "bootstrap"`:
@@ -75,7 +74,9 @@ fit <- sem(model,
            parallel ="snow", ncpus = 8)
 ```
 
-This is the standardized solution with delta-method confidence intervals:
+This is the standardized solution with delta-method confidence intervals
+(results may be different when the code is ran again because seed is not
+set).
 
 ```{r}
 standardizedSolution(fit)
@@ -94,7 +95,7 @@ ci_boot
 ```
 
 The bootstrap percentile confidence intervals are appended to the right
-of the original output of `lavaan::standardizedSolution()`. 
+of the original output of `lavaan::standardizedSolution()`.
 
 # Note
 
