@@ -1,5 +1,3 @@
-skip("WIP")
-
 library(lavaan)
 
 mod_check <-
