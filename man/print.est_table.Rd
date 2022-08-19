@@ -7,22 +7,30 @@
 \method{print}{est_table}(x, ..., nd = 3, empty_cells = "--", group_first = FALSE)
 }
 \arguments{
-\item{x}{Object of the class \code{est_table}.}
+\item{x}{Object of the class
+\code{est_table}.}
 
-\item{...}{Optional arguments to be passed to \code{\link[=print]{print()}} methods.}
+\item{...}{Optional arguments to be
+passed to \code{\link[=print]{print()}} methods.}
 
-\item{nd}{Number of digits to be printed. Default is 3.
-(Scientific
+\item{nd}{The number of digits to be
+printed. Default is 3. (Scientific
 notation will never be used.)}
 
-\item{empty_cells}{String to be printed for empty cells
-or cells with no values. Default is \code{"--"}.}
+\item{empty_cells}{String to be
+printed for empty cells or cells with
+no values. Default is \code{"--"}.}
 
 \item{group_first}{Not used.}
 }
+\value{
+\code{x} is returned invisibly. Called for its side effect.
+}
 \description{
-Print method for an 'est_table' object
+Print method for an
+'est_table' object
 }
 \author{
-Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
+Shu Fai Cheung
+\url{https://orcid.org/0000-0002-9871-9448}
 }

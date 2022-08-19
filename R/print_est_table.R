@@ -1,16 +1,29 @@
 #' @title Print an 'est_table' Object
 #'
-#' @description Print method for an 'est_table' object
+#' @description Print method for an
+#' 'est_table' object
 #'
-#' @param x Object of the class `est_table`.
-#' @param ... Optional arguments to be passed to [print()] methods.
-#' @param nd Number of digits to be printed. Default is 3.
-#'           (Scientific
-#'           notation will never be used.)
-#' @param empty_cells String to be printed for empty cells
-#'                    or cells with no values. Default is `"--"`.
+#' @param x Object of the class
+#' `est_table`.
+#'
+#' @param ... Optional arguments to be
+#' passed to [print()] methods.
+#'
+#' @param nd The number of digits to be
+#' printed. Default is 3. (Scientific
+#' notation will never be used.)
+#'
+#' @param empty_cells String to be
+#' printed for empty cells or cells with
+#' no values. Default is `"--"`.
+#'
 #' @param group_first Not used.
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#'
+#' @return
+#'  `x` is returned invisibly. Called for its side effect.
+#'
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @export
 
