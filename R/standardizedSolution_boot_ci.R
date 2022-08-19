@@ -1,7 +1,7 @@
 #' @title Bootstrap CIs for Standardized Solution
 #'
 #' @description It receives a [lavaan::lavaan-class] object fitted with
-#'   bootstrapping standard errors requested and forms the 
+#'   bootstrapping standard errors requested and forms the
 #'   confidence intervals for the standardized solution.
 #'
 #' @return The output of [lavaan::standardizedSolution()], with
@@ -34,7 +34,7 @@
 #'
 #' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
-#' @seelaso [lavaan::standardizedSolution()]
+#' @seealso [lavaan::standardizedSolution()]
 #' @examples
 #'
 #' library(lavaan)
