@@ -1,33 +1,66 @@
-#' @title Group Estimates By Dependent or Independent Variables
+#' @title Group Estimates By Dependent
+#' or Independent Variables
 #'
-#' @description Groups parameter estimates or other information such as
-#'               p-values into a table with dependent variables as columns
-#'               and independent variables as rows, or a transpose of
-#'               this table.
+#' @description Groups parameter
+#' estimates or other information such
+#' as p-values into a table with
+#' dependent variables as columns and
+#' independent variables as rows, or a
+#' transpose of this table.
 #'
-#' @return A data-frame-like object of the class `est_table`.
+#' @details It gets a [lavaan-class]
+#' object or the output of
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()] and
+#' group selected columns by "dependent"
+#' variables [group_by_dvs()] or by
+#' "independent" variables
+#' [group_by_ivs()].
 #'
-#' @param object A [lavaan-class] object.
+#' "Dependent" variables are defined
+#' as variables on the left hand side
+#' of the operator `~`.
 #'
-#' @param ... Optional arguments to be passed to
-#'            [lavaan::parameterEstimates()].
+#' "Independent" variables are defined
+#' as variables on the right hand side
+#' of the operator `~`.
 #'
-#' @param col_name The column name of information to be
-#'                 grouped. Default is `"est"`. It accepts
-#'                 only one name.
+#' Note that a variable can both be
+#' a "dependent" variable and an
+#' "independent" variable in a model.
 #'
-#' @param add_prefix If `TRUE`, the default,
-#'                   `colname` will be added as
-#'                   prefix to the column names of the
-#'                   output.
+#' @return A data-frame-like object of
+#' the class `est_table`.
 #'
-#' @param group_first If `TRUE`, the rows will be grouped
-#'                    by groups first and then by
-#'                    independent variables Ignored if
-#'                    the model has only one group.
-#'                    Default is `FALSE`.
+#' @param object A [lavaan-class] object
+#' or the output of
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()].
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @param ... Optional arguments to be
+#' passed to
+#' [lavaan::parameterEstimates()].
+#' Ignored if `object`` is an output of
+#' [lavaan::parameterEstimates()] or
+#' [lavaan::standardizedSolution()].
+#'
+#' @param col_name The column name of
+#' information to be grouped. Default is
+#' `"est"`. It accepts only one name.
+#'
+#' @param add_prefix If `TRUE`, the
+#' default, `col_name` will be added as
+#' prefix to the column names of the
+#' output.
+#'
+#' @param group_first If `TRUE`, the
+#'  rows will be grouped by groups first
+#'  and then by independent variables
+#'  Ignored if the model has only one
+#'  group. Default is `FALSE`.
+#'
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
 #'
@@ -61,16 +94,21 @@ group_by_dvs <- function(object,
                          col_name = "est",
                          add_prefix = TRUE,
                          group_first = FALSE) {
-    if (!inherits(object, "lavaan")) {
-        stop("object not a lavaan-class object.")
+    object_type <- check_lavaan_type(object)
+    if (is.na(object_type)) {
+        stop("object is not of the accepted types.")
       }
-    p_est <- lavaan::parameterEstimates(object,
-                                        ...)
+    if (object_type == "lavaan") {
+        p_est <- lavaan::parameterEstimates(object,
+                                            ...)
+      } else {
+        p_est <- object
+      }
     if (all(is.na(match(col_name, colnames(p_est))))) {
         stop(paste(dQuote(col_name),
               "not in the column names of the parameter estimate table."))
       }
-    grouped <- lavaan::lavInspect(object, "ngroups") > 1
+    grouped <- is_grouped(object)
     dvs <- unique(p_est[p_est$op == "~", "lhs"])
     p_est_list <- sapply(dvs, function(x, p_est) {
                           out <- p_est[(p_est$lhs == x) &
@@ -100,6 +138,7 @@ group_by_dvs <- function(object,
         attr(out, "gp_ind") <- NULL
       }
     attr(out, "ivs") <- out[, attr(out, "v_ind")]
+    rownames(out) <- seq_len(nrow(out))
     out
   }
 
@@ -113,7 +152,7 @@ group_by_ivs <- function(object,
                          group_first = FALSE) {
     out <- group_by_dvs(object, ...,
                         col_name = col_name,
-                        add_prefix = add_prefix,
+                        add_prefix = FALSE,
                         group_first = group_first)
     v_ind <- attr(out, "v_ind")
     gp_ind <- attr(out, "gp_ind")
@@ -143,6 +182,10 @@ group_by_ivs <- function(object,
             colnames(out1) <- tmp
           }
       }
+    if (add_prefix) {
+        colnames(out1) <- paste0(col_name, "_",
+                                 colnames(out1))
+      }
     out1 <- cbind(dv = rownames(out1), out1)
     class(out1) <- class(out)
     et_att <- c("v_ind", "gp_ind", "ivs", "gps", "grouped", "group_first")
@@ -150,6 +193,7 @@ group_by_ivs <- function(object,
         attr(out1, att_i) <- attr(out, att_i)
       }
     attr(out1, "by_ivs") <- TRUE
+    rownames(out1) <- seq_len(nrow(out1))
     out1
   }
 

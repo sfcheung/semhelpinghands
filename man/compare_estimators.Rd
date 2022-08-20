@@ -2,33 +2,42 @@
 % Please edit documentation in R/compare_estimators.R
 \name{compare_estimators}
 \alias{compare_estimators}
-\title{Refit a 'lavaan'-Model by Several Estimators}
+\title{Refit a 'lavaan'-Model by
+Several Estimators}
 \usage{
 compare_estimators(object, estimators = NULL)
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object.}
+\item{object}{A \linkS4class{lavaan}
+object.}
 
-\item{estimators}{A character vector of the estimator
-supported by the \code{estimator} argument of
-\code{\link[lavaan:lavaan]{lavaan::lavaan()}} and its wrappers.}
+\item{estimators}{A character vector
+of the estimator supported by the
+\code{estimator} argument of
+\code{\link[lavaan:lavaan]{lavaan::lavaan()}} and its wrappers,
+such as \code{\link[lavaan:sem]{lavaan::sem()}} and
+\code{\link[lavaan:cfa]{lavaan::cfa()}},}
 }
 \value{
-A list of \code{lavaan} outputs, each of them is
-an update of the original output using one of the
-estimator.
+A list of \code{lavaan} outputs,
+each of them is an update of the
+original output using one of the
+estimators.
 }
 \description{
-Refit a model in 'lavaan' by several
-lavaan-supported estimators
+Refit a model in
+'lavaan' by several lavaan-supported
+estimators
 }
 \details{
-The function simply use \code{\link[=lapply]{lapply()}} and
-\code{\link[=update]{update()}} to rerun the analysis once for each
-of the estimator using \verb{update(object, estimator = "x"},
-\code{x} being the estimator.
+The function simply uses
+\code{\link[=lapply]{lapply()}} and \code{\link[=update]{update()}} to rerun
+the analysis once for each of the
+estimator using \verb{update(object, estimator = "x"}, \code{x} being the
+estimator.
 
-The results can then be compared using \code{\link[=group_by_models]{group_by_models()}}.
+The results can then be compared
+using \code{\link[=group_by_models]{group_by_models()}}.
 }
 \examples{
 
@@ -54,5 +63,6 @@ group_by_models(fit_more, col_names = c("est", "pvalue"))
 
 }
 \author{
-Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
+Shu Fai Cheung
+\url{https://orcid.org/0000-0002-9871-9448}
 }

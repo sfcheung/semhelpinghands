@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.1.9001+ (WIP)
+# semhelpinghands 0.1.2.0 (WIP)
 
 - Add `standardizedSolution_boot_ci()` for forming bootstrap percentile
   confidence intervals for standardized solution in a `lavaan` output.
@@ -7,3 +7,5 @@
   group parameter estimates.
 - Add `record_history()` to record optimization history.
 - Add `filter_by()` for selecting rows in a parameter estimates table.
+- Add `group_by_group()` to group parameter estimates.
+- Add `add_exo_cov()` and `auto_exo_cov()` to generate covariances.
