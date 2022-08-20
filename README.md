@@ -23,6 +23,12 @@ other packages as possible, so that I do not need to worry about
 deprecated functions or updates in other packages that break things,
 defeating the "time saving" purpose of this package.
 
+# Home Page
+
+More about this package can be found from the GitHub page of this package:
+
+[https://sfcheung.github.io/semhelpinghands/](https://sfcheung.github.io/semhelpinghands/)
+
 # Installation
 
 The latest development version at GitHub can be installed by `remotes::install_github()`:
