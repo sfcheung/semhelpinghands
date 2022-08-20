@@ -18,7 +18,7 @@ op (operator)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -177,13 +177,16 @@ field.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label   est    se    z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a 0.569 0.343 1.66  0.097   -0.103    1.240</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     b 0.219 0.153 1.43  0.153   -0.081    0.519</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">filter_by</span><span class="op">(</span><span class="va">est</span>, op <span class="op">=</span> <span class="st">"~"</span>, lhs <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label   est    se    z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     b 0.219 0.153 1.43  0.153   -0.081    0.519</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">filter_by</span><span class="op">(</span><span class="va">est</span>, rhs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"m"</span>, <span class="st">"x"</span><span class="op">)</span>, op <span class="op">=</span> <span class="st">"~"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label   est    se    z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a 0.569 0.343 1.66  0.097   -0.103    1.240</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     b 0.219 0.153 1.43  0.153   -0.081    0.519</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">filter_by</span><span class="op">(</span><span class="va">est_gp</span>, group <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lhs op rhs block group label    est    se      z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9    m  ~   x     2     2    a2  0.574 0.417  1.375  0.169   -0.244    1.391</span>
@@ -194,6 +197,9 @@ field.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14   m ~1         2     2       -0.144 0.119 -1.206  0.228   -0.377    0.090</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15   y ~1         2     2       -0.297 0.154 -1.933  0.053   -0.598    0.004</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16   x ~1         2     2       -0.042 0.000     NA     NA   -0.042   -0.042</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># If the fit object is supplied, can filter</span></span></span>
+<span class="r-in"><span><span class="co"># by group label</span></span></span>
 <span class="r-in"><span><span class="fu">filter_by</span><span class="op">(</span><span class="va">est_gp</span>, group <span class="op">=</span> <span class="st">"gp2"</span>, fit <span class="op">=</span> <span class="va">fit_gp</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs block group label    est    se      z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     1     1    a1  0.526 0.569  0.925  0.355   -0.589    1.640</span>
@@ -208,10 +214,20 @@ field.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs block group label   est    se     z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     1     1    a1 0.526 0.569 0.925  0.355   -0.589    1.640</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     1     1    b1 0.211 0.201 1.050  0.294   -0.183    0.605</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Select user-defined parameters</span></span></span>
 <span class="r-in"><span><span class="fu">filter_by</span><span class="op">(</span><span class="va">est_gp</span>, op <span class="op">=</span> <span class="st">":="</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     lhs op   rhs block group label   est    se     z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17 a1b1 := a1*b1     0     0  a1b1 0.111 0.160 0.694  0.488   -0.203    0.425</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18 a2b2 := a2*b2     0     0  a2b2 0.118 0.158 0.748  0.454   -0.191    0.427</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Can be used with some other functions in semhelpinghands</span></span></span>
+<span class="r-in"><span><span class="co"># Piping can also be used</span></span></span>
+<span class="r-in"><span><span class="va">est_gp</span> <span class="op">|&gt;</span> <span class="fu">filter_by</span><span class="op">(</span>op <span class="op">=</span> <span class="st">"~"</span>, group <span class="op">=</span> <span class="st">"gp2"</span>, fit <span class="op">=</span> <span class="va">fit_gp</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>          <span class="fu"><a href="add_sig.html">add_sig</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs block group label   est sig    se     z pvalue ci.lower ci.upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     1     1    a1 0.526     0.569 0.925  0.355   -0.589    1.640</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     1     1    b1 0.211     0.201 1.050  0.294   -0.183    0.605</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -16,7 +16,7 @@ variables in a lavaan model."><!-- mathjax --><script src="https://cdnjs.cloudfl
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,6 +172,8 @@ between exogenous variables.</p></li>
 <span class="r-in"><span><span class="st">m ~~ z + zm</span></span></span>
 <span class="r-in"><span><span class="st">"</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">mod0</span>, <span class="va">dat</span>, fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add covariances. Also printed by default.</span></span></span>
 <span class="r-in"><span><span class="va">mod0_cov</span> <span class="op">&lt;-</span> <span class="fu">add_exo_cov</span><span class="op">(</span><span class="va">mod0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> m ~ x</span>
@@ -181,17 +183,11 @@ between exogenous variables.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Added by auto_exo_cov</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x ~~ z + zm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> z ~~ zm</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">mod0_cov</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m ~ x</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y ~ m + z + zm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m ~~ z + zm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Added by auto_exo_cov</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x ~~ z + zm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> z ~~ zm</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Fit the model</span></span></span>
 <span class="r-in"><span><span class="va">fit_cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">mod0_cov</span>, <span class="va">dat</span>, fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Manually adding the covariances</span></span></span>
 <span class="r-in"><span><span class="va">mod1</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span><span class="st">"</span></span></span>
 <span class="r-in"><span><span class="st">m ~ x</span></span></span>
@@ -202,6 +198,9 @@ between exogenous variables.</p></li>
 <span class="r-in"><span><span class="st">"</span></span></span>
 <span class="r-in"><span><span class="va">fit1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">mod1</span>, <span class="va">dat</span>, meanstructure <span class="op">=</span> <span class="cn">TRUE</span>, fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Compare the results</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># No manual covariances</span></span></span>
 <span class="r-in"><span><span class="va">fit</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lavaan 0.6-12 ended normally after 15 iterations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -216,6 +215,8 @@ between exogenous variables.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Test statistic                                 5.863</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Degrees of freedom                                 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   P-value (Chi-square)                           0.210</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Automatically generated covariances</span></span></span>
 <span class="r-in"><span><span class="va">fit_cov</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lavaan 0.6-12 ended normally after 23 iterations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -230,6 +231,8 @@ between exogenous variables.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Test statistic                                 0.152</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Degrees of freedom                                 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   P-value (Chi-square)                           0.696</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Manually added covariances</span></span></span>
 <span class="r-in"><span><span class="va">fit1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lavaan 0.6-12 ended normally after 27 iterations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

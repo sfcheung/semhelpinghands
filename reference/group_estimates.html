@@ -22,7 +22,7 @@ transpose of this table."><!-- mathjax --><script src="https://cdnjs.cloudflare.
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -193,10 +193,14 @@ a "dependent" variable and an
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y       0.570 0.114 5.000  0.000    0.347    0.794</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x       0.078 0.016 5.000  0.000    0.048    0.109</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab 0.125 0.115 1.083  0.279   -0.101    0.350</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Group by DVs</span></span></span>
 <span class="r-in"><span><span class="fu">group_by_dvs</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   iv est_m est_y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> m  m    -- 0.219</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x  x 0.569    --</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Group by IVs</span></span></span>
 <span class="r-in"><span><span class="fu">group_by_ivs</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dv est_m est_x</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> m  m    -- 0.569</span>

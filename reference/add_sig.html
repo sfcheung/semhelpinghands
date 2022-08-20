@@ -14,7 +14,7 @@ significant."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -178,6 +178,7 @@ requested criteria.</p>
 <span class="r-in"><span><span class="st">'</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">dat</span>, fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add "*" based on 'pvalue'</span></span></span>
 <span class="r-in"><span><span class="fu">add_sig</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label   est sig    se     z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a 0.569     0.343 1.660  0.097   -0.103    1.240</span>
@@ -186,6 +187,8 @@ requested criteria.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y       0.570 *** 0.114 5.000  0.000    0.347    0.794</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x       0.078 *** 0.016 5.000  0.000    0.048    0.109</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab 0.125     0.115 1.083  0.279   -0.101    0.350</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add "*" for standardized solution</span></span></span>
 <span class="r-in"><span><span class="fu">add_sig</span><span class="op">(</span><span class="va">fit</span>, standardized <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label est.std sig    se      z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a   0.229     0.134  1.706  0.088   -0.034    0.491</span>
@@ -194,6 +197,8 @@ requested criteria.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y         0.961 *** 0.054 17.840  0.000    0.855    1.066</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x         1.000     0.000     NA     NA    1.000    1.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab   0.045     0.041  1.096  0.273   -0.036    0.126</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add "*" based on confidence interval</span></span></span>
 <span class="r-in"><span><span class="fu">add_sig</span><span class="op">(</span><span class="va">fit</span>, use <span class="op">=</span> <span class="st">"ci"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label   est  ci    se     z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a 0.569     0.343 1.660  0.097   -0.103    1.240</span>
@@ -202,6 +207,8 @@ requested criteria.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y       0.570 Sig 0.114 5.000  0.000    0.347    0.794</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x       0.078 Sig 0.016 5.000  0.000    0.048    0.109</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab 0.125     0.115 1.083  0.279   -0.101    0.350</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add "*" for standardized solution based on confidence interval</span></span></span>
 <span class="r-in"><span><span class="fu">add_sig</span><span class="op">(</span><span class="va">fit</span>, standardized <span class="op">=</span> <span class="cn">TRUE</span>, use <span class="op">=</span> <span class="st">"ci"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label est.std  ci    se      z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a   0.229     0.134  1.706  0.088   -0.034    0.491</span>
@@ -210,6 +217,9 @@ requested criteria.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y         0.961 Sig 0.054 17.840  0.000    0.855    1.066</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x         1.000     0.000     NA     NA    1.000    1.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab   0.045     0.041  1.096  0.273   -0.036    0.126</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add "*" for standardized solution based on confidence interval</span></span></span>
+<span class="r-in"><span><span class="co"># and 'pvalue'.</span></span></span>
 <span class="r-in"><span><span class="fu">add_sig</span><span class="op">(</span><span class="va">fit</span>, standardized <span class="op">=</span> <span class="cn">TRUE</span>, use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ci"</span>, <span class="st">"pvalue"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label est.std sig  ci    se      z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a   0.229         0.134  1.706  0.088   -0.034    0.491</span>
@@ -218,6 +228,30 @@ requested criteria.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y         0.961 *** Sig 0.054 17.840  0.000    0.855    1.066</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x         1.000         0.000     NA     NA    1.000    1.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab   0.045         0.041  1.096  0.273   -0.036    0.126</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Can also accept a parameter estimates table</span></span></span>
+<span class="r-in"><span><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/parameterEstimates.html" class="external-link">parameterEstimates</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">add_sig</span><span class="op">(</span><span class="va">est</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label   est sig    se     z pvalue ci.lower ci.upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a 0.569     0.343 1.660  0.097   -0.103    1.240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     b 0.219     0.153 1.430  0.153   -0.081    0.519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   m ~~   m       0.460 *** 0.092 5.000  0.000    0.280    0.641</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y       0.570 *** 0.114 5.000  0.000    0.347    0.794</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x       0.078 *** 0.016 5.000  0.000    0.048    0.109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab 0.125     0.115 1.083  0.279   -0.101    0.350</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># So it can be used with some other functions in semhelpinghands</span></span></span>
+<span class="r-in"><span><span class="fu">add_sig</span><span class="op">(</span><span class="fu"><a href="filter_by.html">filter_by</a></span><span class="op">(</span><span class="va">est</span>, op <span class="op">=</span> <span class="st">"~"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label   est sig    se    z pvalue ci.lower ci.upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a 0.569     0.343 1.66  0.097   -0.103    1.240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     b 0.219     0.153 1.43  0.153   -0.081    0.519</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Piping can also be used</span></span></span>
+<span class="r-in"><span><span class="va">est</span> <span class="op">|&gt;</span> <span class="fu"><a href="filter_by.html">filter_by</a></span><span class="op">(</span>op <span class="op">=</span> <span class="st">"~"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>       <span class="fu">add_sig</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label   est sig    se    z pvalue ci.lower ci.upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a 0.569     0.343 1.66  0.097   -0.103    1.240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     b 0.219     0.153 1.43  0.153   -0.081    0.519</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

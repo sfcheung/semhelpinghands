@@ -18,7 +18,7 @@ rows."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathj
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +77,8 @@ rows.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="st">"est"</span>,</span>
 <span>  group_first <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  group_labels <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  group_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fit <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -122,6 +123,15 @@ If not provided. will try to be
 retrieved from <code>object</code> if it is a
 <a href="https://rdrr.io/pkg/lavaan/man/lavaan-class.html" class="external-link">lavaan::lavaan</a> object.</p></dd>
 
+
+<dt>fit</dt>
+<dd><p>Optional. A
+<a href="https://rdrr.io/pkg/lavaan/man/lavaan-class.html" class="external-link">lavaan::lavaan</a> object.
+If <code>object</code> is a parameter estimates
+table and <code>group_labels</code> is <code>NULL</code>,
+it will try to retrieve the group
+labels from <code>fit</code> is supplied.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -156,7 +166,7 @@ the class <code>est_table</code>.</p>
 <span class="r-in"><span><span class="st">'</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">dat</span>, fixed.x <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>           group <span class="op">=</span> <span class="st">"city"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/parameterEstimates.html" class="external-link">parameterEstimates</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/parameterEstimates.html" class="external-link">parameterEstimates</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     lhs op   rhs block group label    est    se      z pvalue ci.lower ci.upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     m  ~     x     1     1    a1  0.636 0.454  1.401  0.161   -0.253    1.526</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     y  ~     m     1     1    b1  0.469 0.153  3.055  0.002    0.168    0.769</span>
@@ -176,6 +186,8 @@ the class <code>est_table</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16    x ~1           2     2        0.051 0.046  1.103  0.270   -0.040    0.142</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17 a1b1 := a1*b1     0     0  a1b1  0.298 0.234  1.274  0.203   -0.161    0.757</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18 a2b2 := a2*b2     0     0  a2b2  0.116 0.097  1.191  0.234   -0.075    0.306</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Group them by groups</span></span></span>
 <span class="r-in"><span><span class="fu">group_by_groups</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs est_City.Beta est_City.Alpha</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x         0.636          0.418</span>
@@ -186,6 +198,33 @@ the class <code>est_table</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6   y  ~   m         0.469          0.277</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7   y ~1            -0.092         -0.125</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8   y ~~   y         0.636          0.478</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Can also work on a parameter estimates table</span></span></span>
+<span class="r-in"><span><span class="co"># To have group labels, need to supply the fit object</span></span></span>
+<span class="r-in"><span><span class="fu">group_by_groups</span><span class="op">(</span><span class="va">est</span>, fit <span class="op">=</span> <span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs est_City.Beta est_City.Alpha</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x         0.636          0.418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   m ~1            -0.144         -0.179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   m ~~   m         0.530          0.413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   x ~1            -0.062          0.051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x         0.052          0.110</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   y  ~   m         0.469          0.277</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   y ~1            -0.092         -0.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   y ~~   y         0.636          0.478</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Can be used with some other functions in semhelpinghands</span></span></span>
+<span class="r-in"><span><span class="co"># when used on a parameter estimates table</span></span></span>
+<span class="r-in"><span><span class="fu">group_by_groups</span><span class="op">(</span><span class="fu"><a href="filter_by.html">filter_by</a></span><span class="op">(</span><span class="va">est</span>, op <span class="op">=</span> <span class="st">"~"</span><span class="op">)</span>, fit <span class="op">=</span> <span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs est_City.Beta est_City.Alpha</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x         0.636          0.418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m         0.469          0.277</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Also support piping</span></span></span>
+<span class="r-in"><span><span class="va">est</span> <span class="op">|&gt;</span> <span class="fu"><a href="filter_by.html">filter_by</a></span><span class="op">(</span>op <span class="op">=</span> <span class="st">"~"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>       <span class="fu">group_by_groups</span><span class="op">(</span>fit <span class="op">=</span> <span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs est_City.Beta est_City.Alpha</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x         0.636          0.418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m         0.469          0.277</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
