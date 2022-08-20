@@ -15,6 +15,7 @@
 #' }
 #'
 #' @examples
+#' data(dvs_ivs)
 #' library(lavaan)
 #' mod <-
 #' "
@@ -22,9 +23,9 @@
 #' y2 ~ x1 + x3
 #' y3 ~ y2 + x2
 #' "
-#' fit <- sem(mod, dat)
+#' fit <- sem(mod, dvs_ivs)
 #' parameterEstimates(fit)
-#' fit_gp <- sem(mod, dat, group = "gp")
+#' fit_gp <- sem(mod, dvs_ivs, group = "gp")
 #' parameterEstimates(fit_gp)
 #'
 "dvs_ivs"

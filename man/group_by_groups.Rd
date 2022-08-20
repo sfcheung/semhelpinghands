@@ -9,7 +9,8 @@ group_by_groups(
   ...,
   col_names = "est",
   group_first = TRUE,
-  group_labels = NULL
+  group_labels = NULL,
+  fit = NULL
 )
 }
 \arguments{
@@ -42,6 +43,13 @@ assigned to group id = 1, 2, 3, etc.
 If not provided. will try to be
 retrieved from \code{object} if it is a
 \link[lavaan:lavaan-class]{lavaan::lavaan} object.}
+
+\item{fit}{Optional. A
+\link[lavaan:lavaan-class]{lavaan::lavaan} object.
+If \code{object} is a parameter estimates
+table and \code{group_labels} is \code{NULL},
+it will try to retrieve the group
+labels from \code{fit} is supplied.}
 }
 \value{
 A data-frame-like object of
@@ -74,8 +82,22 @@ a2b2 := a2*b2
 '
 fit <- sem(model, data = dat, fixed.x = FALSE,
            group = "city")
-parameterEstimates(fit)
+(est <- parameterEstimates(fit))
+
+# Group them by groups
 group_by_groups(fit)
+
+# Can also work on a parameter estimates table
+# To have group labels, need to supply the fit object
+group_by_groups(est, fit = fit)
+
+# Can be used with some other functions in semhelpinghands
+# when used on a parameter estimates table
+group_by_groups(filter_by(est, op = "~"), fit = fit)
+
+# Also support piping
+est |> filter_by(op = "~") |>
+       group_by_groups(fit = fit)
 
 }
 \author{
