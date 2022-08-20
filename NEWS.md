@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.2.0 (WIP)
+# semhelpinghands 0.1.2.0
 
 - Add `standardizedSolution_boot_ci()` for forming bootstrap percentile
   confidence intervals for standardized solution in a `lavaan` output.
