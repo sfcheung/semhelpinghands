@@ -30,8 +30,10 @@
 #' such as [lavaan::sem()] and
 #' [lavaan::cfa()],
 #'
+#' @seealso [group_by_models()]
+#'
 #' @author Shu Fai Cheung
-#' <https://orcid.org/0000-0002-9871-9448>
+#' <https://orcid.org/0000-0002-9871-9448>.
 #'
 #' @examples
 #'
@@ -50,7 +52,10 @@
 #' '
 #'
 #' fit <- sem(model, data = dat, fixed.x = FALSE)
+#'
+#' # Refit the model by three different estimators
 #' fit_more <- compare_estimators(fit, estimator = c("GLS", "MLR", "ML"))
+#'
 #' # Use group_by_models to compare the estimates
 #' group_by_models(fit_more, col_names = c("est", "pvalue"))
 #'

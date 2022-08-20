@@ -104,9 +104,12 @@ visual  =~ x1 + x2 + x3
 textual =~ x4 + x5 + x6
 '
 fit <- cfa(HS.model, data = HolzingerSwineford1939)
+
 # Refit the model with the history recorded
 fit_h <- record_history(fit)
 fit_h
+
+# Plot the history for selected parameters
 plot(fit_h, params = c("visual=~x2", "visual=~x3",
                        "visual~~textual"),
             last_n = 10)

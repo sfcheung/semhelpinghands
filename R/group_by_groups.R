@@ -39,6 +39,13 @@
 #' retrieved from `object` if it is a
 #' [lavaan::lavaan-class] object.
 #'
+#' @param fit Optional. A
+#' [lavaan::lavaan-class] object.
+#' If `object` is a parameter estimates
+#' table and `group_labels` is `NULL`,
+#' it will try to retrieve the group
+#' labels from `fit` is supplied.
+#'
 #' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
@@ -61,8 +68,22 @@
 #' '
 #' fit <- sem(model, data = dat, fixed.x = FALSE,
 #'            group = "city")
-#' parameterEstimates(fit)
+#' (est <- parameterEstimates(fit))
+#'
+#' # Group them by groups
 #' group_by_groups(fit)
+#'
+#' # Can also work on a parameter estimates table
+#' # To have group labels, need to supply the fit object
+#' group_by_groups(est, fit = fit)
+#'
+#' # Can be used with some other functions in semhelpinghands
+#' # when used on a parameter estimates table
+#' group_by_groups(filter_by(est, op = "~"), fit = fit)
+#'
+#' # Also support piping
+#' est |> filter_by(op = "~") |>
+#'        group_by_groups(fit = fit)
 #'
 #' @export
 
@@ -70,7 +91,8 @@ group_by_groups <- function(object,
                          ...,
                          col_names = "est",
                          group_first = TRUE,
-                         group_labels = NULL) {
+                         group_labels = NULL,
+                         fit = NULL) {
     object_type <- check_lavaan_type(object)
     if (is.na(object_type)) {
         stop("object is not of the accepted types.")
@@ -93,6 +115,8 @@ group_by_groups <- function(object,
       } else {
         if (object_type == "lavaan") {
             names(p_est_grouped) <- lavaan::lavInspect(object, "group.label")
+          } else if (inherits(fit, "lavaan")) {
+            names(p_est_grouped) <- lavaan::lavInspect(fit, "group.label")
           }
       }
     group_by_models(p_est_grouped,

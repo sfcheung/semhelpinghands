@@ -56,13 +56,19 @@ ab := a*b
 '
 
 fit <- sem(model, data = dat, fixed.x = FALSE)
+
+# Refit the model by three different estimators
 fit_more <- compare_estimators(fit, estimator = c("GLS", "MLR", "ML"))
+
 # Use group_by_models to compare the estimates
 group_by_models(fit_more, col_names = c("est", "pvalue"))
 
 
 }
+\seealso{
+\code{\link[=group_by_models]{group_by_models()}}
+}
 \author{
 Shu Fai Cheung
-\url{https://orcid.org/0000-0002-9871-9448}
+\url{https://orcid.org/0000-0002-9871-9448}.
 }

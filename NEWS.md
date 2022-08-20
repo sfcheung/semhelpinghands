@@ -1,3 +1,8 @@
+# semhelpinghands 0.1.2.1
+
+- Improve the notes in examples.
+- Fix some bugs.
+
 # semhelpinghands 0.1.2.0
 
 - Add `standardizedSolution_boot_ci()` for forming bootstrap percentile
