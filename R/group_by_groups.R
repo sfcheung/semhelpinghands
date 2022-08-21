@@ -46,6 +46,16 @@
 #' it will try to retrieve the group
 #' labels from `fit` is supplied.
 #'
+#' @param use_standardizedSolution If `TRUE`
+#' and `object` is not an
+#' estimates table,
+#' then [lavaan::standardizedSolution()]
+#' will be used to generate the table.
+#' If `FALSE`, the default, then
+#' [lavaan::parameterEstimates()] will
+#' be used if necessary.
+#'
+#'
 #' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
@@ -92,14 +102,20 @@ group_by_groups <- function(object,
                          col_names = "est",
                          group_first = TRUE,
                          group_labels = NULL,
-                         fit = NULL) {
+                         fit = NULL,
+                         use_standardizedSolution = FALSE) {
     object_type <- check_lavaan_type(object)
     if (is.na(object_type)) {
         stop("object is not of the accepted types.")
       }
     if (object_type == "lavaan") {
-        p_est <- lavaan::parameterEstimates(object,
-                                            ...)
+        if (use_standardizedSolution) {
+            p_est <- lavaan::standardizedSolution(object,
+                                                ...)
+          } else {
+            p_est <- lavaan::parameterEstimates(object,
+                                                ...)
+          }
       } else {
         p_est <- object
       }

@@ -12,7 +12,8 @@ group_by_dvs(
   ...,
   col_name = "est",
   add_prefix = TRUE,
-  group_first = FALSE
+  group_first = FALSE,
+  use_standardizedSolution = FALSE
 )
 
 group_by_ivs(
@@ -20,7 +21,8 @@ group_by_ivs(
   ...,
   col_name = "est",
   add_prefix = TRUE,
-  group_first = FALSE
+  group_first = FALSE,
+  use_standardizedSolution = FALSE
 )
 }
 \arguments{
@@ -50,6 +52,15 @@ rows will be grouped by groups first
 and then by independent variables
 Ignored if the model has only one
 group. Default is \code{FALSE}.}
+
+\item{use_standardizedSolution}{If \code{TRUE}
+and \code{object} is not an
+estimates table,
+then \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
+will be used to generate the table.
+If \code{FALSE}, the default, then
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} will
+be used if necessary.}
 }
 \value{
 A data-frame-like object of

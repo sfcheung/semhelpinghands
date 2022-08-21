@@ -10,7 +10,8 @@ group_by_groups(
   col_names = "est",
   group_first = TRUE,
   group_labels = NULL,
-  fit = NULL
+  fit = NULL,
+  use_standardizedSolution = FALSE
 )
 }
 \arguments{
@@ -50,6 +51,15 @@ If \code{object} is a parameter estimates
 table and \code{group_labels} is \code{NULL},
 it will try to retrieve the group
 labels from \code{fit} is supplied.}
+
+\item{use_standardizedSolution}{If \code{TRUE}
+and \code{object} is not an
+estimates table,
+then \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
+will be used to generate the table.
+If \code{FALSE}, the default, then
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} will
+be used if necessary.}
 }
 \value{
 A data-frame-like object of
