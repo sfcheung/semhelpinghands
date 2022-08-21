@@ -278,6 +278,15 @@ estimator and returns the results.
 They can then be treated as different
 "models" and processed by `group_by_models()`.
 
+`se_ratios()` is a wrapper of `group_by_models()`
+used to compare the standard errors
+by different estimators in the output
+of `compare_estimators()`:
+
+```{r}
+se_ratios(out, reference = "ML")
+```
+
 See the help page of `compare_estimators()`
 for other options.
 
