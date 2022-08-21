@@ -210,13 +210,20 @@ NA, 0.0373206393725567, NA, 0.137956716206957, 0.980967944453393,
 "data.frame"), row.names = c(NA, -48L))
 
 test_that("Test against know results", {
-    expect_equal(out1, out1_ans)
-    expect_equal(out2, out2_ans)
-    expect_equal(out3, out3_ans)
+    expect_true(all.equal(out1[order(out1$op, out1$lhs, out1$rhs, out1$group), ],
+                 out1_ans[order(out1_ans$op, out1_ans$lhs, out1_ans$rhs, out1_ans$group), ],
+                 check.attributes = FALSE))
+    expect_true(all.equal(out2[order(out2$op, out2$lhs, out2$rhs), ],
+                 out2_ans[order(out2_ans$op, out2_ans$lhs, out2_ans$rhs), ],
+                 check.attributes = FALSE))
+    expect_true(all.equal(out3[order(out3$op, out3$lhs, out3$rhs, out3$group), ],
+                 out3_ans[order(out3_ans$op, out3_ans$lhs, out3_ans$rhs, out3_ans$group), ],
+                 check.attributes = FALSE))
   })
 
 test_that("Results from different outputs", {
-    expect_true(identical(out1est, out1est_est))
+    expect_true(identical(out1est[order(out1est$op, out1est$lhs, out1est$rhs, out1est$group), ],
+                          out1est_est[order(out1est_est$op, out1est_est$lhs, out1est_est$rhs, out1est_est$group), ]))
     expect_true(identical(out1[common_names, "std.all"],
                           out1_std[common_names, "est.std"]))
   })
