@@ -27,3 +27,9 @@ test_that("compare_estimators", {
     expect_identical(coef(fit_more$ML),
                      coef(fit_ML))
   })
+
+test_that("compare_estimators: sanity check", {
+    expect_error(compare_estimators(1, estimator = c("GLS")))
+    expect_error(compare_estimators(fit, estimator = c(1, 2)))
+    expect_error(compare_estimators(fit))
+  })

@@ -64,6 +64,15 @@
 
 compare_estimators <- function(object,
                                estimators = NULL) {
+    if (is.null(estimators)) {
+        stop("'estimators' cannot be NULL.")
+      }
+    if (!is.character(estimators)) {
+        stop("'estimators' must be a numeric vector.")
+      }
+    if (!inherits(object, "lavaan")) {
+        stop("'object' is not a lavaan-class object.")
+      }
     call0 <- stats::getCall(object)
     call1 <- call0
     for (i in 2:length(call0)) {
