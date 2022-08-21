@@ -66,6 +66,21 @@ with bootstrapping standard errors
 requested and forms the confidence
 intervals for the standardized
 solution.
+
+It works by calling
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
+with the bootstrap estimates
+of free parameters in each bootstrap sample
+to compute the standardized estimates
+in each sample.
+
+A more reliable way is to use
+function like
+\code{\link[lavaan:bootstrap]{lavaan::bootstrapLavaan()}}.
+Nevertheless, this simple function is
+good enough for some simple scenarios,
+and does not require repeating
+the bootstrapping step.
 }
 \examples{
 
@@ -97,5 +112,13 @@ standardizedSolution_boot_ci(fit)
 }
 \author{
 Shu Fai Cheung
-\url{https://orcid.org/0000-0002-9871-9448}
+\url{https://orcid.org/0000-0002-9871-9448}.
+Originally proposed in an issue at GitHub
+\url{https://github.com/simsem/semTools/issues/101#issue-1021974657},
+inspired by a discussion at
+the Google group for lavaan
+\url{https://groups.google.com/g/lavaan/c/qQBXSz5cd0o/m/R8YT5HxNAgAJ}.
+\code{\link[boot:boot.ci]{boot::boot.ci()}} is used to form the
+percentile confidence intervals in
+this version.
 }

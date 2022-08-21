@@ -8,6 +8,21 @@
 #' intervals for the standardized
 #' solution.
 #'
+#' It works by calling
+#'  [lavaan::standardizedSolution()]
+#' with the bootstrap estimates
+#' of free parameters in each bootstrap sample
+#' to compute the standardized estimates
+#' in each sample.
+#'
+#' A more reliable way is to use
+#' function like
+#' [lavaan::bootstrapLavaan()].
+#' Nevertheless, this simple function is
+#' good enough for some simple scenarios,
+#' and does not require repeating
+#' the bootstrapping step.
+#'
 #' @return The output of
 #' [lavaan::standardizedSolution()],
 #' with bootstrap confidence intervals
@@ -51,7 +66,16 @@
 #' [lavaan::standardizedSolution()].
 #'
 #' @author Shu Fai Cheung
-#' <https://orcid.org/0000-0002-9871-9448>
+#' <https://orcid.org/0000-0002-9871-9448>.
+#' Originally proposed in an issue at GitHub
+#' <https://github.com/simsem/semTools/issues/101#issue-1021974657>,
+#' inspired by a discussion at
+#' the Google group for lavaan
+#' <https://groups.google.com/g/lavaan/c/qQBXSz5cd0o/m/R8YT5HxNAgAJ>.
+#' [boot::boot.ci()] is used to form the
+#' percentile confidence intervals in
+#' this version.
+#'
 #'
 #' @seealso [lavaan::standardizedSolution()]
 #'
