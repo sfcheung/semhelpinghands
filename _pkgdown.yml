@@ -26,3 +26,7 @@ reference:
   - record_history
   - auto_cov
 
+- title: Datasets
+  desc: Datasets used in examples and vignettes.
+- contents:
+  - has_keyword("datasets")

@@ -83,9 +83,21 @@ parameterEstimates(fit2)
 group_by_models(list(no_direct = fit1,
                      direct = fit2),
                 col_names = c("est", "pvalue"))
+# Can also be used with some other functions in
+# semhelpinghands
+group_by_models(list(no_direct = fit1,
+                     direct = fit2),
+                col_names = c("est", "pvalue")) |>
+                filter_by(op = "~")
+
 
 }
 \author{
 Shu Fai Cheung
 \url{https://orcid.org/0000-0002-9871-9448}
+Inspired by the proposal Rönkkö posted in a GitHub
+\url{https://github.com/simsem/semTools/issues/24#issue-235172313}
+for \code{semTools}. I want something
+simple for a quick overview and so
+I wrote this function.
 }

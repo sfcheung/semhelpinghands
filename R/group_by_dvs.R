@@ -80,7 +80,11 @@
 #'
 #' fit <- sem(model, data = dat, fixed.x = FALSE)
 #' parameterEstimates(fit)
+#'
+#' # Group by DVs
 #' group_by_dvs(fit)
+#'
+#' # Group by IVs
 #' group_by_ivs(fit)
 #'
 #' @name group_estimates
