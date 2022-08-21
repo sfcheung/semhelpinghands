@@ -8,6 +8,21 @@
 #' intervals for the standardized
 #' solution.
 #'
+#' It works by calling
+#'  [lavaan::standardizedSolution()]
+#' with the bootstrap estimates
+#' of free parameters in each bootstrap sample
+#' to compute the standardized estimates
+#' in each sample.
+#'
+#' A more reliable way is to use
+#' function like
+#' [lavaan::bootstrapLavaan()].
+#' Nevertheless, this simple function is
+#' good enough for some simple scenarios,
+#' and does not require repeating
+#' the bootstrapping step.
+#'
 #' @return The output of
 #' [lavaan::standardizedSolution()],
 #' with bootstrap confidence intervals

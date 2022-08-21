@@ -66,6 +66,21 @@ with bootstrapping standard errors
 requested and forms the confidence
 intervals for the standardized
 solution.
+
+It works by calling
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
+with the bootstrap estimates
+of free parameters in each bootstrap sample
+to compute the standardized estimates
+in each sample.
+
+A more reliable way is to use
+function like
+\code{\link[lavaan:bootstrap]{lavaan::bootstrapLavaan()}}.
+Nevertheless, this simple function is
+good enough for some simple scenarios,
+and does not require repeating
+the bootstrapping step.
 }
 \examples{
 
