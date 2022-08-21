@@ -76,3 +76,18 @@ were packed into `semhelpinghands`.
 If there are people who inspired some
 of the functions but I forgot to acknowledge,
 please let me know.
+
+# Suggestions and Bugs
+
+This package is still under development.
+There will be bugs, and there are
+limitations. Comments and suggestions
+are welcomed. Feel free to add an issue
+at [GitHub](https://github.com/sfcheung/semhelpinghands/issues).
+Although I may not be able to address
+all of them because this package is
+intended to be a collection of simple
+functions for simple tasks, and
+they are designed
+to be easy to maintain, I will try to
+do what I can do.
