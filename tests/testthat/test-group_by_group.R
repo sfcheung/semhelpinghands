@@ -1,7 +1,3 @@
-# skip_on_cran()
-# skip_if(!interactive(),
-#         message = "standardizedSolution_boot_ci not tested if not interactive")
-
 library(testthat)
 library(semhelpinghands)
 set.seed(838914)

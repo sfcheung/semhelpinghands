@@ -9,7 +9,8 @@ group_by_models(
   ...,
   col_names = "est",
   group_first = FALSE,
-  model_first = TRUE
+  model_first = TRUE,
+  use_standardizedSolution = FALSE
 )
 }
 \arguments{
@@ -44,6 +45,15 @@ columns will be grouped by models
 first and then by columns in the
 parameter estimates tables. Default
 is \code{TRUE}.}
+
+\item{use_standardizedSolution}{If \code{TRUE}
+and \code{object_list} is not a list of
+estimates tables,
+then \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
+will be used to generate the table.
+If \code{FALSE}, the default, then
+\code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} will
+be used if necessary.}
 }
 \value{
 A data-frame-like object of
