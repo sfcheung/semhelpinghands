@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.2.4
+# semhelpinghands 0.1.3.0
 
 - Improve the notes in examples. (0.1.2.1)
 - Fix some bugs. (0.1.2.1)
@@ -6,6 +6,7 @@
   `standardizedSolution_boot_ci()`. (0.1.2.2, 0.1.2.3)
 - Add `se_ratios()` for comparing standard errors by
   different estimators. (0.1.2.4)
+- Add `show_more_options()`. (0.1.2.5)
 
 # semhelpinghands 0.1.2.0
 
