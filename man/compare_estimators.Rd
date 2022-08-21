@@ -2,10 +2,13 @@
 % Please edit documentation in R/compare_estimators.R
 \name{compare_estimators}
 \alias{compare_estimators}
+\alias{se_ratios}
 \title{Refit a 'lavaan'-Model by
 Several Estimators}
 \usage{
 compare_estimators(object, estimators = NULL)
+
+se_ratios(fit_list, reference = NULL)
 }
 \arguments{
 \item{object}{A \linkS4class{lavaan}
@@ -16,7 +19,18 @@ of the estimator supported by the
 \code{estimator} argument of
 \code{\link[lavaan:lavaan]{lavaan::lavaan()}} and its wrappers,
 such as \code{\link[lavaan:sem]{lavaan::sem()}} and
-\code{\link[lavaan:cfa]{lavaan::cfa()}},}
+\code{\link[lavaan:cfa]{lavaan::cfa()}}.}
+
+\item{fit_list}{The output
+of \code{\link[=compare_estimators]{compare_estimators()}}.}
+
+\item{reference}{The name
+of the reference method
+(ratios will be equal to one).
+Must be one of the estimator
+used on \code{\link[=compare_estimators]{compare_estimators()}}.
+If \code{NULL}, the first estimator
+will be used.}
 }
 \value{
 A list of \code{lavaan} outputs,
@@ -39,6 +53,15 @@ estimator.
 The results can then be compared
 using \code{\link[=group_by_models]{group_by_models()}}.
 }
+\section{Functions}{
+\itemize{
+\item \code{compare_estimators}: Refit the model with different estimators.
+
+\item \code{se_ratios}: A wrapper of \code{\link[=group_by_models]{group_by_models()}} that
+computes the ratios of standard errors of different methods
+to those of one method.
+}}
+
 \examples{
 
 library(lavaan)
@@ -63,6 +86,8 @@ fit_more <- compare_estimators(fit, estimator = c("GLS", "MLR", "ML"))
 # Use group_by_models to compare the estimates
 group_by_models(fit_more, col_names = c("est", "pvalue"))
 
+# Use se_ratios to compare standard errors
+se_ratios(fit_more, reference = "ML")
 
 }
 \seealso{

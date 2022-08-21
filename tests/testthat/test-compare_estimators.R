@@ -33,3 +33,16 @@ test_that("compare_estimators: sanity check", {
     expect_error(compare_estimators(fit, estimator = c(1, 2)))
     expect_error(compare_estimators(fit))
   })
+
+fit2 <- sem(model, data = dat, fixed.x = TRUE)
+fit2_more <- compare_estimators(fit2, estimator = c("GLS", "MLR", "ML"))
+fit2_se_ratio <- se_ratios(fit2_more, reference  = "ML")
+
+test_that("se_ratios", {
+    expect_identical(fit2_se_ratio$se_GLS / fit2_se_ratio$se_ML,
+                     fit2_se_ratio$ratio_GLS)
+    expect_identical(fit2_se_ratio$se_MLR / fit2_se_ratio$se_ML,
+                     fit2_se_ratio$ratio_MLR)
+    expect_identical(fit2_se_ratio$se_ML / fit2_se_ratio$se_ML,
+                     fit2_se_ratio$ratio_ML)
+  })

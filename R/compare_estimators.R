@@ -59,7 +59,14 @@
 #' # Use group_by_models to compare the estimates
 #' group_by_models(fit_more, col_names = c("est", "pvalue"))
 #'
+#' # Use se_ratios to compare standard errors
+#' se_ratios(fit_more, reference = "ML")
 #'
+#' @name compare_estimators
+NULL
+
+#' @describeIn compare_estimators Refit the model with different estimators.
+#' @order 1
 #' @export
 
 compare_estimators <- function(object,
@@ -84,4 +91,41 @@ compare_estimators <- function(object,
                     })
     names(outs) <- estimators
     outs
+  }
+#' @param fit_list The output
+#' of [compare_estimators()].
+#'
+#' @param reference The name
+#' of the reference method
+#' (ratios will be equal to one).
+#' Must be one of the estimator
+#' used on [compare_estimators()].
+#' If `NULL`, the first estimator
+#' will be used.
+#'
+#' @describeIn compare_estimators A wrapper of [group_by_models()] that
+#' computes the ratios of standard errors of different methods
+#' to those of one method.
+#' @order 2
+#' @export
+
+se_ratios <- function(fit_list, reference = NULL) {
+    fit_names <- names(fit_list)
+    if (is.null(reference)) {
+        reference <- fit_names[1]
+        reference_id <- 1
+      } else {
+        reference_id <- match(reference, fit_names)
+        if (is.na(reference_id)) {
+            stop("'reference' not one of the estimators.")
+          }
+      }
+    out <- group_by_models(fit_list, col_names = "se")
+    se_names <- paste0("se_", fit_names)
+    i <- match(se_names[1], colnames(out))
+    tmp <- out[, -seq(1, i - 1)]
+    tmp2 <- tmp / tmp[, reference_id]
+    colnames(tmp2) <- paste0("ratio_", fit_names)
+    out[colnames(tmp2)] <- tmp2
+    out
   }
