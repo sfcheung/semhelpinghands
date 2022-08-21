@@ -14,8 +14,333 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Introduction
+
+As of now, `semhelpinghands` has four
+groups of functions: manipulating
+parameter estimates tables, comparing
+results from different methods,
+bootstrapping, and ... others.
+
+This article will only introduce very
+briefly the groups. Some of them will be
+introduced in details in forthcoming
+article dedicated to them.
+
+Let's load the package first, and
+also load `lavaan`.
+
 ```{r setup}
 library(semhelpinghands)
+library(lavaan)
 ```
 
-(Not ready)
+# Manipulate Parameter Estimates Tables
+
+In using `lavaan`, I prefer reading the
+output of `parameterEstimates()`, which
+is compact and clear to me. I sometimes
+would like to organize the rows and
+columns in ways meaningful to a
+particular research questions. This
+can certainly be done using base R
+or `dplyr`. However, I am lazy and want
+to be able to do things using just one
+or two functions, with just one or two
+arguments.
+
+This is a sample dataset for illustration,
+`dvs_ivs`,
+with 3 predictors (`x1`, `x2`, and `x3`),
+3 outcome variables (`y1` `y2`, and `y3`),
+and a group variable (`gp`).
+
+First a single sample model:
+
+```{r}
+data(dvs_ivs)
+mod <-
+"
+y1 ~ x1 + x2 + x3
+y2 ~ x1 + x3
+y3 ~ y2 + x2
+"
+fit <- sem(model = mod, data = dvs_ivs,
+           fixed.x = FALSE)
+```
+
+The parameter estimates tables:
+
+```{r}
+est <- parameterEstimates(fit)
+est
+```
+
+A two-sample model is also fitted to the
+dataset:
+
+```{r}
+fit_gp <- sem(model = mod, data = dvs_ivs,
+              group = "gp",
+              fixed.x = FALSE)
+```
+
+This is the parameter estimates table:
+
+```{r}
+est_gp <- parameterEstimates(fit_gp)
+est_gp
+```
+
+So, these are what `semhelpinghands`
+has for now:
+
+## Add Significance Test Results: `add_sig()`
+
+Despite the controversy over null
+hypothesis significance testing,
+we still need to report them, for now.
+They are there, but I have to decode
+them mentally. Here comes `add_sig()`:
+
+```{r}
+add_sig(est)
+```
+
+If bootstrapping was used, it also
+supports using the confidence intervals,
+which may yield results different from
+the *p*-values when bootstrapping
+confidence intervals are used
+(but same results in this example):
+
+```{r}
+add_sig(est, use = c("pvalue", "ci"))
+```
+
+It also works on the standardized
+solution:
+
+```{r}
+std <- standardizedSolution(fit)
+add_sig(std)
+```
+
+Note: But be careful about the
+interpretation of the *p*-values
+in the standardized solution,
+which are based on the delta method.
+See `vignette("standardizedSolution_boot_ci")`.
+
+See the help page of `add_sig()`
+for other options.
+
+
+## Filter by Operators and Some Other Columns: `filter_by()`
+
+Its purpose is very simple, selecting
+rows by commonly used columns: operators (`op`),
+"dependent variables" (`lhs`), and
+"independent variables" (`rhs`).
+
+```{r}
+filter_by(est, op = "~")
+```
+
+It also supports filtering by group
+using group labels:
+
+```{r}
+filter_by(est_gp, op = "~", group = "gp1", fit = fit_gp)
+```
+
+See the help page of `filter_by()`
+for other options.
+
+
+## Group By DVs or Group By IVs: `group_by_dvs()` and `group_by_ivs()`
+
+Sometimes I want the conventional
+iv-column-dv-row or dv-column-iv-row
+format. That's what `group_by_dvs()`
+and `group_by_ivs()` are for:
+
+```{r}
+group_by_dvs(est)
+group_by_ivs(est)
+```
+
+They also supports extracting another
+column:
+
+```{r}
+group_by_dvs(est, col_name = "pvalue")
+group_by_ivs(est, col_name = "pvalue")
+```
+
+See the help page of `group_by_dvs()`
+and `group_by_ivs()`
+for other options.
+
+
+## Group By Groups: `group_by_groups()`
+
+In multiple sample models, one common
+task is comparing results across groups.
+I wrote `group_by_groups()` for this
+task, to compare results side-by-side:
+
+```{r}
+group_by_groups(est_gp)
+```
+
+It also supports extracting several
+columns:
+
+```{r}
+group_by_groups(est_gp,
+                col_names = c("est", "pvalue"))
+```
+
+If the fit object is used, it can print
+group labels:
+
+```{r}
+group_by_groups(fit_gp,
+                col_names = c("est", "pvalue"))
+```
+
+See the help page of `group_by_groups()`
+for other options.
+
+## Compare Models: `group_by_models()`
+
+This is inspired by the proposal
+Rönkkö proposed in a GitHub
+[issue](https://github.com/simsem/semTools/issues/24#issue-235172313)
+for `semTools`. I want something
+simple for a quick overview and so
+I wrote `group_by_models()`.
+
+Suppose this is the other model fitted:
+
+```{r}
+mod2 <-
+"
+y1 ~ x1 + x2 + x3
+y2 ~ x1 + x2
+y3 ~ y2 + x1
+"
+fit2 <- sem(model = mod2, data = dvs_ivs,
+           fixed.x = FALSE)
+est2 <- parameterEstimates(fit2)
+est2
+```
+
+These two models have no nested
+relationships. To compare the estimates,
+`group_by_models()` can be used:
+
+```{r}
+group_by_models(list(Model1 = est,
+                     Model2 = est2))
+```
+
+It can also compare several columns:
+
+```{r}
+group_by_models(list(Model1 = est,
+                     Model2 = est2),
+                col_names = c("est", "pvalue"))
+```
+
+See the help page of `group_by_models()`
+for other options.
+
+# Compare Methods
+
+Though I believe the choice of the
+estimation method should be justified,
+suppose we want to assess the sensitivity
+of the parameter estimate results to
+the methods used, `compare_estimators()`
+can be used as a quick way to compare
+results from different methods.
+
+```{r}
+out <- compare_estimators(fit,
+         estimator = c("ML", "GLS", "MLR"))
+group_by_models(out, col_names = c("se", "pvalue"))
+```
+
+It simply refits the models for each
+estimator and returns the results.
+They can then be treated as different
+"models" and processed by `group_by_models()`.
+
+See the help page of `compare_estimators()`
+for other options.
+
+# Bootstrapping
+
+One issue with the standardized solution
+is the confidence intervals. They are
+based on the delta method even if
+`se = "boot"` is used. For indirect
+effects, for which bootstrap confidence
+intervals are commonly used, the
+confidence intervals for them in
+the standardized solution are not
+what usually reported other tools
+for mediation. There are some
+other powerful tools on the Internet and
+the [Google Group for lavaan](e.g.,
+[this thread](https://groups.google.com/g/lavaan/c/0RSsh4M6zQg/m/I85YFAiLAAAJ))
+to address this problem.
+I wrote `standardizedSolution_boot_ci()`
+not to replace them (it obviously can't),
+but to address a very specific
+case I usually encounter myself:
+Generating the bootstrap confidence
+intervals for standardized estimates
+based on the bootstrap estimates already
+generated by `se = "boot"`.
+
+Please see `vignette("standardizedSolution_boot_ci")`
+for an illustration on `standardizedSolution_boot_ci()`.
+
+# Others
+
+## Recoding Minimization History
+
+In structural equation modeling,
+closed-form solution is rare and
+optimization (minimization) is used
+to find the/a solution. Out of curiosity
+and teaching, I wrote a function
+to capture the minimization history
+so I can examine it or even plot
+the process. The function,
+`record_history()`, is still in early
+development but should work for now
+for common simple scenarios.
+Please refer the help page of
+`record_history()`
+to learn more about it.
+
+## Add Covariances Between "Exogenous" Variables
+
+In `lavaan`, I rarely need to manually add
+covariances between exogenous variables
+(defined in a loose sense: variables appear
+on the right-hand side but not on the left-hand
+side of `~`). However, I came into a situation
+in which `lavaan` will not do this
+(for good reasons). For example,
+when a covariance between a residual
+term and an exogenous variable is set
+to free. I wrote two simple functions,
+`add_exo_cov()` and `auto_exo_cov()`,
+for this purpose. Please refer to
+their help pages for further information.
+

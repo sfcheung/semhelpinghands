@@ -75,10 +75,14 @@
 #' m ~~ z + zm
 #' "
 #' fit <- sem(mod0, dat, fixed.x = FALSE)
+#'
+#' # Add covariances. Also printed by default.
 #' mod0_cov <- add_exo_cov(mod0)
-#' cat(mod0_cov)
+#'
+#' # Fit the model
 #' fit_cov <- sem(mod0_cov, dat, fixed.x = FALSE)
 #'
+#' # Manually adding the covariances
 #' mod1 <-
 #' "
 #' m ~ x
@@ -89,8 +93,15 @@
 #' "
 #' fit1 <- sem(mod1, dat, meanstructure = TRUE, fixed.x = FALSE)
 #'
+#' # Compare the results
+#'
+#' # No manual covariances
 #' fit
+#'
+#' # Automatically generated covariances
 #' fit_cov
+#'
+#' # Manually added covariances
 #' fit1
 #'
 #'

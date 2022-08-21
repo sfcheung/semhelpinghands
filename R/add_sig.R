@@ -88,11 +88,32 @@
 #' '
 #' fit <- sem(model, data = dat, fixed.x = FALSE)
 #'
+#' # Add "*" based on 'pvalue'
 #' add_sig(fit)
+#'
+#' # Add "*" for standardized solution
 #' add_sig(fit, standardized = TRUE)
+#'
+#' # Add "*" based on confidence interval
 #' add_sig(fit, use = "ci")
+#'
+#' # Add "*" for standardized solution based on confidence interval
 #' add_sig(fit, standardized = TRUE, use = "ci")
+#'
+#' # Add "*" for standardized solution based on confidence interval
+#' # and 'pvalue'.
 #' add_sig(fit, standardized = TRUE, use = c("ci", "pvalue"))
+#'
+#' # Can also accept a parameter estimates table
+#' est <- parameterEstimates(fit)
+#' add_sig(est)
+#'
+#' # So it can be used with some other functions in semhelpinghands
+#' add_sig(filter_by(est, op = "~"))
+#'
+#' # Piping can also be used
+#' est |> filter_by(op = "~") |>
+#'        add_sig()
 #'
 #' @export
 

@@ -88,12 +88,25 @@ est <- parameterEstimates(fit)
 est_gp <- parameterEstimates(fit_gp)
 
 filter_by(est, op = "~")
+
 filter_by(est, op = "~", lhs = "y")
+
 filter_by(est, rhs = c("m", "x"), op = "~")
+
 filter_by(est_gp, group = 2)
+
+# If the fit object is supplied, can filter
+# by group label
 filter_by(est_gp, group = "gp2", fit = fit_gp)
 filter_by(est_gp, group = "gp2", fit = fit_gp, op = "~")
+
+# Select user-defined parameters
 filter_by(est_gp, op = ":=")
+
+# Can be used with some other functions in semhelpinghands
+# Piping can also be used
+est_gp |> filter_by(op = "~", group = "gp2", fit = fit_gp) |>
+          add_sig()
 
 
 }
