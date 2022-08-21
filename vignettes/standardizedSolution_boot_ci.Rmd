@@ -104,3 +104,12 @@ it retrieves the estimates of the unstandardized solution in each bootstrap
 sample and computes the estimates in the standardized solution. Therefore,
 if 5,000 bootstrap samples are requested, this process is repeated 5,000 times.
 Nevertheless, it is still much faster than fitting the model 5,000 times again.
+
+# Background
+
+This function was originally proposed in an [issue at GitHub](https://github.com/simsem/semTools/issues/101#issue-1021974657),
+inspired by a discussion at the [Google group for lavaan](https://groups.google.com/g/lavaan/c/qQBXSz5cd0o/m/R8YT5HxNAgAJ).
+It is not a versatile function and used some "tricks" to
+do the work. A more reliable way is to use function like
+[lavaan::bootstrapLavaan()]. Nevertheless, this simple function
+is good enough for the cases I encountered in my work.

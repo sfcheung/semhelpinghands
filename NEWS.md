@@ -1,7 +1,9 @@
-# semhelpinghands 0.1.2.1
+# semhelpinghands 0.1.2.2
 
-- Improve the notes in examples.
-- Fix some bugs.
+- Improve the notes in examples. (0.1.2.1)
+- Fix some bugs. (0.1.2.1)
+- Provide the background information on
+  `standardizedSolution_boot_ci()`. (0.1.2.2)
 
 # semhelpinghands 0.1.2.0
 

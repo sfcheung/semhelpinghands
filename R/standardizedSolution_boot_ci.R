@@ -51,7 +51,16 @@
 #' [lavaan::standardizedSolution()].
 #'
 #' @author Shu Fai Cheung
-#' <https://orcid.org/0000-0002-9871-9448>
+#' <https://orcid.org/0000-0002-9871-9448>.
+#' Originally proposed in an issue at GitHub
+#' <https://github.com/simsem/semTools/issues/101#issue-1021974657>,
+#' inspired by a discussion at
+#' the Google group for lavaan
+#' <https://groups.google.com/g/lavaan/c/qQBXSz5cd0o/m/R8YT5HxNAgAJ>.
+#' [boot::boot.ci()] is used to form the
+#' percentile confidence intervals in
+#' this version.
+#'
 #'
 #' @seealso [lavaan::standardizedSolution()]
 #'
