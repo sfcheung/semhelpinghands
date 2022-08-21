@@ -1,37 +1,62 @@
-#' @title Show More Major Options in an Output of 'lavaan'
+#' @title Show More Major Options in an
+#' Output of 'lavaan'
 #'
-#' @description Display the values of more major options in a model fitted
-#'  by [lavaan::lavaan()] or its wrappers (e.g., [lavaan::sem] or
-#'  [lavaan::cfa()]).
+#' @description Display the values of
+#' more major options in a model fitted
+#' by [lavaan::lavaan()] or its
+#' wrappers (e.g., [lavaan::sem] or
+#' [lavaan::cfa()]).
 #'
-#' @details It extracts the values of major options in the output of
-#'  [lavaan::lavaan()] or its wrappers (e.g., [lavaan::sem] or
-#'  [lavaan::cfa()].
+#' @details It extracts the values of
+#' major options in the output of
+#' [lavaan::lavaan()] or its wrappers
+#' (e.g., [lavaan::sem] or
+#' [lavaan::cfa()]. Most of the values
+#' are also reported in the summary of
+#' a [lavaan-class] object. This
+#' function is used to show the values
+#' in one single table for a quick
+#' overview.
 #'
-#' It checks the actual values, not the call used. This is useful for
-#'  understanding how a prepackaged estimator such as `ML`, `MLM`, and
-#'  `MLR` set other options. It supports the following options:
+#' It checks the actual values, not the
+#' call used. This is useful for
+#' understanding how a prepackaged
+#' estimator such as `ML`, `MLM`, and
+#' `MLR` set other options. It supports
+#' the following options:
 #'
 #' - Estimator (`estimator`)
 #' - Standard error (`se`)
 #' - Model chi-square test(s) (`test`)
 #' - Missing data method (`missing`)
-#' - Information matrix used for computing standard errors (`information`)
-#' - Information matrix used for computing model chi-square (`information`)
-#' - Whether the mean structure is included.
+#' - Information matrix used for
+#'   computing standard errors
+#'   (`information`)
+#' - Information matrix used for
+#'   computing model chi-square
+#'   (`information`)
+#' - Whether the mean structure is
+#'   included.
 #'
-#' It is named [show_more_options()] to differentiate it from
-#' `show_options` in the `semunpack` package, which is intended for
-#' new users of [lavaan]. The code is adapted from `show_options`
-#' with more advanced options added.
+#' It is named [show_more_options()] to
+#' differentiate it from `show_options`
+#' in the `semunpack` package, which is
+#' intended for new users of [lavaan].
+#' The code is adapted from
+#' `show_options` with more advanced
+#' options added.
 #'
-#' @return
-#' A `show_more_options`-class object with a print method that formats the output.
+#' @return A `show_more_options`-class
+#' object with a print method that
+#' formats the output.
 #'
-#' @param fit An output of [lavaan::lavaan()] or its wrappers (e.g.,
-#'  [lavaan::cfa()] and [lavaan::sem()])
+#' @param fit An output of
+#' [lavaan::lavaan()] or its wrappers
+#' (e.g., [lavaan::cfa()] and
+#' [lavaan::sem()])
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @author Shu Fai Cheung
+#' <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @examples
 #' library(lavaan)
@@ -206,21 +231,24 @@ show_more_options <- function(fit) {
                   call0_missing,
                   call0_information1,
                   call0_information2,
-                  call0_meanstructure)
+                  call0_meanstructure,
+                  call0_fixed_x)
     opt_arg <- c(opt_estimator,
                  opt_se,
                  opt_test,
                  opt_missing,
                  opt_information1,
                  opt_information2,
-                 opt_meanstructure)
+                 opt_meanstructure,
+                 opt_fixed_x)
     opt_names <- c("Estimator(s)",
-                   "Standard Error",
+                   "Standard Error (SE)",
                    "Model Test Statistic(s)",
-                   "Missing Data",
+                   "How Missing Data is Handled",
                    "Information Matrix (for SE)",
                    "Information Matrix (for Model Test)",
-                   "Mean Structure")
+                   "Mean Structure",
+                   "'x' Fixed")
     out <- data.frame(Options = opt_names,
                       Call = call_arg,
                       Actual = opt_arg)

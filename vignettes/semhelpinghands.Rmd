@@ -320,6 +320,35 @@ for an illustration on `standardizedSolution_boot_ci()`.
 
 # Others
 
+## Showing the Options in a Model
+
+`lavaan::lavaan()` and its wrappers suc has `lavaan::sem()`
+and `lavaan::cfa()` allow users to set several options
+using an `estimator`: `ML`, `GLS`, `WLSMV`, and others.
+However, it is not easy to remember
+what the options set for an estimator.
+Instead of finding them from the output
+of `summary()`, this function shows some
+of them in one table for a quick overview.
+This is an example:
+
+```{r}
+data(dvs_ivs)
+mod <-
+"
+y1 ~ x1 + x2 + x3
+y2 ~ x1 + x3
+y3 ~ y2 + x2
+"
+fit_default <- sem(model = mod, data = dvs_ivs)
+show_more_options(fit_default)
+fit_MLR <- sem(model = mod, data = dvs_ivs, estimator = "MLR")
+show_more_options(fit_MLR)
+fit_MLR_fiml <- sem(model = mod, data = dvs_ivs, estimator = "MLR",
+               missing = "fiml")
+show_more_options(fit_MLR_fiml)
+```
+
 ## Recoding Minimization History
 
 In structural equation modeling,
