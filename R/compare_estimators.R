@@ -28,7 +28,7 @@
 #' `estimator` argument of
 #' [lavaan::lavaan()] and its wrappers,
 #' such as [lavaan::sem()] and
-#' [lavaan::cfa()],
+#' [lavaan::cfa()].
 #'
 #' @seealso [group_by_models()]
 #'
