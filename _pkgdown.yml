@@ -24,6 +24,7 @@ reference:
   - standardizedSolution_boot_ci
 - title: Other Helpers
 - contents:
+  - show_more_options
   - record_history
   - auto_cov
 
