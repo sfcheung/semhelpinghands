@@ -31,11 +31,19 @@ More about this package can be found from the GitHub page of this package:
 
 # Installation
 
-The latest development version at GitHub can be installed by `remotes::install_github()`:
+The latest stable version at GitHub can be installed by `remotes::install_github()`:
 
 ```
 remotes::install_github("sfcheung/semhelpinghands")
 ```
+
+The latest developmental version at GitHub can be installed
+from the `devel` branch:
+
+```
+remotes::install_github("sfcheung/semhelpinghands@devel")
+```
+
 
 # Motive
 
