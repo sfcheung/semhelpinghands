@@ -28,11 +28,15 @@
 #'
 #' @param by A character vector of the
 #' columns for filtering. Default
-#' is c("op", "lhs").
+#' is `c("op", "lhs", "rhs")`.
 #'
 #' @param op_priority How rows are
 #' sorted by `op`. Default is `c("=~",
 #' "~", "~~", ":=", "~1", "|", "~*~")`.
+#' Can set only a few of the operators,
+#' e.g., `c("~", "~~")`. Other operators
+#' will be placed to the end with orders
+#' not changed.
 #'
 #' @param number_rows Whether the row
 #' names will be set to row numbers
@@ -45,8 +49,6 @@
 #'
 #' @examples
 #'
-#' # TODO: Update
-#'
 #' library(lavaan)
 #' set.seed(5478374)
 #' n <- 50
@@ -54,47 +56,29 @@
 #' m <- .40 * x + rnorm(n, 0, sqrt(1 - .40))
 #' y <- .30 * m + rnorm(n, 0, sqrt(1 - .30))
 #' dat <- data.frame(x = x, y = y, m = m)
-#' model <-
+#' model1 <-
 #' '
 #' m ~ a*x
 #' y ~ b*m
 #' ab := a*b
 #' '
-#' fit <- sem(model, data = dat, fixed.x = FALSE)
-#'
-#' model_gp <-
+#' fit1 <- sem(model1, data = dat, fixed.x = FALSE)
+#' model2 <-
 #' '
-#' m ~ c(a1, a2)*x
-#' y ~ c(b1, b2)*m
-#' a1b1 := a1*b1
-#' a2b2 := a2*b2
+#' m ~ a*x
+#' y ~ b*m + x
+#' ab := a*b
 #' '
-#' dat$gp <- sample(c("gp1", "gp2"), n, replace = TRUE)
-#' fit_gp <- sem(model_gp, dat, group = "gp", warn = FALSE)
-#'
-#' est <- parameterEstimates(fit)
-#' est_gp <- parameterEstimates(fit_gp)
-#'
-#' filter_by(est, op = "~")
-#'
-#' filter_by(est, op = "~", lhs = "y")
-#'
-#' filter_by(est, rhs = c("m", "x"), op = "~")
-#'
-#' filter_by(est_gp, group = 2)
-#'
-#' # If the fit object is supplied, can filter
-#' # by group label
-#' filter_by(est_gp, group = "gp2", fit = fit_gp)
-#' filter_by(est_gp, group = "gp2", fit = fit_gp, op = "~")
-#'
-#' # Select user-defined parameters
-#' filter_by(est_gp, op = ":=")
-#'
-#' # Can be used with some other functions in semhelpinghands
-#' # Piping can also be used
-#' est_gp |> filter_by(op = "~", group = "gp2", fit = fit_gp) |>
-#'           add_sig()
+#' fit2 <- sem(model2, data = dat, fixed.x = FALSE)
+#' parameterEstimates(fit1)
+#' parameterEstimates(fit2)
+#' out <- group_by_models(list(no_direct = fit1,
+#'                             direct = fit2),
+#'                         col_names = c("est", "pvalue"))
+#' out
+#' sort_by(out)
+#' sort_by(out, op_priority = c("~", ":="))
+#' sort_by(out, by = c("op", "rhs"))
 #'
 #'
 #' @export
@@ -105,8 +89,7 @@ sort_by <- function(object,
                     number_rows = TRUE) {
     op_priority <- match.arg(op_priority, several.ok = TRUE)
     grouped <- "group" %in% colnames(object)
-    op_priority0 <- match(object$op, op_priority, nomatch = -999)
-    by0 <- by
+    op_priority0 <- match(object$op, op_priority, nomatch = 999)
     tmp <- object
     tmp[, "op"] <- op_priority0
     if (grouped) {
