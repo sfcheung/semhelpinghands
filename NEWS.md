@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.4.x (WIP)
+# semhelpinghands 0.1.4.1
 
 - Add `sort_by()`. Update some functions to call `sort_by()`. (0.1.4.1)
 
