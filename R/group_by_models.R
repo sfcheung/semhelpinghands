@@ -161,7 +161,7 @@ group_by_models <- function(object_list,
         tmp <- as.vector(t(matrix(seq_len(k * cnlen), cnlen, k))) + length(m)
         out <- out[, c(mseq, tmp)]
       }
-    out
+    sort_by(out)
   }
 
 #' @noRd
