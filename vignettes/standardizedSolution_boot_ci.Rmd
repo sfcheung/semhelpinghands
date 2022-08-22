@@ -111,5 +111,5 @@ This function was originally proposed in an [issue at GitHub](https://github.com
 inspired by a discussion at the [Google group for lavaan](https://groups.google.com/g/lavaan/c/qQBXSz5cd0o/m/R8YT5HxNAgAJ).
 It is not a versatile function and used some "tricks" to
 do the work. A more reliable way is to use function like
-[lavaan::bootstrapLavaan()]. Nevertheless, this simple function
+`lavaan::bootstrapLavaan()`. Nevertheless, this simple function
 is good enough for the cases I encountered in my work.
