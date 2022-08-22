@@ -18,7 +18,7 @@ rows."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathj
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -203,26 +203,26 @@ the class <code>est_table</code>.</p>
 <span class="r-in"><span><span class="fu">group_by_groups</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs est_City.Beta est_City.Alpha</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x         0.636          0.418</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   m ~1            -0.144         -0.179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m         0.469          0.277</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3   m ~~   m         0.530          0.413</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   x ~1            -0.062          0.051</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x         0.052          0.110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   y  ~   m         0.469          0.277</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   y ~1            -0.092         -0.125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   y ~~   y         0.636          0.478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   x ~~   x         0.052          0.110</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   y ~~   y         0.636          0.478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   m ~1            -0.144         -0.179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   x ~1            -0.062          0.051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   y ~1            -0.092         -0.125</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Can also work on a parameter estimates table</span></span></span>
 <span class="r-in"><span><span class="co"># To have group labels, need to supply the fit object</span></span></span>
 <span class="r-in"><span><span class="fu">group_by_groups</span><span class="op">(</span><span class="va">est</span>, fit <span class="op">=</span> <span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs est_City.Beta est_City.Alpha</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x         0.636          0.418</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   m ~1            -0.144         -0.179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m         0.469          0.277</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3   m ~~   m         0.530          0.413</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   x ~1            -0.062          0.051</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x         0.052          0.110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   y  ~   m         0.469          0.277</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   y ~1            -0.092         -0.125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   y ~~   y         0.636          0.478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   x ~~   x         0.052          0.110</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   y ~~   y         0.636          0.478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   m ~1            -0.144         -0.179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   x ~1            -0.062          0.051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   y ~1            -0.092         -0.125</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Can be used with some other functions in semhelpinghands</span></span></span>
 <span class="r-in"><span><span class="co"># when used on a parameter estimates table</span></span></span>
