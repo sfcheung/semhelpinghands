@@ -266,7 +266,7 @@ such as `"op"`, `"lhs"`, and `"rhs"`,
 (b) operators such as `"~"` and `"~~"`.
 It can be used on the output of
 some other functions that manipulate
-an parameter estimates table.
+a parameter estimates table.
 
 ```{r}
 out <- group_by_groups(est_gp,
@@ -286,8 +286,9 @@ on customizing the order.
 
 ## Piping
 
-Though not official supported, piping using
+Though not officially supported, piping using
 `|>` can be used with most of the
+functions that manipulate
 parameter estimates tables. For example:
 
 ```{r}
