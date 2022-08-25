@@ -346,8 +346,8 @@ the standardized solution are not
 what usually reported other tools
 for mediation. There are some
 other powerful tools on the Internet and
-the [Google Group for lavaan](e.g.,
-[this thread](https://groups.google.com/g/lavaan/c/0RSsh4M6zQg/m/I85YFAiLAAAJ))
+the [Google Group for lavaan], see
+[this thread](https://groups.google.com/g/lavaan/c/0RSsh4M6zQg/m/I85YFAiLAAAJ),
 to address this problem.
 I wrote `standardizedSolution_boot_ci()`
 not to replace them (it obviously can't),
