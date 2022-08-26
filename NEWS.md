@@ -1,7 +1,9 @@
-# semhelpinghands 0.1.4.3
+# semhelpinghands 0.1.4.4
 
 - Fixed some typo errors. (0.1.4.2)
 - Fixed a link. (0.1.4.3)
+- Fixed CRAN related issues. (0.1.4.4)
+
 
 # semhelpinghands 0.1.4.1
 

@@ -55,13 +55,13 @@ using \code{\link[=group_by_models]{group_by_models()}}.
 }
 \section{Functions}{
 \itemize{
-\item \code{compare_estimators}: Refit the model with different estimators.
+\item \code{compare_estimators()}: Refit the model with different estimators.
 
-\item \code{se_ratios}: A wrapper of \code{\link[=group_by_models]{group_by_models()}} that
+\item \code{se_ratios()}: A wrapper of \code{\link[=group_by_models]{group_by_models()}} that
 computes the ratios of standard errors of different methods
 to those of one method.
-}}
 
+}}
 \examples{
 
 library(lavaan)
