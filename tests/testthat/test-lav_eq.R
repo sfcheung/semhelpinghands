@@ -5,8 +5,6 @@
 library(testthat)
 library(semhelpinghands)
 
-options(width = 132)
-
 library(lavaan)
 
 data(HolzingerSwineford1939)

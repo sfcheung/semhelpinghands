@@ -6,7 +6,6 @@ library(testthat)
 library(semhelpinghands)
 
 # Adapted from https://lavaan.ugent.be/tutorial/syntax2.html
-options(width = 132)
 
 library(lavaan)
 data(HolzingerSwineford1939)

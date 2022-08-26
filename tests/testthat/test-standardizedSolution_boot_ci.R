@@ -6,7 +6,6 @@ library(testthat)
 library(semhelpinghands)
 
 # Example from https://lavaan.ugent.be/tutorial/mediation.html
-options(width = 132)
 
 library(lavaan)
 set.seed(1234)

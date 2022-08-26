@@ -6,7 +6,6 @@ library(testthat)
 library(semhelpinghands)
 
 # Example from https://lavaan.ugent.be/tutorial/cfa.html
-options(width = 132)
 
 library(lavaan)
 data(HolzingerSwineford1939)
