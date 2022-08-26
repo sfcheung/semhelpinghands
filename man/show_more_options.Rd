@@ -75,9 +75,9 @@ options added.
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{print}: The print method of the output of \code{\link[=show_more_options]{show_more_options()}}.
-}}
+\item \code{print(show_more_options)}: The print method of the output of \code{\link[=show_more_options]{show_more_options()}}.
 
+}}
 \examples{
 library(lavaan)
 

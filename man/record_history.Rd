@@ -82,17 +82,17 @@ revised to be an advanced version
 intended for diagnostic purpose in
 real studies.
 }
-\section{Methods (by generic)}{
+\section{Functions}{
 \itemize{
-\item \code{plot}: The plot
+\item \code{plot(fit_history)}: The plot
 method for the output of
 \code{\link[=record_history]{record_history()}}.
 
-\item \code{print}: The print
+\item \code{print(fit_history)}: The print
 method for the output of
 \code{\link[=record_history]{record_history()}}.
+
 }}
-
 \examples{
 
 # Adapted from the example for CFA in lavaan::cfa().

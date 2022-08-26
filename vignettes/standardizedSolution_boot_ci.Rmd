@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-options(width = 132)
+optold <- options(width = 132)
 ```
 
 # What `standardizedSolution_boot_ci()` Does
@@ -113,3 +113,8 @@ It is not a versatile function and used some "tricks" to
 do the work. A more reliable way is to use function like
 `lavaan::bootstrapLavaan()`. Nevertheless, this simple function
 is good enough for the cases I encountered in my work.
+
+
+```{r, include = FALSE}
+options(optold)
+```
