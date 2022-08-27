@@ -69,16 +69,16 @@ syntax.
 }
 \section{Functions}{
 \itemize{
-\item \code{add_exo_cov}: Add covariances
+\item \code{add_exo_cov()}: Add covariances
 between exogenous variables to the
 model syntax and than return the
 modified model syntax.
 
-\item \code{auto_exo_cov}: Generate the
+\item \code{auto_exo_cov()}: Generate the
 model syntax for the covariances
 between exogenous variables.
-}}
 
+}}
 \examples{
 
 library(lavaan)

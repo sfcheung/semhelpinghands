@@ -213,6 +213,7 @@ group_by_groups(fit_gp,
 See the help page of `group_by_groups()`
 for other options.
 
+
 ## Compare Models: `group_by_models()`
 
 This is inspired by the proposal
@@ -256,6 +257,48 @@ group_by_models(list(Model1 = est,
 
 See the help page of `group_by_models()`
 for other options.
+
+## Sort Rows: `sort_by()`
+
+The function `sort_by()` can be used
+to sort rows using (a) common fields
+such as `"op"`, `"lhs"`, and `"rhs"`,
+(b) operators such as `"~"` and `"~~"`.
+It can be used on the output of
+some other functions that manipulate
+a parameter estimates table.
+
+```{r}
+out <- group_by_groups(est_gp,
+                       col_names = c("est", "pvalue"))
+out <- filter_by(out, op = c("~", "~~"))
+sort_by(out, by = c("op", "rhs"))
+```
+
+Some functions, such as `group_by_models()`,
+will automatically
+call `sort_by()` to sort the results.
+
+The default order should be acceptable
+in most cases, but can also be customized.
+See the help page of `sort_by()`
+on customizing the order.
+
+## Piping
+
+Though not officially supported, piping using
+`|>` can be used with most of the
+functions that manipulate
+parameter estimates tables. For example:
+
+```{r}
+est_gp |>
+  add_sig() |>
+  group_by_groups(col_names = c("est", "pvalue", "sig"),
+                  group_first = FALSE) |>
+  filter_by(op = c("~"))
+```
+
 
 # Compare Methods
 
@@ -303,8 +346,8 @@ the standardized solution are not
 what usually reported other tools
 for mediation. There are some
 other powerful tools on the Internet and
-the [Google Group for lavaan](e.g.,
-[this thread](https://groups.google.com/g/lavaan/c/0RSsh4M6zQg/m/I85YFAiLAAAJ))
+the [Google Group for lavaan], see
+[this thread](https://groups.google.com/g/lavaan/c/0RSsh4M6zQg/m/I85YFAiLAAAJ),
 to address this problem.
 I wrote `standardizedSolution_boot_ci()`
 not to replace them (it obviously can't),

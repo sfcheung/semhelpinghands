@@ -1,4 +1,16 @@
+<!-- badges: start -->
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![CRAN status](https://www.r-pkg.org/badges/version/semhelpinghands?color=blue)](https://CRAN.R-project.org/package=semhelpinghands)
+[![CRAN: Release Date](https://www.r-pkg.org/badges/last-release/semhelpinghands?color=blue)](https://cran.r-project.org/package=semhelpinghands)
+[![Code size](https://img.shields.io/github/languages/code-size/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands)
+[![Last Commit at Master](https://img.shields.io/github/last-commit/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands/commits/master)
+[![R-CMD-check](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 # semhelpinghands
+
+(Version 0.1.4.6, updated on 2022-08-28, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
 
 This package is an assortment of time-saving helper functions for doing structural
 equation modeling
@@ -31,11 +43,19 @@ More about this package can be found from the GitHub page of this package:
 
 # Installation
 
-The latest development version at GitHub can be installed by `remotes::install_github()`:
+The latest stable version at GitHub can be installed by `remotes::install_github()`:
 
 ```
 remotes::install_github("sfcheung/semhelpinghands")
 ```
+
+The latest developmental version at GitHub can be installed
+from the `devel` branch:
+
+```
+remotes::install_github("sfcheung/semhelpinghands@devel")
+```
+
 
 # Motive
 

@@ -14,6 +14,7 @@ reference:
   - group_by_dvs
   - group_by_groups
   - group_by_models
+  - sort_by
   - print.est_table
 - title: Compare Methods
 - contents:

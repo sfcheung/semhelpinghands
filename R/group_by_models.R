@@ -40,6 +40,15 @@
 #' parameter estimates tables. Default
 #' is `TRUE`.
 #'
+#' @param use_standardizedSolution If `TRUE`
+#' and `object_list` is not a list of
+#' estimates tables,
+#' then [lavaan::standardizedSolution()]
+#' will be used to generate the table.
+#' If `FALSE`, the default, then
+#' [lavaan::parameterEstimates()] will
+#' be used if necessary.
+#'
 #' @author Shu Fai Cheung
 #' <https://orcid.org/0000-0002-9871-9448>
 #' Inspired by the proposal Rönkkö posted in a GitHub
@@ -90,7 +99,8 @@ group_by_models <- function(object_list,
                             ...,
                             col_names = "est",
                             group_first = FALSE,
-                            model_first = TRUE) {
+                            model_first = TRUE,
+                            use_standardizedSolution = FALSE) {
     output_type <- all_type(object_list)
     if (is.na(output_type)) {
         stop("object_list is invalid. Not of the same types or not of the accepted types.")
@@ -111,10 +121,17 @@ group_by_models <- function(object_list,
     k <- length(object_list)
     model_names <- names(object_list)
     if (output_type == "lavaan") {
-        p_est_list <- sapply(object_list,
-                            lavaan::parameterEstimates,
-                            ...,
-                            simplify = FALSE, USE.NAMES = TRUE)
+        if (use_standardizedSolution) {
+            p_est_list <- sapply(object_list,
+                                lavaan::standardizedSolution,
+                                ...,
+                                simplify = FALSE, USE.NAMES = TRUE)
+          } else {
+            p_est_list <- sapply(object_list,
+                                lavaan::parameterEstimates,
+                                ...,
+                                simplify = FALSE, USE.NAMES = TRUE)
+          }
       } else {
         p_est_list <- object_list
       }
@@ -144,7 +161,7 @@ group_by_models <- function(object_list,
         tmp <- as.vector(t(matrix(seq_len(k * cnlen), cnlen, k))) + length(m)
         out <- out[, c(mseq, tmp)]
       }
-    out
+    sort_by(out)
   }
 
 #' @noRd

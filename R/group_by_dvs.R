@@ -40,7 +40,7 @@
 #' @param ... Optional arguments to be
 #' passed to
 #' [lavaan::parameterEstimates()].
-#' Ignored if `object`` is an output of
+#' Ignored if `object` is an output of
 #' [lavaan::parameterEstimates()] or
 #' [lavaan::standardizedSolution()].
 #'
@@ -58,6 +58,16 @@
 #'  and then by independent variables
 #'  Ignored if the model has only one
 #'  group. Default is `FALSE`.
+#'
+#'
+#' @param use_standardizedSolution If `TRUE`
+#' and `object` is not an
+#' estimates table,
+#' then [lavaan::standardizedSolution()]
+#' will be used to generate the table.
+#' If `FALSE`, the default, then
+#' [lavaan::parameterEstimates()] will
+#' be used if necessary.
 #'
 #' @author Shu Fai Cheung
 #' <https://orcid.org/0000-0002-9871-9448>
@@ -97,14 +107,20 @@ group_by_dvs <- function(object,
                          ...,
                          col_name = "est",
                          add_prefix = TRUE,
-                         group_first = FALSE) {
+                         group_first = FALSE,
+                         use_standardizedSolution = FALSE) {
     object_type <- check_lavaan_type(object)
     if (is.na(object_type)) {
         stop("object is not of the accepted types.")
       }
     if (object_type == "lavaan") {
-        p_est <- lavaan::parameterEstimates(object,
-                                            ...)
+        if (use_standardizedSolution) {
+            p_est <- lavaan::standardizedSolution(object,
+                                                ...)
+          } else {
+            p_est <- lavaan::parameterEstimates(object,
+                                                ...)
+          }
       } else {
         p_est <- object
       }
@@ -153,11 +169,13 @@ group_by_ivs <- function(object,
                          ...,
                          col_name = "est",
                          add_prefix = TRUE,
-                         group_first = FALSE) {
+                         group_first = FALSE,
+                         use_standardizedSolution = FALSE) {
     out <- group_by_dvs(object, ...,
                         col_name = col_name,
                         add_prefix = FALSE,
-                        group_first = group_first)
+                        group_first = group_first,
+                        use_standardizedSolution = use_standardizedSolution)
     v_ind <- attr(out, "v_ind")
     gp_ind <- attr(out, "gp_ind")
     ivs <- attr(out, "ivs")

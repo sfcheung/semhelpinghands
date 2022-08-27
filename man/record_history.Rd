@@ -49,7 +49,8 @@ be displayed. Default is 3.}
 }
 \value{
 A \code{fit_history}-class object
-with a `plot`` method.
+with a \code{plot} method
+(\code{plot.fit_history()}).
 }
 \description{
 Record the minimization
@@ -70,8 +71,8 @@ estimates of free parameters is
 found.
 
 It will refit the model by the
-\verb{update`` method of [lavaan::lavaan-class], setting }se =
-"none"\code{and}test = "standard"`
+\code{update} method of
+\link[lavaan:lavaan-class]{lavaan::lavaan}, setting \code{se = "none"} and \code{test = "standard"}
 because they have no impact on the
 minimization process.
 
@@ -82,17 +83,17 @@ revised to be an advanced version
 intended for diagnostic purpose in
 real studies.
 }
-\section{Methods (by generic)}{
+\section{Functions}{
 \itemize{
-\item \code{plot}: The plot
+\item \code{plot(fit_history)}: The plot
 method for the output of
 \code{\link[=record_history]{record_history()}}.
 
-\item \code{print}: The print
+\item \code{print(fit_history)}: The print
 method for the output of
 \code{\link[=record_history]{record_history()}}.
+
 }}
-
 \examples{
 
 # Adapted from the example for CFA in lavaan::cfa().
