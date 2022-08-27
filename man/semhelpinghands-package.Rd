@@ -6,7 +6,7 @@
 \alias{semhelpinghands-package}
 \title{semhelpinghands: Helper Functions for Structural Equation Modeling}
 \description{
-An assortment of helper functions for doing structural equation modeling, mainly by 'lavaan' for now. Most of them are time-saving functions for common tasks in doing structural equation modeling and reading the output. This package is not for functions that implement advanced statistical procedures. It is a light-weight package for simple functions to simple tasks conveniently, as few dependencies as possible.
+An assortment of helper functions for doing structural equation modeling, mainly by 'lavaan' for now. Most of them are time-saving functions for common tasks in doing structural equation modeling and reading the output. This package is not for functions that implement advanced statistical procedures. It is a light-weight package for simple functions that do simple tasks conveniently, with as few dependencies as possible.
 }
 \seealso{
 Useful links:

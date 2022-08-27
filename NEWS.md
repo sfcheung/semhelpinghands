@@ -1,7 +1,8 @@
-# semhelpinghands 0.1.4.5 (Work-In-Progress)
+# semhelpinghands 0.1.4.6 (Work-In-Progress)
 
 - Fixed word wrap in DESCRIPTION. (0.1.4.5)
 - Added R CMD Check action. (0.1.4.5)
+- Fixed a typo error; updated doc. (0.1.4.6)
 
 # semhelpinghands 0.1.4.4 (CRAN)
 

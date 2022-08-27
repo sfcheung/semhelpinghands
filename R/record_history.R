@@ -18,7 +18,7 @@
 #' found.
 #'
 #' It will refit the model by the
-#' `update`` method of
+#' `update` method of
 #' [lavaan::lavaan-class], setting `se =
 #' "none"` and `test = "standard"`
 #' because they have no impact on the
@@ -32,7 +32,8 @@
 #' real studies.
 #'
 #' @return A `fit_history`-class object
-#' with a `plot`` method.
+#' with a `plot` method
+#' (`plot.fit_history()`).
 #'
 #' @param object A [lavaan-class]
 #' object.
