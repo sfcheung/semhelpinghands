@@ -1,6 +1,16 @@
+<!-- badges: start -->
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![CRAN status](https://www.r-pkg.org/badges/version/semhelpinghands?color=blue)](https://CRAN.R-project.org/package=semhelpinghands)
+[![CRAN: Release Date](https://www.r-pkg.org/badges/last-release/semhelpinghands?color=blue)](https://cran.r-project.org/package=semhelpinghands)
+[![Code size](https://img.shields.io/github/languages/code-size/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands)
+[![Last Commit at Master](https://img.shields.io/github/last-commit/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands/commits/master)
+[![R-CMD-check](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 # semhelpinghands
 
-(Version 0.1.4.4, updated on 2022-08-26, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
+(Version 0.1.4.5, updated on 2022-08-27, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
 
 This package is an assortment of time-saving helper functions for doing structural
 equation modeling

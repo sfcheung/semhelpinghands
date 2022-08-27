@@ -1,21 +1,16 @@
 Package: semhelpinghands
 Title: Helper Functions for Structural Equation Modeling
-Version: 0.1.4.4
+Version: 0.1.4.5
 Authors@R: person(given = "Shu Fai",
            family = "Cheung",
            role = c("aut", "cre"),
            email = "shufai.cheung@gmail.com",
            comment = c(ORCID = "0000-0002-9871-9448"))
-Description: An assortment of helper functions for doing
-  structural equation
-  modeling, mainly by 'lavaan' for now. Most of them
-  are
-  time-saving functions for common tasks in
-  doing structural equation modeling and reading the
-  output. This package
-  is not for functions that
-  implement advanced statistical procedures. It is a
-  light-weight package for simple functions that do simple
+Description: An assortment of helper functions for doing structural equation
+  modeling, mainly by 'lavaan' for now. Most of them are time-saving functions
+  for common tasks in doing structural equation modeling and reading the
+  output. This package is not for functions that implement advanced statistical
+  procedures. It is a light-weight package for simple functions that do simple
   tasks conveniently, with as few dependencies as possible.
 URL: https://sfcheung.github.io/semhelpinghands/
 BugReports: https://github.com/sfcheung/semhelpinghands/issues
