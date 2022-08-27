@@ -20,7 +20,7 @@ lavaan::cfa())."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,7 +140,8 @@ be displayed. Default is 3.</p></dd>
     
 
 <p>A <code>fit_history</code>-class object
-with a `plot`` method.</p>
+with a <code>plot</code> method
+(<code>plot.fit_history()</code>).</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -154,8 +155,8 @@ displayed, for visualizing how the
 estimates of free parameters is
 found.</p>
 <p>It will refit the model by the
-<code>update`` method of [lavaan::lavaan-class], setting </code>se =
-"none"<code>and</code>test = "standard"`
+<code>update</code> method of
+<a href="https://rdrr.io/pkg/lavaan/man/lavaan-class.html" class="external-link">lavaan::lavaan</a>, setting <code>se = "none"</code> and <code>test = "standard"</code>
 because they have no impact on the
 minimization process.</p>
 <p>This and related functions are
