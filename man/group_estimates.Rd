@@ -34,7 +34,7 @@ or the output of
 \item{...}{Optional arguments to be
 passed to
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}.
-Ignored if `object`` is an output of
+Ignored if \code{object} is an output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
 

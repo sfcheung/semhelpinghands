@@ -40,7 +40,7 @@
 #' @param ... Optional arguments to be
 #' passed to
 #' [lavaan::parameterEstimates()].
-#' Ignored if `object`` is an output of
+#' Ignored if `object` is an output of
 #' [lavaan::parameterEstimates()] or
 #' [lavaan::standardizedSolution()].
 #'
