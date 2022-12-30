@@ -121,6 +121,14 @@ standardizedSolution_boot_ci <- function(object,
       }
     if (!force_run) {
       }
+    # For lavaan 0.6-13
+    # Remove bootstrap replications with error
+    boot_error_idx <- attr(boot_est0, "error.idx")
+    if (!is.null(boot_error_idx)) {
+        if (length(boot_error_idx) > 0) {
+            boot_est0 <- boot_est0[-boot_error_idx, ]
+          }
+      }
     std_args <- list(...)
     ptable <- lavaan::parameterTable(object)
     p_free <- ptable$free > 0
