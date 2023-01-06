@@ -10,7 +10,7 @@
 
 # semhelpinghands
 
-(Version 0.1.6, updated on 2022-01-06, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
+(Version 0.1.6, updated on 2023-01-06, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
 
 This package is an assortment of time-saving helper functions for doing structural
 equation modeling
