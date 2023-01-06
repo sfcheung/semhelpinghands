@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.5
+# semhelpinghands 0.1.6
 
 - Fixed word wrap in DESCRIPTION. (0.1.4.5)
 - Added R CMD Check action. (0.1.4.5)
@@ -6,6 +6,7 @@
 - Modified `standardizedSolution_boot_ci()` to work with lavaan 0.6-13.
   Bootstrap replications with errors (e.g., inadmissible solutions),
   if flagged, will be removed.
+- Fixed an issue on README.md. (0.1.6)
 
 # semhelpinghands 0.1.4.4 (CRAN)
 
