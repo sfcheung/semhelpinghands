@@ -3,6 +3,7 @@
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![CRAN status](https://www.r-pkg.org/badges/version/semhelpinghands?color=blue)](https://CRAN.R-project.org/package=semhelpinghands)
 [![CRAN: Release Date](https://www.r-pkg.org/badges/last-release/semhelpinghands?color=blue)](https://cran.r-project.org/package=semhelpinghands)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/semhelpinghands?color=blue)](https://r-pkg.org/pkg/semhelpinghands)
 [![Code size](https://img.shields.io/github/languages/code-size/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands)
 [![Last Commit at Main](https://img.shields.io/github/last-commit/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands/commits/main)
 [![R-CMD-check](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml)
@@ -10,7 +11,7 @@
 
 # semhelpinghands
 
-(Version 0.1.6, updated on 2023-01-06, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
+(Version 0.1.6.1, updated on 2023-02-18, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
 
 This package is an assortment of time-saving helper functions for doing structural
 equation modeling
