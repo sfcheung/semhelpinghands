@@ -1,3 +1,7 @@
+# semhelpinghands 0.1.6.1
+
+- Update a badge in README.md. (0.1.6.1)
+
 # semhelpinghands 0.1.6
 
 - Fixed word wrap in DESCRIPTION. (0.1.4.5)
