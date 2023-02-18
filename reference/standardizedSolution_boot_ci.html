@@ -48,7 +48,7 @@ the bootstrapping step."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -230,7 +230,7 @@ this version.</p>
 <span class="r-in"><span>           se <span class="op">=</span> <span class="st">"boot"</span>,</span></span>
 <span class="r-in"><span>           bootstrap <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lavaan 0.6-12 ended normally after 1 iterations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lavaan 0.6.14 ended normally after 1 iteration</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Estimator                                         ML</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Optimization method                           NLMINB</span>
@@ -253,36 +253,36 @@ this version.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regressions:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   m ~                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x          (a)    0.569    0.337    1.688    0.091</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x          (a)    0.569    0.325    1.749    0.080</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   y ~                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     m          (b)    0.219    0.146    1.503    0.133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     m          (b)    0.219    0.146    1.495    0.135</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variances:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .m                 0.460    0.079    5.803    0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .y                 0.570    0.104    5.487    0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x                 0.078    0.011    7.017    0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .m                 0.460    0.086    5.381    0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .y                 0.570    0.110    5.178    0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x                 0.078    0.012    6.782    0.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Defined Parameters:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     ab                0.125    0.137    0.910    0.363</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ab                0.125    0.126    0.992    0.321</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">standardizedSolution_boot_ci</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lhs op rhs label est.std    se      z pvalue ci.lower ci.upper boot.ci.lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a   0.229 0.136  1.677  0.094   -0.039    0.496        -0.039</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     b   0.198 0.125  1.586  0.113   -0.047    0.443        -0.026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   m ~~   m         0.948 0.062 15.205  0.000    0.826    1.070         0.708</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y         0.961 0.050 19.401  0.000    0.864    1.058         0.796</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   m  ~   x     a   0.229 0.127  1.800  0.072   -0.020    0.477        -0.041</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   y  ~   m     b   0.198 0.118  1.684  0.092   -0.032    0.429        -0.024</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   m ~~   m         0.948 0.058 16.325  0.000    0.834    1.062         0.793</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   y ~~   y         0.961 0.047 20.595  0.000    0.869    1.052         0.785</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5   x ~~   x         1.000 0.000     NA     NA    1.000    1.000            NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab   0.045 0.046  0.975  0.330   -0.046    0.136        -0.008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  ab := a*b    ab   0.045 0.040  1.130  0.259   -0.033    0.124        -0.007</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   boot.ci.upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         0.540</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         0.451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         0.454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         0.464</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3         1.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4         1.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5            NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         0.188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         0.164</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
