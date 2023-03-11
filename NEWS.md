@@ -1,6 +1,7 @@
-# semhelpinghands 0.1.6.1
+# semhelpinghands 0.1.6.2
 
 - Update a badge in README.md. (0.1.6.1)
+- Update the pkgdown site. (0.1.6.2)
 
 # semhelpinghands 0.1.6
 
