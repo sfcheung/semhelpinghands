@@ -3,6 +3,17 @@ destination: docs
 url: https://sfcheung.github.io/semhelpinghands/
 template:
   bootstrap: 5
+  bootswatch: materia
+  theme: a11y-light
+  bslib:
+    pkgdown-nav-height: 80px
+    bg: "#FAF2F2"
+    fg: "#000000"
+    primary: "#0000FF"
+# navbar:
+#   structure:
+#     left:  [intro, articles, reference, news]
+#     right: [search, github]
 
 reference:
 - title: Parameter Estimates Tables Manipulation

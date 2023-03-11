@@ -9,9 +9,9 @@
 [![R-CMD-check](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-# semhelpinghands
+# semhelpinghands <img src="man/figures/logo.png" align="right" height="150" />
 
-(Version 0.1.6.1, updated on 2023-02-18, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
+(Version ,0.1.6.2 updated on 2023-03-11, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
 
 This package is an assortment of time-saving helper functions for doing structural
 equation modeling
