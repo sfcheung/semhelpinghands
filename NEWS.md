@@ -1,7 +1,8 @@
-# semhelpinghands 0.1.6.2
+# semhelpinghands 0.1.6.3
 
-- Update a badge in README.md. (0.1.6.1)
-- Update the pkgdown site. (0.1.6.2)
+- Updated a badge in README.md. (0.1.6.1)
+- Updated the pkgdown site. (0.1.6.2)
+- Add a test for noSuggests in R CMD check. (0.1.6.3)
 
 # semhelpinghands 0.1.6
 
