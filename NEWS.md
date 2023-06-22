@@ -1,8 +1,11 @@
-# semhelpinghands 0.1.6.3
+# semhelpinghands 0.1.6.4
 
 - Updated a badge in README.md. (0.1.6.1)
 - Updated the pkgdown site. (0.1.6.2)
-- Add a test for noSuggests in R CMD check. (0.1.6.3)
+- Added a test for noSuggests in R CMD check. (0.1.6.3)
+- Migrated functions from the
+  `semunpack` package to this package.
+  (0.1.6.4)
 
 # semhelpinghands 0.1.6
 
