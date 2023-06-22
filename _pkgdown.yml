@@ -38,6 +38,7 @@ reference:
 - contents:
   - annotate_matrices
   - plot_models_fm
+  - show_ifi
 - title: Other Helpers
 - contents:
   - show_more_options
