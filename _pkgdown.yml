@@ -39,6 +39,7 @@ reference:
   - annotate_matrices
   - plot_models_fm
   - show_ifi
+  - show_options
 - title: Other Helpers
 - contents:
   - show_more_options
