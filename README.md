@@ -3,14 +3,15 @@
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![CRAN status](https://www.r-pkg.org/badges/version/semhelpinghands?color=blue)](https://CRAN.R-project.org/package=semhelpinghands)
 [![CRAN: Release Date](https://www.r-pkg.org/badges/last-release/semhelpinghands?color=blue)](https://cran.r-project.org/package=semhelpinghands)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/semhelpinghands?color=blue)](https://r-pkg.org/pkg/semhelpinghands)
 [![Code size](https://img.shields.io/github/languages/code-size/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands)
-[![Last Commit at Master](https://img.shields.io/github/last-commit/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands/commits/master)
+[![Last Commit at Main](https://img.shields.io/github/last-commit/sfcheung/semhelpinghands.svg)](https://github.com/sfcheung/semhelpinghands/commits/main)
 [![R-CMD-check](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sfcheung/semhelpinghands/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-# semhelpinghands
+# semhelpinghands <img src="man/figures/logo.png" align="right" height="150" />
 
-(Version 0.1.4.6, updated on 2022-08-28, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
+(Version 0.1.6.4 updated on 2023-06-22, [release history](https://sfcheung.github.io/semhelpinghands/news/index.html))
 
 This package is an assortment of time-saving helper functions for doing structural
 equation modeling
@@ -43,19 +44,17 @@ More about this package can be found from the GitHub page of this package:
 
 # Installation
 
-The latest stable version at GitHub can be installed by `remotes::install_github()`:
+The latest version at CRAN can be installed by `install.packages()`:
+
+```
+install.packages("semhelpinghands")
+```
+
+The latest developmental version at GitHub can be installed by `remotes::install_github()`:
 
 ```
 remotes::install_github("sfcheung/semhelpinghands")
 ```
-
-The latest developmental version at GitHub can be installed
-from the `devel` branch:
-
-```
-remotes::install_github("sfcheung/semhelpinghands@devel")
-```
-
 
 # Motive
 

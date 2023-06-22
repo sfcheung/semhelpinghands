@@ -1,8 +1,21 @@
-# semhelpinghands 0.1.4.6 (Work-In-Progress)
+# semhelpinghands 0.1.6.4
+
+- Updated a badge in README.md. (0.1.6.1)
+- Updated the pkgdown site. (0.1.6.2)
+- Added a test for noSuggests in R CMD check. (0.1.6.3)
+- Migrated functions from the
+  `semunpack` package to this package.
+  (0.1.6.4)
+
+# semhelpinghands 0.1.6
 
 - Fixed word wrap in DESCRIPTION. (0.1.4.5)
 - Added R CMD Check action. (0.1.4.5)
 - Fixed a typo error; updated doc. (0.1.4.6)
+- Modified `standardizedSolution_boot_ci()` to work with lavaan 0.6-13.
+  Bootstrap replications with errors (e.g., inadmissible solutions),
+  if flagged, will be removed.
+- Fixed an issue on README.md. (0.1.6)
 
 # semhelpinghands 0.1.4.4 (CRAN)
 

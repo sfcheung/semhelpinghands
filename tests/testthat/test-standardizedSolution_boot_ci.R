@@ -25,10 +25,11 @@ model <- ' # direct effect
              total := c + (a*b)
          '
 set.seed(1234)
-system.time(fit <- sem(model,
+# One bootstrap replication failed. Kept intentionally.
+suppressWarnings(system.time(fit <- sem(model,
                        data = Data,
                        se = "boot",
-                       bootstrap = 100))
+                       bootstrap = 100)))
 
 ci_boot <- standardizedSolution_boot_ci(fit, save_boot_est_std = TRUE)
 
@@ -41,8 +42,16 @@ fit2 <- sem(model,
             se = "none",
             bootstrap = 100)
 set.seed(1234)
-boot_ci_test <- bootstrapLavaan(fit2, R = 100,
-                                FUN = get_std)
+suppressWarnings(boot_ci_test <- bootstrapLavaan(fit2, R = 100,
+                                FUN = get_std))
+
+# For lavaan 0.9-13
+boot_ci_test_error_idx <- attr(boot_ci_test, "error.idx")
+if (!is.null(boot_ci_test_error_idx)) {
+    if (length(boot_ci_test_error_idx) > 0) {
+        boot_ci_test <- boot_ci_test[-boot_ci_test_error_idx, ]
+      }
+  }
 
 test_that("Compare boot estimates directly", {
     expect_equal(
