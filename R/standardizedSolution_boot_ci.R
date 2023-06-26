@@ -163,7 +163,9 @@ standardizedSolution_boot_ci <- function(object,
                         })
     boot_ci <- t(boot_ci)
     colnames(boot_ci) <- c("boot.ci.lower", "boot.ci.upper")
-    out_final <- cbind(out, boot_ci)
+    boot_se <- apply(out_all, 2, sd, na.rm = TRUE, simplify = TRUE)
+    boot_se[boot_se < .Machine$double.eps] <- NA
+    out_final <- cbind(out, boot_ci, `boot.se` = boot_se)
     if (boot_delta_ratio) {
         tmp1 <- abs(out_final$boot.ci.lower - out_final$est.std) /
                                  abs(out_final$ci.lower - out_final$est.std)
