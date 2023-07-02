@@ -18,7 +18,7 @@ a named vector."><meta property="og:image" content="https://sfcheung.github.io/s
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -374,7 +374,9 @@ wrappers.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    wald_stat      wald_df       wald_p </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.444631e+01 1.000000e+00 1.442117e-04 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">vec_compRelSEM</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"semTools"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">vec_compRelSEM</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: semTools</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  visual_rel textual_rel   speed_rel </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       0.612       0.885       0.686 </span>
