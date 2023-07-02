@@ -1,16 +1,24 @@
-# semhelpinghands 0.1.6.5
+# semhelpinghands 0.1.7
 
-- Updated a badge in README.md. (0.1.6.1)
-- Updated the pkgdown site. (0.1.6.2)
-- Added a test for noSuggests in R CMD check. (0.1.6.3)
+## New Features
+
 - Migrated functions from the
-  `semunpack` package to this package.
+  `semunpack` package to this package:
+  `annotate_matrices()`,
+  `plot_models_fm()`,
+  `show_ifi()`, `show_cfi()`,
+  `show_tli()`, and `show_options()`.
   (0.1.6.4)
 - Added a set of wrappers (e.g., `vec_rsquare()`)
   to extract some commonly requested
   information and return output as a
   named numeric vector. (0.1.6.5)
 
+## Others
+
+- Updated a badge in README.md. (0.1.6.1)
+- Updated the pkgdown site. (0.1.6.2)
+- Added a test for noSuggests in R CMD check. (0.1.6.3)
 
 # semhelpinghands 0.1.6
 
