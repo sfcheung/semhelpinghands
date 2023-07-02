@@ -1,6 +1,6 @@
 Package: semhelpinghands
 Title: Helper Functions for Structural Equation Modeling
-Version: 0.1.6.4
+Version: 0.1.6.5
 Authors@R: person(given = "Shu Fai",
            family = "Cheung",
            role = c("aut", "cre"),
@@ -23,6 +23,7 @@ RoxygenNote: 7.2.3
 Suggests:
     rmarkdown,
     knitr,
+    semTools,
     testthat (>= 3.0.0)
 Config/testthat/parallel: true
 Config/testthat/edition: 3
