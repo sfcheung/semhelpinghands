@@ -74,6 +74,31 @@ get_sample_var(fit_cfa_mg)
 get_sample_var(fit_sem)
 get_sample_var(fit_sem_mg)
 
+get_est_var(fit_cfa)
+get_est_var(fit_cfa_mg)
+get_est_var(fit_sem)
+get_est_var(fit_sem_mg)
+
+get_est_se(fit_cfa)
+get_est_se(fit_cfa_mg)
+get_est_se(fit_sem)
+get_est_se(fit_sem_mg)
+
+test_that("Sanity check", {
+    expect_error(get_def_var(fit_cfa))
+    expect_error(get_def_var(fit_cfa_mg))
+  })
+get_def_var(fit_sem)
+get_def_var(fit_sem_mg)
+
+test_that("Sanity check", {
+    expect_error(get_def_se(fit_cfa))
+    expect_error(get_def_se(fit_cfa_mg))
+  })
+get_def_se(fit_sem)
+get_def_se(fit_sem_mg)
+
+
 get_lavTestLRT(fit_cfa, fit_cfa2, fit_cfa3,
                model.names = c("M1", "M2", "M3"))
 get_lavTestLRT(fit_cfa, fit_cfa2,
@@ -92,4 +117,6 @@ get_compRelSEM(fit_cfa)
 get_compRelSEM(fit_cfa, return.total = TRUE)
 get_compRelSEM(fit_cfa_mg)
 get_compRelSEM(fit_cfa_mg, return.total = TRUE)
-get_compRelSEM(fit_cfa, return.df = TRUE)
+test_that("Sanity check", {
+    expect_error(get_compRelSEM(fit_cfa, return.df = TRUE))
+  })

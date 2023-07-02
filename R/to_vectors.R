@@ -247,6 +247,70 @@ get_compRelSEM <- function(object,
   }
 
 
+#' @describeIn get_this_from_lavaan Sampling variances of free parameters.
+#' @order 8
+
+get_est_var <- function(object,
+                        parnames = NULL) {
+    out0 <- lavaan::lavInspect(object, what = "vcov",
+                               add.class = FALSE,
+                               list.by.group = TRUE,
+                               drop.list.single.group = FALSE)
+    out0 <- diag(out0)
+    if (!is.null(parnames)) {
+        out0 <- out0[parnames]
+      }
+    if (length(out0) == 0) {
+        stop("No parameters selected")
+      }
+    return(out0)
+  }
+
+#' @describeIn get_this_from_lavaan Standard errors of free parameters.
+#' @order 9
+
+get_est_se <- function(object,
+                       parnames = NULL) {
+    out <- get_est_var(object = object,
+                       parnames = parnames)
+    out <- sqrt(out)
+    return(out)
+  }
+
+
+#' @describeIn get_this_from_lavaan Sampling variances of user-defined parameters.
+#' @order 10
+
+get_def_var <- function(object,
+                        parnames = NULL) {
+    out0 <- lavaan::lavInspect(object, what = "vcov.def",
+                               add.class = FALSE,
+                               list.by.group = TRUE,
+                               drop.list.single.group = FALSE)
+    out0 <- diag(out0)
+    if (length(out0) == 0) {
+        stop("No user defined parameters in the model.")
+      }
+    if (!is.null(parnames)) {
+        out0 <- out0[parnames]
+      }
+    if (length(out0) == 0) {
+        stop("No parameters selected")
+      }
+    return(out0)
+  }
+
+#' @describeIn get_this_from_lavaan Standard errors of user-defined parameters.
+#' @order 11
+
+get_def_se <- function(object,
+                        parnames = NULL) {
+    out <- get_def_var(object = object,
+                       parnames = parnames)
+    out <- sqrt(out)
+    return(out)
+  }
+
 
 #### Helpers (Not Exported)
 
