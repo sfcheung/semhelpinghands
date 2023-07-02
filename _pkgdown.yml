@@ -45,6 +45,7 @@ reference:
   - show_more_options
   - record_history
   - auto_cov
+  - vector_from_lavaan
 
 - title: Datasets
   desc: Datasets used in examples and vignettes.
