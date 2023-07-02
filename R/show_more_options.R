@@ -39,8 +39,9 @@
 #'   included.
 #'
 #' It is named [show_more_options()] to
-#' differentiate it from `show_options`
-#' in the `semunpack` package, which is
+#' differentiate it from
+#' [show_options()], originally in the
+#' `semunpack` package, which is
 #' intended for new users of [lavaan].
 #' The code is adapted from
 #' `show_options` with more advanced

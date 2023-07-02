@@ -34,11 +34,18 @@ reference:
 - title: Bootstrapping
 - contents:
   - standardizedSolution_boot_ci
+- title: Understanding and Learning SEM
+- contents:
+  - annotate_matrices
+  - plot_models_fm
+  - show_ifi
+  - show_options
 - title: Other Helpers
 - contents:
   - show_more_options
   - record_history
   - auto_cov
+  - vector_from_lavaan
 
 - title: Datasets
   desc: Datasets used in examples and vignettes.
