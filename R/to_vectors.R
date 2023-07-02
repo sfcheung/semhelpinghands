@@ -264,21 +264,15 @@ vec_compRelSEM <- function(object,
     return(out)
   }
 
-#' @param parnames TBD.
-#'
 #' @describeIn vector_from_lavaan Sampling variances of free parameters.
 #' @order 4
 
-vec_est_var <- function(object,
-                        parnames = NULL) {
+vec_est_var <- function(object) {
     out0 <- lavaan::lavInspect(object, what = "vcov",
                                add.class = FALSE,
                                list.by.group = TRUE,
                                drop.list.single.group = FALSE)
     out0 <- diag(out0)
-    if (!is.null(parnames)) {
-        out0 <- out0[parnames]
-      }
     if (length(out0) == 0) {
         stop("No parameters selected")
       }
@@ -288,10 +282,8 @@ vec_est_var <- function(object,
 #' @describeIn vector_from_lavaan Standard errors of free parameters.
 #' @order 6
 
-vec_est_se <- function(object,
-                       parnames = NULL) {
-    out <- vec_est_var(object = object,
-                       parnames = parnames)
+vec_est_se <- function(object) {
+    out <- vec_est_var(object = object)
     out <- sqrt(out)
     return(out)
   }
@@ -300,8 +292,7 @@ vec_est_se <- function(object,
 #' @describeIn vector_from_lavaan Sampling variances of user-defined parameters.
 #' @order 10
 
-vec_def_var <- function(object,
-                        parnames = NULL) {
+vec_def_var <- function(object) {
     out0 <- lavaan::lavInspect(object, what = "vcov.def",
                                add.class = FALSE,
                                list.by.group = TRUE,
@@ -310,22 +301,14 @@ vec_def_var <- function(object,
     if (length(out0) == 0) {
         stop("No user defined parameters in the model.")
       }
-    if (!is.null(parnames)) {
-        out0 <- out0[parnames]
-      }
-    if (length(out0) == 0) {
-        stop("No parameters selected")
-      }
     return(out0)
   }
 
 #' @describeIn vector_from_lavaan Standard errors of user-defined parameters.
 #' @order 7
 
-vec_def_se <- function(object,
-                       parnames = NULL) {
-    out <- vec_def_var(object = object,
-                       parnames = parnames)
+vec_def_se <- function(object) {
+    out <- vec_def_var(object = object)
     out <- sqrt(out)
     return(out)
   }
