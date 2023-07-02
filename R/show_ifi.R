@@ -91,9 +91,8 @@ show_ifi <- function(fit,
       ggplot2::xlim(0, df_max) +
       ggplot2::labs(
           # title = "Discrepancy (chisq) vs. Simplicity (df)",
-          x = "Complex Model <- Degrees of Freedom (df) -> Simple Model",
-          y = "Good absolute fit <- Chi-squared (Chisq) -> Bad absolute fit")
-
+          x = expression("Complex Model"%<-%"Degrees of Freedom (df)"%->%"Simple Model"),
+          y = expression("Good |fit|"%<-% chi^2 %->%"Bad |fit|"))
     base_point <-
       ggplot2::geom_point(ggplot2::aes(x = df_base,
                                        y = chisq_base),
