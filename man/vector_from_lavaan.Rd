@@ -6,11 +6,11 @@
 \alias{vec_sample_var}
 \alias{vec_est_var}
 \alias{vec_est_se}
+\alias{vec_def_var}
 \alias{vec_def_se}
 \alias{vec_lavTestLRT}
 \alias{vec_lavTestScore}
 \alias{vec_lavTestWald}
-\alias{vec_def_var}
 \alias{vec_compRelSEM}
 \alias{vector_from_lavaan}
 \title{Wrapper Functions to Extract
@@ -25,6 +25,8 @@ vec_sample_var(object)
 vec_est_var(object)
 
 vec_est_se(object)
+
+vec_def_var(object)
 
 vec_def_se(object)
 
@@ -48,8 +50,6 @@ vec_lavTestScore(
 
 vec_lavTestWald(object, constraints = NULL, prefix = NULL)
 
-vec_def_var(object)
-
 vec_compRelSEM(object, ...)
 }
 \arguments{
@@ -59,34 +59,74 @@ object.}
 \item{...}{Additional arguments to
 be passed to the original function.}
 
-\item{method}{(Of lavTestLRT.)}
+\item{method}{An argument to be
+passed to \code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.
+Please refer to the help page of
+\code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.}
 
-\item{A.method}{(Of lavTestLRT.)}
+\item{A.method}{An argument to be
+passed \code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.
+Please refer to the help page of
+\code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.}
 
-\item{scaled.shifted}{(Of lavTestLRT.)}
+\item{scaled.shifted}{An argument to
+be
+passed to \code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.
+Please refer to the help page of
+\code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.}
 
-\item{H1}{(Of lavTestLRT.)}
+\item{H1}{An argument to be passed
+to
+\code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.
+Please refer to the help page of
+\code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.}
 
-\item{model.names}{(Of lavTestLRT.)}
+\item{model.names}{An argument to
+be
+passed to \code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.
+Please refer to the help page of
+\code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}.
+Unlike
+\code{\link[lavaan:lavTestLRT]{lavaan::lavTestLRT()}}, this argument
+is required, for the sake of naming
+the vector to be returned.}
 
-\item{add}{(Of lavTestScore.)}
+\item{add}{An argument to be passed
+to \code{\link[lavaan:lavTestScore]{lavaan::lavTestScore()}}. Please
+refer to the help page of
+\code{\link[lavaan:lavTestScore]{lavaan::lavTestScore()}}.}
 
-\item{release}{(Of lavTestScore.)}
+\item{release}{An argument to be passed
+to \code{\link[lavaan:lavTestScore]{lavaan::lavTestScore()}}. Please
+refer to the help page of
+\code{\link[lavaan:lavTestScore]{lavaan::lavTestScore()}}.}
 
-\item{univariate}{(Of lavTestScore.)}
+\item{univariate}{An argument to be passed
+to \code{\link[lavaan:lavTestScore]{lavaan::lavTestScore()}}. Please
+refer to the help page of
+\code{\link[lavaan:lavTestScore]{lavaan::lavTestScore()}}.}
 
-\item{information}{(Of lavTestScore.)}
+\item{information}{An argument to be passed
+to \code{\link[lavaan:lavTestScore]{lavaan::lavTestScore()}}. Please
+refer to the help page of
+\code{\link[lavaan:lavTestScore]{lavaan::lavTestScore()}}.}
 
-\item{constraints}{(Of lavTestScore.)}
+\item{constraints}{An argument to be passed
+to \code{\link[lavaan:lavTestWald]{lavaan::lavTestWald()}}. Please
+refer to the help page of
+\code{\link[lavaan:lavTestWald]{lavaan::lavTestWald()}}.}
 
-\item{prefix}{(Of lavTestScore.)}
+\item{prefix}{Optional. A character
+string to be added as a prefix to
+names of the output. Default is
+\code{NULL}.}
 }
 \value{
 All of them return a named numeric
 vector.
 }
 \description{
-A set of vector functions
+A set of wrapper functions
 to extract information from a
 \code{lavaan}-class object and return
 a named vector.
@@ -95,14 +135,21 @@ a named vector.
 This set of wrapper
 functions are for functions like
 \code{\link[lavaan:bootstrap]{lavaan::bootstrapLavaan()}} that
-expects a function that receives
+require users to supply a function
+that receives
 a \code{lavaan}-class object and returns
 a vector of values.
 
-Many of the tasks can be performed
+All wrappers functions are designed
+to have the same form of output:
+a named numeric vector.
+
+Many of the tasks of this set of
+wrappers can be performed
 by writing our own functions. The
-wrapper functions are just time-saver
-for common tasks.
+wrapper functions are developed just
+to save the coding time for some
+commonly requested information.
 
 The wrapper functions are designed
 to be as simple to use as possible,
@@ -123,6 +170,8 @@ wrappers.
 
 \item \code{vec_est_se()}: Standard errors of free parameters.
 
+\item \code{vec_def_var()}: Sampling variances of user-defined parameters.
+
 \item \code{vec_def_se()}: Standard errors of user-defined parameters.
 
 \item \code{vec_lavTestLRT()}: Get sample variances.
@@ -131,14 +180,61 @@ wrappers.
 
 \item \code{vec_lavTestWald()}: Do a Wald test.
 
-\item \code{vec_def_var()}: Sampling variances of user-defined parameters.
-
 \item \code{vec_compRelSEM()}: Composite reliability.
 
 }}
 \examples{
-\donttest{
-}
+
+# From the help page of lavaan::cfa().
+
+library(lavaan)
+HS.model <- '
+visual  =~ x1 + x2 + x3
+textual =~ x4 + x5 + x6
+speed   =~ x7 + x8 + x9
+'
+fit <- cfa(HS.model, data = HolzingerSwineford1939)
+
+vec_rsquare(fit)
+vec_sample_vcov(fit)
+vec_sample_var(fit)
+vec_est_var(fit)
+vec_est_se(fit)
+
+HS.model.sem1 <- '
+visual  =~ x1 + x2 + x3
+textual =~ x4 + x5 + x6
+speed   =~ x7 + x8 + x9
+textual ~ a * visual
+speed ~ b * textual
+ab := a * b
+'
+fit_sem1 <- sem(HS.model.sem1, data = HolzingerSwineford1939)
+
+HS.model.sem2 <- '
+visual  =~ x1 + x2 + x3
+textual =~ x4 + x5 + x6
+speed   =~ x7 + x8 + x9
+textual ~ a * visual
+speed ~ b * textual + cp * visual
+ab := a * b
+'
+fit_sem2 <- sem(HS.model.sem2, data = HolzingerSwineford1939)
+
+vec_def_var(fit_sem1)
+vec_def_se(fit_sem1)
+
+vec_lavTestLRT(fit_sem1, fit_sem2,
+               model.names = c("No Direct", "Direct"))
+
+vec_lavTestScore(fit_sem1,
+                 add = "speed ~ visual")
+
+vec_lavTestWald(fit_sem2,
+                constraints = "cp == 0")
+
+vec_compRelSEM(fit)
+
 
 }
 \seealso{

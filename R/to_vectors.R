@@ -1,7 +1,7 @@
 #' @title Wrapper Functions to Extract
 #' Information as a Vector
 #'
-#' @description A set of vector functions
+#' @description A set of wrapper functions
 #' to extract information from a
 #' `lavaan`-class object and return
 #' a named vector.
@@ -9,14 +9,21 @@
 #' @details This set of wrapper
 #' functions are for functions like
 #' [lavaan::bootstrapLavaan()] that
-#' expects a function that receives
+#' require users to supply a function
+#' that receives
 #' a `lavaan`-class object and returns
 #' a vector of values.
 #'
-#' Many of the tasks can be performed
+#' All wrappers functions are designed
+#' to have the same form of output:
+#' a named numeric vector.
+#'
+#' Many of the tasks of this set of
+#' wrappers can be performed
 #' by writing our own functions. The
-#' wrapper functions are just time-saver
-#' for common tasks.
+#' wrapper functions are developed just
+#' to save the coding time for some
+#' commonly requested information.
 #'
 #' The wrapper functions are designed
 #' to be as simple to use as possible,
@@ -41,12 +48,62 @@
 #' @seealso [lavaan::lavInspect()]
 #'
 #' @examples
-#' \donttest{
-#' }
+#'
+#' # From the help page of lavaan::cfa().
+#'
+#' library(lavaan)
+#' HS.model <- '
+#' visual  =~ x1 + x2 + x3
+#' textual =~ x4 + x5 + x6
+#' speed   =~ x7 + x8 + x9
+#' '
+#' fit <- cfa(HS.model, data = HolzingerSwineford1939)
+#'
+#' vec_rsquare(fit)
+#' vec_sample_vcov(fit)
+#' vec_sample_var(fit)
+#' vec_est_var(fit)
+#' vec_est_se(fit)
+#'
+#' HS.model.sem1 <- '
+#' visual  =~ x1 + x2 + x3
+#' textual =~ x4 + x5 + x6
+#' speed   =~ x7 + x8 + x9
+#' textual ~ a * visual
+#' speed ~ b * textual
+#' ab := a * b
+#' '
+#' fit_sem1 <- sem(HS.model.sem1, data = HolzingerSwineford1939)
+#'
+#' HS.model.sem2 <- '
+#' visual  =~ x1 + x2 + x3
+#' textual =~ x4 + x5 + x6
+#' speed   =~ x7 + x8 + x9
+#' textual ~ a * visual
+#' speed ~ b * textual + cp * visual
+#' ab := a * b
+#' '
+#' fit_sem2 <- sem(HS.model.sem2, data = HolzingerSwineford1939)
+#'
+#' vec_def_var(fit_sem1)
+#' vec_def_se(fit_sem1)
+#'
+#' vec_lavTestLRT(fit_sem1, fit_sem2,
+#'                model.names = c("No Direct", "Direct"))
+#'
+#' vec_lavTestScore(fit_sem1,
+#'                  add = "speed ~ visual")
+#'
+#' vec_lavTestWald(fit_sem2,
+#'                 constraints = "cp == 0")
+#'
+#' vec_compRelSEM(fit)
+#'
 #'
 #' @name vector_from_lavaan
 NULL
 
+#' @export
 #' @describeIn vector_from_lavaan Get R-squares in a model.
 #' @order 1
 
@@ -71,6 +128,7 @@ vec_rsquare <- function(object) {
     return(out)
   }
 
+#' @export
 #' @describeIn vector_from_lavaan Get sample variances and covariances.
 #' @order 2
 
@@ -97,6 +155,7 @@ vec_sample_vcov <- function(object) {
     return(out)
   }
 
+#' @export
 #' @describeIn vector_from_lavaan Get sample variances.
 #' @order 3
 
@@ -122,16 +181,96 @@ vec_sample_var <- function(object) {
     return(out)
   }
 
-#' @param method (Of lavTestLRT.)
+
+#' @export
+#' @describeIn vector_from_lavaan Sampling variances of free parameters.
+#' @order 4
+
+vec_est_var <- function(object) {
+    out0 <- lavaan::lavInspect(object, what = "vcov",
+                               add.class = FALSE,
+                               list.by.group = TRUE,
+                               drop.list.single.group = FALSE)
+    out0 <- diag(out0)
+    if (length(out0) == 0) {
+        stop("No parameters selected")
+      }
+    return(out0)
+  }
+
+
+#' @export
+#' @describeIn vector_from_lavaan Standard errors of free parameters.
+#' @order 5
+
+vec_est_se <- function(object) {
+    out <- vec_est_var(object = object)
+    out <- sqrt(out)
+    return(out)
+  }
+
+
+#' @export
+#' @describeIn vector_from_lavaan Sampling variances of user-defined parameters.
+#' @order 6
+
+vec_def_var <- function(object) {
+    out0 <- lavaan::lavInspect(object, what = "vcov.def",
+                               add.class = FALSE,
+                               list.by.group = TRUE,
+                               drop.list.single.group = FALSE)
+    out0 <- diag(out0)
+    if (length(out0) == 0) {
+        stop("No user defined parameters in the model.")
+      }
+    return(out0)
+  }
+
+#' @export
+#' @describeIn vector_from_lavaan Standard errors of user-defined parameters.
+#' @order 7
+
+vec_def_se <- function(object) {
+    out <- vec_def_var(object = object)
+    out <- sqrt(out)
+    return(out)
+  }
+
+
+
+#' @param method An argument to be
+#' passed to [lavaan::lavTestLRT()].
+#' Please refer to the help page of
+#' [lavaan::lavTestLRT()].
 #'
-#' @param A.method (Of lavTestLRT.)
+#' @param A.method An argument to be
+#' passed [lavaan::lavTestLRT()].
+#' Please refer to the help page of
+#' [lavaan::lavTestLRT()].
 #'
-#' @param scaled.shifted  (Of lavTestLRT.)
+#' @param scaled.shifted An argument to
+#' be
+#' passed to [lavaan::lavTestLRT()].
+#' Please refer to the help page of
+#' [lavaan::lavTestLRT()].
 #'
-#' @param H1 (Of lavTestLRT.)
+#' @param H1 An argument to be passed
+#' to
+#' [lavaan::lavTestLRT()].
+#' Please refer to the help page of
+#' [lavaan::lavTestLRT()].
 #'
-#' @param model.names (Of lavTestLRT.)
+#' @param model.names An argument to
+#' be
+#' passed to [lavaan::lavTestLRT()].
+#' Please refer to the help page of
+#' [lavaan::lavTestLRT()].
+#' Unlike
+#' [lavaan::lavTestLRT()], this argument
+#' is required, for the sake of naming
+#' the vector to be returned.
 #'
+#' @export
 #' @describeIn vector_from_lavaan Get sample variances.
 #' @order 8
 
@@ -173,14 +312,27 @@ vec_lavTestLRT <- function(object, ...,
     return(out)
   }
 
-#' @param add (Of lavTestScore.)
+#' @param add An argument to be passed
+#' to [lavaan::lavTestScore()]. Please
+#' refer to the help page of
+#' [lavaan::lavTestScore()].
 #'
-#' @param release (Of lavTestScore.)
+#' @param release An argument to be passed
+#' to [lavaan::lavTestScore()]. Please
+#' refer to the help page of
+#' [lavaan::lavTestScore()].
 #'
-#' @param univariate (Of lavTestScore.)
+#' @param univariate An argument to be passed
+#' to [lavaan::lavTestScore()]. Please
+#' refer to the help page of
+#' [lavaan::lavTestScore()].
 #'
-#' @param information (Of lavTestScore.)
+#' @param information An argument to be passed
+#' to [lavaan::lavTestScore()]. Please
+#' refer to the help page of
+#' [lavaan::lavTestScore()].
 #'
+#' @export
 #' @describeIn vector_from_lavaan Do score tests.
 #' @order 9
 
@@ -212,10 +364,17 @@ vec_lavTestScore <- function(object,
     return(out)
   }
 
-#' @param constraints (Of lavTestScore.)
+#' @param constraints An argument to be passed
+#' to [lavaan::lavTestWald()]. Please
+#' refer to the help page of
+#' [lavaan::lavTestWald()].
 #'
-#' @param prefix (Of lavTestScore.)
+#' @param prefix Optional. A character
+#' string to be added as a prefix to
+#' names of the output. Default is
+#' `NULL`.
 #'
+#' @export
 #' @describeIn vector_from_lavaan Do a Wald test.
 #' @order 10
 
@@ -234,12 +393,15 @@ vec_lavTestWald <- function(object,
     return(out1)
   }
 
-
+#' @export
 #' @describeIn vector_from_lavaan Composite reliability.
 #' @order 11
 
 vec_compRelSEM <- function(object,
                            ...) {
+    if (!requireNamespace("semTools")) {
+        stop("Please install 'semTools' first.")
+      }
     my_call <- match.call()
     if ("return.df" %in% names(my_call)) {
         stop("'return.df' cannot be set. Please remove it.")
@@ -261,55 +423,6 @@ vec_compRelSEM <- function(object,
         names(out0) <- paste0(names(out0), "_rel")
         out <- out0
       }
-    return(out)
-  }
-
-#' @describeIn vector_from_lavaan Sampling variances of free parameters.
-#' @order 4
-
-vec_est_var <- function(object) {
-    out0 <- lavaan::lavInspect(object, what = "vcov",
-                               add.class = FALSE,
-                               list.by.group = TRUE,
-                               drop.list.single.group = FALSE)
-    out0 <- diag(out0)
-    if (length(out0) == 0) {
-        stop("No parameters selected")
-      }
-    return(out0)
-  }
-
-#' @describeIn vector_from_lavaan Standard errors of free parameters.
-#' @order 6
-
-vec_est_se <- function(object) {
-    out <- vec_est_var(object = object)
-    out <- sqrt(out)
-    return(out)
-  }
-
-
-#' @describeIn vector_from_lavaan Sampling variances of user-defined parameters.
-#' @order 10
-
-vec_def_var <- function(object) {
-    out0 <- lavaan::lavInspect(object, what = "vcov.def",
-                               add.class = FALSE,
-                               list.by.group = TRUE,
-                               drop.list.single.group = FALSE)
-    out0 <- diag(out0)
-    if (length(out0) == 0) {
-        stop("No user defined parameters in the model.")
-      }
-    return(out0)
-  }
-
-#' @describeIn vector_from_lavaan Standard errors of user-defined parameters.
-#' @order 7
-
-vec_def_se <- function(object) {
-    out <- vec_def_var(object = object)
-    out <- sqrt(out)
     return(out)
   }
 
