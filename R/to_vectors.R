@@ -44,14 +44,13 @@
 #' \donttest{
 #' }
 #'
-#' @rdname get_this_from_lavaan
-#' @export
+#' @name vector_from_lavaan
 NULL
 
-#' @describeIn get_this_from_lavaan Get R-squares in a model.
+#' @describeIn vector_from_lavaan Get R-squares in a model.
 #' @order 1
 
-get_rsquare <- function(object) {
+vec_rsquare <- function(object) {
     out0 <- lavaan::lavInspect(object, what = "r2",
                                add.class = FALSE,
                                list.by.group = TRUE,
@@ -72,10 +71,10 @@ get_rsquare <- function(object) {
     return(out)
   }
 
-#' @describeIn get_this_from_lavaan Get sample variances and covariances.
+#' @describeIn vector_from_lavaan Get sample variances and covariances.
 #' @order 2
 
-get_sample_vcov <- function(object) {
+vec_sample_vcov <- function(object) {
     out0 <- lavaan::lavInspect(object, what = "sampstat",
                                add.class = FALSE,
                                list.by.group = TRUE,
@@ -98,10 +97,10 @@ get_sample_vcov <- function(object) {
     return(out)
   }
 
-#' @describeIn get_this_from_lavaan Get sample variances.
+#' @describeIn vector_from_lavaan Get sample variances.
 #' @order 3
 
-get_sample_var <- function(object) {
+vec_sample_var <- function(object) {
     out0 <- lavaan::lavInspect(object, what = "sampstat",
                                add.class = FALSE,
                                list.by.group = TRUE,
@@ -123,11 +122,20 @@ get_sample_var <- function(object) {
     return(out)
   }
 
+#' @param method (Of lavTestLRT.)
+#'
+#' @param A.method (Of lavTestLRT.)
+#'
+#' @param scaled.shifted  (Of lavTestLRT.)
+#'
+#' @param H1 (Of lavTestLRT.)
+#'
+#' @param model.names (Of lavTestLRT.)
+#'
+#' @describeIn vector_from_lavaan Get sample variances.
+#' @order 8
 
-#' @describeIn get_this_from_lavaan Get sample variances.
-#' @order 4
-
-get_lavTestLRT <- function(object, ...,
+vec_lavTestLRT <- function(object, ...,
                            method = "default",
                            A.method = "delta",
                            scaled.shifted = TRUE,
@@ -165,11 +173,18 @@ get_lavTestLRT <- function(object, ...,
     return(out)
   }
 
+#' @param add (Of lavTestScore.)
+#'
+#' @param release (Of lavTestScore.)
+#'
+#' @param univariate (Of lavTestScore.)
+#'
+#' @param information (Of lavTestScore.)
+#'
+#' @describeIn vector_from_lavaan Do score tests.
+#' @order 9
 
-#' @describeIn get_this_from_lavaan Do score tests.
-#' @order 5
-
-get_lavTestScore <- function(object,
+vec_lavTestScore <- function(object,
                              add = NULL,
                              release = NULL,
                              univariate = TRUE,
@@ -197,11 +212,14 @@ get_lavTestScore <- function(object,
     return(out)
   }
 
+#' @param constraints (Of lavTestScore.)
+#'
+#' @param prefix (Of lavTestScore.)
+#'
+#' @describeIn vector_from_lavaan Do a Wald test.
+#' @order 10
 
-#' @describeIn get_this_from_lavaan Do a Wald test.
-#' @order 6
-
-get_lavTestWald <- function(object,
+vec_lavTestWald <- function(object,
                             constraints = NULL,
                             prefix = NULL) {
     out0 <- lavaan::lavTestWald(object,
@@ -217,10 +235,10 @@ get_lavTestWald <- function(object,
   }
 
 
-#' @describeIn get_this_from_lavaan Composite reliability.
-#' @order 7
+#' @describeIn vector_from_lavaan Composite reliability.
+#' @order 11
 
-get_compRelSEM <- function(object,
+vec_compRelSEM <- function(object,
                            ...) {
     my_call <- match.call()
     if ("return.df" %in% names(my_call)) {
@@ -246,11 +264,12 @@ get_compRelSEM <- function(object,
     return(out)
   }
 
+#' @param parnames TBD.
+#'
+#' @describeIn vector_from_lavaan Sampling variances of free parameters.
+#' @order 4
 
-#' @describeIn get_this_from_lavaan Sampling variances of free parameters.
-#' @order 8
-
-get_est_var <- function(object,
+vec_est_var <- function(object,
                         parnames = NULL) {
     out0 <- lavaan::lavInspect(object, what = "vcov",
                                add.class = FALSE,
@@ -266,22 +285,22 @@ get_est_var <- function(object,
     return(out0)
   }
 
-#' @describeIn get_this_from_lavaan Standard errors of free parameters.
-#' @order 9
+#' @describeIn vector_from_lavaan Standard errors of free parameters.
+#' @order 6
 
-get_est_se <- function(object,
+vec_est_se <- function(object,
                        parnames = NULL) {
-    out <- get_est_var(object = object,
+    out <- vec_est_var(object = object,
                        parnames = parnames)
     out <- sqrt(out)
     return(out)
   }
 
 
-#' @describeIn get_this_from_lavaan Sampling variances of user-defined parameters.
+#' @describeIn vector_from_lavaan Sampling variances of user-defined parameters.
 #' @order 10
 
-get_def_var <- function(object,
+vec_def_var <- function(object,
                         parnames = NULL) {
     out0 <- lavaan::lavInspect(object, what = "vcov.def",
                                add.class = FALSE,
@@ -300,12 +319,12 @@ get_def_var <- function(object,
     return(out0)
   }
 
-#' @describeIn get_this_from_lavaan Standard errors of user-defined parameters.
-#' @order 11
+#' @describeIn vector_from_lavaan Standard errors of user-defined parameters.
+#' @order 7
 
-get_def_se <- function(object,
-                        parnames = NULL) {
-    out <- get_def_var(object = object,
+vec_def_se <- function(object,
+                       parnames = NULL) {
+    out <- vec_def_var(object = object,
                        parnames = parnames)
     out <- sqrt(out)
     return(out)
