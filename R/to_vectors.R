@@ -97,7 +97,9 @@
 #' vec_lavTestWald(fit_sem2,
 #'                 constraints = "cp == 0")
 #'
-#' vec_compRelSEM(fit)
+#' if (requireNamespace("semTools")) {
+#'     vec_compRelSEM(fit)
+#'   }
 #'
 #'
 #' @name vector_from_lavaan
