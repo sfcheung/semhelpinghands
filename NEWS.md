@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.7
+# semhelpinghands 0.1.8
 
 ## New Features
 
@@ -19,6 +19,8 @@
 - Updated a badge in README.md. (0.1.6.1)
 - Updated the pkgdown site. (0.1.6.2)
 - Added a test for noSuggests in R CMD check. (0.1.6.3)
+- Shorten the y-axis label of the plot
+  of `show_ifi()`. (0.1.8)
 
 # semhelpinghands 0.1.6
 
