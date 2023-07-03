@@ -23,6 +23,14 @@
 #' and does not require repeating
 #' the bootstrapping step.
 #'
+#' [store_boot_est_std()] computes the
+#' standardized solution for each bootstrap
+#' sample, stores them in the internal
+#' slot, and returns the [lavaan::lavaan-class]
+#' object. These estimates can be used
+#' by other functions, without the need
+#' to repeat the computation.
+#'
 #' @return The output of
 #' [lavaan::standardizedSolution()],
 #' with bootstrap confidence intervals
@@ -103,6 +111,10 @@
 #'
 #' standardizedSolution_boot_ci(fit)
 #'
+#' @name standardizedSolution_boot_ci
+NULL
+
+#' @rdname standardizedSolution_boot_ci
 #' @export
 
 standardizedSolution_boot_ci <- function(object,
@@ -255,4 +267,24 @@ boot_est_std <- function(object,
                         type = type,
                         std_args = std_args))
     return(out_all)
+  }
+
+#' @rdname standardizedSolution_boot_ci
+#' @export
+
+store_boot_est_std <- function(object,
+                               type = "std.all",
+                               force_run = FALSE,
+                               ...) {
+    if (!inherits(object, "lavaan")) {
+        stop("The object must be a lavaan-class object.")
+      }
+    if (!force_run) {
+      }
+    out_all <- boot_est_std(object = object,
+                            type = type,
+                            ...)
+    object@external$shh_boot_est_std <- out_all
+    object@external$shh_boot_est_std_type <- type
+    return(object)
   }

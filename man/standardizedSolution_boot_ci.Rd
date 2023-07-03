@@ -2,6 +2,7 @@
 % Please edit documentation in R/standardizedSolution_boot_ci.R
 \name{standardizedSolution_boot_ci}
 \alias{standardizedSolution_boot_ci}
+\alias{store_boot_est_std}
 \title{Bootstrap CIs for Standardized
 Solution}
 \usage{
@@ -14,6 +15,8 @@ standardizedSolution_boot_ci(
   boot_delta_ratio = FALSE,
   ...
 )
+
+store_boot_est_std(object, type = "std.all", force_run = FALSE, ...)
 }
 \arguments{
 \item{object}{A \linkS4class{lavaan}
@@ -81,6 +84,14 @@ Nevertheless, this simple function is
 good enough for some simple scenarios,
 and does not require repeating
 the bootstrapping step.
+
+\code{\link[=store_boot_est_std]{store_boot_est_std()}} computes the
+standardized solution for each bootstrap
+sample, stores them in the internal
+slot, and returns the \link[lavaan:lavaan-class]{lavaan::lavaan}
+object. These estimates can be used
+by other functions, without the need
+to repeat the computation.
 }
 \examples{
 
