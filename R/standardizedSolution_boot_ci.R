@@ -168,10 +168,15 @@ standardizedSolution_boot_ci <- function(object,
         out_final$ratio.lower <- tmp1
         out_final$ratio.upper <- tmp2
       }
-    class(out_final) <- class(out)
+    class(out_final) <- c("std_solution_boot", class(out))
     if (save_boot_est_std) {
         attr(out_final, "boot_est_std") <- out_all
       }
+    fit_summary <- lavaan::summary(object)
+    attr(out_final, "pe_attrib") <- attributes(fit_summary$pe)
+    attr(out_final, "partable") <- lavaan::parameterTable(object)
+    attr(out_final, "est") <- lavaan::parameterEstimates(object)
+    attr(out_fainl, "call") <- match.call()
     out_final
   }
 
