@@ -1,3 +1,13 @@
+# semhelpinghands 0.1.8.2
+
+- (Internal) Factored out the function
+  responsible for generating the
+  bootstrap estimates. (0.1.8.1)
+- Added `store_boot_est_std()`. It
+  computed the bootstrap estimates
+  in the standardized solution,
+  stores them in the fit object. (0.1.8.2)
+
 # semhelpinghands 0.1.8
 
 ## New Features
