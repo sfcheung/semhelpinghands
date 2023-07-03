@@ -115,31 +115,11 @@ standardizedSolution_boot_ci <- function(object,
     if (!inherits(object, "lavaan")) {
         stop("The object must be a lavaan-class object.")
       }
-    boot_est0 <- try(lavaan::lavTech(object, "boot"), silent = TRUE)
-    if (inherits(boot_est0, "try-error")) {
-        stop("Bootstrapping estimates not found. Was se = 'boot' or 'bootstrap'?")
-      }
     if (!force_run) {
       }
-    # For lavaan 0.6-13
-    # Remove bootstrap replications with error
-    boot_error_idx <- attr(boot_est0, "error.idx")
-    if (!is.null(boot_error_idx)) {
-        if (length(boot_error_idx) > 0) {
-            boot_est0 <- boot_est0[-boot_error_idx, ]
-          }
-      }
-    std_args <- list(...)
-    ptable <- lavaan::parameterTable(object)
-    p_free <- ptable$free > 0
-    p_est  <- ptable$est
-    boot_est <- split(boot_est0, row(boot_est0))
-    out_all <- t(sapply(boot_est, std_i,
-                        p_est = p_est,
-                        p_free = p_free,
-                        object = object,
-                        type = type,
-                        std_args = std_args))
+    out_all <- boot_est_std(object = object,
+                            type = type,
+                            ...)
     out <- lavaan::standardizedSolution(object,
                                         type = type,
                                         level = level,
@@ -243,4 +223,36 @@ check_std_i <- function(object, type, std_args) {
     } else {
       return(TRUE)
     }
+  }
+
+#' @title Generate bootstrap estimates
+#' @noRd
+
+boot_est_std <- function(object,
+                         type,
+                         ...) {
+    # For lavaan 0.6-13
+    # Remove bootstrap replications with error
+    boot_est0 <- try(lavaan::lavTech(object, "boot"), silent = TRUE)
+    if (inherits(boot_est0, "try-error")) {
+        stop("Bootstrapping estimates not found. Was se = 'boot' or 'bootstrap'?")
+      }
+    boot_error_idx <- attr(boot_est0, "error.idx")
+    if (!is.null(boot_error_idx)) {
+        if (length(boot_error_idx) > 0) {
+            boot_est0 <- boot_est0[-boot_error_idx, ]
+          }
+      }
+    std_args <- list(...)
+    ptable <- lavaan::parameterTable(object)
+    p_free <- ptable$free > 0
+    p_est  <- ptable$est
+    boot_est <- split(boot_est0, row(boot_est0))
+    out_all <- t(sapply(boot_est, std_i,
+                        p_est = p_est,
+                        p_free = p_free,
+                        object = object,
+                        type = type,
+                        std_args = std_args))
+    return(out_all)
   }

@@ -1,3 +1,9 @@
+# semhelpinghands 0.1.8.1
+
+- (Internal) Factored out the function
+  responsible for generating the
+  bootstrap estimates. (0.1.8.1)
+
 # semhelpinghands 0.1.8
 
 ## New Features
