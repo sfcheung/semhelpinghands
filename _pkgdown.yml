@@ -34,6 +34,7 @@ reference:
 - title: Bootstrapping
 - contents:
   - standardizedSolution_boot_ci
+  - store_boot_def
 - title: Understanding and Learning SEM
 - contents:
   - annotate_matrices
