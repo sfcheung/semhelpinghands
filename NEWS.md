@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.8.2
+# semhelpinghands 0.1.8.3
 
 - (Internal) Factored out the function
   responsible for generating the
@@ -7,6 +7,10 @@
   computed the bootstrap estimates
   in the standardized solution,
   stores them in the fit object. (0.1.8.2)
+- Added `store_boot_def()` and
+  `get_boot_def()`, for computing and
+  storing values of user-defined
+  parameters in bootstrap samples. (0.1.8.3)
 
 # semhelpinghands 0.1.8
 
