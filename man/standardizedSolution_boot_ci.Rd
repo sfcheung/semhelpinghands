@@ -60,7 +60,15 @@ passed to
 The output of
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}},
 with bootstrap confidence intervals
-appended to the right.
+appended to the right, with class
+set to \code{std_solution_boot} (since
+version 0.1.8.4). It has
+a print method
+(\code{\link[=print.std_solution_boot]{print.std_solution_boot()}}) that
+can be used to print the standardized
+solution in a format similar to
+that of the printout of \code{\link[=summary]{summary()}}
+of a \link[lavaan:lavaan-class]{lavaan::lavaan} object.
 }
 \description{
 It receives a

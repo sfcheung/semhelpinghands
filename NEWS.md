@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.8.3
+# semhelpinghands 0.1.8.4
 
 - (Internal) Factored out the function
   responsible for generating the
@@ -11,6 +11,12 @@
   `get_boot_def()`, for computing and
   storing values of user-defined
   parameters in bootstrap samples. (0.1.8.3)
+- Set the class of the output of
+  `standardizedSolution_boot_ci()`
+  to `std_solution_boot`, with a
+  print method for printing the output
+  as in the printout of the summary
+  output of a `lavaan-class` object. (0.1.8.4)
 
 # semhelpinghands 0.1.8
 
