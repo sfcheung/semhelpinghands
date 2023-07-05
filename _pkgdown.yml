@@ -35,6 +35,7 @@ reference:
 - contents:
   - standardizedSolution_boot_ci
   - store_boot_def
+  - print.std_solution_boot
 - title: Understanding and Learning SEM
 - contents:
   - annotate_matrices
