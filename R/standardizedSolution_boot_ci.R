@@ -34,7 +34,15 @@
 #' @return The output of
 #' [lavaan::standardizedSolution()],
 #' with bootstrap confidence intervals
-#' appended to the right.
+#' appended to the right, with class
+#' set to `std_solution_boot` (since
+#' version 0.1.8.4). It has
+#' a print method
+#' ([print.std_solution_boot()]) that
+#' can be used to print the standardized
+#' solution in a format similar to
+#' that of the printout of [summary()]
+#' of a [lavaan::lavaan-class] object.
 #'
 #' @param object A [lavaan-class]
 #' object, fitted with 'se = "boot"'.
@@ -155,7 +163,7 @@ standardizedSolution_boot_ci <- function(object,
                         })
     boot_ci <- t(boot_ci)
     colnames(boot_ci) <- c("boot.ci.lower", "boot.ci.upper")
-    boot_se <- apply(out_all, 2, sd, na.rm = TRUE, simplify = TRUE)
+    boot_se <- apply(out_all, 2, stats::sd, na.rm = TRUE, simplify = TRUE)
     boot_se[boot_se < .Machine$double.eps] <- NA
     out_final <- cbind(out, boot_ci, `boot.se` = boot_se)
     if (boot_delta_ratio) {
@@ -176,7 +184,9 @@ standardizedSolution_boot_ci <- function(object,
     attr(out_final, "pe_attrib") <- attributes(fit_summary$pe)
     attr(out_final, "partable") <- lavaan::parameterTable(object)
     attr(out_final, "est") <- lavaan::parameterEstimates(object)
-    attr(out_fainl, "call") <- match.call()
+    attr(out_final, "level") <- level
+    attr(out_final, "type") <- type
+    attr(out_final, "call") <- match.call()
     out_final
   }
 
