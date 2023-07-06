@@ -23,7 +23,7 @@
 #' estimates and computes the values
 #' of user-defined parameters. The
 #' values are then stored in the slot
-#' `external` of the the slot `Model`,
+#' `external` of the object,
 #' in the element `shh_boot_def`.
 #' The bootstrap estimates can then be
 #' used by other functions for diagnostics
@@ -41,8 +41,9 @@
 #' of user-defined parameters in the
 #' bootstrap samples, as a matrix,
 #' stored in the
-#' slot `external` of the slot
-#' `Model`, under the name `shh_boot_def`.
+#' slot `external` of `object` under
+#' the name
+#' `shh_boot_def`.
 #'
 #' [get_boot_def()] returns a matrix
 #' of the stored bootstrap estimates

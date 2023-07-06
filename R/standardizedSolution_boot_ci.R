@@ -25,11 +25,16 @@
 #'
 #' [store_boot_est_std()] computes the
 #' standardized solution for each bootstrap
-#' sample, stores them in the internal
-#' slot, and returns the [lavaan::lavaan-class]
-#' object. These estimates can be used
+#' sample, stores them the
+#' [lavaan::lavaan-class] object, and
+#' returns it. These estimates can be used
 #' by other functions, without the need
 #' to repeat the computation.
+#'
+#' [get_boot_est_std()] retrieves
+#' the bootstrap estimates of the
+#' standardized solution stored by
+#' [store_boot_est_std()].
 #'
 #' @return The output of
 #' [lavaan::standardizedSolution()],
@@ -43,6 +48,20 @@
 #' solution in a format similar to
 #' that of the printout of [summary()]
 #' of a [lavaan::lavaan-class] object.
+#'
+#' [store_boot_est_std()] returns
+#' the fit object set to
+#' `object`, with the bootstrap values
+#' of standardized solution in the
+#' bootstrap samples, as a matrix,
+#' stored in the
+#' slot `external` under the name
+#' `shh_boot_est_std`.
+#'
+#' [get_boot_est_std()] returns a matrix
+#' of the stored bootstrap estimates
+#' of standardized solution. If none is
+#' stored, `NULL` is returned.
 #'
 #' @param object A [lavaan-class]
 #' object, fitted with 'se = "boot"'.
@@ -301,7 +320,34 @@ store_boot_est_std <- function(object,
     out_all <- boot_est_std(object = object,
                             type = type,
                             ...)
+    colnames(out_all) <- std_names(object, ...)
     object@external$shh_boot_est_std <- out_all
     object@external$shh_boot_est_std_type <- type
     return(object)
+  }
+
+
+#' @rdname standardizedSolution_boot_ci
+#' @export
+
+get_boot_est_std <- function(object) {
+    return(object@external$shh_boot_est_std)
+  }
+
+#' Generate names for standardized solution
+#' @noRd
+
+std_names <- function(object, ...) {
+    std <- lavaan::standardizedSolution(object, se = FALSE, ...)
+    std$id <- seq_len(nrow(std))
+    ptable <- lavaan::parameterTable(object)
+    std1 <- merge(std, ptable,
+                  all.y = FALSE)
+    std1 <- std1[order(std1$id), ]
+    std1$lavlabel <- lavaan::lav_partable_labels(std1,
+                        blocks = c("group", "level"),
+                        group.equal = "",
+                        group.partial = "",
+                        type = "user")
+    return(std1$lavlabel)
   }

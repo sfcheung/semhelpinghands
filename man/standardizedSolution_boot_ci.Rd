@@ -3,6 +3,7 @@
 \name{standardizedSolution_boot_ci}
 \alias{standardizedSolution_boot_ci}
 \alias{store_boot_est_std}
+\alias{get_boot_est_std}
 \title{Bootstrap CIs for Standardized
 Solution}
 \usage{
@@ -17,6 +18,8 @@ standardizedSolution_boot_ci(
 )
 
 store_boot_est_std(object, type = "std.all", force_run = FALSE, ...)
+
+get_boot_est_std(object)
 }
 \arguments{
 \item{object}{A \linkS4class{lavaan}
@@ -69,6 +72,20 @@ can be used to print the standardized
 solution in a format similar to
 that of the printout of \code{\link[=summary]{summary()}}
 of a \link[lavaan:lavaan-class]{lavaan::lavaan} object.
+
+\code{\link[=store_boot_est_std]{store_boot_est_std()}} returns
+the fit object set to
+\code{object}, with the bootstrap values
+of standardized solution in the
+bootstrap samples, as a matrix,
+stored in the
+slot \code{external} under the name
+\code{shh_boot_est_std}.
+
+\code{\link[=get_boot_est_std]{get_boot_est_std()}} returns a matrix
+of the stored bootstrap estimates
+of standardized solution. If none is
+stored, \code{NULL} is returned.
 }
 \description{
 It receives a
@@ -95,11 +112,16 @@ the bootstrapping step.
 
 \code{\link[=store_boot_est_std]{store_boot_est_std()}} computes the
 standardized solution for each bootstrap
-sample, stores them in the internal
-slot, and returns the \link[lavaan:lavaan-class]{lavaan::lavaan}
-object. These estimates can be used
+sample, stores them the
+\link[lavaan:lavaan-class]{lavaan::lavaan} object, and
+returns it. These estimates can be used
 by other functions, without the need
 to repeat the computation.
+
+\code{\link[=get_boot_est_std]{get_boot_est_std()}} retrieves
+the bootstrap estimates of the
+standardized solution stored by
+\code{\link[=store_boot_est_std]{store_boot_est_std()}}.
 }
 \examples{
 
