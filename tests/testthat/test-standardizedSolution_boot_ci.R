@@ -64,10 +64,11 @@ test_that("Compare boot estimates directly", {
 # Test store_boot_est_std()
 
 tmp <- store_boot_est_std(fit)
-tmp_boot_est_std <- tmp@external$shh_boot_est_std
+tmp_boot_est_std <- get_boot_est_std(tmp)
 test_that("store_boot_est_std", {
     expect_equal(tmp_boot_est_std,
-                 attr(ci_boot, "boot_est_std"))
+                 attr(ci_boot, "boot_est_std"),
+                 ignore_attr = TRUE)
     expect_equal(tmp@external$shh_boot_est_std_type,
                  "std.all")
   })
