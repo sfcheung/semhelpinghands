@@ -25,8 +25,9 @@ the fit object set to
 of user-defined parameters in the
 bootstrap samples, as a matrix,
 stored in the
-slot \code{external} of the slot
-\code{Model}, under the name \code{shh_boot_def}.
+slot \code{external} of \code{object} under
+the name
+\code{shh_boot_def}.
 
 \code{\link[=get_boot_def]{get_boot_def()}} returns a matrix
 of the stored bootstrap estimates
@@ -55,7 +56,7 @@ retrieves the stored bootstrap
 estimates and computes the values
 of user-defined parameters. The
 values are then stored in the slot
-\code{external} of the the slot \code{Model},
+\code{external} of the object,
 in the element \code{shh_boot_def}.
 The bootstrap estimates can then be
 used by other functions for diagnostics
