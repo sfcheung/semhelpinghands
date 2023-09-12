@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.8.5
+# semhelpinghands 0.1.8.6
 
 - (Internal) Factored out the function
   responsible for generating the
@@ -21,6 +21,17 @@
   print method for printing the output
   as in the printout of the summary
   output of a `lavaan-class` object. (0.1.8.4)
+- Added `plot_boot()` for diagnostics
+  plots for bootstrapping, simliar to
+  those for the output of `boot::boot()`.
+  Can be used for `lavaan`'s bootstrap
+  estimates for free parameters,
+  for user-defined parameters (stored
+  by `store_boot_def()`), or for
+  bootstrap estimates for the
+  standardized solution (stored by
+  `store_boot_est_std()`). (0.1.8.6)
+
 
 # semhelpinghands 0.1.8
 
