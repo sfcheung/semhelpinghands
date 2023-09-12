@@ -10,6 +10,8 @@ template:
     bg: "#FAF2F2"
     fg: "#000000"
     primary: "#0000FF"
+  includes:
+    in_header: <meta name="google-site-verification" content="0VLBmFnW_UJFI-7gXnORPBsWxqZwmzuGpK-TeVRLBjQ" />
 # navbar:
 #   structure:
 #     left:  [intro, articles, reference, news]
