@@ -53,7 +53,7 @@ use. Default is \code{FALSE}.}
 confidence limit from the point
 estimate to (b) the distance of the
 delta-method limit from the point
-estimate.}
+estimate. Default is \code{FALSE}.}
 
 \item{...}{Other arguments to be
 passed to
@@ -70,8 +70,8 @@ a print method
 (\code{\link[=print.std_solution_boot]{print.std_solution_boot()}}) that
 can be used to print the standardized
 solution in a format similar to
-that of the printout of \code{\link[=summary]{summary()}}
-of a \link[lavaan:lavaan-class]{lavaan::lavaan} object.
+that of the printout of
+the \code{\link[=summary]{summary()}} of a \link[lavaan:lavaan-class]{lavaan::lavaan} object.
 
 \code{\link[=store_boot_est_std]{store_boot_est_std()}} returns
 the fit object set to
@@ -86,9 +86,19 @@ slot \code{external} under the name
 of the stored bootstrap estimates
 of standardized solution. If none is
 stored, \code{NULL} is returned.
+
+\code{\link[=store_boot_est_std]{store_boot_est_std()}} is usually used
+with diagnostic functions such
+as \code{\link[=plot_boot]{plot_boot()}}.
 }
 \description{
-It receives a
+Functions for forming
+bootstrap confidence intervals
+for the standardized solution.
+}
+\details{
+\code{\link[=standardizedSolution_boot_ci]{standardizedSolution_boot_ci()}}
+receives a
 \link[lavaan:lavaan-class]{lavaan::lavaan} object fitted
 with bootstrapping standard errors
 requested and forms the confidence
@@ -115,7 +125,9 @@ standardized solution for each bootstrap
 sample, stores them the
 \link[lavaan:lavaan-class]{lavaan::lavaan} object, and
 returns it. These estimates can be used
-by other functions, without the need
+by other functions, such as \code{\link[=plot_boot]{plot_boot()}},
+to examine the
+estimates, without the need
 to repeat the computation.
 
 \code{\link[=get_boot_est_std]{get_boot_est_std()}} retrieves
@@ -145,11 +157,28 @@ fit <- sem(model, data = dat, fixed.x = FALSE,
            bootstrap = 100)
 summary(fit)
 
-standardizedSolution_boot_ci(fit)
+std <- standardizedSolution_boot_ci(fit)
+std
+
+# Print in a friendly format with only standardized solution
+print(std, output = "text")
+
+# Print in a friendly format with both unstandardized
+# and standardized solution
+print(std, output = "text", standardized_only = FALSE)
+
+
+# store_boot_est_std() is usually used with plot_boot()
+# First, store the bootstrap estimates of the
+# standardized solution
+fit_with_boot_std <- store_boot_est_std(fit)
+# Second, plot the distribution of the bootstrap estimates of
+# standardized 'ab'
+plot_boot(fit_with_boot_std, "ab", standardized = TRUE)
 
 }
 \seealso{
-\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}
+\code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}, \code{\link[=plot_boot]{plot_boot()}}
 }
 \author{
 Shu Fai Cheung

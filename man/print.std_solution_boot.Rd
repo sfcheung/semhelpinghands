@@ -47,6 +47,22 @@ Print method for an
 is the output of
 \code{\link[=standardizedSolution_boot_ci]{standardizedSolution_boot_ci()}}.
 }
+\details{
+The default format of the printout
+is that of \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}},
+which is compact but not easy to
+read. Users can request a format
+similar to that of the printout
+of the summary of a \code{lavaan} output
+by setting \code{output} to \code{"text"}.
+
+For the \code{"text"} format, users can
+also select whether
+only the standardized solution is
+printed (the default) or whether
+the standardized solution is appended
+to the right of the printout.
+}
 \examples{
 library(lavaan)
 set.seed(5478374)

@@ -5,7 +5,8 @@
 #' with bootstrapping standard errors
 #' requested, computes the user-defined
 #' parameters in each bootstrap samples,
-#' and returns [lavaan::lavaan-class] object
+#' and returns a [lavaan::lavaan-class]
+#' object
 #' with the estimates stored.
 #'
 #' @details
@@ -35,6 +36,10 @@
 #' object. If none is stored, `NULL`
 #' is returned.
 #'
+#' [store_boot_def()] is usually used
+#' with diagnostic functions such
+#' as [plot_boot()].
+#'
 #' @return [store_boot_def()] returns
 #' the fit object set to
 #' `object`, with the bootstrap values
@@ -60,6 +65,8 @@
 #' @author Shu Fai Cheung
 #' <https://orcid.org/0000-0002-9871-9448>.
 #'
+#' @seealso [plot_boot()]
+#'
 #' @examples
 #'
 #' library(lavaan)
@@ -82,9 +89,13 @@
 #'            bootstrap = 100)
 #' summary(fit)
 #'
+#' # store_boot_def() is usually used with plot_boot()
+#' # First, store the bootstrap estimates of user-defined
+#' # parameters
 #' fit_with_boot_def <- store_boot_def(fit)
-#' get_boot_def(fit_with_boot_def)
-#'
+#' # Second, plot the distribution of the bootstrap estimates of
+#' # 'ab'
+#' plot_boot(fit_with_boot_def, "ab", standardized = FALSE)
 #' @name store_boot_def
 NULL
 

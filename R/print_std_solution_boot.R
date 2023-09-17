@@ -5,6 +5,22 @@
 #' is the output of
 #' [standardizedSolution_boot_ci()].
 #'
+#' @details
+#' The default format of the printout
+#' is that of [lavaan::standardizedSolution()],
+#' which is compact but not easy to
+#' read. Users can request a format
+#' similar to that of the printout
+#' of the summary of a `lavaan` output
+#' by setting `output` to `"text"`.
+#'
+#' For the `"text"` format, users can
+#' also select whether
+#' only the standardized solution is
+#' printed (the default) or whether
+#' the standardized solution is appended
+#' to the right of the printout.
+#'
 #' @param x Object of the class
 #' `std_solution_boot`.
 #'
