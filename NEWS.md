@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.8.8
+# semhelpinghands 0.1.8.9
 
 - (Internal) Factored out the function
   responsible for generating the
@@ -37,6 +37,7 @@
   (0.1.8.7)
 - Finalized the help pages of
   new functions. (0.1.8.8)
+- Revised existing vignettes. (0.1.8.9)
 
 
 # semhelpinghands 0.1.8
