@@ -1,6 +1,6 @@
 Package: semhelpinghands
 Title: Helper Functions for Structural Equation Modeling
-Version: 0.1.8.10
+Version: 0.1.9
 Authors@R: person(given = "Shu Fai",
            family = "Cheung",
            role = c("aut", "cre"),
