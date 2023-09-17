@@ -39,7 +39,8 @@ It receives a
 with bootstrapping standard errors
 requested, computes the user-defined
 parameters in each bootstrap samples,
-and returns \link[lavaan:lavaan-class]{lavaan::lavaan} object
+and returns a \link[lavaan:lavaan-class]{lavaan::lavaan}
+object
 with the estimates stored.
 }
 \details{
@@ -67,6 +68,10 @@ bootstrap estimates of user-defined
 parameters from a \linkS4class{lavaan}
 object. If none is stored, \code{NULL}
 is returned.
+
+\code{\link[=store_boot_def]{store_boot_def()}} is usually used
+with diagnostic functions such
+as \code{\link[=plot_boot]{plot_boot()}}.
 }
 \examples{
 
@@ -90,9 +95,16 @@ fit <- sem(model, data = dat, fixed.x = FALSE,
            bootstrap = 100)
 summary(fit)
 
+# store_boot_def() is usually used with plot_boot()
+# First, store the bootstrap estimates of user-defined
+# parameters
 fit_with_boot_def <- store_boot_def(fit)
-get_boot_def(fit_with_boot_def)
-
+# Second, plot the distribution of the bootstrap estimates of
+# 'ab'
+plot_boot(fit_with_boot_def, "ab", standardized = FALSE)
+}
+\seealso{
+\code{\link[=plot_boot]{plot_boot()}}
 }
 \author{
 Shu Fai Cheung
