@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.8.6
+# semhelpinghands 0.1.8.7
 
 - (Internal) Factored out the function
   responsible for generating the
@@ -31,6 +31,10 @@
   bootstrap estimates for the
   standardized solution (stored by
   `store_boot_est_std()`). (0.1.8.6)
+- Updated the vignette for
+  `standardizedSolution_boot_ci()`,
+  introducing the new print method.
+  (0.1.8.7)
 
 
 # semhelpinghands 0.1.8
