@@ -10,6 +10,9 @@
     <loc>https://sfcheung.github.io/semhelpinghands/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://sfcheung.github.io/semhelpinghands/articles/plot_boot.html</loc>
+  </url>
+  <url>
     <loc>https://sfcheung.github.io/semhelpinghands/articles/semhelpinghands.html</loc>
   </url>
   <url>
@@ -55,10 +58,16 @@
     <loc>https://sfcheung.github.io/semhelpinghands/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://sfcheung.github.io/semhelpinghands/reference/plot_boot.html</loc>
+  </url>
+  <url>
     <loc>https://sfcheung.github.io/semhelpinghands/reference/plot_models_fm.html</loc>
   </url>
   <url>
     <loc>https://sfcheung.github.io/semhelpinghands/reference/print.est_table.html</loc>
+  </url>
+  <url>
+    <loc>https://sfcheung.github.io/semhelpinghands/reference/print.std_solution_boot.html</loc>
   </url>
   <url>
     <loc>https://sfcheung.github.io/semhelpinghands/reference/record_history.html</loc>
@@ -83,6 +92,9 @@
   </url>
   <url>
     <loc>https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.html</loc>
+  </url>
+  <url>
+    <loc>https://sfcheung.github.io/semhelpinghands/reference/store_boot_def.html</loc>
   </url>
   <url>
     <loc>https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.html</loc>

@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +51,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/plot_boot.html">Diagnostic Plots of Bootstrap Estimates</a>
     <a class="dropdown-item" href="../articles/standardizedSolution_boot_ci.html">Bootstrap Confidence Interval for Standardized Solution in lavaan</a>
   </div>
 </li>
@@ -82,6 +83,8 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>semhelpinghands</h1>
+                        <h4 data-toc-skip class="author">Shu Fai
+Cheung</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/sfcheung/semhelpinghands/blob/HEAD/vignettes/semhelpinghands.Rmd" class="external-link"><code>vignettes/semhelpinghands.Rmd</code></a></small>
@@ -93,9 +96,10 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>As of now, <code>semhelpinghands</code> has four groups of functions:
-manipulating parameter estimates tables, comparing results from
-different methods, bootstrapping, and … others.</p>
+<p>At the time of writing, <a href="https://sfcheung.github.io/semhelpinghands/"><code>semhelpinghands</code></a>
+has these groups of functions: manipulating parameter estimates tables,
+comparing results from different methods, bootstrapping, and …
+others.</p>
 <p>This article will only introduce very briefly the groups. Some of
 them will be introduced in details in forthcoming article dedicated to
 them.</p>
@@ -129,7 +133,8 @@ outcome variables (<code>y1</code> <code>y2</code>, and
 <span><span class="st">y2 ~ x1 + x3</span></span>
 <span><span class="st">y3 ~ y2 + x2</span></span>
 <span><span class="st">"</span></span>
-<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>, data <span class="op">=</span> <span class="va">dvs_ivs</span>,</span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>,</span>
+<span>           data <span class="op">=</span> <span class="va">dvs_ivs</span>,</span>
 <span>           fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>The parameter estimates tables:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -155,7 +160,8 @@ outcome variables (<code>y1</code> <code>y2</code>, and
 <span><span class="co">#&gt; 17  x3 ~~  x3  0.912 0.129  7.071  0.000    0.659    1.165</span></span></code></pre></div>
 <p>A two-sample model is also fitted to the dataset:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fit_gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>, data <span class="op">=</span> <span class="va">dvs_ivs</span>,</span>
+<code class="sourceCode R"><span><span class="va">fit_gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>,</span>
+<span>              data <span class="op">=</span> <span class="va">dvs_ivs</span>,</span>
 <span>              group <span class="op">=</span> <span class="st">"gp"</span>,</span>
 <span>              fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>This is the parameter estimates table:</p>
@@ -241,7 +247,8 @@ intervals, which may yield results different from the <em>p</em>-values
 when bootstrapping confidence intervals are used (but same results in
 this example):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/add_sig.html">add_sig</a></span><span class="op">(</span><span class="va">est</span>, use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pvalue"</span>, <span class="st">"ci"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/add_sig.html">add_sig</a></span><span class="op">(</span><span class="va">est</span>,</span>
+<span>        use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pvalue"</span>, <span class="st">"ci"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    lhs op rhs    est sig  ci    se      z pvalue ci.lower ci.upper</span></span>
 <span><span class="co">#&gt; 1   y1  ~  x1  0.206 *   Sig 0.087  2.354  0.019    0.034    0.377</span></span>
 <span><span class="co">#&gt; 2   y1  ~  x2  0.381 *** Sig 0.093  4.100  0.000    0.199    0.563</span></span>
@@ -296,7 +303,8 @@ delta method. See
 operators (<code>op</code>), “dependent variables” (<code>lhs</code>),
 and “independent variables” (<code>rhs</code>).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/filter_by.html">filter_by</a></span><span class="op">(</span><span class="va">est</span>, op <span class="op">=</span> <span class="st">"~"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/filter_by.html">filter_by</a></span><span class="op">(</span><span class="va">est</span>,</span>
+<span>          op <span class="op">=</span> <span class="st">"~"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   lhs op rhs   est    se     z pvalue ci.lower ci.upper</span></span>
 <span><span class="co">#&gt; 1  y1  ~  x1 0.206 0.087 2.354  0.019    0.034    0.377</span></span>
 <span><span class="co">#&gt; 2  y1  ~  x2 0.381 0.093 4.100  0.000    0.199    0.563</span></span>
@@ -307,7 +315,10 @@ and “independent variables” (<code>rhs</code>).</p>
 <span><span class="co">#&gt; 7  y3  ~  x2 0.295 0.121 2.445  0.014    0.059    0.532</span></span></code></pre></div>
 <p>It also supports filtering by group using group labels:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/filter_by.html">filter_by</a></span><span class="op">(</span><span class="va">est_gp</span>, op <span class="op">=</span> <span class="st">"~"</span>, group <span class="op">=</span> <span class="st">"gp1"</span>, fit <span class="op">=</span> <span class="va">fit_gp</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/filter_by.html">filter_by</a></span><span class="op">(</span><span class="va">est_gp</span>,</span>
+<span>          op <span class="op">=</span> <span class="st">"~"</span>,</span>
+<span>          group <span class="op">=</span> <span class="st">"gp1"</span>,</span>
+<span>          fit <span class="op">=</span> <span class="va">fit_gp</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   lhs op rhs block group   est    se     z pvalue ci.lower ci.upper</span></span>
 <span><span class="co">#&gt; 1  y1  ~  x1     1     1 0.210 0.149 1.404  0.160   -0.083    0.502</span></span>
 <span><span class="co">#&gt; 2  y1  ~  x2     1     1 0.243 0.138 1.761  0.078   -0.027    0.513</span></span>
@@ -339,13 +350,15 @@ dv-column-iv-row format. That’s what <code><a href="../reference/group_estimat
 <span><span class="co">#&gt; y3 y3     --  0.295     --  0.044</span></span></code></pre></div>
 <p>They also supports extracting another column:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/group_estimates.html">group_by_dvs</a></span><span class="op">(</span><span class="va">est</span>, col_name <span class="op">=</span> <span class="st">"pvalue"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/group_estimates.html">group_by_dvs</a></span><span class="op">(</span><span class="va">est</span>,</span>
+<span>             col_name <span class="op">=</span> <span class="st">"pvalue"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    iv pvalue_y1 pvalue_y2 pvalue_y3</span></span>
 <span><span class="co">#&gt; x1 x1     0.019     0.154        --</span></span>
 <span><span class="co">#&gt; x2 x2     0.000        --     0.014</span></span>
 <span><span class="co">#&gt; x3 x3     0.064     0.029        --</span></span>
 <span><span class="co">#&gt; y2 y2        --        --     0.675</span></span>
-<span><span class="fu"><a href="../reference/group_estimates.html">group_by_ivs</a></span><span class="op">(</span><span class="va">est</span>, col_name <span class="op">=</span> <span class="st">"pvalue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/group_estimates.html">group_by_ivs</a></span><span class="op">(</span><span class="va">est</span>,</span>
+<span>             col_name <span class="op">=</span> <span class="st">"pvalue"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    dv pvalue_x1 pvalue_x2 pvalue_x3 pvalue_y2</span></span>
 <span><span class="co">#&gt; y1 y1     0.019     0.000     0.064        --</span></span>
 <span><span class="co">#&gt; y2 y2     0.154        --     0.029        --</span></span>
@@ -458,8 +471,9 @@ and so I wrote <code><a href="../reference/group_by_models.html">group_by_models
 <span><span class="st">y2 ~ x1 + x2</span></span>
 <span><span class="st">y3 ~ y2 + x1</span></span>
 <span><span class="st">"</span></span>
-<span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod2</span>, data <span class="op">=</span> <span class="va">dvs_ivs</span>,</span>
-<span>           fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod2</span>,</span>
+<span>            data <span class="op">=</span> <span class="va">dvs_ivs</span>,</span>
+<span>            fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">est2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/parameterEstimates.html" class="external-link">parameterEstimates</a></span><span class="op">(</span><span class="va">fit2</span><span class="op">)</span></span>
 <span><span class="va">est2</span></span>
 <span><span class="co">#&gt;    lhs op rhs    est    se      z pvalue ci.lower ci.upper</span></span>
@@ -544,8 +558,10 @@ that manipulate a parameter estimates table.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/group_by_groups.html">group_by_groups</a></span><span class="op">(</span><span class="va">est_gp</span>,</span>
 <span>                       col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"est"</span>, <span class="st">"pvalue"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filter_by.html">filter_by</a></span><span class="op">(</span><span class="va">out</span>, op <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"~"</span>, <span class="st">"~~"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/sort_by.html">sort_by</a></span><span class="op">(</span><span class="va">out</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"op"</span>, <span class="st">"rhs"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filter_by.html">filter_by</a></span><span class="op">(</span><span class="va">out</span>,</span>
+<span>                 op <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"~"</span>, <span class="st">"~~"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/sort_by.html">sort_by</a></span><span class="op">(</span><span class="va">out</span>,</span>
+<span>        by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"op"</span>, <span class="st">"rhs"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    lhs op rhs est_1  est_2 pvalue_1 pvalue_2</span></span>
 <span><span class="co">#&gt; 1   y1  ~  x1 0.210  0.258    0.160    0.011</span></span>
 <span><span class="co">#&gt; 2   y2  ~  x1 0.036  0.226    0.842    0.076</span></span>
@@ -603,7 +619,8 @@ methods.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_estimators.html">compare_estimators</a></span><span class="op">(</span><span class="va">fit</span>,</span>
 <span>         estimator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ML"</span>, <span class="st">"GLS"</span>, <span class="st">"MLR"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/group_by_models.html">group_by_models</a></span><span class="op">(</span><span class="va">out</span>, col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"se"</span>, <span class="st">"pvalue"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/group_by_models.html">group_by_models</a></span><span class="op">(</span><span class="va">out</span>,</span>
+<span>                col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"se"</span>, <span class="st">"pvalue"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    lhs op rhs se_ML se_GLS se_MLR pvalue_ML pvalue_GLS pvalue_MLR</span></span>
 <span><span class="co">#&gt; 1   y1  ~  x1 0.087  0.094  0.067     0.019      0.028      0.002</span></span>
 <span><span class="co">#&gt; 2   y1  ~  x2 0.093  0.100  0.091     0.000      0.000      0.000</span></span>
@@ -630,7 +647,8 @@ results. They can then be treated as different “models” and processed by
 different estimators in the output of
 <code><a href="../reference/compare_estimators.html">compare_estimators()</a></code>:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/compare_estimators.html">se_ratios</a></span><span class="op">(</span><span class="va">out</span>, reference <span class="op">=</span> <span class="st">"ML"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/compare_estimators.html">se_ratios</a></span><span class="op">(</span><span class="va">out</span>,</span>
+<span>          reference <span class="op">=</span> <span class="st">"ML"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    lhs op rhs se_ML se_GLS se_MLR ratio_ML ratio_GLS ratio_MLR</span></span>
 <span><span class="co">#&gt; 1   y1  ~  x1 0.087  0.094  0.067        1     1.072     0.765</span></span>
 <span><span class="co">#&gt; 2   y1  ~  x2 0.093  0.100  0.091        1     1.073     0.977</span></span>
@@ -670,6 +688,15 @@ standardized estimates based on the bootstrap estimates already
 generated by <code>se = "boot"</code>.</p>
 <p>Please see <code><a href="../articles/standardizedSolution_boot_ci.html">vignette("standardizedSolution_boot_ci")</a></code> for
 an illustration on <code><a href="../reference/standardizedSolution_boot_ci.html">standardizedSolution_boot_ci()</a></code>.</p>
+<p>Another issue is examine bootstrap estimates, such as the
+distribution of the estimates. The function <code><a href="../reference/plot_boot.html">plot_boot()</a></code> and
+related functions can be used to compute bootstrap estimates and plot
+them. The bootstrap estimates of free parameters (stored by
+<code>lavaan</code>), user-defined parameters (computed by
+<code><a href="../reference/store_boot_def.html">store_boot_def()</a></code>), and the standardized solution (computed
+by <code><a href="../reference/standardizedSolution_boot_ci.html">store_boot_est_std()</a></code>) can be plotted.</p>
+<p>Please see the <a href="https://sfcheung.github.io/semhelpinghands/articles/plot_boot.html">article</a>
+on <code><a href="../reference/plot_boot.html">plot_boot()</a></code> on how to use this function.</p>
 </div>
 <div class="section level2">
 <h2 id="others">Others<a class="anchor" aria-label="anchor" href="#others"></a>
@@ -693,7 +720,8 @@ example:</p>
 <span><span class="st">y2 ~ x1 + x3</span></span>
 <span><span class="st">y3 ~ y2 + x2</span></span>
 <span><span class="st">"</span></span>
-<span><span class="va">fit_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>, data <span class="op">=</span> <span class="va">dvs_ivs</span><span class="op">)</span></span>
+<span><span class="va">fit_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>,</span>
+<span>                   data <span class="op">=</span> <span class="va">dvs_ivs</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/show_more_options.html">show_more_options</a></span><span class="op">(</span><span class="va">fit_default</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  Options                             Call    Actual  </span></span>
 <span><span class="co">#&gt;  Estimator(s)                        default ML      </span></span>
@@ -704,7 +732,9 @@ example:</p>
 <span><span class="co">#&gt;  Information Matrix (for Model Test) default expected</span></span>
 <span><span class="co">#&gt;  Mean Structure                      default No      </span></span>
 <span><span class="co">#&gt;  'x' Fixed                           default TRUE</span></span>
-<span><span class="va">fit_MLR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>, data <span class="op">=</span> <span class="va">dvs_ivs</span>, estimator <span class="op">=</span> <span class="st">"MLR"</span><span class="op">)</span></span>
+<span><span class="va">fit_MLR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>,</span>
+<span>               data <span class="op">=</span> <span class="va">dvs_ivs</span>,</span>
+<span>               estimator <span class="op">=</span> <span class="st">"MLR"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/show_more_options.html">show_more_options</a></span><span class="op">(</span><span class="va">fit_MLR</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  Options                             Call    Actual            </span></span>
 <span><span class="co">#&gt;  Estimator(s)                        MLR     ML                </span></span>
@@ -715,8 +745,10 @@ example:</p>
 <span><span class="co">#&gt;  Information Matrix (for Model Test) default observed          </span></span>
 <span><span class="co">#&gt;  Mean Structure                      default No                </span></span>
 <span><span class="co">#&gt;  'x' Fixed                           default TRUE</span></span>
-<span><span class="va">fit_MLR_fiml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>, data <span class="op">=</span> <span class="va">dvs_ivs</span>, estimator <span class="op">=</span> <span class="st">"MLR"</span>,</span>
-<span>               missing <span class="op">=</span> <span class="st">"fiml"</span><span class="op">)</span></span>
+<span><span class="va">fit_MLR_fiml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mod</span>,</span>
+<span>                    data <span class="op">=</span> <span class="va">dvs_ivs</span>,</span>
+<span>                    estimator <span class="op">=</span> <span class="st">"MLR"</span>,</span>
+<span>                    missing <span class="op">=</span> <span class="st">"fiml"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/show_more_options.html">show_more_options</a></span><span class="op">(</span><span class="va">fit_MLR_fiml</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  Options                             Call    Actual            </span></span>
 <span><span class="co">#&gt;  Estimator(s)                        MLR     ML                </span></span>
