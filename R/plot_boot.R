@@ -1,8 +1,48 @@
-#' @title Diagnostics Plots of Bootstrap Estimates in 'lavaan'
+#' @title Diagnostic Plots of Bootstrap Estimates in 'lavaan'
 #'
-#' @description (TBD)
+#' @description Plots for examining the
+#' distribution of bootstrap estimates
+#' in a model fitted by `lavaan`.
 #'
-#' @details (TBD)
+#' @details Rousselet, Pernet, and Wilcox (2021)
+#' argued that when using bootstrapping,
+#' it is necessary to examine the distribution
+#' of bootstrap estimates. This can be
+#' done when [boot::boot()] is used
+#' because it has a `plot` method for
+#' its output. This cannot be easily
+#' done in model fitted by [lavaan::lavaan()].
+#'
+#' The function [plot_boot()] is used for
+#' plotting the distribution of bootstrap
+#' estimates for a model fitted by
+#' `lavaan` in a format similar to that
+#' of the output of [boot::boot()], with
+#' a histogram on the left and a normal
+#' QQ-plot on the right.
+#'
+#' For free parameters in a model
+#' (unstandardized), it can be called
+#' directly on the output of `lavaan`
+#' and retrieves the stored estimates.
+#'
+#' For estimates of user-defined parameters,
+#' call [store_boot_def()] first to compute
+#' and store the bootstrap estimates
+#' first.
+#'
+#' For estimates in standardized solution,
+#' for both free and user-defined
+#' parameters, call [store_boot_est_std()]
+#' first to compute and store the bootstrap
+#' estimates in the standardized solution.
+#'
+#' @references
+#' Rousselet, G. A., Pernet, C. R., & Wilcox, R. R. (2021).
+#' The percentile bootstrap: A primer with step-by-step
+#' instructions in R.
+#' *Advances in Methods and Practices in Psychological Science*,
+#' *4*(1), 1--10. \doi{10.1177/2515245920911881}
 #'
 #' @return Return the original
 #' [lavaan::lavaan-class] object
@@ -125,8 +165,8 @@
 #'
 #' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
-#' @seealso [lavaan::fitMeasures()]
-#'
+#' @seealso [lavaan::fitMeasures()], [store_boot_est_std()],
+#' and [store_boot_def()].
 #'
 #' @examples
 #'
@@ -143,12 +183,23 @@
 #'            se = "bootstrap",
 #'            bootstrap = 50,
 #'            iseed = 985714)
-#' fit <- store_boot_est_std(fit)
-#' fit <- store_boot_def(fit)
 #'
-#' plot_boot(fit, "a", standardized = TRUE)
+#' # Can plot bootstrap estimates for
+#' # free parameters directly
+#' # Note that 'standardized' must be always be set to
+#' # either TRUE or FALSE. No default value.
+#' plot_boot(fit, "a", standardized = FALSE)
+#'
+#' # For estimates of user-defined parameters,
+#' # call store_boot_def() first.
+#' fit <- store_boot_def(fit)
 #' plot_boot(fit, "ab", standardized = FALSE)
-#' plot_boot(fit, "y~x", standardized = FALSE)
+#'
+#' # For estimates in standardized solution,
+#' # call store_boot_est_std() first.
+#' fit <- store_boot_est_std(fit)
+#' plot_boot(fit, "a", standardized = TRUE)
+#' plot_boot(fit, "ab", standardized = TRUE)
 #'
 #' @importFrom graphics abline hist lines
 #' @importFrom stats qqline qqnorm setNames

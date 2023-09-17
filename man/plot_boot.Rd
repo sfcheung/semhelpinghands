@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_boot.R
 \name{plot_boot}
 \alias{plot_boot}
-\title{Diagnostics Plots of Bootstrap Estimates in 'lavaan'}
+\title{Diagnostic Plots of Bootstrap Estimates in 'lavaan'}
 \usage{
 plot_boot(
   object,
@@ -147,10 +147,43 @@ invisibly. Called for its side-effect
 (plotting the graphs).
 }
 \description{
-(TBD)
+Plots for examining the
+distribution of bootstrap estimates
+in a model fitted by \code{lavaan}.
 }
 \details{
-(TBD)
+Rousselet, Pernet, and Wilcox (2021)
+argued that when using bootstrapping,
+it is necessary to examine the distribution
+of bootstrap estimates. This can be
+done when \code{\link[boot:boot]{boot::boot()}} is used
+because it has a \code{plot} method for
+its output. This cannot be easily
+done in model fitted by \code{\link[lavaan:lavaan]{lavaan::lavaan()}}.
+
+The function \code{\link[=plot_boot]{plot_boot()}} is used for
+plotting the distribution of bootstrap
+estimates for a model fitted by
+\code{lavaan} in a format similar to that
+of the output of \code{\link[boot:boot]{boot::boot()}}, with
+a histogram on the left and a normal
+QQ-plot on the right.
+
+For free parameters in a model
+(unstandardized), it can be called
+directly on the output of \code{lavaan}
+and retrieves the stored estimates.
+
+For estimates of user-defined parameters,
+call \code{\link[=store_boot_def]{store_boot_def()}} first to compute
+and store the bootstrap estimates
+first.
+
+For estimates in standardized solution,
+for both free and user-defined
+parameters, call \code{\link[=store_boot_est_std]{store_boot_est_std()}}
+first to compute and store the bootstrap
+estimates in the standardized solution.
 }
 \examples{
 
@@ -167,16 +200,35 @@ fit <- sem(mod, simple_mediation,
            se = "bootstrap",
            bootstrap = 50,
            iseed = 985714)
-fit <- store_boot_est_std(fit)
-fit <- store_boot_def(fit)
 
-plot_boot(fit, "a", standardized = TRUE)
+# Can plot bootstrap estimates for
+# free parameters directly
+# Note that 'standardized' must be always be set to
+# either TRUE or FALSE. No default value.
+plot_boot(fit, "a", standardized = FALSE)
+
+# For estimates of user-defined parameters,
+# call store_boot_def() first.
+fit <- store_boot_def(fit)
 plot_boot(fit, "ab", standardized = FALSE)
-plot_boot(fit, "y~x", standardized = FALSE)
+
+# For estimates in standardized solution,
+# call store_boot_est_std() first.
+fit <- store_boot_est_std(fit)
+plot_boot(fit, "a", standardized = TRUE)
+plot_boot(fit, "ab", standardized = TRUE)
 
 }
+\references{
+Rousselet, G. A., Pernet, C. R., & Wilcox, R. R. (2021).
+The percentile bootstrap: A primer with step-by-step
+instructions in R.
+\emph{Advances in Methods and Practices in Psychological Science},
+\emph{4}(1), 1--10. \doi{10.1177/2515245920911881}
+}
 \seealso{
-\code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}}
+\code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}}, \code{\link[=store_boot_est_std]{store_boot_est_std()}},
+and \code{\link[=store_boot_def]{store_boot_def()}}.
 }
 \author{
 Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}

@@ -1,41 +1,33 @@
-# semhelpinghands 0.1.8.7
+# semhelpinghands 0.1.9
 
-- (Internal) Factored out the function
-  responsible for generating the
-  bootstrap estimates. (0.1.8.1)
-- Added `store_boot_est_std()`. It
-  computed the bootstrap estimates
-  in the standardized solution,
-  stores them in the fit object. (0.1.8.2)
-- Added `get_boot_est_std()` for extracting
-  the stored bootstrap estimates in the
-  standardized solution (stored
-  by `store_boot_est_std()`). (0.1.8.5)
-- Added `store_boot_def()` and
-  `get_boot_def()`, for computing and
-  storing values of user-defined
-  parameters in bootstrap samples. (0.1.8.3)
+## New Features
+
+- Added `store_boot_est_std()` and
+  `store_boot_def()` for computing
+  and storing bootstrap estimates
+  of the standardized solution and
+  user parameters, respectively.
+  Added `get_boot_est_std()`
+  and `get-boot_def()` to extract
+  the computed estimates. (0.1.8.2,
+  0.1.8.3, 0.1.8.5).
 - Set the class of the output of
   `standardizedSolution_boot_ci()`
   to `std_solution_boot`, with a
   print method for printing the output
   as in the printout of the summary
   output of a `lavaan-class` object. (0.1.8.4)
-- Added `plot_boot()` for diagnostics
-  plots for bootstrapping, simliar to
+- Added `plot_boot()` for diagnostic
+  plots for bootstrapping, similiar to
   those for the output of `boot::boot()`.
   Can be used for `lavaan`'s bootstrap
   estimates for free parameters,
-  for user-defined parameters (stored
-  by `store_boot_def()`), or for
-  bootstrap estimates for the
+  user-defined parameters (stored
+  by `store_boot_def()`), or
   standardized solution (stored by
-  `store_boot_est_std()`). (0.1.8.6)
-- Updated the vignette for
-  `standardizedSolution_boot_ci()`,
-  introducing the new print method.
-  (0.1.8.7)
-
+  `store_boot_est_std()`). Also
+  added an article to the `pkgdown`
+  website (0.1.8.6, 0.1.8.10).
 
 # semhelpinghands 0.1.8
 

@@ -1,5 +1,6 @@
 ---
 title: "Bootstrap Confidence Interval for Standardized Solution in lavaan"
+author: "Shu Fai Cheung"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Bootstrap Confidence Interval for Standardized Solution in lavaan}
@@ -13,6 +14,14 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+# Introduction
+
+This document introduces the function
+`standardizedSolution_boot_ci()`,
+and related helpers, from the package
+[`semhelpinghands`](https://sfcheung.github.io/semhelpinghands/).
+
 
 # What `standardizedSolution_boot_ci()` Does
 

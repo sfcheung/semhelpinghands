@@ -1,7 +1,14 @@
 #' @title Bootstrap CIs for Standardized
 #' Solution
 #'
-#' @description It receives a
+#' @description Functions for forming
+#' bootstrap confidence intervals
+#' for the standardized solution.
+#'
+#' @details
+#'
+#' [standardizedSolution_boot_ci()]
+#' receives a
 #' [lavaan::lavaan-class] object fitted
 #' with bootstrapping standard errors
 #' requested and forms the confidence
@@ -28,7 +35,9 @@
 #' sample, stores them the
 #' [lavaan::lavaan-class] object, and
 #' returns it. These estimates can be used
-#' by other functions, without the need
+#' by other functions, such as [plot_boot()],
+#' to examine the
+#' estimates, without the need
 #' to repeat the computation.
 #'
 #' [get_boot_est_std()] retrieves
@@ -46,8 +55,8 @@
 #' ([print.std_solution_boot()]) that
 #' can be used to print the standardized
 #' solution in a format similar to
-#' that of the printout of [summary()]
-#' of a [lavaan::lavaan-class] object.
+#' that of the printout of
+#' the [summary()] of a [lavaan::lavaan-class] object.
 #'
 #' [store_boot_est_std()] returns
 #' the fit object set to
@@ -62,6 +71,10 @@
 #' of the stored bootstrap estimates
 #' of standardized solution. If none is
 #' stored, `NULL` is returned.
+#'
+#' [store_boot_est_std()] is usually used
+#' with diagnostic functions such
+#' as [plot_boot()].
 #'
 #' @param object A [lavaan-class]
 #' object, fitted with 'se = "boot"'.
@@ -94,7 +107,7 @@
 #' confidence limit from the point
 #' estimate to (b) the distance of the
 #' delta-method limit from the point
-#' estimate.
+#' estimate. Default is `FALSE`.
 #'
 #' @param ... Other arguments to be
 #' passed to
@@ -112,7 +125,7 @@
 #' this version.
 #'
 #'
-#' @seealso [lavaan::standardizedSolution()]
+#' @seealso [lavaan::standardizedSolution()], [plot_boot()]
 #'
 #' @examples
 #'
@@ -136,7 +149,15 @@
 #'            bootstrap = 100)
 #' summary(fit)
 #'
-#' standardizedSolution_boot_ci(fit)
+#' std <- standardizedSolution_boot_ci(fit)
+#' std
+#'
+#' # Print in a friendly format with only standardized solution
+#' print(std, output = "text")
+#'
+#' # Print in a friendly format with both unstandardized
+#' # and standardized solution
+#' print(std, output = "text", standardized_only = FALSE)
 #'
 #' @name standardizedSolution_boot_ci
 NULL
@@ -305,6 +326,16 @@ boot_est_std <- function(object,
     return(out_all)
   }
 
+#' @examples
+#'
+#' # store_boot_est_std() is usually used with plot_boot()
+#' # First, store the bootstrap estimates of the
+#' # standardized solution
+#' fit_with_boot_std <- store_boot_est_std(fit)
+#' # Second, plot the distribution of the bootstrap estimates of
+#' # standardized 'ab'
+#' plot_boot(fit_with_boot_std, "ab", standardized = TRUE)
+#'
 #' @rdname standardizedSolution_boot_ci
 #' @export
 
