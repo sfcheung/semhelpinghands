@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.8.7
+# semhelpinghands 0.1.8.8
 
 - (Internal) Factored out the function
   responsible for generating the
@@ -35,6 +35,8 @@
   `standardizedSolution_boot_ci()`,
   introducing the new print method.
   (0.1.8.7)
+- Finalized the help pages of
+  new functions. (0.1.8.8)
 
 
 # semhelpinghands 0.1.8
