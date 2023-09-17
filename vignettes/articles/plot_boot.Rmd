@@ -1,7 +1,8 @@
 ---
 title: "Diagnostic Plots of Bootstrap Estimates"
 author: "Shu Fai Cheung"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
 vignette: >
   %\VignetteIndexEntry{Diagnostic Plots of Bootstrap Estimates}
   %\VignetteEngine{knitr::rmarkdown}
