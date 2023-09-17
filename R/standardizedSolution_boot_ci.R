@@ -1,7 +1,14 @@
 #' @title Bootstrap CIs for Standardized
 #' Solution
 #'
-#' @description It receives a
+#' @description Functions for forming
+#' bootstrap confidence intervals
+#' for the standardized solution.
+#'
+#' @details
+#'
+#' [standardizedSolution_boot_ci()]
+#' receives a
 #' [lavaan::lavaan-class] object fitted
 #' with bootstrapping standard errors
 #' requested and forms the confidence
@@ -23,10 +30,51 @@
 #' and does not require repeating
 #' the bootstrapping step.
 #'
+#' [store_boot_est_std()] computes the
+#' standardized solution for each bootstrap
+#' sample, stores them the
+#' [lavaan::lavaan-class] object, and
+#' returns it. These estimates can be used
+#' by other functions, such as [plot_boot()],
+#' to examine the
+#' estimates, without the need
+#' to repeat the computation.
+#'
+#' [get_boot_est_std()] retrieves
+#' the bootstrap estimates of the
+#' standardized solution stored by
+#' [store_boot_est_std()].
+#'
 #' @return The output of
 #' [lavaan::standardizedSolution()],
 #' with bootstrap confidence intervals
-#' appended to the right.
+#' appended to the right, with class
+#' set to `std_solution_boot` (since
+#' version 0.1.8.4). It has
+#' a print method
+#' ([print.std_solution_boot()]) that
+#' can be used to print the standardized
+#' solution in a format similar to
+#' that of the printout of
+#' the [summary()] of a [lavaan::lavaan-class] object.
+#'
+#' [store_boot_est_std()] returns
+#' the fit object set to
+#' `object`, with the bootstrap values
+#' of standardized solution in the
+#' bootstrap samples, as a matrix,
+#' stored in the
+#' slot `external` under the name
+#' `shh_boot_est_std`.
+#'
+#' [get_boot_est_std()] returns a matrix
+#' of the stored bootstrap estimates
+#' of standardized solution. If none is
+#' stored, `NULL` is returned.
+#'
+#' [store_boot_est_std()] is usually used
+#' with diagnostic functions such
+#' as [plot_boot()].
 #'
 #' @param object A [lavaan-class]
 #' object, fitted with 'se = "boot"'.
@@ -59,7 +107,7 @@
 #' confidence limit from the point
 #' estimate to (b) the distance of the
 #' delta-method limit from the point
-#' estimate.
+#' estimate. Default is `FALSE`.
 #'
 #' @param ... Other arguments to be
 #' passed to
@@ -77,7 +125,7 @@
 #' this version.
 #'
 #'
-#' @seealso [lavaan::standardizedSolution()]
+#' @seealso [lavaan::standardizedSolution()], [plot_boot()]
 #'
 #' @examples
 #'
@@ -101,8 +149,20 @@
 #'            bootstrap = 100)
 #' summary(fit)
 #'
-#' standardizedSolution_boot_ci(fit)
+#' std <- standardizedSolution_boot_ci(fit)
+#' std
 #'
+#' # Print in a friendly format with only standardized solution
+#' print(std, output = "text")
+#'
+#' # Print in a friendly format with both unstandardized
+#' # and standardized solution
+#' print(std, output = "text", standardized_only = FALSE)
+#'
+#' @name standardizedSolution_boot_ci
+NULL
+
+#' @rdname standardizedSolution_boot_ci
 #' @export
 
 standardizedSolution_boot_ci <- function(object,
@@ -115,31 +175,11 @@ standardizedSolution_boot_ci <- function(object,
     if (!inherits(object, "lavaan")) {
         stop("The object must be a lavaan-class object.")
       }
-    boot_est0 <- try(lavaan::lavTech(object, "boot"), silent = TRUE)
-    if (inherits(boot_est0, "try-error")) {
-        stop("Bootstrapping estimates not found. Was se = 'boot' or 'bootstrap'?")
-      }
     if (!force_run) {
       }
-    # For lavaan 0.6-13
-    # Remove bootstrap replications with error
-    boot_error_idx <- attr(boot_est0, "error.idx")
-    if (!is.null(boot_error_idx)) {
-        if (length(boot_error_idx) > 0) {
-            boot_est0 <- boot_est0[-boot_error_idx, ]
-          }
-      }
-    std_args <- list(...)
-    ptable <- lavaan::parameterTable(object)
-    p_free <- ptable$free > 0
-    p_est  <- ptable$est
-    boot_est <- split(boot_est0, row(boot_est0))
-    out_all <- t(sapply(boot_est, std_i,
-                        p_est = p_est,
-                        p_free = p_free,
-                        object = object,
-                        type = type,
-                        std_args = std_args))
+    out_all <- boot_est_std(object = object,
+                            type = type,
+                            ...)
     out <- lavaan::standardizedSolution(object,
                                         type = type,
                                         level = level,
@@ -163,7 +203,9 @@ standardizedSolution_boot_ci <- function(object,
                         })
     boot_ci <- t(boot_ci)
     colnames(boot_ci) <- c("boot.ci.lower", "boot.ci.upper")
-    out_final <- cbind(out, boot_ci)
+    boot_se <- apply(out_all, 2, stats::sd, na.rm = TRUE, simplify = TRUE)
+    boot_se[boot_se < .Machine$double.eps] <- NA
+    out_final <- cbind(out, boot_ci, `boot.se` = boot_se)
     if (boot_delta_ratio) {
         tmp1 <- abs(out_final$boot.ci.lower - out_final$est.std) /
                                  abs(out_final$ci.lower - out_final$est.std)
@@ -174,10 +216,17 @@ standardizedSolution_boot_ci <- function(object,
         out_final$ratio.lower <- tmp1
         out_final$ratio.upper <- tmp2
       }
-    class(out_final) <- class(out)
+    class(out_final) <- c("std_solution_boot", class(out))
     if (save_boot_est_std) {
         attr(out_final, "boot_est_std") <- out_all
       }
+    fit_summary <- lavaan::summary(object)
+    attr(out_final, "pe_attrib") <- attributes(fit_summary$pe)
+    attr(out_final, "partable") <- lavaan::parameterTable(object)
+    attr(out_final, "est") <- lavaan::parameterEstimates(object)
+    attr(out_final, "level") <- level
+    attr(out_final, "type") <- type
+    attr(out_final, "call") <- match.call()
     out_final
   }
 
@@ -243,4 +292,93 @@ check_std_i <- function(object, type, std_args) {
     } else {
       return(TRUE)
     }
+  }
+
+#' @title Generate bootstrap estimates
+#' @noRd
+
+boot_est_std <- function(object,
+                         type,
+                         ...) {
+    # For lavaan 0.6-13
+    # Remove bootstrap replications with error
+    boot_est0 <- try(lavaan::lavTech(object, "boot"), silent = TRUE)
+    if (inherits(boot_est0, "try-error")) {
+        stop("Bootstrapping estimates not found. Was se = 'boot' or 'bootstrap'?")
+      }
+    boot_error_idx <- attr(boot_est0, "error.idx")
+    if (!is.null(boot_error_idx)) {
+        if (length(boot_error_idx) > 0) {
+            boot_est0 <- boot_est0[-boot_error_idx, ]
+          }
+      }
+    std_args <- list(...)
+    ptable <- lavaan::parameterTable(object)
+    p_free <- ptable$free > 0
+    p_est  <- ptable$est
+    boot_est <- split(boot_est0, row(boot_est0))
+    out_all <- t(sapply(boot_est, std_i,
+                        p_est = p_est,
+                        p_free = p_free,
+                        object = object,
+                        type = type,
+                        std_args = std_args))
+    return(out_all)
+  }
+
+#' @examples
+#'
+#' # store_boot_est_std() is usually used with plot_boot()
+#' # First, store the bootstrap estimates of the
+#' # standardized solution
+#' fit_with_boot_std <- store_boot_est_std(fit)
+#' # Second, plot the distribution of the bootstrap estimates of
+#' # standardized 'ab'
+#' plot_boot(fit_with_boot_std, "ab", standardized = TRUE)
+#'
+#' @rdname standardizedSolution_boot_ci
+#' @export
+
+store_boot_est_std <- function(object,
+                               type = "std.all",
+                               force_run = FALSE,
+                               ...) {
+    if (!inherits(object, "lavaan")) {
+        stop("The object must be a lavaan-class object.")
+      }
+    if (!force_run) {
+      }
+    out_all <- boot_est_std(object = object,
+                            type = type,
+                            ...)
+    colnames(out_all) <- std_names(object, ...)
+    object@external$shh_boot_est_std <- out_all
+    object@external$shh_boot_est_std_type <- type
+    return(object)
+  }
+
+
+#' @rdname standardizedSolution_boot_ci
+#' @export
+
+get_boot_est_std <- function(object) {
+    return(object@external$shh_boot_est_std)
+  }
+
+#' Generate names for standardized solution
+#' @noRd
+
+std_names <- function(object, ...) {
+    std <- lavaan::standardizedSolution(object, se = FALSE, ...)
+    std$id <- seq_len(nrow(std))
+    ptable <- lavaan::parameterTable(object)
+    std1 <- merge(std, ptable,
+                  all.y = FALSE)
+    std1 <- std1[order(std1$id), ]
+    std1$lavlabel <- lavaan::lav_partable_labels(std1,
+                        blocks = c("group", "level"),
+                        group.equal = "",
+                        group.partial = "",
+                        type = "user")
+    return(std1$lavlabel)
   }

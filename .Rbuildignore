@@ -4,3 +4,5 @@
 ^pkgdown$
 ^\.github$
 ^data-raw$
+^rebuild_vignettes.R$
+^\.lintr$

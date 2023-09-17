@@ -8,7 +8,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
 # Introduction
 
@@ -46,8 +51,7 @@ A mediation model example modified from the
 official `lavaan` website is used
 (https://lavaan.ugent.be/tutorial/mediation.html).
 
-
-```r
+```{r}
 library(lavaan)
 set.seed(1234)
 n <- 100
@@ -77,8 +81,7 @@ and 5000 replication. (Change `ncpus`
 to a value appropriate for the system
 running it.)
 
-
-```r
+```{r}
 fit <- sem(model,
            data = Data,
            se = "bootstrap",
@@ -95,18 +98,8 @@ confidence intervals.)
 
 This is the standardized solution with delta-method confidence intervals.
 
-
-```r
+```{r}
 standardizedSolution(fit)
-#>     lhs op     rhs label est.std    se      z pvalue ci.lower ci.upper
-#> 1     Y  ~       X     c   0.054 0.118  0.461  0.645   -0.176    0.285
-#> 2     M  ~       X     a   0.370 0.098  3.768  0.000    0.178    0.563
-#> 3     Y  ~       M     b   0.255 0.097  2.622  0.009    0.064    0.446
-#> 4     Y ~~       Y         0.922 0.055 16.653  0.000    0.813    1.030
-#> 5     M ~~       M         0.863 0.073 11.866  0.000    0.720    1.006
-#> 6     X ~~       X         1.000 0.000     NA     NA    1.000    1.000
-#> 7    ab :=     a*b    ab   0.094 0.045  2.093  0.036    0.006    0.183
-#> 8 total := c+(a*b) total   0.149 0.108  1.375  0.169   -0.063    0.361
 ```
 
 # Bootstrap Percentile CIs for Standardized Solution
@@ -115,29 +108,10 @@ To form bootstrap percentile confidence intervals for the standardized
 solution, simply use `standardizedSolution_boot_ci()` instead of
 `lavaan::standardizedSolution()`:
 
-
-```r
+```{r}
 library(semhelpinghands)
 ci_boot <- standardizedSolution_boot_ci(fit)
 ci_boot
-#>     lhs op     rhs label est.std    se      z pvalue ci.lower ci.upper
-#> 1     Y  ~       X     c   0.054 0.118  0.461  0.645   -0.176    0.285
-#> 2     M  ~       X     a   0.370 0.098  3.768  0.000    0.178    0.563
-#> 3     Y  ~       M     b   0.255 0.097  2.622  0.009    0.064    0.446
-#> 4     Y ~~       Y         0.922 0.055 16.653  0.000    0.813    1.030
-#> 5     M ~~       M         0.863 0.073 11.866  0.000    0.720    1.006
-#> 6     X ~~       X         1.000 0.000     NA     NA    1.000    1.000
-#> 7    ab :=     a*b    ab   0.094 0.045  2.093  0.036    0.006    0.183
-#> 8 total := c+(a*b) total   0.149 0.108  1.375  0.169   -0.063    0.361
-#>   boot.ci.lower boot.ci.upper boot.se
-#> 1        -0.171         0.286   0.117
-#> 2         0.144         0.537   0.101
-#> 3         0.061         0.443   0.097
-#> 4         0.766         0.986   0.058
-#> 5         0.712         0.979   0.070
-#> 6            NA            NA      NA
-#> 7         0.016         0.202   0.047
-#> 8        -0.048         0.362   0.106
 ```
 
 The bootstrap percentile confidence intervals are appended to the right
@@ -146,14 +120,22 @@ in columns `boot.ci.lower` and `boot.ci.upper`. The standard
 errors based on the bootstrap estimates (the standard deviation
 of the estimates) are listed on the column `boot.se`.
 
-
+```{r echo = FALSE}
+tmp <- ci_boot[ci_boot$label == "ab", ]
+ab_ci_delta_1 <- formatC(tmp[, "ci.lower"], digits = 3, format = "f")
+ab_ci_delta_2 <- formatC(tmp[, "ci.upper"], digits = 3, format = "f")
+ab_ci_boot_1 <- formatC(tmp[, "boot.ci.lower"], digits = 3, format = "f")
+ab_ci_boot_2 <- formatC(tmp[, "boot.ci.upper"], digits = 3, format = "f")
+ab_ci_delta <- paste0("[", ab_ci_delta_1, ", ", ab_ci_delta_2, "]")
+ab_ci_boot <- paste0("[", ab_ci_boot_1, ", ", ab_ci_boot_2, "]")
+```
 
 As expected, the bootstrap percentile
 confidence interval of the indirect
-effect, `ab`, is [0.016, 0.202],
+effect, `ab`, is `r ab_ci_boot`,
 wider than the
 delta-method confidence interval,
-[0.006, 0.183], and
+`r ab_ci_delta`, and
 is shifted to the right.
 
 # Print in a Friendly Format
@@ -165,38 +147,9 @@ similar to the summary of `lavaan`
 output. Call `print()` directly and
 add `output = "text"`:
 
-
-```r
+```{r}
 print(ci_boot,
       output = "text")
-#> 
-#> Standardized Estimates Only
-#> 
-#>   Standard errors                            Bootstrap
-#>   Confidence interval                        Bootstrap
-#>   Confidence Level                               95.0%
-#>   Standardization Type                         std.all
-#>   Number of requested bootstrap draws             5000
-#>   Number of successful bootstrap draws            5000
-#> 
-#> Regressions:
-#>                Standardized  Std.Err ci.lower ci.upper
-#>   Y ~                                                 
-#>     X          (c)    0.054    0.117   -0.171    0.286
-#>   M ~                                                 
-#>     X          (a)    0.370    0.101    0.144    0.537
-#>   Y ~                                                 
-#>     M          (b)    0.255    0.097    0.061    0.443
-#> 
-#> Variances:
-#>                Standardized  Std.Err ci.lower ci.upper
-#>    .Y                 0.922    0.058    0.766    0.986
-#>    .M                 0.863    0.070    0.712    0.979
-#> 
-#> Defined Parameters:
-#>                Standardized  Std.Err ci.lower ci.upper
-#>     ab                0.094    0.047    0.016    0.202
-#>     total             0.149    0.106   -0.048    0.362
 ```
 
 Note that it will replace the results

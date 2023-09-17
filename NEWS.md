@@ -1,3 +1,34 @@
+# semhelpinghands 0.1.9
+
+## New Features
+
+- Added `store_boot_est_std()` and
+  `store_boot_def()` for computing
+  and storing bootstrap estimates
+  of the standardized solution and
+  user parameters, respectively.
+  Added `get_boot_est_std()`
+  and `get-boot_def()` to extract
+  the computed estimates. (0.1.8.2,
+  0.1.8.3, 0.1.8.5).
+- Set the class of the output of
+  `standardizedSolution_boot_ci()`
+  to `std_solution_boot`, with a
+  print method for printing the output
+  as in the printout of the summary
+  output of a `lavaan-class` object. (0.1.8.4)
+- Added `plot_boot()` for diagnostic
+  plots for bootstrapping, similiar to
+  those for the output of `boot::boot()`.
+  Can be used for `lavaan`'s bootstrap
+  estimates for free parameters,
+  user-defined parameters (stored
+  by `store_boot_def()`), or
+  standardized solution (stored by
+  `store_boot_est_std()`). Also
+  added an article to the `pkgdown`
+  website (0.1.8.6, 0.1.8.10).
+
 # semhelpinghands 0.1.8
 
 ## New Features
