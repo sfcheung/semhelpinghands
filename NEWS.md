@@ -1,17 +1,21 @@
-# semhelpinghands 0.1.9.7
+# semhelpinghands 0.1.9.8
 
 ## New Features
 
-- Added `ptable_to_syntax]()` for
+- Added `ptable_to_syntax()` for
   converting a `lavaan` parameter
   table to a `lavaan` model syntax.
   (0.1.9.1 - 0.1.9.6).
 - Renamed the first argument of
-  `ptable_to_syntax]()` to `object`.
+  `ptable_to_syntax()` to `object`.
   It can now accepts both a
   `lavaan` object or a `lavaan`
   parameter table. (0.1.9.7)
 
+## Others
+
+- Fixed some typos in `NEWS.md`.
+  (0.1.9.8)
 
 # semhelpinghands 0.1.9
 
@@ -23,7 +27,7 @@
   of the standardized solution and
   user parameters, respectively.
   Added `get_boot_est_std()`
-  and `get-boot_def()` to extract
+  and `get_boot_def()` to extract
   the computed estimates. (0.1.8.2,
   0.1.8.3, 0.1.8.5).
 - Set the class of the output of
