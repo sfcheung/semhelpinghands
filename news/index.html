@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,18 +55,22 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.9.7" id="semhelpinghands-0197">semhelpinghands 0.1.9.7<a class="anchor" aria-label="anchor" href="#semhelpinghands-0197"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.9.8" id="semhelpinghands-0198">semhelpinghands 0.1.9.8<a class="anchor" aria-label="anchor" href="#semhelpinghands-0198"></a></h2>
 <div class="section level3">
-<h3 id="new-features-0-1-9-7">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-1-9-7"></a></h3>
-<ul><li>Added <code>ptable_to_syntax]()</code> for converting a <code>lavaan</code> parameter table to a <code>lavaan</code> model syntax. (0.1.9.1 - 0.1.9.6).</li>
-<li>Renamed the first argument of <code>ptable_to_syntax]()</code> to <code>object</code>. It can now accepts both a <code>lavaan</code> object or a <code>lavaan</code> parameter table. (0.1.9.7)</li>
+<h3 id="new-features-0-1-9-8">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-1-9-8"></a></h3>
+<ul><li>Added <code><a href="../reference/ptable_to_syntax.html">ptable_to_syntax()</a></code> for converting a <code>lavaan</code> parameter table to a <code>lavaan</code> model syntax. (0.1.9.1 - 0.1.9.6).</li>
+<li>Renamed the first argument of <code><a href="../reference/ptable_to_syntax.html">ptable_to_syntax()</a></code> to <code>object</code>. It can now accepts both a <code>lavaan</code> object or a <code>lavaan</code> parameter table. (0.1.9.7)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="others-0-1-9-8">Others<a class="anchor" aria-label="anchor" href="#others-0-1-9-8"></a></h3>
+<ul><li>Fixed some typos in <code>NEWS.md</code>. (0.1.9.8)</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.9" id="semhelpinghands-019">semhelpinghands 0.1.9<a class="anchor" aria-label="anchor" href="#semhelpinghands-019"></a></h2><p class="text-muted">CRAN release: 2023-09-17</p>
 <div class="section level3">
 <h3 id="new-features-0-1-9">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-1-9"></a></h3>
-<ul><li>Added <code><a href="../reference/standardizedSolution_boot_ci.html">store_boot_est_std()</a></code> and <code><a href="../reference/store_boot_def.html">store_boot_def()</a></code> for computing and storing bootstrap estimates of the standardized solution and user parameters, respectively. Added <code><a href="../reference/standardizedSolution_boot_ci.html">get_boot_est_std()</a></code> and <code>get-boot_def()</code> to extract the computed estimates. (0.1.8.2, 0.1.8.3, 0.1.8.5).</li>
+<ul><li>Added <code><a href="../reference/standardizedSolution_boot_ci.html">store_boot_est_std()</a></code> and <code><a href="../reference/store_boot_def.html">store_boot_def()</a></code> for computing and storing bootstrap estimates of the standardized solution and user parameters, respectively. Added <code><a href="../reference/standardizedSolution_boot_ci.html">get_boot_est_std()</a></code> and <code><a href="../reference/store_boot_def.html">get_boot_def()</a></code> to extract the computed estimates. (0.1.8.2, 0.1.8.3, 0.1.8.5).</li>
 <li>Set the class of the output of <code><a href="../reference/standardizedSolution_boot_ci.html">standardizedSolution_boot_ci()</a></code> to <code>std_solution_boot</code>, with a print method for printing the output as in the printout of the summary output of a <code>lavaan-class</code> object. (0.1.8.4)</li>
 <li>Added <code><a href="../reference/plot_boot.html">plot_boot()</a></code> for diagnostic plots for bootstrapping, similiar to those for the output of <code><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot::boot()</a></code>. Can be used for <code>lavaan</code>’s bootstrap estimates for free parameters, user-defined parameters (stored by <code><a href="../reference/store_boot_def.html">store_boot_def()</a></code>), or standardized solution (stored by <code><a href="../reference/standardizedSolution_boot_ci.html">store_boot_est_std()</a></code>). Also added an article to the <code>pkgdown</code> website (0.1.8.6, 0.1.8.10).</li>
 </ul></div>
