@@ -110,7 +110,7 @@
 #' parameter table will be extracted
 #' from it.
 #'
-#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
+#' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>.
 #' This function is inspired by
 #' a discussion at the Google Group
 #' <https://groups.google.com/g/lavaan/c/1ueFiue9qLM/m/cJhxDoqeBAAJ>.
