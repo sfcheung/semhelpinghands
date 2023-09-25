@@ -16,7 +16,7 @@ lavaan parameter table."><meta property="og:image" content="https://sfcheung.git
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,9 +78,11 @@ Table to a 'lavaan' Model Syntax</h1>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>fit</dt>
-<dd><p>A <code>lavaan</code> parameter table.
-For example, the output of
-<code><a href="https://rdrr.io/pkg/lavaan/man/model.syntax.html" class="external-link">lavaan::parameterTable()</a></code>.</p></dd>
+<dd><p>A <code>lavaan</code> object, such
+as the output of <code><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">lavaan::sem()</a></code>
+or <code><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">lavaan::cfa()</a></code>.
+The parameter table will be extracted
+from it by <code><a href="https://rdrr.io/pkg/lavaan/man/model.syntax.html" class="external-link">lavaan::parameterTable()</a></code>.</p></dd>
 
 
 <dt>object1</dt>
