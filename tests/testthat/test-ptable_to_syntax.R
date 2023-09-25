@@ -131,3 +131,30 @@ fit <- sem(mod, data = HolzingerSwineford1939, ordered = "x5c")
 test_that("partable_to_syntax", {
     expect_error(ptable_to_syntax(fit))
   })
+
+# Formative indicators
+
+HS.model <- ' visual  <~ x1 + x2 + x3
+              textual <~ x4 + x5 + x6
+              speed   =~ x7 + x8 + x9
+              speed ~ visual + textual'
+
+fit <- sem(HS.model, data = HolzingerSwineford1939, do.fit = FALSE)
+
+test_that("partable_to_syntax", {
+    expect_error(ptable_to_syntax(fit))
+  })
+
+# Use equal()
+
+mod <-
+"
+x4 ~ x1 + x2 + b*x3
+x5 ~ equal('x4 ~ x1') * x1 + x2
+"
+
+fit <- sem(mod, data = HolzingerSwineford1939)
+
+test_that("partable_to_syntax", {
+    expect_error(ptable_to_syntax(fit))
+  })
