@@ -19,12 +19,14 @@ d8 == d2
 fit <- sem(mod, data = HolzingerSwineford1939)
 
 mod_chk <- ptable_to_syntax(fit)
+mod_chk2 <- ptable_to_syntax(parameterTable(fit))
 fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
 
 ptable1 <- parameterTable(fit)
 ptable2 <- parameterTable(fit_chk)
 
 test_that("partable_to_syntax", {
+    expect_identical(mod_chk, mod_chk2)
     expect_true(compare_ptables(ptable1, ptable2))
   })
 
@@ -40,12 +42,14 @@ x4 ~~ .3 * x5
 fit <- sem(mod, data = HolzingerSwineford1939)
 ptable <- parameterTable(fit)
 mod_chk <- ptable_to_syntax(fit)
+mod_chk2 <- ptable_to_syntax(ptable)
 fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
 
 ptable1 <- parameterTable(fit)
 ptable2 <- parameterTable(fit_chk)
 
 test_that("partable_to_syntax", {
+    expect_identical(mod_chk, mod_chk2)
     expect_true(compare_ptables(ptable1, ptable2))
   })
 
@@ -62,12 +66,14 @@ x1 ~~ a * x1
 fit <- sem(mod, data = HolzingerSwineford1939, fixed.x = FALSE)
 
 mod_chk <- ptable_to_syntax(fit)
+mod_chk2 <- ptable_to_syntax(parameterTable(fit))
 fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
 
 ptable1 <- parameterTable(fit)
 ptable2 <- parameterTable(fit_chk)
 
 test_that("partable_to_syntax", {
+    expect_identical(mod_chk, mod_chk2)
     expect_true(compare_ptables(ptable1, ptable2))
   })
 
@@ -93,12 +99,14 @@ fit <- sem(mod, data = HolzingerSwineford1939,
            meanstructure = TRUE)
 
 mod_chk <- ptable_to_syntax(fit)
+mod_chk2 <- ptable_to_syntax(parameterTable(fit))
 fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
 
 ptable1 <- parameterTable(fit)
 ptable2 <- parameterTable(fit_chk)
 
 test_that("partable_to_syntax", {
+    expect_identical(mod_chk, mod_chk2)
     expect_true(compare_ptables(ptable1, ptable2))
   })
 
@@ -111,9 +119,32 @@ x5 ~ x1 + x2
 "
 
 fit <- sem(mod, data = HolzingerSwineford1939, group = "school")
+ptable <- parameterTable(fit)
 
 test_that("partable_to_syntax", {
     expect_error(ptable_to_syntax(fit))
+    expect_error(ptable_to_syntax_check_ptable(ptable))
+  })
+
+# Multilevel models
+
+# Adapted from https://lavaan.ugent.be/tutorial/multilevel.html
+
+model <- '
+level: 1
+    fw =~ y1 + y2 + y3
+    fw ~ x1 + x2 + x3
+level: 2
+    fb =~ y1 + y2 + y3
+    fb ~ w1 + w2
+'
+
+fit <- sem(model = model, data = Demo.twolevel, cluster = "cluster", do.fit = FALSE)
+ptable <- parameterTable(fit)
+
+test_that("partable_to_syntax", {
+    expect_error(ptable_to_syntax(fit))
+    expect_error(ptable_to_syntax_check_ptable(ptable))
   })
 
 # Categorical variables
@@ -127,9 +158,11 @@ x5c ~ x1 + x2
 "
 
 fit <- sem(mod, data = HolzingerSwineford1939, ordered = "x5c")
+ptable <- parameterTable(fit)
 
 test_that("partable_to_syntax", {
     expect_error(ptable_to_syntax(fit))
+    expect_error(ptable_to_syntax_check_ptable(ptable))
   })
 
 # Formative indicators
@@ -140,9 +173,11 @@ HS.model <- ' visual  <~ x1 + x2 + x3
               speed ~ visual + textual'
 
 fit <- sem(HS.model, data = HolzingerSwineford1939, do.fit = FALSE)
+ptable <- parameterTable(fit)
 
 test_that("partable_to_syntax", {
     expect_error(ptable_to_syntax(fit))
+    expect_error(ptable_to_syntax_check_ptable(ptable))
   })
 
 # Use equal()
@@ -154,7 +189,9 @@ x5 ~ equal('x4 ~ x1') * x1 + x2
 "
 
 fit <- sem(mod, data = HolzingerSwineford1939)
+ptable <- parameterTable(fit)
 
 test_that("partable_to_syntax", {
     expect_error(ptable_to_syntax(fit))
+    expect_error(ptable_to_syntax_check_ptable(ptable))
   })
