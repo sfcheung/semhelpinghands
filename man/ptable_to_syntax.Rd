@@ -6,16 +6,19 @@
 \title{Convert a 'lavaan' Parameter
 Table to a 'lavaan' Model Syntax}
 \usage{
-ptable_to_syntax(fit)
+ptable_to_syntax(object)
 
 compare_ptables(object1, object2)
 }
 \arguments{
-\item{fit}{A \code{lavaan} object, such
+\item{object}{If set to a \code{lavaan}
+object, such
 as the output of \code{\link[lavaan:sem]{lavaan::sem()}}
-or \code{\link[lavaan:cfa]{lavaan::cfa()}}.
-The parameter table will be extracted
-from it by \code{\link[lavaan:lavParTable]{lavaan::parameterTable()}}.}
+or \code{\link[lavaan:cfa]{lavaan::cfa()}}, the parameter
+table will be extracted
+from it by \code{\link[lavaan:lavParTable]{lavaan::parameterTable()}}.
+If set to a parameter table, it will
+be used to generate the model syntax.}
 
 \item{object1}{The first \code{lavaan}
 parameter table, to be compared with
