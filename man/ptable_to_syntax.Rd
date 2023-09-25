@@ -11,9 +11,11 @@ ptable_to_syntax(fit)
 compare_ptables(object1, object2)
 }
 \arguments{
-\item{fit}{A \code{lavaan} parameter table.
-For example, the output of
-\code{\link[lavaan:lavParTable]{lavaan::parameterTable()}}.}
+\item{fit}{A \code{lavaan} object, such
+as the output of \code{\link[lavaan:sem]{lavaan::sem()}}
+or \code{\link[lavaan:cfa]{lavaan::cfa()}}.
+The parameter table will be extracted
+from it by \code{\link[lavaan:lavParTable]{lavaan::parameterTable()}}.}
 
 \item{object1}{The first \code{lavaan}
 parameter table, to be compared with

@@ -88,9 +88,11 @@
 #' in form. `FALSE` if they are
 #' not identical.
 #'
-#' @param fit A `lavaan` parameter table.
-#' For example, the output of
-#' [lavaan::parameterTable()].
+#' @param fit A `lavaan` object, such
+#' as the output of [lavaan::sem()]
+#' or [lavaan::cfa()].
+#' The parameter table will be extracted
+#' from it by [lavaan::parameterTable()].
 #'
 #' @param object1 The first `lavaan`
 #' parameter table, to be compared with
