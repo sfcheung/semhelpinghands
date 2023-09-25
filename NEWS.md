@@ -1,11 +1,16 @@
-# semhelpinghands 0.1.9.6
+# semhelpinghands 0.1.9.7
 
 ## New Features
 
 - Added `ptable_to_syntax]()` for
   converting a `lavaan` parameter
   table to a `lavaan` model syntax.
-  (0.1.9.1 - 0.1.9.6)
+  (0.1.9.1 - 0.1.9.6).
+- Renamed the first argument of
+  `ptable_to_syntax]()` to `object`.
+  It can now accepts both a
+  `lavaan` object or a `lavaan`
+  parameter table. (0.1.9.7)
 
 
 # semhelpinghands 0.1.9
