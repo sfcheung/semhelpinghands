@@ -129,7 +129,7 @@ library(lavaan)
 
 mod <-
 "
-visual  =~ x3 + x1 + x3
+visual  =~ x3 + x1 + x2
 textual =~ x4 + x6 + x5
 speed   =~ x7 + x8 + x9 + start(0.1) * x6
 visual ~ a*textual
