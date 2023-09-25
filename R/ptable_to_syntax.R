@@ -88,11 +88,14 @@
 #' in form. `FALSE` if they are
 #' not identical.
 #'
-#' @param fit A `lavaan` object, such
+#' @param object If set to a `lavaan`
+#' object, such
 #' as the output of [lavaan::sem()]
-#' or [lavaan::cfa()].
-#' The parameter table will be extracted
+#' or [lavaan::cfa()], the parameter
+#' table will be extracted
 #' from it by [lavaan::parameterTable()].
+#' If set to a parameter table, it will
+#' be used to generate the model syntax.
 #'
 #' @param object1 The first `lavaan`
 #' parameter table, to be compared with
@@ -154,15 +157,23 @@
 #'
 #' @export
 #'
-ptable_to_syntax <- function(fit) {
-    if (!ptable_to_syntax_check_fit(fit)) {
-        stop("The model in 'fit' is not supported.")
+ptable_to_syntax <- function(object) {
+    if (inherits(object, "lavaan")) {
+        if (!ptable_to_syntax_check_fit(object)) {
+            stop("The model in 'fit' is not supported.")
+          }
+        ptable <- lavaan::parameterTable(object)
+        names_lv <- lavaan::lavNames(object, "lv.regular")
+        names_eqs_y <- lavaan::lavNames(object, "eqs.y")
+      } else {
+        ptable <- object
+        if (!ptable_to_syntax_check_ptable(ptable)) {
+            stop("The parameter table in 'fit' is not supported.")
+          }
+        names_lv <- pt_lavNames_lv_regular(ptable)
+        names_eqs_y <- pt_lavNames_eqs_y(ptable)
       }
 
-    ptable <- lavaan::parameterTable(fit)
-
-    names_lv <- lavaan::lavNames(fit, "lv.regular")
-    names_eqs_y <- lavaan::lavNames(fit, "eqs.y")
     names_def <- unname(ptable[ptable$op == ":=",
                         "lhs", drop = TRUE])
 
@@ -312,6 +323,44 @@ ptable_to_syntax_check_fit <- function(fit) {
       }
     TRUE
   }
+
+#' @noRd
+
+ptable_to_syntax_check_ptable <- function(ptable) {
+    if (!is.null(ptable$group)) {
+        if (max(ptable$group) != 1) {
+            stop("Multigroup models not supported.")
+          }
+      }
+    if (!is.null(ptable$level)) {
+        if (max(ptable$level) != 1)
+        stop("Multilevel models not supported.")
+      }
+    # if (!all(lavaan::lavTech(fit, "nclusters") == 1)) {
+    #     stop("Models with clusters not supported.")
+    #   }
+    if ("|" %in% ptable$op) {
+        stop("Models with ordinal variables not supported.")
+      }
+    if ("<~" %in% ptable$op) {
+        stop("Models with operator '<~' not supported.")
+      }
+    ptmp <- ptable
+    ptmp$label <- ""
+    coef_names <- lavaan::lav_partable_labels(ptmp)
+    user_labels <- setdiff(ptable$label, "")
+    if (any(user_labels %in% coef_names)) {
+        stop("Does not support constraints imposed by 'equal()'.")
+      }
+    if (any(sapply(ptable$label, any_space))) {
+        stop("Does not support labels with spaces.")
+      }
+    if (any(sapply(ptable$label, any_op))) {
+        stop("Does not support labels with syntax operators.")
+      }
+    TRUE
+  }
+
 
 #' @noRd
 
@@ -612,4 +661,20 @@ any_op <- function(x) {
         return(TRUE)
       }
     return(FALSE)
+  }
+
+#' @noRd
+
+pt_lavNames_lv_regular <- function(ptable) {
+    out0 <- unique(ptable[ptable$op == "=~", "lhs",
+                          drop = TRUE])
+    out0
+  }
+
+#' @noRd
+
+pt_lavNames_eqs_y <- function(ptable) {
+    out0 <- unique(ptable[ptable$op == "~", "lhs",
+                          drop = TRUE])
+    out0
   }
