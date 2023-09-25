@@ -156,7 +156,7 @@ compare_ptables(ptable1, ptable2)
 \code{\link[lavaan:lavaan]{lavaan::lavaan()}}, \code{\link[lavaan:lavParTable]{lavaan::parameterTable()}}
 }
 \author{
-Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}
+Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}.
 This function is inspired by
 a discussion at the Google Group
 \url{https://groups.google.com/g/lavaan/c/1ueFiue9qLM/m/cJhxDoqeBAAJ}.
