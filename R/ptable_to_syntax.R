@@ -210,7 +210,8 @@ ptable_to_syntax <- function(object,
     if (length(names_eqs_y) != 0) {
         out_y <- sapply(names_eqs_y,
                         mod_y,
-                        ptable = ptable)
+                        ptable = ptable,
+                        is_incomplete = is_incomplete)
 
       } else {
         out_y <- character(0)
@@ -220,7 +221,8 @@ ptable_to_syntax <- function(object,
     if (length(names_def) != 0) {
         out_def <- sapply(names_def,
                           mod_def,
-                          ptable = ptable)
+                          ptable = ptable,
+                          is_incomplete = is_incomplete)
       } else {
         out_def <- character(0)
       }
@@ -538,7 +540,22 @@ mod_eq <- function(ptable) {
 
 #' @noRd
 
-mod_def <- function(ptable, def) {
+mod_def <- function(ptable, def, is_incomplete) {
+    if (missing(is_incomplete)) {
+        stop("'is_incomplete' must be set.")
+      }
+    if (is_incomplete) {
+        return(inc_def(ptable = ptable,
+                       def = def))
+      } else {
+        return(pt_def(ptable = ptable,
+                      def = def))
+      }
+  }
+
+#' @noRd
+
+pt_def <- function(ptable, def) {
     pt0 <- ptable[(ptable$op == ":="), , drop = FALSE]
     k <- nrow(pt0 > 0)
     out0 <- character(0)
@@ -628,28 +645,26 @@ inc_y <- function(ptable, eqs_y) {
     if (k > 0) {
         for (i in seq_len(k)) {
             pt_i <- pt0[i, ]
-            if (pt_i$free == 0) {
-                out0 <- c(out0,
-                          paste0(pt_i$ustart,
-                                  "*",
-                                  pt_i$rhs))
+            if (pt_i$label != "") {
+                outi <- paste0(pt_i$label,
+                                "*",
+                                pt_i$rhs)
               } else {
-                if (pt_i$label != "") {
-                    outi <- paste0(pt_i$label,
-                                   "*",
-                                   pt_i$rhs)
-                  } else {
-                    outi <- pt_i$rhs
-                  }
-                if (!is.na(pt_i$ustart)) {
-                    outi <- paste0("start(",
-                                   pt_i$ustart,
-                                   ")*",
-                                   outi)
-                  }
-                out0 <- c(out0,
-                          outi)
+                outi <- pt_i$rhs
               }
+            if (pt_i$start != "") {
+                outi <- paste0("start(",
+                                pt_i$start,
+                                ")*",
+                                outi)
+              }
+            if (pt_i$fixed != "") {
+                outi <- paste0(pt_i$fixed,
+                               "*",
+                               outi)
+              }
+            out0 <- c(out0,
+                      outi)
           }
       } else {
         return(out0)
@@ -748,11 +763,16 @@ inc_ind <- function(ptable, lv) {
               } else {
                 outi <- pt_i$rhs
               }
-            if (pt_i$fixed != "") {
+            if (pt_i$start != "") {
                 outi <- paste0("start(",
-                                pt_i$fixed,
-                                ")*",
-                                outi)
+                               pt_i$start,
+                               ")*",
+                               outi)
+              }
+            if (pt_i$fixed != "") {
+                outi <- paste0(pt_i$fixed,
+                               "*",
+                               outi)
               }
             out0 <- c(out0,
                       outi)
