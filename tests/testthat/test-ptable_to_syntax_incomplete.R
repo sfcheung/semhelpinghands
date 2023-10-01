@@ -16,26 +16,21 @@ speed ~ start(0.1) * b*visual + start(NA) * textual + ageyr
 ab: = a * b
 d2 == d5
 d8 == d2
+x4 ~1
+x7 ~ .5*1
+x9 ~ i9*1
+x5 ~ start(.2) * 1
 "
 
 pt_incomplete <- lavParseModelString(mod,
                                      as.data.frame. = TRUE)
-fit <- sem(mod, data = HolzingerSwineford1939)
-ptable <- parameterTable(fit)
-mod_chk <- ptable_to_syntax(mod_incomplete)
-
-
-# TO PROCESS
-
-mod_chk2 <- ptable_to_syntax(parameterTable(fit))
-fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
-
-ptable1 <- parameterTable(fit)
-ptable2 <- parameterTable(fit_chk)
+fit_chk <- sem(mod, data = HolzingerSwineford1939)
+mod_chk <- ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE)
+fit <- sem(mod_chk, data = HolzingerSwineford1939)
 
 test_that("partable_to_syntax", {
-    expect_identical(mod_chk, mod_chk2)
-    expect_true(compare_ptables(ptable1, ptable2))
+    expect_identical(coef(fit),
+                     coef(fit_chk))
   })
 
 # Path Model
@@ -47,18 +42,15 @@ x5 ~ a * x1 + x2
 x4 ~~ .3 * x5
 "
 
-fit <- sem(mod, data = HolzingerSwineford1939)
-ptable <- parameterTable(fit)
-mod_chk <- ptable_to_syntax(fit)
-mod_chk2 <- ptable_to_syntax(ptable)
-fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
-
-ptable1 <- parameterTable(fit)
-ptable2 <- parameterTable(fit_chk)
+pt_incomplete <- lavParseModelString(mod,
+                                     as.data.frame. = TRUE)
+fit_chk <- sem(mod, data = HolzingerSwineford1939)
+mod_chk <- ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE)
+fit <- sem(mod_chk, data = HolzingerSwineford1939)
 
 test_that("partable_to_syntax", {
-    expect_identical(mod_chk, mod_chk2)
-    expect_true(compare_ptables(ptable1, ptable2))
+    expect_identical(coef(fit),
+                     coef(fit_chk))
   })
 
 # Path Model
@@ -71,18 +63,16 @@ x4 ~~ .3 * x5
 x1 ~~ a * x1
 "
 
-fit <- sem(mod, data = HolzingerSwineford1939, fixed.x = FALSE)
-
-mod_chk <- ptable_to_syntax(fit)
-mod_chk2 <- ptable_to_syntax(parameterTable(fit))
-fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
-
-ptable1 <- parameterTable(fit)
-ptable2 <- parameterTable(fit_chk)
+pt_incomplete <- lavParseModelString(mod,
+                                     as.data.frame. = TRUE,
+                                     warn = FALSE)
+fit_chk <- sem(mod, data = HolzingerSwineford1939, warn = FALSE)
+mod_chk <- ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE)
+fit <- sem(mod_chk, data = HolzingerSwineford1939, warn = FALSE)
 
 test_that("partable_to_syntax", {
-    expect_identical(mod_chk, mod_chk2)
-    expect_true(compare_ptables(ptable1, ptable2))
+    expect_identical(coef(fit),
+                     coef(fit_chk))
   })
 
 # SEM
@@ -103,20 +93,20 @@ x2 ~ start(.6) * b*1
 x4 ~ b*1
 "
 
-fit <- sem(mod, data = HolzingerSwineford1939,
-           meanstructure = TRUE)
-
-mod_chk <- ptable_to_syntax(fit)
-mod_chk2 <- ptable_to_syntax(parameterTable(fit))
-fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
-
-ptable1 <- parameterTable(fit)
-ptable2 <- parameterTable(fit_chk)
+pt_incomplete <- lavParseModelString(mod,
+                                     as.data.frame. = TRUE,
+                                     warn = FALSE)
+fit_chk <- sem(mod, data = HolzingerSwineford1939, warn = FALSE)
+mod_chk <- ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE)
+fit <- sem(mod_chk, data = HolzingerSwineford1939, warn = FALSE)
 
 test_that("partable_to_syntax", {
-    expect_identical(mod_chk, mod_chk2)
-    expect_true(compare_ptables(ptable1, ptable2))
+    expect_identical(coef(fit),
+                     coef(fit_chk))
   })
+
+# TO PROCESS
+
 
 # Multiple Group Models
 

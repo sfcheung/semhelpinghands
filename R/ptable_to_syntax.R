@@ -176,7 +176,7 @@ ptable_to_syntax <- function(object,
       } else if (inherits(object, "data.frame") &&
                  !inherits(object, "lavaan.data.frame")) {
         if (!allow_incomplete) {
-            stop("Object may be an incomplete parameter table",
+            stop("Object may be an incomplete parameter table ",
                  "but 'allow_incomplete' is FALSE.")
           }
         is_incomplete <- TRUE
@@ -193,8 +193,11 @@ ptable_to_syntax <- function(object,
         names_eqs_y <- pt_lavNames_eqs_y(ptable)
       }
 
-    names_def <- unname(ptable[ptable$op == ":=",
-                        "lhs", drop = TRUE])
+    if (is_incomplete) {
+        names_def <- inc_lavNames_def(ptable)
+      } else {
+        names_def <- pt_lavNames_def(ptable)
+      }
 
     # lv
     if (length(names_lv) != 0) {
@@ -228,13 +231,16 @@ ptable_to_syntax <- function(object,
       }
 
     # constraints
-    out_eq <- mod_eq(ptable)
+    out_eq <- mod_eq(ptable,
+                     is_incomplete = is_incomplete)
 
     # covariances and variances
-    out_cov <- mod_cov(ptable)
+    out_cov <- mod_cov(ptable,
+                       is_incomplete = is_incomplete)
 
     # intercepts
-    out_int <- mod_int(ptable)
+    out_int <- mod_int(ptable,
+                       is_incomplete = is_incomplete)
 
     out <- c(out_lv,
              out_y,
@@ -423,9 +429,24 @@ update_plabel <- function(pt,
     pt
   }
 
+
 #' @noRd
 
-mod_int <- function(ptable) {
+mod_int <- function(ptable, is_incomplete) {
+    if (missing(is_incomplete)) {
+        stop("'is_incomplete' must be set.")
+      }
+    if (is_incomplete) {
+        return(inc_int(ptable = ptable))
+      } else {
+        return(pt_int(ptable = ptable))
+      }
+  }
+
+
+#' @noRd
+
+pt_int <- function(ptable) {
     pt0 <- ptable[(ptable$op == "~1"), , drop = FALSE]
     k <- nrow(pt0)
     out0 <- character(0)
@@ -469,7 +490,61 @@ mod_int <- function(ptable) {
 
 #' @noRd
 
-mod_cov <- function(ptable) {
+inc_int <- function(ptable) {
+    pt0 <- ptable[(ptable$op == "~1"), , drop = FALSE]
+    k <- nrow(pt0 > 0)
+    out0 <- character(0)
+    if (k > 0) {
+        for (i in seq_len(k)) {
+            pt_i <- pt0[i, ]
+            if (pt_i$label != "") {
+                outi <- paste0(pt_i$label,
+                                "*",
+                                "1")
+              } else {
+                outi <- "1"
+              }
+            if (pt_i$start != "") {
+                outi <- paste0("start(",
+                                pt_i$start,
+                                ")*",
+                                outi)
+              }
+            if (pt_i$fixed != "") {
+                outi <- paste0(pt_i$fixed,
+                               "*",
+                               outi)
+              }
+            outi <- paste(pt_i$lhs,
+                          "~",
+                          outi)
+            out0 <- c(out0,
+                      outi)
+          }
+      } else {
+        return(out0)
+      }
+    out0
+  }
+
+
+
+#' @noRd
+
+mod_cov <- function(ptable, is_incomplete) {
+    if (missing(is_incomplete)) {
+        stop("'is_incomplete' must be set.")
+      }
+    if (is_incomplete) {
+        return(inc_cov(ptable = ptable))
+      } else {
+        return(pt_cov(ptable = ptable))
+      }
+  }
+
+#' @noRd
+
+pt_cov <- function(ptable) {
     pt0 <- ptable[(ptable$op == "~~"), , drop = FALSE]
     k <- nrow(pt0)
     out0 <- character(0)
@@ -513,9 +588,64 @@ mod_cov <- function(ptable) {
     out0
   }
 
+
 #' @noRd
 
-mod_eq <- function(ptable) {
+inc_cov <- function(ptable) {
+    pt0 <- ptable[(ptable$op == "~~"), , drop = FALSE]
+    k <- nrow(pt0 > 0)
+    out0 <- character(0)
+    if (k > 0) {
+        for (i in seq_len(k)) {
+            pt_i <- pt0[i, ]
+            if (pt_i$label != "") {
+                outi <- paste0(pt_i$label,
+                                "*",
+                                pt_i$rhs)
+              } else {
+                outi <- pt_i$rhs
+              }
+            if (pt_i$start != "") {
+                outi <- paste0("start(",
+                                pt_i$start,
+                                ")*",
+                                outi)
+              }
+            if (pt_i$fixed != "") {
+                outi <- paste0(pt_i$fixed,
+                               "*",
+                               outi)
+              }
+            outi <- paste(pt_i$lhs,
+                          pt_i$op,
+                          outi)
+            out0 <- c(out0,
+                      outi)
+          }
+      } else {
+        return(out0)
+      }
+    out0
+  }
+
+
+#' @noRd
+
+mod_eq <- function(ptable, is_incomplete) {
+    if (missing(is_incomplete)) {
+        stop("'is_incomplete' must be set.")
+      }
+    if (is_incomplete) {
+        return(inc_eq(ptable = ptable))
+      } else {
+        return(pt_def(ptable = ptable))
+      }
+  }
+
+
+#' @noRd
+
+pt_eq <- function(ptable) {
     pt0 <- ptable[(ptable$op == "=="), , drop = FALSE]
     plabels <- setdiff(ptable$plabel, "")
     labels <- setdiff(ptable$label, "")
@@ -537,6 +667,24 @@ mod_eq <- function(ptable) {
               paste(pt0$lhs, pt0$op, pt0$rhs))
     out0
   }
+
+
+#' @noRd
+
+inc_eq <- function(ptable) {
+    con <- attr(ptable, "constraints")
+    ops <- sapply(con, function(x) x$op)
+    tmp <- ops == "=="
+    if (all(!tmp)) {
+        return(character(0))
+      }
+    con <- con[tmp]
+    out0 <- sapply(con, function(x) {
+        paste(x$lhs, x$op, x$rhs)
+      })
+    return(out0)
+  }
+
 
 #' @noRd
 
@@ -571,6 +719,24 @@ pt_def <- function(ptable, def) {
       }
     return(out0)
   }
+
+#' @noRd
+
+inc_def <- function(ptable, def) {
+    con <- attr(ptable, "constraints")
+    ops <- sapply(con, function(x) x$op)
+    tmp <- ops == ":="
+    if (all(!tmp)) {
+        return(character(0))
+      }
+    con <- con[tmp]
+    out0 <- sapply(con, function(x) {
+        paste(x$lhs, x$op, x$rhs)
+      })
+    return(out0)
+  }
+
+
 
 #' @noRd
 
@@ -853,5 +1019,30 @@ pt_lavNames_eqs_y <- function(ptable) {
 inc_lavNames_eqs_y <- function(ptable) {
     out0 <- unique(ptable[ptable$op == "~", "lhs",
                           drop = TRUE])
+    out0
+  }
+
+#' @noRd
+
+pt_lavNames_def <- function(ptable) {
+    out0 <- unname(ptable[ptable$op == ":=",
+                   "lhs", drop = TRUE])
+    out0
+  }
+
+#' @noRd
+
+inc_lavNames_def <- function(ptable) {
+    tmp1 <- attr(ptable, "constraints")
+    if (length(tmp1) == 0) {
+        return(character(0))
+      }
+    ops <- sapply(tmp1, function(x) x$op)
+    tmp2 <- ops == ":="
+    if (all(!tmp2)) {
+        return(character(0))
+      }
+    tmp3 <- tmp1[tmp2]
+    out0 <- sapply(tmp3, function(x) x$lhs)
     out0
   }
