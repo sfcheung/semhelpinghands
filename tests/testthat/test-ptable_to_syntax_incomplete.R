@@ -1,5 +1,3 @@
-skip("WIP")
-
 library(testthat)
 
 library(lavaan)
@@ -27,10 +25,14 @@ pt_incomplete <- lavParseModelString(mod,
 fit_chk <- sem(mod, data = HolzingerSwineford1939)
 mod_chk <- ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE)
 fit <- sem(mod_chk, data = HolzingerSwineford1939)
+ptable <- parameterTable(fit)
+ptable_chk <- parameterTable(fit_chk)
 
 test_that("partable_to_syntax", {
     expect_identical(coef(fit),
                      coef(fit_chk))
+    expect_true(compare_ptables(ptable,
+                                ptable_chk))
   })
 
 # Path Model
@@ -47,11 +49,16 @@ pt_incomplete <- lavParseModelString(mod,
 fit_chk <- sem(mod, data = HolzingerSwineford1939)
 mod_chk <- ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE)
 fit <- sem(mod_chk, data = HolzingerSwineford1939)
+ptable <- parameterTable(fit)
+ptable_chk <- parameterTable(fit_chk)
 
 test_that("partable_to_syntax", {
     expect_identical(coef(fit),
                      coef(fit_chk))
+    expect_true(compare_ptables(ptable,
+                                ptable_chk))
   })
+
 
 # Path Model
 
@@ -69,10 +76,14 @@ pt_incomplete <- lavParseModelString(mod,
 fit_chk <- sem(mod, data = HolzingerSwineford1939, warn = FALSE)
 mod_chk <- ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE)
 fit <- sem(mod_chk, data = HolzingerSwineford1939, warn = FALSE)
+ptable <- parameterTable(fit)
+ptable_chk <- parameterTable(fit_chk)
 
 test_that("partable_to_syntax", {
     expect_identical(coef(fit),
                      coef(fit_chk))
+    expect_true(compare_ptables(ptable,
+                                ptable_chk))
   })
 
 # SEM
@@ -99,10 +110,14 @@ pt_incomplete <- lavParseModelString(mod,
 fit_chk <- sem(mod, data = HolzingerSwineford1939, warn = FALSE)
 mod_chk <- ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE)
 fit <- sem(mod_chk, data = HolzingerSwineford1939, warn = FALSE)
+ptable <- parameterTable(fit)
+ptable_chk <- parameterTable(fit_chk)
 
 test_that("partable_to_syntax", {
     expect_identical(coef(fit),
                      coef(fit_chk))
+    expect_true(compare_ptables(ptable,
+                                ptable_chk))
   })
 
 # TO PROCESS
@@ -112,16 +127,16 @@ test_that("partable_to_syntax", {
 
 mod <-
 "
-x4 ~ x1 + x2 + x3
-x5 ~ x1 + x2
+x4 ~ x1 + c(a, a)*x2 + start(1, 2)*x3
+x5 ~ x1 + c(NA, NA)*x2
 "
 
-fit <- sem(mod, data = HolzingerSwineford1939, group = "school")
-ptable <- parameterTable(fit)
+pt_incomplete <- lavParseModelString(mod,
+                                     as.data.frame. = TRUE,
+                                     warn = FALSE)
 
 test_that("partable_to_syntax", {
-    expect_error(ptable_to_syntax(fit))
-    expect_error(ptable_to_syntax_check_ptable(ptable))
+    expect_error(ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE))
   })
 
 # Multilevel models
@@ -137,12 +152,12 @@ level: 2
     fb ~ w1 + w2
 '
 
-fit <- sem(model = model, data = Demo.twolevel, cluster = "cluster", do.fit = FALSE)
-ptable <- parameterTable(fit)
+pt_incomplete <- lavParseModelString(model,
+                                     as.data.frame. = TRUE,
+                                     warn = FALSE)
 
 test_that("partable_to_syntax", {
-    expect_error(ptable_to_syntax(fit))
-    expect_error(ptable_to_syntax_check_ptable(ptable))
+    expect_error(ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE))
   })
 
 # Categorical variables
@@ -153,15 +168,18 @@ mod <-
 "
 x4 ~ x1 + x2 + x3
 x5c ~ x1 + x2
+x5c | t1 + t2 + t3
+x4 ~*~ x4
 "
 
-fit <- sem(mod, data = HolzingerSwineford1939, ordered = "x5c")
-ptable <- parameterTable(fit)
+pt_incomplete <- lavParseModelString(mod,
+                                     as.data.frame. = TRUE,
+                                     warn = FALSE)
 
 test_that("partable_to_syntax", {
-    expect_error(ptable_to_syntax(fit))
-    expect_error(ptable_to_syntax_check_ptable(ptable))
+    expect_error(ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE))
   })
+
 
 # Formative indicators
 
@@ -170,13 +188,14 @@ HS.model <- ' visual  <~ x1 + x2 + x3
               speed   =~ x7 + x8 + x9
               speed ~ visual + textual'
 
-fit <- sem(HS.model, data = HolzingerSwineford1939, do.fit = FALSE)
-ptable <- parameterTable(fit)
+pt_incomplete <- lavParseModelString(HS.model,
+                                     as.data.frame. = TRUE,
+                                     warn = FALSE)
 
 test_that("partable_to_syntax", {
-    expect_error(ptable_to_syntax(fit))
-    expect_error(ptable_to_syntax_check_ptable(ptable))
+    expect_error(ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE))
   })
+
 
 # Use equal()
 
@@ -186,10 +205,10 @@ x4 ~ x1 + x2 + b*x3
 x5 ~ equal('x4 ~ x1') * x1 + x2
 "
 
-fit <- sem(mod, data = HolzingerSwineford1939)
-ptable <- parameterTable(fit)
+pt_incomplete <- lavParseModelString(mod,
+                                     as.data.frame. = TRUE,
+                                     warn = FALSE)
 
 test_that("partable_to_syntax", {
-    expect_error(ptable_to_syntax(fit))
-    expect_error(ptable_to_syntax_check_ptable(ptable))
+    expect_error(ptable_to_syntax(pt_incomplete, allow_incomplete = TRUE))
   })
