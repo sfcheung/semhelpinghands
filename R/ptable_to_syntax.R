@@ -521,6 +521,8 @@ mod_int <- function(ptable, is_incomplete) {
 
 pt_int <- function(ptable) {
     pt0 <- ptable[(ptable$op == "~1"), , drop = FALSE]
+    # Drop intercepts of exogenous variables
+    pt0 <- pt0[pt0$exo == 0, ]
     k <- nrow(pt0)
     out0 <- character(0)
     if (k == 0) {
@@ -529,34 +531,30 @@ pt_int <- function(ptable) {
     for (i in seq_len(k)) {
         pt_i <- pt0[i, ]
         if (pt_i$free == 0) {
-            if (is.na(pt_i$ustart)) {
-                out0 <- c(out0,
-                          character(0))
-              } else {
-                out0 <- c(out0,
-                          paste0(pt_i$lhs,
-                                 " ~ ",
-                                 pt_i$ustart,
-                                 "*1"))
-              }
+            outi1 <- paste0(pt_i$ustart,
+                            "*1")
           } else {
-            if (pt_i$label == "") {
-                outi <- paste0("1")
-              } else {
-                outi <- paste0(pt_i$label,
-                               "*1")
-              }
-            if (!is.na(pt_i$ustart)) {
-                outi <- paste0("start(",
-                               pt_i$ustart,
-                               ")*",
-                               outi)
-              }
-            out0 <- c(out0,
-                      paste0(pt_i$lhs,
-                             " ~ ",
-                             outi))
+            outi1 <- "1"
           }
+        if (pt_i$label != "") {
+            outi2 <- paste0(pt_i$label,
+                            "*1")
+          } else {
+            outi2 <- character(0)
+          }
+        if (!is.na(pt_i$ustart)) {
+            outi3 <- paste0("start(",
+                            pt_i$ustart,
+                            ")*1")
+          } else {
+            outi3 <- character(0)
+          }
+        outi <- paste(c(outi1, outi2, outi3),
+                      collapse = " + ")
+        out0 <- c(out0,
+                  paste0(pt_i$lhs,
+                         " ~ ",
+                         outi))
       }
     out0
   }
@@ -571,28 +569,30 @@ inc_int <- function(ptable) {
         for (i in seq_len(k)) {
             pt_i <- pt0[i, ]
             if (pt_i$label != "") {
-                outi <- paste0(pt_i$label,
-                                "*",
-                                "1")
+                outi1 <- paste0(pt_i$label,
+                                "*1")
               } else {
-                outi <- "1"
+                outi1 <- 1
               }
             if (pt_i$start != "") {
-                outi <- paste0("start(",
+                outi2 <- paste0("start(",
                                 pt_i$start,
-                                ")*",
-                                outi)
+                                ")*1")
+              } else {
+                outi2 <- character(0)
               }
             if (pt_i$fixed != "") {
-                outi <- paste0(pt_i$fixed,
-                               "*",
-                               outi)
+                outi3 <- paste0(pt_i$fixed,
+                                "*1")
+              } else {
+                outi3 <- character(0)
               }
-            outi <- paste(pt_i$lhs,
-                          "~",
-                          outi)
+            outi <- paste(c(outi1, outi2, outi3),
+                          collapse = " + ")
             out0 <- c(out0,
-                      outi)
+                      paste0(pt_i$lhs,
+                            " ~ ",
+                            outi))
           }
       } else {
         return(out0)
@@ -619,6 +619,8 @@ mod_cov <- function(ptable, is_incomplete) {
 
 pt_cov <- function(ptable) {
     pt0 <- ptable[(ptable$op == "~~"), , drop = FALSE]
+    # Drop variances and covariances of exogenous variables
+    pt0 <- pt0[pt0$exo == 0, ]
     k <- nrow(pt0)
     out0 <- character(0)
     if (k == 0) {
@@ -627,36 +629,33 @@ pt_cov <- function(ptable) {
     for (i in seq_len(k)) {
         pt_i <- pt0[i, ]
         if (pt_i$free == 0) {
-            if (is.na(pt_i$ustart)) {
-                out0 <- c(out0,
-                          character(0))
-              } else {
-                out0 <- c(out0,
-                          paste0(pt_i$lhs,
-                                 " ~~ ",
-                                 pt_i$ustart,
-                                 "*",
-                                 pt_i$rhs))
-              }
+            outi1 <- paste0(pt_i$ustart,
+                            "*",
+                            pt_i$rhs)
           } else {
-            if (pt_i$label != "") {
-                outi <- paste0(pt_i$label,
-                               "*",
-                               pt_i$rhs)
-              } else {
-                outi <- pt_i$rhs
-              }
-            if (!is.na(pt_i$ustart)) {
-                outi <- paste0("start(",
-                               pt_i$ustart,
-                               ")*",
-                               outi)
-              }
-            out0 <- c(out0,
-                      paste0(pt_i$lhs,
-                             " ~~ ",
-                             outi))
+            outi1 <- pt_i$rhs
           }
+        if (pt_i$label != "") {
+            outi2 <- paste0(pt_i$label,
+                            "*",
+                            pt_i$rhs)
+          } else {
+            outi2 <- character(0)
+          }
+        if (!is.na(pt_i$ustart)) {
+            outi3 <- paste0("start(",
+                            pt_i$ustart,
+                            ")*",
+                            pt_i$rhs)
+          } else {
+            outi3 <- character(0)
+          }
+        outi <- paste(c(outi1, outi2, outi3),
+                      collapse = " + ")
+        out0 <- c(out0,
+                  paste0(pt_i$lhs,
+                         " ~~ ",
+                         outi))
       }
     out0
   }
@@ -672,28 +671,33 @@ inc_cov <- function(ptable) {
         for (i in seq_len(k)) {
             pt_i <- pt0[i, ]
             if (pt_i$label != "") {
-                outi <- paste0(pt_i$label,
+                outi1 <- paste0(pt_i$label,
                                 "*",
                                 pt_i$rhs)
               } else {
-                outi <- pt_i$rhs
+                outi1 <- pt_i$rhs
               }
             if (pt_i$start != "") {
-                outi <- paste0("start(",
+                outi2 <- paste0("start(",
                                 pt_i$start,
                                 ")*",
-                                outi)
+                                pt_i$rhs)
+              } else {
+                outi2 <- character(0)
               }
             if (pt_i$fixed != "") {
-                outi <- paste0(pt_i$fixed,
-                               "*",
-                               outi)
+                outi3 <- paste0(pt_i$fixed,
+                                "*",
+                                pt_i$rhs)
+              } else {
+                outi3 <- character(0)
               }
-            outi <- paste(pt_i$lhs,
-                          pt_i$op,
-                          outi)
+            outi <- paste(c(outi1, outi2, outi3),
+                            collapse = " + ")
             out0 <- c(out0,
-                      outi)
+                      paste0(pt_i$lhs,
+                             " ~~ ",
+                             outi))
           }
       } else {
         return(out0)
@@ -838,27 +842,31 @@ pt_y <- function(ptable, eqs_y) {
         for (i in seq_len(k)) {
             pt_i <- pt0[i, ]
             if (pt_i$free == 0) {
-                out0 <- c(out0,
-                          paste0(pt_i$ustart,
-                                  "*",
-                                  pt_i$rhs))
+                outi1 <- paste0(pt_i$ustart,
+                                "*",
+                                pt_i$rhs)
               } else {
-                if (pt_i$label != "") {
-                    outi <- paste0(pt_i$label,
-                                   "*",
-                                   pt_i$rhs)
-                  } else {
-                    outi <- pt_i$rhs
-                  }
-                if (!is.na(pt_i$ustart)) {
-                    outi <- paste0("start(",
-                                   pt_i$ustart,
-                                   ")*",
-                                   outi)
-                  }
-                out0 <- c(out0,
-                          outi)
+                outi1 <- pt_i$rhs
               }
+            if (pt_i$label != "") {
+                outi2 <- paste0(pt_i$label,
+                                "*",
+                                pt_i$rhs)
+              } else {
+                outi2 <- character(0)
+              }
+            if (!is.na(pt_i$ustart)) {
+                outi3 <- paste0("start(",
+                                pt_i$ustart,
+                                ")*",
+                                pt_i$rhs)
+              } else {
+                outi3 <- character(0)
+              }
+            outi <- paste(c(outi1, outi2, outi3),
+                          collapse = " + ")
+            out0 <- c(out0,
+                      outi)
           }
       } else {
         return(out0)
@@ -885,23 +893,29 @@ inc_y <- function(ptable, eqs_y) {
         for (i in seq_len(k)) {
             pt_i <- pt0[i, ]
             if (pt_i$label != "") {
-                outi <- paste0(pt_i$label,
+                outi1 <- paste0(pt_i$label,
                                 "*",
                                 pt_i$rhs)
               } else {
-                outi <- pt_i$rhs
+                outi1 <- pt_i$rhs
               }
             if (pt_i$start != "") {
-                outi <- paste0("start(",
+                outi2 <- paste0("start(",
                                 pt_i$start,
                                 ")*",
-                                outi)
+                                pt_i$rhs)
+              } else {
+                outi2 <- character(0)
               }
             if (pt_i$fixed != "") {
-                outi <- paste0(pt_i$fixed,
-                               "*",
-                               outi)
+                outi3 <- paste0(pt_i$fixed,
+                                "*",
+                                pt_i$rhs)
+              } else {
+                outi3 <- character(0)
               }
+            outi <- paste(c(outi1, outi2, outi3),
+                          collapse = " + ")
             out0 <- c(out0,
                       outi)
           }
@@ -948,28 +962,33 @@ pt_ind <- function(ptable, lv) {
             if (pt_i$free == 0) {
                 # Must set to 1 because
                 # whether it is 1 depends on
-                # the call, if omiitted.
-                out0 <- c(out0,
-                          paste0(pt_i$ustart,
-                                  "*",
-                                  pt_i$rhs))
+                # the call, if omitted.
+                outi1 <- paste0(pt_i$ustart,
+                                "*",
+                                pt_i$rhs)
               } else {
-                if (pt_i$label != "") {
-                    outi <- paste0(pt_i$label,
-                                   "*",
-                                   pt_i$rhs)
-                  } else {
-                    outi <- pt_i$rhs
-                  }
-                if (!is.na(pt_i$ustart)) {
-                    outi <- paste0("start(",
-                                   pt_i$ustart,
-                                   ")*",
-                                   outi)
-                  }
-                out0 <- c(out0,
-                          outi)
+                outi1 <- pt_i$rhs
               }
+            if (pt_i$label != "") {
+                outi2 <- paste0(pt_i$label,
+                                "*",
+                                pt_i$rhs)
+              } else {
+                outi2 <- character(0)
+              }
+            if (!is.na(pt_i$ustart) &&
+                pt_i$free != 0) {
+                outi3 <- paste0("start(",
+                                pt_i$ustart,
+                                ")*",
+                                pt_i$rhs)
+              } else {
+                outi3 <- character(0)
+              }
+            outi <- paste(c(outi1, outi2, outi3),
+                          collapse = " + ")
+            out0 <- c(out0,
+                      outi)
           }
       } else {
         return(out0)
@@ -996,23 +1015,29 @@ inc_ind <- function(ptable, lv) {
         for (i in seq_len(k)) {
             pt_i <- pt0[i, ]
             if (pt_i$label != "") {
-                outi <- paste0(pt_i$label,
+                outi1 <- paste0(pt_i$label,
                                 "*",
                                 pt_i$rhs)
               } else {
-                outi <- pt_i$rhs
+                outi1 <- pt_i$rhs
               }
             if (pt_i$start != "") {
-                outi <- paste0("start(",
-                               pt_i$start,
-                               ")*",
-                               outi)
+                outi2 <- paste0("start(",
+                                pt_i$start,
+                                ")*",
+                                pt_i$rhs)
+              } else {
+                outi2 <- character(0)
               }
             if (pt_i$fixed != "") {
-                outi <- paste0(pt_i$fixed,
-                               "*",
-                               outi)
+                outi3 <- paste0(pt_i$fixed,
+                                "*",
+                                pt_i$rhs)
+              } else {
+                outi3 <- character(0)
               }
+            outi <- paste(c(outi1, outi2, outi3),
+                          collapse = " + ")
             out0 <- c(out0,
                       outi)
           }
