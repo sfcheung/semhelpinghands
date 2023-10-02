@@ -16,7 +16,7 @@ lavaan parameter table."><meta property="og:image" content="https://sfcheung.git
     
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9.10</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -268,9 +268,9 @@ a discussion at the Google Group
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">mod_chk</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> visual =~ 1*x3 + x1 + x2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> textual =~ 1*x4 + x6 + x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> speed =~ 1*x7 + x8 + x9 + start(0.1)*x6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> visual ~ a*textual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> speed ~ b*visual</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> speed =~ 1*x7 + x8 + x9 + x6 + start(0.1)*x6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> visual ~ textual + a*textual</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> speed ~ visual + b*visual</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ab := a*b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x3 ~~ x3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x1 ~~ x1</span>
