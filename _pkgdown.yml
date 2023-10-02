@@ -51,6 +51,7 @@ reference:
   - record_history
   - auto_cov
   - vector_from_lavaan
+  - ptable_to_syntax
 
 - title: Datasets
   desc: Datasets used in examples and vignettes.
