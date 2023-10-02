@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.9.9
+# semhelpinghands 0.1.9.10
 
 ## New Features
 
@@ -17,6 +17,10 @@
   `lavaan::lavParseModelString()`
   with `as.data.frame.` set to
   `TRUE`. (0.1.9.9)
+- Fixed a bug in `ptable_to_syntax()`
+  when a parameter has more than one
+  modifiers (e.g., `y ~ start(2)*x + b*x`)
+  (0.1.9.10)
 
 ## Others
 
