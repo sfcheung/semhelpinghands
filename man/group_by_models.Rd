@@ -32,7 +32,9 @@ object_list are the results of
 \item{col_names}{A vector of the
 column names in the parameter
 estimate tables to be included.
-Default is \code{"est"}.}
+Default is \code{"est"}, or \code{"est.std"}
+if \code{use_standardizedSolution} is
+\code{TRUE}.}
 
 \item{group_first}{If \code{TRUE}, the
 rows will be grouped by groups first

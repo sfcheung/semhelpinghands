@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.9.10
+# semhelpinghands 0.1.9.11
 
 ## New Features
 
@@ -26,6 +26,10 @@
 
 - Fixed some typos in `NEWS.md`.
   (0.1.9.8)
+- The default of `col_names` for
+  `group_by_models()` is now
+  `"est.std"` if `use_standardizedSolution`
+  is `TRUE`. (0.1.9.11)
 
 # semhelpinghands 0.1.9
 
