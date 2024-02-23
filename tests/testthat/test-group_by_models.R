@@ -97,3 +97,19 @@ test_that("Results from different outputs", {
     tmp2 <- est1[est1$lhs == "y1" & est1$rhs == "x3" & est1$group == 2, "se"]
     expect_equal(tmp1, tmp2)
   })
+
+out2 <- group_by_models(list(model1 = fit1_nogroup,
+                             model2 = fit2_nogroup),
+                             use_standardizedSolution = TRUE)
+out3 <- group_by_models(list(model1 = fit1,
+                             model2 = fit2),
+                             use_standardizedSolution = TRUE,
+                             group_first = TRUE)
+test_that("use_standardizedSolution = TRUE", {
+    expect_identical(colnames(out2),
+                     c("lhs", "op", "rhs",
+                       "est.std_model1", "est.std_model2"))
+    expect_identical(colnames(out3),
+                     c("group", "lhs", "op", "rhs",
+                       "est.std_model1", "est.std_model2"))
+  })

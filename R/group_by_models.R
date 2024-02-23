@@ -26,7 +26,9 @@
 #' @param col_names A vector of the
 #' column names in the parameter
 #' estimate tables to be included.
-#' Default is `"est"`.
+#' Default is `"est"`, or `"est.std"`
+#' if `use_standardizedSolution` is
+#' `TRUE`.
 #'
 #' @param group_first If `TRUE`, the
 #' rows will be grouped by groups first
@@ -122,6 +124,9 @@ group_by_models <- function(object_list,
     model_names <- names(object_list)
     if (output_type == "lavaan") {
         if (use_standardizedSolution) {
+            if (identical(col_names, "est")) {
+                col_names <- "est.std"
+              }
             p_est_list <- sapply(object_list,
                                 lavaan::standardizedSolution,
                                 ...,
