@@ -34,6 +34,11 @@
 #' @author Shu Fai Cheung
 #' <https://orcid.org/0000-0002-9871-9448>
 #'
+#' @seealso [fitMeasures_by_models()]
+#'
+#'
+#' @examples
+#'
 #' library(lavaan)
 #' set.seed(5478374)
 #' n <- 50
@@ -57,7 +62,7 @@
 #' fit2 <- sem(model2, data = dat, fixed.x = FALSE)
 #'
 #' out <- fitMeasures_by_models(list(no_direct = fit1,
-#'                                   direct = fit2)))
+#'                                   direct = fit2))
 #' out
 #'
 #' print(out, nd = 4, measures_compact = c("chisq", "cfi", "rmsea"))

@@ -4,7 +4,9 @@
 #' into a table with models as columns.
 #'
 #' @return A data-frame-like object of
-#' the class `fit_by_model`.
+#' the class `fit_by_models`, which
+#' has a `print` method (see
+#' [print.fit_by_models()]).
 #'
 #' @param object_list A named list of
 #' [lavaan-class] objects.
@@ -15,6 +17,8 @@
 #'
 #' @author Shu Fai Cheung
 #' <https://orcid.org/0000-0002-9871-9448>.
+#'
+#' @seealso [lavaan::fitMeasures()]
 #'
 #' @examples
 #'
@@ -41,7 +45,7 @@
 #' fit2 <- sem(model2, data = dat, fixed.x = FALSE)
 #'
 #' fitMeasures_by_models(list(no_direct = fit1,
-#'                            direct = fit2)))
+#'                            direct = fit2))
 #'
 #' @export
 
@@ -55,7 +59,7 @@ fitMeasures_by_models <- function(object_list,
         stop("object_list must be a named list.")
       }
     fm_list <- lapply(object_list,
-                      fitMeasures,
+                      lavaan::fitMeasures,
                       ...)
     out0 <- lapply(fm_list, function(xx) {
                     data.frame(short_name = names(xx),

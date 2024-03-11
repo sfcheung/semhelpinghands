@@ -50,9 +50,7 @@ in vector factor.}
 Print method for a
 'fit_by_models' object
 }
-\author{
-Shu Fai Cheung
-\url{https://orcid.org/0000-0002-9871-9448}
+\examples{
 
 library(lavaan)
 set.seed(5478374)
@@ -63,22 +61,30 @@ y <- .30 * m + rnorm(n, 0, sqrt(1 - .30))
 dat <- data.frame(x = x, y = y, m = m)
 model1 <-
 '
-m ~ a\emph{x
-y ~ b}m
-ab := a\emph{b
+m ~ a*x
+y ~ b*m
+ab := a*b
 '
 fit1 <- sem(model1, data = dat, fixed.x = FALSE)
 model2 <-
 '
-m ~ a}x
-y ~ b\emph{m + x
-ab := a}b
+m ~ a*x
+y ~ b*m + x
+ab := a*b
 '
 fit2 <- sem(model2, data = dat, fixed.x = FALSE)
 
 out <- fitMeasures_by_models(list(no_direct = fit1,
-direct = fit2)))
+                                  direct = fit2))
 out
 
 print(out, nd = 4, measures_compact = c("chisq", "cfi", "rmsea"))
+
+}
+\seealso{
+\code{\link[=fitMeasures_by_models]{fitMeasures_by_models()}}
+}
+\author{
+Shu Fai Cheung
+\url{https://orcid.org/0000-0002-9871-9448}
 }

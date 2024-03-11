@@ -16,7 +16,9 @@ passed to
 }
 \value{
 A data-frame-like object of
-the class \code{fit_by_model}.
+the class \code{fit_by_models}, which
+has a \code{print} method (see
+\code{\link[=print.fit_by_models]{print.fit_by_models()}}).
 }
 \description{
 Groups fit measures
@@ -47,8 +49,11 @@ ab := a*b
 fit2 <- sem(model2, data = dat, fixed.x = FALSE)
 
 fitMeasures_by_models(list(no_direct = fit1,
-                           direct = fit2)))
+                           direct = fit2))
 
+}
+\seealso{
+\code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}}
 }
 \author{
 Shu Fai Cheung
