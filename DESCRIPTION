@@ -1,6 +1,6 @@
 Package: semhelpinghands
 Title: Helper Functions for Structural Equation Modeling
-Version: 0.1.9.11
+Version: 0.1.9.12
 Authors@R: person(given = "Shu Fai",
            family = "Cheung",
            role = c("aut", "cre"),
@@ -32,5 +32,6 @@ Imports:
     boot,
     rlang,
     ggplot2,
-    ggrepel
+    ggrepel,
+    utils
 VignetteBuilder: knitr
