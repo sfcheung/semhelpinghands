@@ -33,36 +33,26 @@ fit2_nogroup <- sem(mod2, dat)
 fit1_nogroup_mlr <- sem(mod2, dat, group = "gp", estimator = "MLR")
 fit2_nogroup_gls <- sem(mod2, dat, group = "gp", estimator = "GLS")
 
-summary(fit1, fit.measures = TRUE, estimates = FALSE)
-summary(fit2, fit.measures = TRUE, estimates = FALSE)
-summary(fit1_nogroup, fit.measures = TRUE, estimates = FALSE)
-summary(fit2_nogroup, fit.measures = TRUE, estimates = FALSE)
-summary(fit1_mlr, fit.measures = TRUE, estimates = FALSE)
-summary(fit2_mlr, fit.measures = TRUE, estimates = FALSE)
-summary(fit1_nogroup_mlr, fit.measures = TRUE, estimates = FALSE)
-summary(fit2_nogroup_gls, fit.measures = TRUE, estimates = FALSE)
-
 fit_list <- list(fit1 = fit1, fit2_mlr = fit2_mlr)
 
-
-tmp <- fitMeasures_by_models(list(fit1 = fit1,
-                                  fit2_mlr = fit2_mlr))
-tmp
-tmp <- fitMeasures_by_models(list(fit1 = fit1,
-                                  fit2 = fit2))
-tmp
-print(tmp, remove_all_na = FALSE)
-
-tmp <- fitMeasures_by_models(list(fit1 = fit1,
-                                  fit2_mlr = fit2_mlr))
-tmp
-tmp <- fitMeasures_by_models(list(fit1 = fit1_mlr,
-                                  fit2 = fit2_mlr))
-tmp
-
-print(tmp, remove_all_na = FALSE)
-
-print(tmp, measures_compact = c("chisq", "cfi"))
-
-print(tmp, measures_compact = c("baseline.chisq", "cfi"))
-
+test_that("fitMeasures_by_models", {
+  tmp <- fitMeasures_by_models(list(fit1 = fit1,
+                                    fit2_mlr = fit2_mlr))
+  expect_true(all(c("fit1", "fit2_mlr") %in% colnames(tmp)))
+  expect_true("rmsea.robust" %in% tmp$short_name)
+  tmp <- fitMeasures_by_models(list(fit1 = fit1,
+                                    fit2 = fit2))
+  expect_false("rmsea.robust" %in% tmp$short_name)
+  tmp2 <- capture.output(print(tmp, measures_compact = c("cfi", "rmsea")))
+  expect_true(length(tmp2) == 3)
+  expect_true(!any(grepl("TLI", tmp2)))
+  expect_output(print(tmp, nd = 5), "0.00000")
+  tmp <- fitMeasures_by_models(list(fit1 = fit1,
+                                    fit2 = fit2),
+                               c("cfi", "bic"))
+  expect_true(length(setdiff(c("bic", "cfi"), tmp$short_name)) == 0)
+  tmp <- fitMeasures_by_models(list(fit1 = fit1,
+                                    fit2 = fit2),
+                               output = "text")
+  expect_true(length(dim(tmp)) == 2)
+})
