@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.9.11
+# semhelpinghands 0.1.9.12
 
 ## New Features
 
@@ -21,6 +21,14 @@
   when a parameter has more than one
   modifiers (e.g., `y ~ start(2)*x + b*x`)
   (0.1.9.10)
+- Added `fitMeasures_by_models()`,
+  with a print method (`print.fit_by_models()`).
+  Generate a compact table of the fit
+  measures for two or more models, with
+  models as the columns. For quick
+  preview and comparison.
+  (0.1.9.12)
+
 
 ## Others
 

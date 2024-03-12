@@ -33,6 +33,8 @@ reference:
 - contents:
   - compare_estimators
   - se_ratios
+  - fitMeasures_by_models
+  - print.fit_by_models
 - title: Bootstrapping
 - contents:
   - standardizedSolution_boot_ci
