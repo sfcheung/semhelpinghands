@@ -78,9 +78,17 @@ fitMeasures_by_models <- function(object_list,
     if (is.null(names(object_list))) {
         stop("object_list must be a named list.")
       }
+    fm_args <- list(...)
+    utils::modifyList(fm_args,
+                      list(output = "vector"))
     fm_list <- lapply(object_list,
-                      lavaan::fitMeasures,
-                      ...)
+                      function(x, fm_args) {
+                          fm_args1 <- utils::modifyList(fm_args,
+                                        list(object = x))
+                          do.call(lavaan::fitMeasures,
+                                  fm_args1)
+                        },
+                      fm_args = fm_args)
     out0 <- lapply(fm_list, function(xx) {
                     data.frame(short_name = names(xx),
                                long_name = rep("", length(xx)),
