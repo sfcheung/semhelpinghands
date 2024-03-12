@@ -24,6 +24,26 @@ has a \code{print} method (see
 Groups fit measures
 into a table with models as columns.
 }
+\details{
+It call \code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}} to
+compute for each model the fit
+measures supported by \code{lavaan}, and
+combine them into a data frame. Users
+can then use the print method
+(\code{\link[=print.fit_by_models]{print.fit_by_models()}}) to customize
+the printout.
+
+To be consist with full \code{lavaan}
+output, the names used in
+\code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}} are used.
+
+This function is intended for
+a simple and compact table of
+fit measures for quick preview.
+For a well-organized
+layout, call \code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}}
+and set \code{output} to \code{"text"}.
+}
 \examples{
 
 library(lavaan)

@@ -3,6 +3,19 @@
 #' @description Print method for a
 #' 'fit_by_models' object
 #'
+#' @details
+#' This function is intended to
+#' print the fit measures of one or
+#' more groups in a  simple and
+#' compact table for quick preview.
+#' For a well-organized
+#' layout, call [lavaan::fitMeasures()]
+#' and set `output` to `"text"`. For
+#' comparing the models with notations
+#' on models with the best fit on
+#' each measures, use
+#' [semTools::compareFit()].
+#'
 #' @param x Object of the class
 #' `fit_by_models`.
 #'
@@ -26,7 +39,7 @@
 #' vector of fit measures to be
 #' printed. The names should be the names
 #' of the output of [lavaan::fitMeasures()],
-#' in vector factor.
+#' in vector form.
 #'
 #' @return
 #'  `x` is returned invisibly. Called for its side effect.

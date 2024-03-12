@@ -3,6 +3,26 @@
 #' @description Groups fit measures
 #' into a table with models as columns.
 #'
+#' @details
+#' It call [lavaan::fitMeasures()] to
+#' compute for each model the fit
+#' measures supported by `lavaan`, and
+#' combine them into a data frame. Users
+#' can then use the print method
+#' ([print.fit_by_models()]) to customize
+#' the printout.
+#'
+#' To be consist with full `lavaan`
+#' output, the names used in
+#' [lavaan::fitMeasures()] are used.
+#'
+#' This function is intended for
+#' a simple and compact table of
+#' fit measures for quick preview.
+#' For a well-organized
+#' layout, call [lavaan::fitMeasures()]
+#' and set `output` to `"text"`.
+#'
 #' @return A data-frame-like object of
 #' the class `fit_by_models`, which
 #' has a `print` method (see

@@ -41,7 +41,7 @@ removed. Default is \code{TRUE}.}
 vector of fit measures to be
 printed. The names should be the names
 of the output of \code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}},
-in vector factor.}
+in vector form.}
 }
 \value{
 \code{x} is returned invisibly. Called for its side effect.
@@ -49,6 +49,19 @@ in vector factor.}
 \description{
 Print method for a
 'fit_by_models' object
+}
+\details{
+This function is intended to
+print the fit measures of one or
+more groups in a  simple and
+compact table for quick preview.
+For a well-organized
+layout, call \code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}}
+and set \code{output} to \code{"text"}. For
+comparing the models with notations
+on models with the best fit on
+each measures, use
+\code{\link[semTools:compareFit]{semTools::compareFit()}}.
 }
 \examples{
 
