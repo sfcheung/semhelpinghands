@@ -190,9 +190,7 @@ standardizedSolution_boot_ci <- function(object,
                       R = nrow(out_all))
     # Adapted from boot
     boot_ci <- sapply(seq_along(est_org), function(x) {
-                          if (all(abs(out_all[, x] -
-                                      mean(out_all[, x], na.rm = TRUE)) <
-                                      1e-8) ||
+                          if (isTRUE(all.equal(stats::var(out_all[, x], na.rm = TRUE), 0)) ||
                               all(is.na(out_all[, x]))) {
                               return(c(NA, NA))
                             }
