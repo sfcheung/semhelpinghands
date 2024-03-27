@@ -1,3 +1,13 @@
+# semhelpinghands 0.1.10.1
+
+## Others
+
+- Revised `standardizedSolution_boot_ci()`
+  to handle unusual cases in which the
+  bootstrap estimates in the
+  standardized solution cannot be
+  computed. (0.1.10.1)
+
 # semhelpinghands 0.1.10
 
 ## New Features
