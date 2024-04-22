@@ -1,12 +1,15 @@
-# semhelpinghands 0.1.10.1
+# semhelpinghands 0.1.11
 
-## Others
+## Minor Fixes
 
 - Revised `standardizedSolution_boot_ci()`
   to handle unusual cases in which the
   bootstrap estimates in the
   standardized solution cannot be
   computed. (0.1.10.1)
+- Corrected some model specifications
+  that are incompatible with the new
+  parser of `lavaan`. (0.1.10.2)
 
 # semhelpinghands 0.1.10
 

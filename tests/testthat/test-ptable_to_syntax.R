@@ -11,7 +11,7 @@ textual =~ x4 + x6 + d5*x5
 speed   =~ x7 + d8*x8 + d9*x9 + d9*x6
 visual ~ a*textual
 speed ~ start(0.1)*visual + b*visual + start(NA) * textual + ageyr
-ab: = a * b
+ab := a * b
 d2 == d5
 d8 == d2
 # speed ~~ ca*speed + start(2)*speed
@@ -88,7 +88,7 @@ textual =~ x4 + x6 + d5*x5
 speed   =~ x7 + d8*x8 + d9*x9 + d9*x6
 visual ~ a*textual
 speed ~ start(0.1)*visual + b*visual + start(NA) * textual + ageyr
-ab: = a * b
+ab := a * b
 d2 == d5
 d8 == d2
 x1 ~ start(.5) * 1 + b*1
