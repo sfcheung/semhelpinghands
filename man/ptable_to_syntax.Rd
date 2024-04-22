@@ -175,7 +175,7 @@ textual =~ x4 + x6 + x5
 speed   =~ x7 + x8 + x9 + start(0.1) * x6
 visual ~ a*textual
 speed ~ b*visual
-ab: = a * b
+ab := a * b
 "
 
 fit <- sem(mod, data = HolzingerSwineford1939)
