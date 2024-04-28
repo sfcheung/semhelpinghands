@@ -188,6 +188,11 @@ plotted.</p></li>
 <p>The argument <code>qq_dot_size</code> is optional, for controlling
 the size of the points in the normal QQ-plot.</p>
 <p>This is the plot</p>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'semhelpinghands'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     sort_by</span></span></code></pre>
 <p><img src="plot_boot_files/figure-html/unnamed-chunk-5-1.png" width="2187.5"></p>
 <p>The plot is similar to that of the output of
 <code><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot::boot()</a></code>. The left panel is a histogram with:</p>
@@ -213,12 +218,12 @@ estimates of user-defined parameters and store them back to the output
 of <code>lavaan</code>.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The estimates are stored in a slot for external
 functions and do not affect the output of &lt;code&gt;lavaan&lt;/code&gt; in other
 ways.&lt;/p&gt;"><sup>1</sup></a></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/store_boot_def.html">store_boot_def</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
 <p>Once computed and stored, <code><a href="../reference/plot_boot.html">plot_boot()</a></code> can be used again.
 For example, to plot the distribution of <code>ab</code>, the indirect
 effect, just set <code>param</code> to <code>"ab"</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_boot.html">plot_boot</a></span><span class="op">(</span><span class="va">fit</span>,</span>
 <span>          param <span class="op">=</span> <span class="st">"ab"</span>,</span>
 <span>          standardized <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -237,13 +242,13 @@ the bootstrap estimates in the standardized solution and store them back
 to the output of <code>lavaan</code>.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Like &lt;code&gt;&lt;a href="../reference/store_boot_def.html"&gt;store_boot_def()&lt;/a&gt;&lt;/code&gt;, the estimates are
 stored in a slot for external functions and do not affect the output of
 &lt;code&gt;lavaan&lt;/code&gt; in other ways.&lt;/p&gt;'><sup>2</sup></a></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardizedSolution_boot_ci.html">store_boot_est_std</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
 <p>Once computed and stored, <code><a href="../reference/plot_boot.html">plot_boot()</a></code> can be used again.
 For example, to plot the distribution of the standardized indirect
 effect, just set <code>param</code> to <code>"ab"</code> <em>and</em>
 set <code>standardized</code> to <code>TRUE</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_boot.html">plot_boot</a></span><span class="op">(</span><span class="va">fit</span>,</span>
 <span>          param <span class="op">=</span> <span class="st">"ab"</span>,</span>
 <span>          standardized <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -253,7 +258,7 @@ set <code>standardized</code> to <code>TRUE</code>:</p>
 sampling distribution in the standardized solution. For example, this is
 the plot of the bootstrap estimates of the standardized path from
 <code>M</code> to <code>Y</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_boot.html">plot_boot</a></span><span class="op">(</span><span class="va">fit</span>,</span>
 <span>          param <span class="op">=</span> <span class="st">"b"</span>,</span>
 <span>          standardized <span class="op">=</span> <span class="cn">TRUE</span>,</span>
