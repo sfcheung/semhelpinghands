@@ -1,3 +1,14 @@
+# semhelpinghands 0.1.11.1
+
+## New Features
+
+- `standardizedSolution_boot_ci()` now
+  support both percentile confidence
+  intervals (`"perc"`, the default) and
+  bias-corrected confidence intervals
+  (`"bc"` or `"bca.simple"`), controlled
+  by the argument `boot_ci_type`. (0.1.11.1)
+
 # semhelpinghands 0.1.11
 
 ## Minor Fixes
