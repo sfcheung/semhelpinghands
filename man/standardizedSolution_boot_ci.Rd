@@ -14,6 +14,7 @@ standardizedSolution_boot_ci(
   save_boot_est_std = TRUE,
   force_run = FALSE,
   boot_delta_ratio = FALSE,
+  boot_ci_type = c("perc", "bc", "bca.simple"),
   ...
 )
 
@@ -54,6 +55,13 @@ confidence limit from the point
 estimate to (b) the distance of the
 delta-method limit from the point
 estimate. Default is \code{FALSE}.}
+
+\item{boot_ci_type}{The type of the
+bootstrapping confidence intervals.
+Support percentile confidence intervals
+(\code{"perc"}, the default) and
+bias-corrected confidence intervals
+(\code{"bc"} or \code{"bca.simple"}).}
 
 \item{...}{Other arguments to be
 passed to

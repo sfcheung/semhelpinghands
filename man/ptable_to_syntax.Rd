@@ -16,7 +16,7 @@ object, such
 as the output of \code{\link[lavaan:sem]{lavaan::sem()}}
 or \code{\link[lavaan:cfa]{lavaan::cfa()}}, the parameter
 table will be extracted
-from it by \code{\link[lavaan:lavParTable]{lavaan::parameterTable()}}.
+from it by \code{\link[lavaan:parTable]{lavaan::parameterTable()}}.
 If set to a parameter table, it will
 be used to generate the model syntax.
 It can also the output of
@@ -194,7 +194,7 @@ compare_ptables(ptable1, ptable2)
 
 }
 \seealso{
-\code{\link[lavaan:lavaan]{lavaan::lavaan()}}, \code{\link[lavaan:lavParTable]{lavaan::parameterTable()}}
+\code{\link[lavaan:lavaan]{lavaan::lavaan()}}, \code{\link[lavaan:parTable]{lavaan::parameterTable()}}
 }
 \author{
 Shu Fai Cheung \url{https://orcid.org/0000-0002-9871-9448}.
