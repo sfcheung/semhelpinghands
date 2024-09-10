@@ -229,6 +229,7 @@ standardizedSolution_boot_ci <- function(object,
       }
     class(out_final) <- c("std_solution_boot", class(out))
     if (save_boot_est_std) {
+        colnames(out_all) <- std_names(object, ...)
         attr(out_final, "boot_est_std") <- out_all
       }
     fit_summary <- lavaan::summary(object)
