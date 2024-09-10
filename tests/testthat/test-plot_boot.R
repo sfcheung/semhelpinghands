@@ -73,3 +73,23 @@ test_that("Expect errors", {
     expect_error(plot_boot(fitgp_boot, "X~~X", standardized = TRUE))
     expect_error(plot_boot(fitgp_boot, "X~~X", standardized = FALSE))
   })
+
+# Support standardizedSolution_boot_ci()
+
+std <- standardizedSolution_boot_ci(fit)
+stdgp <- standardizedSolution_boot_ci(fitgp)
+coef(fitgp)
+
+# Examine interactively
+
+plot_boot(std, "ab")
+plot_boot(fit_boot, "ab", standardized = TRUE)
+
+plot_boot(std, "total")
+plot_boot(fit_boot, "total", standardized = TRUE)
+
+plot_boot(stdgp, "M~~M.g2")
+plot_boot(fitgp_boot, "M~~M.g2", standardized = TRUE)
+
+plot_boot(stdgp, "M~~M")
+plot_boot(fitgp_boot, "M~~M", standardized = TRUE)

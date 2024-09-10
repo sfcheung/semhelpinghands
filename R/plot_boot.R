@@ -37,6 +37,10 @@
 #' first to compute and store the bootstrap
 #' estimates in the standardized solution.
 #'
+#' Since Version 0.1.11.2, it can also
+#' plot bootstrap estimates in the output
+#' of [standardizedSolution_boot_ci()].
+#'
 #' @references
 #' Rousselet, G. A., Pernet, C. R., & Wilcox, R. R. (2021).
 #' The percentile bootstrap: A primer with step-by-step
@@ -49,10 +53,15 @@
 #' invisibly. Called for its side-effect
 #' (plotting the graphs).
 #'
-#' @param object A [lavaan::lavaan-class]
+#' @param object Either
+#' a [lavaan::lavaan-class]
 #' object with bootstrap estimates
-#' stored. For standardized solution
-#' and user-defined parameters, the
+#' stored, or the output of
+#' [standardizedSolution_boot_ci()].
+#' For standardized solution
+#' and user-defined parameters, if
+#' the object is a [lavaan::lavaan-class]
+#' object, the
 #' estimates need to be stored by
 #' [store_boot_est_std()] or
 #' [store_boot_def()].
@@ -65,9 +74,15 @@
 #' @param standardized Logical. Whether
 #' the estimates from the standardized
 #' solution are to be plotted. Default
-#' is `NULL`. This is a required parameter
+#' is `NULL`. If `object` is a
+#' [lavaan::lavaan-class] object, then
+#' this is a required parameter
 #' and users need to explicitly set it
-#' to `TRUE` or `FALSE`.
+#' to `TRUE` or `FALSE`. If `object` is
+#' the output of
+#' [standardizedSolution_boot_ci()],
+#' then this argument is ignored (
+#' forced to be `TRUE` internally).
 #'
 #' @param nclass The number of breaks.
 #' This argument will be passed to
@@ -201,6 +216,13 @@
 #' plot_boot(fit, "a", standardized = TRUE)
 #' plot_boot(fit, "ab", standardized = TRUE)
 #'
+#' # It can also plot the estimates stored
+#' # in the output of standardizedSolution_boot_ci().
+#' std_boot <- standardizedSolution_boot_ci(fit)
+#' plot_boot(std_boot, "ab")
+#' plot_boot(fit, "ab", standardized = TRUE)
+#'
+#'
 #' @importFrom graphics abline hist lines
 #' @importFrom stats qqline qqnorm setNames
 #' @export
@@ -224,7 +246,7 @@ plot_boot <- function(object,
                       qq_line_color = "black",
                       qq_line_linetype = "solid"
                       ) {
-    if (is.null(standardized)) {
+    if (is.null(standardized) && !inherits(object, "std_solution_boot")) {
         stop("'standardized' must be TRUE or FALSE.")
       }
     boot_out <- param_find_boot(object = object,
@@ -299,12 +321,30 @@ param_find_boot <- function(object,
                             standardized) {
     boot_t0 <- NA
     boot_t <- NA
+    is_std_solution_boot <- inherits(object, "std_solution_boot")
+    if (is_std_solution_boot) {
+        standardized <- TRUE
+      }
     if (standardized) {
-        boot_i <- get_boot_est_std(object)
+        if (is_std_solution_boot) {
+            coef_names <- lavaan::lav_partable_labels(object)
+            boot_i <- attr(object, "boot_est_std")
+            if (is.null(boot_i)) {
+                stop("Bootstrap estimates not found in the object.")
+              }
+            colnames(boot_i) <- coef_names
+          } else {
+            boot_i <- get_boot_est_std(object)
+          }
         if (param %in% colnames(boot_i)) {
-            i <- match(param, std_names(object))
-            boot_t0 <- setNames(lavaan::standardizedSolution(object,
-                          se = FALSE)[i, "est.std"], param)
+            if (is_std_solution_boot) {
+                i <- match(param, colnames(boot_i))
+                boot_t0 <- object[i, "est.std"]
+              } else {
+                i <- match(param, std_names(object))
+                boot_t0 <- setNames(lavaan::standardizedSolution(object,
+                              se = FALSE)[i, "est.std"], param)
+              }
             boot_t <- boot_i[, param, drop = TRUE]
             out <- list(t0 = boot_t0,
                         t = boot_t)
