@@ -166,6 +166,10 @@
 #' # and standardized solution
 #' print(std, output = "text", standardized_only = FALSE)
 #'
+#' # plot_boot() can be used to examine the bootstrap estimates
+#' # of a parameter
+#' plot_boot(std, param = "ab")
+#'
 #' @name standardizedSolution_boot_ci
 NULL
 
@@ -229,6 +233,7 @@ standardizedSolution_boot_ci <- function(object,
       }
     class(out_final) <- c("std_solution_boot", class(out))
     if (save_boot_est_std) {
+        colnames(out_all) <- std_names(object, ...)
         attr(out_final, "boot_est_std") <- out_all
       }
     fit_summary <- lavaan::summary(object)
