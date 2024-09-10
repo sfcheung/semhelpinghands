@@ -26,10 +26,15 @@ plot_boot(
 )
 }
 \arguments{
-\item{object}{A \link[lavaan:lavaan-class]{lavaan::lavaan}
+\item{object}{Either
+a \link[lavaan:lavaan-class]{lavaan::lavaan}
 object with bootstrap estimates
-stored. For standardized solution
-and user-defined parameters, the
+stored, or the output of
+\code{\link[=standardizedSolution_boot_ci]{standardizedSolution_boot_ci()}}.
+For standardized solution
+and user-defined parameters, if
+the object is a \link[lavaan:lavaan-class]{lavaan::lavaan}
+object, the
 estimates need to be stored by
 \code{\link[=store_boot_est_std]{store_boot_est_std()}} or
 \code{\link[=store_boot_def]{store_boot_def()}}.}
@@ -42,9 +47,15 @@ a call to \code{coef()}.}
 \item{standardized}{Logical. Whether
 the estimates from the standardized
 solution are to be plotted. Default
-is \code{NULL}. This is a required parameter
+is \code{NULL}. If \code{object} is a
+\link[lavaan:lavaan-class]{lavaan::lavaan} object, then
+this is a required parameter
 and users need to explicitly set it
-to \code{TRUE} or \code{FALSE}.}
+to \code{TRUE} or \code{FALSE}. If \code{object} is
+the output of
+\code{\link[=standardizedSolution_boot_ci]{standardizedSolution_boot_ci()}},
+then this argument is ignored (
+forced to be \code{TRUE} internally).}
 
 \item{nclass}{The number of breaks.
 This argument will be passed to
@@ -184,6 +195,10 @@ for both free and user-defined
 parameters, call \code{\link[=store_boot_est_std]{store_boot_est_std()}}
 first to compute and store the bootstrap
 estimates in the standardized solution.
+
+Since Version 0.1.11.2, it can also
+plot bootstrap estimates in the output
+of \code{\link[=standardizedSolution_boot_ci]{standardizedSolution_boot_ci()}}.
 }
 \examples{
 
@@ -217,6 +232,13 @@ plot_boot(fit, "ab", standardized = FALSE)
 fit <- store_boot_est_std(fit)
 plot_boot(fit, "a", standardized = TRUE)
 plot_boot(fit, "ab", standardized = TRUE)
+
+# It can also plot the estimates stored
+# in the output of standardizedSolution_boot_ci().
+std_boot <- standardizedSolution_boot_ci(fit)
+plot_boot(std_boot, "ab")
+plot_boot(fit, "ab", standardized = TRUE)
+
 
 }
 \references{
