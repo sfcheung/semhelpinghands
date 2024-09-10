@@ -11,13 +11,7 @@ bibliography: references.bib
 csl: apa.csl
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  dpi = 300
-)
-```
+
 
 # Introduction
 
@@ -39,7 +33,8 @@ A mediation model example modified from the
 official `lavaan` website is used
 (https://lavaan.ugent.be/tutorial/mediation.html).
 
-```{r}
+
+``` r
 library(lavaan)
 set.seed(12345)
 n <- 100
@@ -68,7 +63,8 @@ and 5000 replication. (Change `ncpus`
 to a value appropriate for the system
 running it.)
 
-```{r}
+
+``` r
 fit <- sem(model,
            data = Data,
            se = "bootstrap",
@@ -85,8 +81,18 @@ confidence intervals.)
 
 This is the bootstrap confidence intervals:
 
-```{r}
+
+``` r
 parameterEstimates(fit)
+#>     lhs op     rhs label   est    se     z pvalue ci.lower ci.upper
+#> 1     Y  ~       X     c 0.008 0.071 0.117  0.906   -0.135    0.141
+#> 2     M  ~       X     a 0.390 0.076 5.133  0.000    0.235    0.534
+#> 3     Y  ~       M     b 0.505 0.087 5.814  0.000    0.331    0.668
+#> 4     Y ~~       Y       0.541 0.076 7.121  0.000    0.383    0.682
+#> 5     M ~~       M       0.911 0.117 7.798  0.000    0.674    1.135
+#> 6     X ~~       X       1.230 0.000    NA     NA    1.230    1.230
+#> 7    ab :=     a*b    ab 0.197 0.049 3.986  0.000    0.106    0.296
+#> 8 total := c+(a*b) total 0.205 0.081 2.519  0.012    0.040    0.361
 ```
 
 # Plot Bootstrap Distribution
@@ -129,13 +135,7 @@ in the normal QQ-plot.
 
 This is the plot
 
-```{r echo = FALSE}
-library(semhelpinghands)
-plot_boot(fit,
-          param = "b",
-          standardized = FALSE,
-          qq_dot_size = 1)
-```
+![Parameter: b](figure/fig1-1.png)
 
 The plot is similar to that of the
 output of `boot::boot()`. The left panel
@@ -174,7 +174,8 @@ a slot for external functions and do not
 affect the output of `lavaan` in other
 ways.
 
-```{r}
+
+``` r
 fit <- store_boot_def(fit)
 ```
 
@@ -184,12 +185,15 @@ plot the distribution of `ab`, the
 indirect effect, just set `param`
 to `"ab"`.
 
-```{r}
+
+``` r
 plot_boot(fit,
           param = "ab",
           standardized = FALSE,
           qq_dot_size = 1)
 ```
+
+![User-Parameter: ab](figure/fig2-1.png)
 
 The plot suggests that, as expected,
 the sampling distribution of the indirect
@@ -213,7 +217,8 @@ a slot for external functions and do not
 affect the output of `lavaan` in other
 ways.
 
-```{r}
+
+``` r
 fit <- store_boot_est_std(fit)
 ```
 
@@ -224,12 +229,15 @@ standardized indirect effect, just
 set `param` to `"ab"` *and* set
 `standardized` to `TRUE`:
 
-```{r}
+
+``` r
 plot_boot(fit,
           param = "ab",
           standardized = TRUE,
           qq_dot_size = 1)
 ```
+
+![User-Parameter: ab (Standardized)](figure/fig3-1.png)
 
 Note that it is not unusual for a
 parameter to have a nonnormal sampling
@@ -239,12 +247,15 @@ plot of the bootstrap estimates of
 the standardized path from `M`
 to `Y`:
 
-```{r}
+
+``` r
 plot_boot(fit,
           param = "b",
           standardized = TRUE,
           qq_dot_size = 1)
 ```
+
+![Y ~ M: Standardized](figure/fig4-1.png)
 
 Compared to the previous plot of `b`
 in the original (unstandardized) solution,
