@@ -175,6 +175,10 @@ print(std, output = "text")
 # and standardized solution
 print(std, output = "text", standardized_only = FALSE)
 
+# plot_boot() can be used to examine the bootstrap estimates
+# of a parameter
+plot_boot(std, param = "ab")
+
 
 # store_boot_est_std() is usually used with plot_boot()
 # First, store the bootstrap estimates of the

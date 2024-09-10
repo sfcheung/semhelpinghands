@@ -166,6 +166,10 @@
 #' # and standardized solution
 #' print(std, output = "text", standardized_only = FALSE)
 #'
+#' # plot_boot() can be used to examine the bootstrap estimates
+#' # of a parameter
+#' plot_boot(std, param = "ab")
+#'
 #' @name standardizedSolution_boot_ci
 NULL
 
