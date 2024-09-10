@@ -11,7 +11,7 @@ for the standardized solution."><meta property="og:image" content="https://sfche
 
     <a class="navbar-brand me-2" href="../index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.11.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.11.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -360,6 +360,11 @@ this version.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     0.045       -0.007        0.164        0.043   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># plot_boot() can be used to examine the bootstrap estimates</span></span></span>
+<span class="r-in"><span><span class="co"># of a parameter</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_boot.html">plot_boot</a></span><span class="op">(</span><span class="va">std</span>, param <span class="op">=</span> <span class="st">"ab"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="standardizedSolution_boot_ci-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># store_boot_est_std() is usually used with plot_boot()</span></span></span>
 <span class="r-in"><span><span class="co"># First, store the bootstrap estimates of the</span></span></span>
@@ -368,7 +373,7 @@ this version.</p>
 <span class="r-in"><span><span class="co"># Second, plot the distribution of the bootstrap estimates of</span></span></span>
 <span class="r-in"><span><span class="co"># standardized 'ab'</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_boot.html">plot_boot</a></span><span class="op">(</span><span class="va">fit_with_boot_std</span>, <span class="st">"ab"</span>, standardized <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="standardizedSolution_boot_ci-1.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="standardizedSolution_boot_ci-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
