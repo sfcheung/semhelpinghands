@@ -73,3 +73,10 @@ test_that("Expect errors", {
     expect_error(plot_boot(fitgp_boot, "X~~X", standardized = TRUE))
     expect_error(plot_boot(fitgp_boot, "X~~X", standardized = FALSE))
   })
+
+# Support standardizedSolution_boot_ci()
+
+std <- standardizedSolution_boot_ci(fit)
+stdgp <- standardizedSolution_boot_ci(fitgp)
+
+plot_boot(std)
