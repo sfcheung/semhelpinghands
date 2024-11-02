@@ -40,7 +40,7 @@
 #' printed in a text format similar to
 #' the printout of the output of
 #' [summary()] of
-#' a [lavaan-class] object.
+#' a 'lavaan'-class object.
 #'
 #' @param standardized_only Logical.
 #' If `TRUE`, the default, only the
@@ -49,7 +49,7 @@
 #' the standardized solution is printed
 #' alongside the unstandardized solution,
 #' as in the printout of the output
-#' of [summary()] of a [lavaan-class]
+#' of [summary()] of a 'lavaan'-class
 #' object.
 #'
 #' @seealso [standardizedSolution_boot_ci()]

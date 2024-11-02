@@ -39,7 +39,7 @@ major options in the output of
 (e.g., \link[lavaan:sem]{lavaan::sem} or
 \code{\link[lavaan:cfa]{lavaan::cfa()}}. Most of the values
 are also reported in the summary of
-a \linkS4class{lavaan} object. This
+a 'lavaan'-class object. This
 function is used to show the values
 in one single table for a quick
 overview.

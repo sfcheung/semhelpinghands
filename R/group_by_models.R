@@ -9,7 +9,7 @@
 #' the class `est_table`.
 #'
 #' @param object_list A named list of
-#' [lavaan-class] objects, a named list
+#' 'lavaan'-class objects, a named list
 #' of the output of
 #' [lavaan::parameterEstimates()], or a
 #' named list of the output of

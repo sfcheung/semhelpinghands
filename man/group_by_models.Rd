@@ -15,7 +15,7 @@ group_by_models(
 }
 \arguments{
 \item{object_list}{A named list of
-\linkS4class{lavaan} objects, a named list
+'lavaan'-class objects, a named list
 of the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}, or a
 named list of the output of

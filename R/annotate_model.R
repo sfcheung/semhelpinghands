@@ -5,7 +5,7 @@
 #' the model matrices in a lavaan model.
 #'
 #' @details This function annotates the
-#' model matrices in a [lavaan-class]
+#' model matrices in a 'lavaan'-class
 #' object. This function is not to be
 #' used in analysis. It is a learning
 #' tool, for learners to understand

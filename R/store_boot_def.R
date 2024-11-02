@@ -32,7 +32,7 @@
 #'
 #' [get_boot_def()] extracts the
 #' bootstrap estimates of user-defined
-#' parameters from a [lavaan-class]
+#' parameters from a 'lavaan'-class
 #' object. If none is stored, `NULL`
 #' is returned.
 #'
@@ -54,7 +54,7 @@
 #' of the stored bootstrap estimates
 #' of user-defined parameters
 #'
-#' @param object A [lavaan-class]
+#' @param object A 'lavaan'-class
 #' object, fitted with 'se = "boot"'.
 #'
 #' @param force_run If `TRUE`, will skip

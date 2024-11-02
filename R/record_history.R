@@ -35,7 +35,7 @@
 #' with a `plot` method
 #' (`plot.fit_history()`).
 #'
-#' @param object A [lavaan-class]
+#' @param object A 'lavaan'-class
 #' object.
 #'
 #' @author Shu Fai Cheung

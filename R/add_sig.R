@@ -22,7 +22,7 @@
 #' after the parameter estimates to
 #' denote the significant test results.
 #'
-#' @param object A [lavaan-class] object
+#' @param object A 'lavaan'-class object
 #' or the output of
 #' [lavaan::parameterEstimates()] or
 #' [lavaan::standardizedSolution()].

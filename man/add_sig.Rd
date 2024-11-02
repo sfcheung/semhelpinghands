@@ -7,7 +7,7 @@
 add_sig(object, ..., standardized = FALSE, na_str = "", use = "pvalue")
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object
+\item{object}{A 'lavaan'-class object
 or the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.

@@ -14,7 +14,7 @@ record_history(object)
 \method{print}{fit_history}(x, n_iterations = 10, digits = 3, ...)
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan}
+\item{object}{A 'lavaan'-class
 object.}
 
 \item{x}{A \code{fit_history} class

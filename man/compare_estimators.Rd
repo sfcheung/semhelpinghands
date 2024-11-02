@@ -11,7 +11,7 @@ compare_estimators(object, estimators = NULL)
 se_ratios(fit_list, reference = NULL)
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan}
+\item{object}{A 'lavaan'-class
 object.}
 
 \item{estimators}{A character vector
