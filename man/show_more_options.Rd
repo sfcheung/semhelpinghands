@@ -69,9 +69,7 @@ It is named \code{\link[=show_more_options]{show_more_options()}} to
 differentiate it from
 \code{\link[=show_options]{show_options()}}, originally in the
 \code{semunpack} package, which is
-intended for new users of \link{lavaan}.
-The code is adapted from
-\code{show_options} with more advanced
+intended for new users of \verb{lavaan``. The code is adapted from }show_options` with more advanced
 options added.
 }
 \section{Methods (by generic)}{
