@@ -20,7 +20,7 @@
 #' original output using one of the
 #' estimators.
 #'
-#' @param object A [lavaan-class]
+#' @param object A 'lavaan'-class
 #' object.
 #'
 #' @param estimators A character vector

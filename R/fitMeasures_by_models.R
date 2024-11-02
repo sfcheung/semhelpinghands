@@ -29,7 +29,7 @@
 #' [print.fit_by_models()]).
 #'
 #' @param object_list A named list of
-#' [lavaan-class] objects.
+#' 'lavaan'-class objects.
 #'
 #' @param ... Optional arguments to be
 #' passed to

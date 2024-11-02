@@ -9,7 +9,7 @@
 #' @return A data-frame-like object of
 #' the class `est_table`.
 #'
-#' @param object A [lavaan-class] object
+#' @param object A 'lavaan'-class object
 #' or the output of
 #' [lavaan::parameterEstimates()] or
 #' [lavaan::standardizedSolution()].

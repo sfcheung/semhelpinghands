@@ -76,7 +76,7 @@
 #' with diagnostic functions such
 #' as [plot_boot()].
 #'
-#' @param object A [lavaan-class]
+#' @param object A 'lavaan'-class
 #' object, fitted with 'se = "boot"'.
 #'
 #' @param level The level of confidence

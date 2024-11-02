@@ -23,7 +23,7 @@ store_boot_est_std(object, type = "std.all", force_run = FALSE, ...)
 get_boot_est_std(object)
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan}
+\item{object}{A 'lavaan'-class
 object, fitted with 'se = "boot"'.}
 
 \item{level}{The level of confidence

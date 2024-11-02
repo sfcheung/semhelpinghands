@@ -26,7 +26,7 @@ If \code{"text"}, the results will be
 printed in a text format similar to
 the printout of the output of
 \code{\link[=summary]{summary()}} of
-a \linkS4class{lavaan} object.}
+a 'lavaan'-class object.}
 
 \item{standardized_only}{Logical.
 If \code{TRUE}, the default, only the
@@ -35,7 +35,7 @@ will be printed. If \code{FALSE}, then
 the standardized solution is printed
 alongside the unstandardized solution,
 as in the printout of the output
-of \code{\link[=summary]{summary()}} of a \linkS4class{lavaan}
+of \code{\link[=summary]{summary()}} of a 'lavaan'-class
 object.}
 }
 \value{

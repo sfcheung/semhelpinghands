@@ -13,7 +13,7 @@
 #' (e.g., [lavaan::sem] or
 #' [lavaan::cfa()]. Most of the values
 #' are also reported in the summary of
-#' a [lavaan-class] object. This
+#' a 'lavaan'-class object. This
 #' function is used to show the values
 #' in one single table for a quick
 #' overview.

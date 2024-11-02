@@ -10,7 +10,7 @@ store_boot_def(object, force_run = FALSE)
 get_boot_def(object)
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan}
+\item{object}{A 'lavaan'-class
 object, fitted with 'se = "boot"'.}
 
 \item{force_run}{If \code{TRUE}, will skip
@@ -65,7 +65,7 @@ purposes.
 
 \code{\link[=get_boot_def]{get_boot_def()}} extracts the
 bootstrap estimates of user-defined
-parameters from a \linkS4class{lavaan}
+parameters from a 'lavaan'-class
 object. If none is stored, \code{NULL}
 is returned.
 

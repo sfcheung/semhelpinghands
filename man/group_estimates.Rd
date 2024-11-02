@@ -26,7 +26,7 @@ group_by_ivs(
 )
 }
 \arguments{
-\item{object}{A \linkS4class{lavaan} object
+\item{object}{A 'lavaan'-class object
 or the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}}.}
@@ -75,7 +75,7 @@ independent variables as rows, or a
 transpose of this table.
 }
 \details{
-It gets a \linkS4class{lavaan}
+It gets a 'lavaan'-class
 object or the output of
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}} or
 \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}} and

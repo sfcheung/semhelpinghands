@@ -8,7 +8,7 @@ fitMeasures_by_models(object_list, ...)
 }
 \arguments{
 \item{object_list}{A named list of
-\linkS4class{lavaan} objects.}
+'lavaan'-class objects.}
 
 \item{...}{Optional arguments to be
 passed to
