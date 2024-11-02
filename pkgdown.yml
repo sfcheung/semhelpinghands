@@ -1,11 +1,11 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   articles/plot_boot: plot_boot.html
   semhelpinghands: semhelpinghands.html
   standardizedSolution_boot_ci: standardizedSolution_boot_ci.html
-last_built: 2024-09-10T14:09Z
+last_built: 2024-11-02T03:44Z
 urls:
   reference: https://sfcheung.github.io/semhelpinghands/reference
   article: https://sfcheung.github.io/semhelpinghands/articles
