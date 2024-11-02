@@ -42,7 +42,7 @@
 #' differentiate it from
 #' [show_options()], originally in the
 #' `semunpack` package, which is
-#' intended for new users of [lavaan].
+#' intended for new users of `lavaan`.
 #' The code is adapted from
 #' `show_options` with more advanced
 #' options added.
