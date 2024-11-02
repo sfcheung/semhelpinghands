@@ -253,7 +253,13 @@ plot_boot <- function(object,
                                 param = param,
                                 standardized = standardized)
     if (any(is.na(boot_out))) {
-        stop("Bootstrap estimates not found or not stored.")
+        if (standardized) {
+            stop("Bootstrap standardized estimates not found or not stored. ",
+                 "Please call 'store_boot_est_std()' first if ",
+                 "bootstrapping has been requested.")
+          } else {
+            stop("Bootstrap estimates not found or not stored.")
+          }
       }
     t0 <- boot_out$t0
     t <- boot_out$t
