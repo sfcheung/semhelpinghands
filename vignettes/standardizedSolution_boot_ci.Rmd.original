@@ -15,6 +15,25 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Note
+
+2025-11-22: A new package, [`semboottools`](https://yangzhen1999.github.io/semboottools/),
+can do what `standardizedSolution_boot_ci()`
+in this package does,
+with more features, as well as some
+diagnostic functions. The function
+`standardizedSolution_boot_ci()`,
+as well as its helpers, such as
+`store_boot_def()` and `plot_boot()`,
+will
+stay in [`semhelpinghands`](https://sfcheung.github.io/semhelpinghands/).
+, but will not
+be further developed. Users are
+recommended to use
+`semboottools::standardizedSolution_boot()`
+and other functions in [`semboottools`](https://yangzhen1999.github.io/semboottools/)
+instead of this function.
+
 # Introduction
 
 This document introduces the function
