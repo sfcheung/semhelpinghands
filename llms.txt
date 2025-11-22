@@ -1,0 +1,191 @@
+# semhelpinghands
+
+(Version 0.1.12.1 updated on 2025-11-22, [release
+history](https://sfcheung.github.io/semhelpinghands/news/index.html))
+
+This package is an assortment of time-saving helper functions for doing
+structural equation modeling (SEM), mainly by
+[`lavaan::lavaan()`](https://rdrr.io/pkg/lavaan/man/lavaan.html) and its
+wrappers, such as
+[`lavaan::sem()`](https://rdrr.io/pkg/lavaan/man/sem.html) and
+[`lavaan::cfa()`](https://rdrr.io/pkg/lavaan/man/cfa.html). This package
+is not for implementing advanced statistical procedures. This should be
+the job of excellent packages such as `semTools`. These helper functions
+are for tasks that come in handy (at least to me) when doing SEM. They
+are usually used *during* the data analysis phase, not for publishing or
+presenting results.
+
+Many of the tasks can be done by base R code or by `dplyr` functions.
+However, these functions may help users who are not familiar with R
+programming or use R only occasionally to do these tasks without writing
+their own code, or for people like me who know how to do this using base
+R but do not want to write the code every time.
+
+I intentionally use base R if possible because I want to keep
+`semhelpinghands` a light weight package, depending on as few other
+packages as possible, so that I do not need to worry about deprecated
+functions or updates in other packages that break things, defeating the
+“time saving” purpose of this package.
+
+# Home Page
+
+More about this package can be found from the GitHub page of this
+package:
+
+<https://sfcheung.github.io/semhelpinghands/>
+
+# Installation
+
+The latest version at CRAN can be installed by
+[`install.packages()`](https://rdrr.io/r/utils/install.packages.html):
+
+    install.packages("semhelpinghands")
+
+The latest developmental version at GitHub can be installed by
+`remotes::install_github()`:
+
+    remotes::install_github("sfcheung/semhelpinghands")
+
+# Motive
+
+One major motive behind all these functions is writing something for my
+own work with others. So, each function should be at least useful to me
+myself and I myself will use them. Nevertheless, maybe there are others
+who, like me, just want some simple functions for some simple tasks. I
+also like using packages to pack functions I used myself in my work, so
+I do not have to source files again and again. Therefore, I packaged
+them into `semhelpinghands` also for myself. I hope this package will
+also be useful for some others.
+
+I will only devote a limited amount of time on this package. The package
+and its functions are means for me to do research. They are not the
+goals themselves.
+
+# Acknowledgement
+
+I would like to thank Prof. Rosseel and Prof. Jorgensen for developing
+`lavaan` and `semTools`. Their advice in the [lavaan Google
+Group](https://groups.google.com/g/lavaan?pli=1) and GitHub pages (for
+[lavaan](https://github.com/yrosseel/lavaan) and
+[semTools](https://github.com/simsem/semTools)) on various issues about
+`lavaan` helped me in writing some of the functions here, before they
+were packed into `semhelpinghands`. If there are people who inspired
+some of the functions but I forgot to acknowledge, please let me know.
+
+# Suggestions and Bugs
+
+This package is still under development. There will be bugs, and there
+are limitations. Comments and suggestions are welcomed. Feel free to add
+an issue at
+[GitHub](https://github.com/sfcheung/semhelpinghands/issues). Although I
+may not be able to address all of them because this package is intended
+to be a collection of simple functions for simple tasks, and they are
+designed to be easy to maintain, I will try to do what I can do.
+
+# Package index
+
+## Parameter Estimates Tables Manipulation
+
+Functions for manipulating parameter estimates tables
+
+- [`add_sig()`](https://sfcheung.github.io/semhelpinghands/reference/add_sig.md)
+  : Add Significant Test Results
+- [`filter_by()`](https://sfcheung.github.io/semhelpinghands/reference/filter_by.md)
+  : Filter a Parameter Estimates Table
+- [`group_by_dvs()`](https://sfcheung.github.io/semhelpinghands/reference/group_estimates.md)
+  [`group_by_ivs()`](https://sfcheung.github.io/semhelpinghands/reference/group_estimates.md)
+  : Group Estimates By Dependent or Independent Variables
+- [`group_by_groups()`](https://sfcheung.github.io/semhelpinghands/reference/group_by_groups.md)
+  : Group Estimates By Groups
+- [`group_by_models()`](https://sfcheung.github.io/semhelpinghands/reference/group_by_models.md)
+  : Group Estimates By Models
+- [`sort_by()`](https://sfcheung.github.io/semhelpinghands/reference/sort_by.md)
+  : Sort a Parameter Estimates Table
+- [`print(`*`<est_table>`*`)`](https://sfcheung.github.io/semhelpinghands/reference/print.est_table.md)
+  : Print an 'est_table' Object
+
+## Compare Methods
+
+- [`compare_estimators()`](https://sfcheung.github.io/semhelpinghands/reference/compare_estimators.md)
+  [`se_ratios()`](https://sfcheung.github.io/semhelpinghands/reference/compare_estimators.md)
+  : Refit a 'lavaan'-Model by Several Estimators
+- [`fitMeasures_by_models()`](https://sfcheung.github.io/semhelpinghands/reference/fitMeasures_by_models.md)
+  : Fit Measures By Models
+- [`print(`*`<fit_by_models>`*`)`](https://sfcheung.github.io/semhelpinghands/reference/print.fit_by_models.md)
+  : Print a 'fit_by_models' Object
+
+## Bootstrapping
+
+- [`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
+  [`store_boot_est_std()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
+  [`get_boot_est_std()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
+  : Bootstrap CIs for Standardized Solution
+- [`store_boot_def()`](https://sfcheung.github.io/semhelpinghands/reference/store_boot_def.md)
+  [`get_boot_def()`](https://sfcheung.github.io/semhelpinghands/reference/store_boot_def.md)
+  : Store Bootstrap Estimates of User-Defined Parameters
+- [`print(`*`<std_solution_boot>`*`)`](https://sfcheung.github.io/semhelpinghands/reference/print.std_solution_boot.md)
+  : Print an 'std_solution_boot' Object
+- [`plot_boot()`](https://sfcheung.github.io/semhelpinghands/reference/plot_boot.md)
+  : Diagnostic Plots of Bootstrap Estimates in 'lavaan'
+
+## Understanding and Learning SEM
+
+- [`annotate_matrices()`](https://sfcheung.github.io/semhelpinghands/reference/annotate_matrices.md)
+  [`print(`*`<annotate_matrices>`*`)`](https://sfcheung.github.io/semhelpinghands/reference/annotate_matrices.md)
+  : Annotate the Matrices of a 'lavaan' Model
+- [`plot_models_fm()`](https://sfcheung.github.io/semhelpinghands/reference/plot_models_fm.md)
+  : Plot Models on a Chi-Squares-vs-Dfs Graph
+- [`show_cfi()`](https://sfcheung.github.io/semhelpinghands/reference/show_ifi.md)
+  [`show_tli()`](https://sfcheung.github.io/semhelpinghands/reference/show_ifi.md)
+  [`show_ifi()`](https://sfcheung.github.io/semhelpinghands/reference/show_ifi.md)
+  : Visualize How CFI and TLI Are Computed
+- [`show_options()`](https://sfcheung.github.io/semhelpinghands/reference/show_options.md)
+  [`print(`*`<show_options>`*`)`](https://sfcheung.github.io/semhelpinghands/reference/show_options.md)
+  : Show Major Options in an Output of 'lavaan'
+
+## Other Helpers
+
+- [`show_more_options()`](https://sfcheung.github.io/semhelpinghands/reference/show_more_options.md)
+  [`print(`*`<show_more_options>`*`)`](https://sfcheung.github.io/semhelpinghands/reference/show_more_options.md)
+  : Show More Major Options in an Output of 'lavaan'
+- [`record_history()`](https://sfcheung.github.io/semhelpinghands/reference/record_history.md)
+  [`plot(`*`<fit_history>`*`)`](https://sfcheung.github.io/semhelpinghands/reference/record_history.md)
+  [`print(`*`<fit_history>`*`)`](https://sfcheung.github.io/semhelpinghands/reference/record_history.md)
+  : Record the Minimization History
+- [`add_exo_cov()`](https://sfcheung.github.io/semhelpinghands/reference/auto_cov.md)
+  [`auto_exo_cov()`](https://sfcheung.github.io/semhelpinghands/reference/auto_cov.md)
+  : Add Covariances Between Exogenous Variables
+- [`vec_rsquare()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_sample_vcov()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_sample_var()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_est_var()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_est_se()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_def_var()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_def_se()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_lavTestLRT()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_lavTestScore()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_lavTestWald()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  [`vec_compRelSEM()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  : Wrapper Functions to Extract Information as a Vector
+- [`ptable_to_syntax()`](https://sfcheung.github.io/semhelpinghands/reference/ptable_to_syntax.md)
+  [`compare_ptables()`](https://sfcheung.github.io/semhelpinghands/reference/ptable_to_syntax.md)
+  : Convert a 'lavaan' Parameter Table to a 'lavaan' Model Syntax
+
+## Datasets
+
+Datasets used in examples and vignettes.
+
+- [`dvs_ivs`](https://sfcheung.github.io/semhelpinghands/reference/dvs_ivs.md)
+  : Sample Dataset: 3 Predictors and 3 Outcomes
+- [`simple_mediation`](https://sfcheung.github.io/semhelpinghands/reference/simple_mediation.md)
+  : Sample Dataset: Simple Mediation
+
+# Articles
+
+### All vignettes
+
+- [Diagnostic Plots of Bootstrap
+  Estimates](https://sfcheung.github.io/semhelpinghands/articles/plot_boot.md):
+- [semhelpinghands](https://sfcheung.github.io/semhelpinghands/articles/semhelpinghands.md):
+- [Bootstrap Confidence Interval for Standardized Solution in
+  lavaan](https://sfcheung.github.io/semhelpinghands/articles/standardizedSolution_boot_ci.md):

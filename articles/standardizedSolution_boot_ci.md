@@ -1,0 +1,228 @@
+# Bootstrap Confidence Interval for Standardized Solution in lavaan
+
+## Note
+
+2025-11-22: A new package,
+[`semboottools`](https://yangzhen1999.github.io/semboottools/), can do
+what
+[`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
+in this package does, with more features, as well as some diagnostic
+functions. The function
+[`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md),
+as well as its helpers, such as
+[`store_boot_def()`](https://sfcheung.github.io/semhelpinghands/reference/store_boot_def.md)
+and
+[`plot_boot()`](https://sfcheung.github.io/semhelpinghands/reference/plot_boot.md),
+will stay in
+[`semhelpinghands`](https://sfcheung.github.io/semhelpinghands/). , but
+will not be further developed. Users are recommended to use
+`semboottools::standardizedSolution_boot()` and other functions in
+[`semboottools`](https://yangzhen1999.github.io/semboottools/) instead
+of this function.
+
+## Introduction
+
+This document introduces the function
+[`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md),
+and related helpers, from the package
+[`semhelpinghands`](https://sfcheung.github.io/semhelpinghands/).
+
+## What `standardizedSolution_boot_ci()` Does
+
+In `lavaan`, even with `se = "bootstrap"`, the confidence intervals in
+the standardized solution are *not* bootstrap confidence intervals. This
+is a problem when researchers want to form bootstrap confidence
+intervals for parameters such as a *standardized* indirect
+effect.[¹](#fn1)
+
+The function
+[`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
+addresses this problem. It accepts a `lavaan::lavaan-class` object
+fitted with `se = "bootstrap"` (or `se = "boot"`) and forms the
+percentile confidence intervals based on the bootstrap estimates stored
+in the object.
+
+## Data and Model
+
+A mediation model example modified from the official `lavaan` website is
+used (<https://lavaan.ugent.be/tutorial/mediation.html>).
+
+``` r
+library(lavaan)
+set.seed(1234)
+n <- 100
+# X drawn from a Chi-square distribution with df = 2
+X <- (rchisq(n, df = 2) - 2) / sqrt(2 * 2)
+M <- .40 * X + sqrt(1 - .40^2) * rnorm(n)
+Y <- .30 * M + sqrt(1 - .30^2) * rnorm(n)
+Data <- data.frame(X = X,
+                   Y = Y,
+                   M = M)
+model <-
+"
+# direct effect
+  Y ~ c*X
+# mediator
+  M ~ a*X
+  Y ~ b*M
+# indirect effect (a*b)
+  ab := a*b
+# total effect
+  total := c + (a*b)
+"
+```
+
+This model is fitted with `se = "bootstrap"` and 5000 replication.
+(Change `ncpus` to a value appropriate for the system running it.)
+
+``` r
+fit <- sem(model,
+           data = Data,
+           se = "bootstrap",
+           bootstrap = 5000,
+           parallel = "snow",
+           ncpus = 4,
+           iseed = 1234)
+```
+
+(Note that having a warning for some bootstrap runs is normal. The
+failed runs will not be used in forming the confidence intervals.)
+
+This is the standardized solution with delta-method confidence
+intervals.
+
+``` r
+standardizedSolution(fit)
+#>     lhs op     rhs label est.std    se      z pvalue ci.lower ci.upper
+#> 1     Y  ~       X     c   0.054 0.118  0.461  0.645   -0.176    0.285
+#> 2     M  ~       X     a   0.370 0.098  3.768  0.000    0.178    0.563
+#> 3     Y  ~       M     b   0.255 0.097  2.622  0.009    0.064    0.446
+#> 4     Y ~~       Y         0.922 0.055 16.653  0.000    0.813    1.030
+#> 5     M ~~       M         0.863 0.073 11.866  0.000    0.720    1.006
+#> 6     X ~~       X         1.000 0.000     NA     NA    1.000    1.000
+#> 7    ab :=     a*b    ab   0.094 0.045  2.093  0.036    0.006    0.183
+#> 8 total := c+(a*b) total   0.149 0.108  1.375  0.169   -0.063    0.361
+```
+
+## Bootstrap Percentile CIs for Standardized Solution
+
+To form bootstrap percentile confidence intervals for the standardized
+solution, simply use
+[`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
+instead of
+[`lavaan::standardizedSolution()`](https://rdrr.io/pkg/lavaan/man/standardizedSolution.html):
+
+``` r
+library(semhelpinghands)
+ci_boot <- standardizedSolution_boot_ci(fit)
+ci_boot
+#>     lhs op     rhs label est.std    se      z pvalue ci.lower ci.upper
+#> 1     Y  ~       X     c   0.054 0.118  0.461  0.645   -0.176    0.285
+#> 2     M  ~       X     a   0.370 0.098  3.768  0.000    0.178    0.563
+#> 3     Y  ~       M     b   0.255 0.097  2.622  0.009    0.064    0.446
+#> 4     Y ~~       Y         0.922 0.055 16.653  0.000    0.813    1.030
+#> 5     M ~~       M         0.863 0.073 11.866  0.000    0.720    1.006
+#> 6     X ~~       X         1.000 0.000     NA     NA    1.000    1.000
+#> 7    ab :=     a*b    ab   0.094 0.045  2.093  0.036    0.006    0.183
+#> 8 total := c+(a*b) total   0.149 0.108  1.375  0.169   -0.063    0.361
+#>   boot.ci.lower boot.ci.upper boot.se
+#> 1        -0.171         0.286   0.117
+#> 2         0.144         0.537   0.101
+#> 3         0.061         0.443   0.097
+#> 4         0.766         0.986   0.058
+#> 5         0.712         0.979   0.070
+#> 6            NA            NA      NA
+#> 7         0.016         0.202   0.047
+#> 8        -0.048         0.362   0.106
+```
+
+The bootstrap percentile confidence intervals are appended to the right
+of the original output of
+[`lavaan::standardizedSolution()`](https://rdrr.io/pkg/lavaan/man/standardizedSolution.html),
+in columns `boot.ci.lower` and `boot.ci.upper`. The standard errors
+based on the bootstrap estimates (the standard deviation of the
+estimates) are listed on the column `boot.se`.
+
+As expected, the bootstrap percentile confidence interval of the
+indirect effect, `ab`, is \[0.016, 0.202\], wider than the delta-method
+confidence interval, \[0.006, 0.183\], and is shifted to the right.
+
+## Print in a Friendly Format
+
+The print-method of the output of
+[`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
+supports printing the results in a text Format similar to the summary of
+`lavaan` output. Call [`print()`](https://rdrr.io/r/base/print.html)
+directly and add `output = "text"`:
+
+``` r
+print(ci_boot,
+      output = "text")
+#> 
+#> Standardized Estimates Only
+#> 
+#>   Standard errors                            Bootstrap
+#>   Confidence interval                        Bootstrap
+#>   Confidence Level                               95.0%
+#>   Standardization Type                         std.all
+#>   Number of requested bootstrap draws             5000
+#>   Number of successful bootstrap draws            5000
+#> 
+#> Regressions:
+#>                Standardized  Std.Err ci.lower ci.upper
+#>   Y ~                                                 
+#>     X          (c)    0.054    0.117   -0.171    0.286
+#>   M ~                                                 
+#>     X          (a)    0.370    0.101    0.144    0.537
+#>   Y ~                                                 
+#>     M          (b)    0.255    0.097    0.061    0.443
+#> 
+#> Variances:
+#>                Standardized  Std.Err ci.lower ci.upper
+#>    .Y                 0.922    0.058    0.766    0.986
+#>    .M                 0.863    0.070    0.712    0.979
+#> 
+#> Defined Parameters:
+#>                Standardized  Std.Err ci.lower ci.upper
+#>     ab                0.094    0.047    0.016    0.202
+#>     total             0.149    0.106   -0.048    0.362
+```
+
+Note that it will replace the results of *unstandardized* solution by
+those from the *standardized* solution.
+
+To print both the unstandardized and standardized results in the
+text-format, add `standardized_only = FALSE` when calling
+[`print()`](https://rdrr.io/r/base/print.html).
+
+## Note
+
+The function
+[`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
+takes some time to run because it retrieves the estimates of the
+unstandardized solution in each bootstrap sample and computes the
+estimates in the standardized solution. Therefore, if 5,000 bootstrap
+samples are requested, this process is repeated 5,000 times.
+Nevertheless, it is still much faster than fitting the model 5,000 times
+again.
+
+## Background
+
+This function was originally proposed in an [issue at
+GitHub](https://github.com/simsem/semTools/issues/101#issue-1021974657),
+inspired by a discussion at the [Google group for
+lavaan](https://groups.google.com/g/lavaan/c/qQBXSz5cd0o/m/R8YT5HxNAgAJ).
+It is not a versatile function and used some “tricks” to do the work. A
+more reliable way is to use function like
+[`lavaan::bootstrapLavaan()`](https://rdrr.io/pkg/lavaan/man/bootstrap.html).
+Nevertheless, this simple function is good enough for the cases I
+encountered in my work.
+
+------------------------------------------------------------------------
+
+1.  In `lavaan`, if bootstrapping is requested, the standard errors and
+    confidence intervals in the standardized solutions are computed by
+    delta method using the variance-covariance matrix of the bootstrap
+    estimates. The intervals are symmetric about the point estimates and
+    are not the bootstrap percentile confidence intervals users expect
+    when bootstrapping is conducted.
