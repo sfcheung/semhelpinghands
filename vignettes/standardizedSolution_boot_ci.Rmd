@@ -10,6 +10,25 @@ vignette: >
 
 
 
+# Note
+
+2025-11-22: A new package, [`semboottools`](https://yangzhen1999.github.io/semboottools/),
+can do what `standardizedSolution_boot_ci()`
+in this package does,
+with more features, as well as some
+diagnostic functions. The function
+`standardizedSolution_boot_ci()`,
+as well as its helpers, such as
+`store_boot_def()` and `plot_boot()`,
+will
+stay in [`semhelpinghands`](https://sfcheung.github.io/semhelpinghands/).
+, but will not
+be further developed. Users are
+recommended to use
+`semboottools::standardizedSolution_boot()`
+and other functions in [`semboottools`](https://yangzhen1999.github.io/semboottools/)
+instead of this function.
+
 # Introduction
 
 This document introduces the function
@@ -47,7 +66,7 @@ official `lavaan` website is used
 (https://lavaan.ugent.be/tutorial/mediation.html).
 
 
-```r
+``` r
 library(lavaan)
 set.seed(1234)
 n <- 100
@@ -78,7 +97,7 @@ to a value appropriate for the system
 running it.)
 
 
-```r
+``` r
 fit <- sem(model,
            data = Data,
            se = "bootstrap",
@@ -96,7 +115,7 @@ confidence intervals.)
 This is the standardized solution with delta-method confidence intervals.
 
 
-```r
+``` r
 standardizedSolution(fit)
 #>     lhs op     rhs label est.std    se      z pvalue ci.lower ci.upper
 #> 1     Y  ~       X     c   0.054 0.118  0.461  0.645   -0.176    0.285
@@ -116,7 +135,7 @@ solution, simply use `standardizedSolution_boot_ci()` instead of
 `lavaan::standardizedSolution()`:
 
 
-```r
+``` r
 library(semhelpinghands)
 ci_boot <- standardizedSolution_boot_ci(fit)
 ci_boot
@@ -166,7 +185,7 @@ output. Call `print()` directly and
 add `output = "text"`:
 
 
-```r
+``` r
 print(ci_boot,
       output = "text")
 #> 

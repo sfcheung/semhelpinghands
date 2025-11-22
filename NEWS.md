@@ -1,3 +1,17 @@
+# semhelpinghands 0.1.12.1
+
+## Miscellaneous
+
+- Add notes to notify users that
+  `standardizedSolution_boot_ci()` and
+  its helpers will no longer be further
+  developed in this package. Users are
+  recommended to use the package
+  `semboottools`(https://yangzhen1999.github.io/semboottools/)
+  to form bootstrap confidence intervals
+  for the standardized solution.
+  (0.1.12.1)
+
 # semhelpinghands 0.1.12
 
 ## New Features

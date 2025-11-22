@@ -7,6 +7,21 @@
 #'
 #' @details
 #'
+#' **NOTE**: A new package, \href{https://yangzhen1999.github.io/semboottools/}{`semboottools`},
+#' can do what [standardizedSolution_boot_ci()] does,
+#' with more features, as well as some
+#' diagnostic functions. The function
+#' [standardizedSolution_boot_ci()],
+#' as well as its helpers, such as
+#' [store_boot_def()] and [plot_boot()],
+#' will
+#' stay in this package, but will not
+#' be further developed. Users are
+#' recommended to use
+#' [semboottools::standardizedSolution_boot()]
+#' and other functions in \href{https://yangzhen1999.github.io/semboottools/}{`semboottools`}
+#' instead of this function.
+#'
 #' [standardizedSolution_boot_ci()]
 #' receives a
 #' [lavaan::lavaan-class] object fitted

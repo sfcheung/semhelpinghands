@@ -44,6 +44,21 @@ object
 with the estimates stored.
 }
 \details{
+\strong{NOTE}: A new package, \href{https://yangzhen1999.github.io/semboottools/}{\code{semboottools}},
+can do what \code{\link[=standardizedSolution_boot_ci]{standardizedSolution_boot_ci()}} does,
+with more features, as well as some
+diagnostic functions. The function
+\code{\link[=standardizedSolution_boot_ci]{standardizedSolution_boot_ci()}},
+as well as its helpers, such as
+\code{\link[=store_boot_def]{store_boot_def()}} and \code{\link[=plot_boot]{plot_boot()}},
+will
+stay in this package, but will not
+be further developed. Users are
+recommended to use
+\code{\link[semboottools:standardizedSolution_boot]{semboottools::standardizedSolution_boot()}}
+and other functions in \href{https://yangzhen1999.github.io/semboottools/}{\code{semboottools}}
+instead of this function.
+
 \code{\link[lavaan:lavaan]{lavaan::lavaan()}} and its wrappers,
 such as \code{\link[lavaan:sem]{lavaan::sem()}} and
 \code{\link[lavaan:cfa]{lavaan::cfa()}}, stores the estimates
