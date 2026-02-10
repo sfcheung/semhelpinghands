@@ -3,11 +3,19 @@
 ## Note
 
 2025-11-22: A new package,
-[`semboottools`](https://yangzhen1999.github.io/semboottools/), can do
-what
+[`semboottools`](https://yangzhen1999.github.io/semboottools/) (Yang &
+Cheung, 2026), can do what
 [`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
 in this package does, with more features, as well as some diagnostic
-functions. The function
+functions:
+
+- Yang, W., & Cheung, S. F. (2026). Forming bootstrap confidence
+  intervals and examining bootstrap distributions of standardized
+  coefficients in structural equation modelling: A simplified workflow
+  using the R package `semboottools`. *Behavior Research Methods,
+  58*(2), 38. <https://doi.org/10.3758/s13428-025-02911-z>
+
+The function
 [`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md),
 as well as its helpers, such as
 [`store_boot_def()`](https://sfcheung.github.io/semhelpinghands/reference/store_boot_def.md)
@@ -217,6 +225,14 @@ more reliable way is to use function like
 [`lavaan::bootstrapLavaan()`](https://rdrr.io/pkg/lavaan/man/bootstrap.html).
 Nevertheless, this simple function is good enough for the cases I
 encountered in my work.
+
+## Reference(s)
+
+Yang, W., & Cheung, S. F. (2026). Forming bootstrap confidence intervals
+and examining bootstrap distributions of standardized coefficients in
+structural equation modelling: A simplified workflow using the R package
+semboottools. *Behavior Research Methods*, *58*(2), 38.
+<https://doi.org/10.3758/s13428-025-02911-z>
 
 ------------------------------------------------------------------------
 

@@ -3,11 +3,19 @@
 ## Note
 
 2025-11-22: A new package,
-[`semboottools`](https://yangzhen1999.github.io/semboottools/), can do
-what
+[`semboottools`](https://yangzhen1999.github.io/semboottools/) (Yang &
+Cheung, 2026), can do what
 [`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
 in this package does, with more features, as well as some diagnostic
-functions. The function
+functions:
+
+- Yang, W., & Cheung, S. F. (2026). Forming bootstrap confidence
+  intervals and examining bootstrap distributions of standardized
+  coefficients in structural equation modelling: A simplified workflow
+  using the R package `semboottools`. *Behavior Research Methods,
+  58*(2), 38. <https://doi.org/10.3758/s13428-025-02911-z>
+
+The function
 [`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md),
 as well as its helpers, such as
 [`store_boot_def()`](https://sfcheung.github.io/semhelpinghands/reference/store_boot_def.md)
@@ -238,6 +246,12 @@ Rousselet, G. A., Pernet, C. R., & Wilcox, R. R. (2021). The percentile
 bootstrap: A primer with step-by-step instructions in R. *Advances in
 Methods and Practices in Psychological Science*, *4*(1), 1–10.
 <https://doi.org/10.1177/2515245920911881>
+
+Yang, W., & Cheung, S. F. (2026). Forming bootstrap confidence intervals
+and examining bootstrap distributions of standardized coefficients in
+structural equation modelling: A simplified workflow using the R package
+semboottools. *Behavior Research Methods*, *58*(2), 38.
+<https://doi.org/10.3758/s13428-025-02911-z>
 
 ------------------------------------------------------------------------
 

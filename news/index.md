@@ -1,6 +1,6 @@
 # Changelog
 
-## semhelpinghands 0.1.12.1
+## semhelpinghands 0.1.13
 
 ### Miscellaneous
 
@@ -11,6 +11,12 @@
   `semboottools`(<https://yangzhen1999.github.io/semboottools/>) to form
   bootstrap confidence intervals for the standardized solution.
   (0.1.12.1)
+
+- Updated
+  [`vec_compRelSEM()`](https://sfcheung.github.io/semhelpinghands/reference/vector_from_lavaan.md)
+  for the upcoming `semTools` 0.5-8. Thank
+  [@TDJorgensen](https://github.com/TDJorgensen) for updating this
+  function. (0.1.12.2)
 
 ## semhelpinghands 0.1.12
 

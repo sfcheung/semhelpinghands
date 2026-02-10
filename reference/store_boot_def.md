@@ -39,8 +39,8 @@ user-defined parameters
 ## Details
 
 **NOTE**: A new package,
-[`semboottools`](https://yangzhen1999.github.io/semboottools/), can do
-what
+[`semboottools`](https://yangzhen1999.github.io/semboottools/) (Yang &
+Cheung, 2026), can do what
 [`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
 does, with more features, as well as some diagnostic functions. The
 function
@@ -72,6 +72,14 @@ returned.
 
 `store_boot_def()` is usually used with diagnostic functions such as
 [`plot_boot()`](https://sfcheung.github.io/semhelpinghands/reference/plot_boot.md).
+
+## References
+
+Yang, W., & Cheung, S. F. (2026). Forming bootstrap confidence intervals
+and examining bootstrap distributions of standardized coefficients in
+structural equation modelling: A simplified workflow using the R package
+*semboottools*. *Behavior Research Methods, 58*(2), 38.
+[doi:10.3758/s13428-025-02911-z](https://doi.org/10.3758/s13428-025-02911-z)
 
 ## See also
 
