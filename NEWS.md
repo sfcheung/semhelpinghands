@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.12.2
+# semhelpinghands 0.1.13
 
 ## Miscellaneous
 
@@ -13,7 +13,7 @@
   (0.1.12.1)
 
 - Updated `vec_compRelSEM()` for the
-  upcoming `semTools` 0.5-8. Thanks
+  upcoming `semTools` 0.5-8. Thank
   @TDJorgensen for updating this
   function.
   (0.1.12.2)
