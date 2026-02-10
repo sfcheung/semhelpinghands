@@ -8,7 +8,7 @@
 #' @details
 #'
 #' **NOTE**: A new package, \href{https://yangzhen1999.github.io/semboottools/}{`semboottools`}
-#' (\href{https://doi.org/10.3758/s13428-025-02911-z}{Yang & Cheung, 2026}),
+#' (Yang & Cheung, 2026),
 #' can do what [standardizedSolution_boot_ci()] does,
 #' with more features, as well as some
 #' diagnostic functions. The function
