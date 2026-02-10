@@ -210,19 +210,20 @@ skip_if_not_installed("semTools")
 library(semTools)
 test_that("compRelSEM", {
     expect_equal(vec_compRelSEM(fit_cfa),
-                 compRelSEM(fit_cfa),
+                 compRelSEM(fit_cfa, simplify = -1L),
                  ignore_attr = TRUE)
     expect_equal(vec_compRelSEM(fit_cfa, return.total = TRUE),
-                 compRelSEM(fit_cfa, return.total = TRUE),
+                 compRelSEM(fit_cfa, return.total = TRUE, simplify = -1L),
                  ignore_attr = TRUE)
     expect_equal(sort(vec_compRelSEM(fit_cfa_mg)),
-                 sort(unlist(compRelSEM(fit_cfa_mg)[, -1])),
+                 sort(unlist(compRelSEM(fit_cfa_mg, simplify = -1L))),
                  ignore_attr = TRUE)
     expect_equal(sort(vec_compRelSEM(fit_cfa_mg, return.total = TRUE)),
-                 sort(unlist(compRelSEM(fit_cfa_mg, return.total = TRUE)[, -1])),
+                 sort(unlist(compRelSEM(fit_cfa_mg, return.total = TRUE, simplify = -1L))),
                  ignore_attr = TRUE)
   })
 
 test_that("Sanity check", {
-    expect_error(vec_compRelSEM(fit_cfa, return.df = TRUE))
-  })
+  # expect_error(vec_compRelSEM(fit_cfa, return.df = TRUE)) # invalid from 0.5-8
+  expect_error(vec_compRelSEM(fit_cfa, simplify = TRUE))
+})
