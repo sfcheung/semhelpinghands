@@ -6,6 +6,8 @@ vignette: >
   %\VignetteIndexEntry{Bootstrap Confidence Interval for Standardized Solution in lavaan}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: references.bib
+csl: apa.csl
 ---
 
 ```{r, include = FALSE}
@@ -17,11 +19,22 @@ knitr::opts_chunk$set(
 
 # Note
 
-2025-11-22: A new package, [`semboottools`](https://yangzhen1999.github.io/semboottools/),
+2025-11-22: A new package, [`semboottools`](https://yangzhen1999.github.io/semboottools/) [@yang_forming_2026],
 can do what `standardizedSolution_boot_ci()`
 in this package does,
 with more features, as well as some
-diagnostic functions. The function
+diagnostic functions:
+
+- Yang, W., & Cheung, S. F. (2026). Forming
+  bootstrap confidence intervals and examining
+  bootstrap distributions of standardized
+  coefficients in structural equation modelling:
+  A simplified workflow using the R package
+  `semboottools`.
+  *Behavior Research Methods, 58*(2), 38.
+  https://doi.org/10.3758/s13428-025-02911-z
+
+The function
 `standardizedSolution_boot_ci()`,
 as well as its helpers, such as
 `store_boot_def()` and `plot_boot()`,
@@ -197,4 +210,5 @@ do the work. A more reliable way is to use function like
 `lavaan::bootstrapLavaan()`. Nevertheless, this simple function
 is good enough for the cases I encountered in my work.
 
+# Reference(s)
 
