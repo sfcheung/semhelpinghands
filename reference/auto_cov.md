@@ -113,7 +113,7 @@ fit1 <- sem(mod1, dat, meanstructure = TRUE, fixed.x = FALSE)
 
 # No manual covariances
 fit
-#> lavaan 0.6-20 ended normally after 15 iterations
+#> lavaan 0.6-21 ended normally after 15 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -129,7 +129,7 @@ fit
 
 # Automatically generated covariances
 fit_cov
-#> lavaan 0.6-20 ended normally after 23 iterations
+#> lavaan 0.6-21 ended normally after 23 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -145,7 +145,7 @@ fit_cov
 
 # Manually added covariances
 fit1
-#> lavaan 0.6-20 ended normally after 23 iterations
+#> lavaan 0.6-21 ended normally after 23 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB

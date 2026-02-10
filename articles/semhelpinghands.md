@@ -20,7 +20,7 @@ library(semhelpinghands)
 #> 
 #>     sort_by
 library(lavaan)
-#> This is lavaan 0.6-20
+#> This is lavaan 0.6-21
 #> lavaan is FREE software! Please report any bugs.
 ```
 
@@ -759,28 +759,28 @@ fit_MLR <- sem(model = mod,
                data = dvs_ivs,
                estimator = "MLR")
 show_more_options(fit_MLR)
-#>  Options                             Call    Actual            
-#>  Estimator(s)                        MLR     ML                
-#>  Standard Error (SE)                 default robust.huber.white
-#>  Model Test Statistic(s)             default yuan.bentler.mplus
-#>  How Missing Data is Handled         default listwise          
-#>  Information Matrix (for SE)         default observed          
-#>  Information Matrix (for Model Test) default observed          
-#>  Mean Structure                      default No                
+#>  Options                             Call    Actual                      
+#>  Estimator(s)                        MLR     ML                          
+#>  Standard Error (SE)                 default robust.huber.white          
+#>  Model Test Statistic(s)             default standard, yuan.bentler.mplus
+#>  How Missing Data is Handled         default listwise                    
+#>  Information Matrix (for SE)         default observed                    
+#>  Information Matrix (for Model Test) default observed                    
+#>  Mean Structure                      default No                          
 #>  'x' Fixed                           default TRUE
 fit_MLR_fiml <- sem(model = mod,
                     data = dvs_ivs,
                     estimator = "MLR",
                     missing = "fiml")
 show_more_options(fit_MLR_fiml)
-#>  Options                             Call    Actual            
-#>  Estimator(s)                        MLR     ML                
-#>  Standard Error (SE)                 default robust.huber.white
-#>  Model Test Statistic(s)             default yuan.bentler.mplus
-#>  How Missing Data is Handled         fiml    ml                
-#>  Information Matrix (for SE)         default observed          
-#>  Information Matrix (for Model Test) default observed          
-#>  Mean Structure                      default Yes               
+#>  Options                             Call    Actual                      
+#>  Estimator(s)                        MLR     ML                          
+#>  Standard Error (SE)                 default robust.huber.white          
+#>  Model Test Statistic(s)             default standard, yuan.bentler.mplus
+#>  How Missing Data is Handled         fiml    ml                          
+#>  Information Matrix (for SE)         default observed                    
+#>  Information Matrix (for Model Test) default observed                    
+#>  Mean Structure                      default Yes                         
 #>  'x' Fixed                           default TRUE
 ```
 

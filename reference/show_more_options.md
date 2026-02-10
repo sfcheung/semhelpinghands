@@ -108,24 +108,24 @@ tmp
 
 fit <- cfa(HS.model, data = HolzingerSwineford1939, estimator = "MLR")
 show_more_options(fit)
-#>  Options                             Call    Actual            
-#>  Estimator(s)                        MLR     ML                
-#>  Standard Error (SE)                 default robust.huber.white
-#>  Model Test Statistic(s)             default yuan.bentler.mplus
-#>  How Missing Data is Handled         default listwise          
-#>  Information Matrix (for SE)         default observed          
-#>  Information Matrix (for Model Test) default observed          
-#>  Mean Structure                      default No                
-#>  'x' Fixed                           default FALSE             
+#>  Options                             Call    Actual                      
+#>  Estimator(s)                        MLR     ML                          
+#>  Standard Error (SE)                 default robust.huber.white          
+#>  Model Test Statistic(s)             default standard, yuan.bentler.mplus
+#>  How Missing Data is Handled         default listwise                    
+#>  Information Matrix (for SE)         default observed                    
+#>  Information Matrix (for Model Test) default observed                    
+#>  Mean Structure                      default No                          
+#>  'x' Fixed                           default FALSE                       
 fit <- cfa(HS.model, data = HolzingerSwineford1939, estimator = "MLM")
 show_more_options(fit)
-#>  Options                             Call    Actual         
-#>  Estimator(s)                        MLM     ML             
-#>  Standard Error (SE)                 default robust.sem     
-#>  Model Test Statistic(s)             default satorra.bentler
-#>  How Missing Data is Handled         default listwise       
-#>  Information Matrix (for SE)         default expected       
-#>  Information Matrix (for Model Test) default expected       
-#>  Mean Structure                      default No             
-#>  'x' Fixed                           default FALSE          
+#>  Options                             Call    Actual                   
+#>  Estimator(s)                        MLM     ML                       
+#>  Standard Error (SE)                 default robust.sem               
+#>  Model Test Statistic(s)             default standard, satorra.bentler
+#>  How Missing Data is Handled         default listwise                 
+#>  Information Matrix (for SE)         default expected                 
+#>  Information Matrix (for Model Test) default expected                 
+#>  Mean Structure                      default No                       
+#>  'x' Fixed                           default FALSE                    
 ```
