@@ -393,38 +393,86 @@ vec_lavTestWald <- function(object,
         names(out1) <- paste0(prefix, "_", names(out1))
       }
     return(out1)
+}
+
+
+## old version, works on semTools < 0.5-8
+vec_compRelSEM_old <- function(object,
+                           ...) {
+  my_call <- match.call()
+  if ("return.df" %in% names(my_call)) {
+    stop("'return.df' cannot be set. Please remove it.")
   }
+  out0 <- semTools::compRelSEM(object,
+                               return.df = FALSE,
+                               ...)
+  ngroup <- lavaan::lavInspect(object, "ngroups")
+  if (ngroup > 1) {
+    group_labels <- paste0(".", names(out0))
+    out1 <- mapply(function(x, xname) {
+      names(x) <- paste0(names(x), "_rel", xname)
+      x
+    }, x = out0, xname = group_labels,
+    SIMPLIFY = FALSE)
+    names(out1) <- NULL
+    out <- unlist(out1)
+  } else {
+    names(out0) <- paste0(names(out0), "_rel")
+    out <- out0
+  }
+  return(out)
+}
 
 #' @export
 #' @describeIn vector_from_lavaan Composite reliability.
 #' @order 11
-
+## new version, works on semTools 0.5-8, but calls old version for earlier semTools
 vec_compRelSEM <- function(object,
                            ...) {
     if (!requireNamespace("semTools")) {
         stop("Please install 'semTools' first.")
-      }
+    }
+  ## run old version when user has an old semTools installed
+  if (utils::packageDescription("semTools", fields = "Version") < "0.5-8") {
+    return(vec_compRelSEM_old(object, ...))
+  }
+  ## else, run the new version:
+
     my_call <- match.call()
-    if ("return.df" %in% names(my_call)) {
-        stop("'return.df' cannot be set. Please remove it.")
-      }
+    if ("simplify" %in% names(my_call)) {
+        stop("'simplify=' argument cannot be set. Please remove it.")
+    }
+
+    ## just try letting semTools simplify it first
     out0 <- semTools::compRelSEM(object,
-                                 return.df = FALSE,
+                                 simplify = -1L,
                                  ...)
-    ngroup <- lavaan::lavInspect(object, "ngroups")
-    if (ngroup > 1) {
-        group_labels <- paste0(".", names(out0))
-        out1 <- mapply(function(x, xname) {
-                    names(x) <- paste0(names(x), "_rel", xname)
-                    x
-                  }, x = out0, xname = group_labels,
-              SIMPLIFY = FALSE)
-        names(out1) <- NULL
-        out <- unlist(out1)
-      } else {
-        names(out0) <- paste0(names(out0), "_rel")
-        out <- out0
-      }
+    ## then check if it is already a vector
+    if (is.numeric(out0)) {
+      names(out0) <- paste0(names(out0), "_rel")
+      out <- out0
+
+    } else if (is.data.frame(out0)) {
+
+      ## grab group names from columns, composite names from rows
+      composite_labels <- paste0(colnames(out0), "_rel")
+      group_labels <- paste0(".", rownames(out0))
+      ## combine names
+      coef_labels <- do.call(function(x, y) paste0(x, y),
+                             ## y first to yield same order as do.call(c, out0)
+                             args = expand.grid(y = group_labels,
+                                                x = composite_labels,
+                                                stringsAsFactors = FALSE))
+      ## apply names to coefficients
+      out <- setNames(object = do.call(c, out0),
+                      nm = coef_labels)
+
+    } else if (is.list(out0)) {
+      ## Can't be simplified. Try concatenating the vectors.
+      out <- do.call(c, out0) # probably safe to rely on these default names
+
+    } else out <- NULL # it should only be a list, vector, or data.frame
+
     return(out)
   }
 
