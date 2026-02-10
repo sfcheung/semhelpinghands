@@ -218,10 +218,10 @@ test_that("compRelSEM", {
                  compRelSEM(fit_cfa, return.total = TRUE),
                  ignore_attr = TRUE)
     expect_equal(sort(vec_compRelSEM(fit_cfa_mg)),
-                 sort(unlist(compRelSEM(fit_cfa_mg, return.df = FALSE))),
+                 sort(unlist(compRelSEM(fit_cfa_mg)[, -1])),
                  ignore_attr = TRUE)
     expect_equal(sort(vec_compRelSEM(fit_cfa_mg, return.total = TRUE)),
-                 sort(unlist(compRelSEM(fit_cfa_mg, return.total = TRUE, return.df = FALSE))),
+                 sort(unlist(compRelSEM(fit_cfa_mg, return.total = TRUE)[, -1])),
                  ignore_attr = TRUE)
   } else {
     expect_equal(vec_compRelSEM(fit_cfa),
@@ -236,11 +236,8 @@ test_that("compRelSEM", {
     expect_equal(sort(vec_compRelSEM(fit_cfa_mg, return.total = TRUE)),
                  sort(unlist(compRelSEM(fit_cfa_mg, return.total = TRUE, simplify = -1L))),
                  ignore_attr = TRUE)
+    expect_error(vec_compRelSEM(fit_cfa, simplify = TRUE))
   }
 
 })
 
-test_that("Sanity check", {
-  # expect_error(vec_compRelSEM(fit_cfa, return.df = TRUE)) # invalid from 0.5-8
-  expect_error(vec_compRelSEM(fit_cfa, simplify = TRUE))
-})
