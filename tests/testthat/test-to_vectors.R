@@ -209,6 +209,21 @@ test_that("Wald tests", {
 skip_if_not_installed("semTools")
 library(semTools)
 test_that("compRelSEM", {
+
+  if (utils::packageDescription("semTools", fields = "Version") < "0.5-8") {
+    expect_equal(vec_compRelSEM(fit_cfa),
+                 compRelSEM(fit_cfa),
+                 ignore_attr = TRUE)
+    expect_equal(vec_compRelSEM(fit_cfa, return.total = TRUE),
+                 compRelSEM(fit_cfa, return.total = TRUE),
+                 ignore_attr = TRUE)
+    expect_equal(sort(vec_compRelSEM(fit_cfa_mg)),
+                 sort(unlist(compRelSEM(fit_cfa_mg, return.df = FALSE))),
+                 ignore_attr = TRUE)
+    expect_equal(sort(vec_compRelSEM(fit_cfa_mg, return.total = TRUE)),
+                 sort(unlist(compRelSEM(fit_cfa_mg, return.total = TRUE, return.df = FALSE))),
+                 ignore_attr = TRUE)
+  } else {
     expect_equal(vec_compRelSEM(fit_cfa),
                  compRelSEM(fit_cfa, simplify = -1L),
                  ignore_attr = TRUE)
@@ -221,7 +236,9 @@ test_that("compRelSEM", {
     expect_equal(sort(vec_compRelSEM(fit_cfa_mg, return.total = TRUE)),
                  sort(unlist(compRelSEM(fit_cfa_mg, return.total = TRUE, simplify = -1L))),
                  ignore_attr = TRUE)
-  })
+  }
+
+})
 
 test_that("Sanity check", {
   # expect_error(vec_compRelSEM(fit_cfa, return.df = TRUE)) # invalid from 0.5-8

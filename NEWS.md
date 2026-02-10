@@ -1,4 +1,4 @@
-# semhelpinghands 0.1.12.1
+# semhelpinghands 0.1.12.2
 
 ## Miscellaneous
 
@@ -11,6 +11,12 @@
   to form bootstrap confidence intervals
   for the standardized solution.
   (0.1.12.1)
+
+- Updated `vec_compRelSEM()` for the
+  upcoming `semTools` 0.5-8. Thanks
+  @TDJorgensen for updating this
+  function.
+  (0.1.12.2)
 
 # semhelpinghands 0.1.12
 
