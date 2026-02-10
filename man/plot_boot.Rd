@@ -163,7 +163,8 @@ distribution of bootstrap estimates
 in a model fitted by \code{lavaan}.
 }
 \details{
-\strong{NOTE}: A new package, \href{https://yangzhen1999.github.io/semboottools/}{\code{semboottools}},
+\strong{NOTE}: A new package, \href{https://yangzhen1999.github.io/semboottools/}{\code{semboottools}}
+(\href{https://doi.org/10.3758/s13428-025-02911-z}{Yang & Cheung, 2026}),
 can do what \code{\link[=standardizedSolution_boot_ci]{standardizedSolution_boot_ci()}} does,
 with more features, as well as some
 diagnostic functions. The function
@@ -262,6 +263,14 @@ The percentile bootstrap: A primer with step-by-step
 instructions in R.
 \emph{Advances in Methods and Practices in Psychological Science},
 \emph{4}(1), 1--10. \doi{10.1177/2515245920911881}
+
+Yang, W., & Cheung, S. F. (2026). Forming bootstrap
+confidence intervals and examining bootstrap
+distributions of standardized coefficients in
+structural equation modelling: A simplified workflow
+using the R package \emph{semboottools}.
+\emph{Behavior Research Methods, 58}(2), 38.
+\doi{10.3758/s13428-025-02911-z}
 }
 \seealso{
 \code{\link[lavaan:fitMeasures]{lavaan::fitMeasures()}}, \code{\link[=store_boot_est_std]{store_boot_est_std()}},

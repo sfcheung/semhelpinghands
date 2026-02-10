@@ -6,7 +6,8 @@
 #'
 #' @details
 #'
-#' **NOTE**: A new package, \href{https://yangzhen1999.github.io/semboottools/}{`semboottools`},
+#' **NOTE**: A new package, \href{https://yangzhen1999.github.io/semboottools/}{`semboottools`}
+#' (\href{https://doi.org/10.3758/s13428-025-02911-z}{Yang & Cheung, 2026}),
 #' can do what [standardizedSolution_boot_ci()] does,
 #' with more features, as well as some
 #' diagnostic functions. The function
@@ -64,6 +65,14 @@
 #' instructions in R.
 #' *Advances in Methods and Practices in Psychological Science*,
 #' *4*(1), 1--10. \doi{10.1177/2515245920911881}
+#'
+#' Yang, W., & Cheung, S. F. (2026). Forming bootstrap
+#' confidence intervals and examining bootstrap
+#' distributions of standardized coefficients in
+#' structural equation modelling: A simplified workflow
+#' using the R package *semboottools*.
+#' *Behavior Research Methods, 58*(2), 38.
+#' \doi{10.3758/s13428-025-02911-z}
 #'
 #' @return Return the original
 #' [lavaan::lavaan-class] object

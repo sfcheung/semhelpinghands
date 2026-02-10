@@ -11,7 +11,8 @@
 #'
 #' @details
 #'
-#' **NOTE**: A new package, \href{https://yangzhen1999.github.io/semboottools/}{`semboottools`},
+#' **NOTE**: A new package, \href{https://yangzhen1999.github.io/semboottools/}{`semboottools`}
+#' (\href{https://doi.org/10.3758/s13428-025-02911-z}{Yang & Cheung, 2026}),
 #' can do what [standardizedSolution_boot_ci()] does,
 #' with more features, as well as some
 #' diagnostic functions. The function
@@ -82,6 +83,15 @@
 #' <https://orcid.org/0000-0002-9871-9448>.
 #'
 #' @seealso [plot_boot()]
+#'
+#' @references
+#' Yang, W., & Cheung, S. F. (2026). Forming bootstrap
+#' confidence intervals and examining bootstrap
+#' distributions of standardized coefficients in
+#' structural equation modelling: A simplified workflow
+#' using the R package *semboottools*.
+#' *Behavior Research Methods, 58*(2), 38.
+#' \doi{10.3758/s13428-025-02911-z}
 #'
 #' @examples
 #'
