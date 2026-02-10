@@ -1,6 +1,6 @@
 # semhelpinghands
 
-(Version 0.1.13 updated on 2026-02-09, [release
+(Version 0.1.14 updated on 2026-02-09, [release
 history](https://sfcheung.github.io/semhelpinghands/news/index.html))
 
 This package is an assortment of time-saving helper functions for doing

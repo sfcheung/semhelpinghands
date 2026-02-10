@@ -11,13 +11,13 @@ Source:
 [`DESCRIPTION`](https://github.com/sfcheung/semhelpinghands/blob/main/DESCRIPTION)
 
 Cheung S (2026). *semhelpinghands: Helper Functions for Structural
-Equation Modeling*. R package version 0.1.13,
+Equation Modeling*. R package version 0.1.14,
 <https://sfcheung.github.io/semhelpinghands/>.
 
     @Manual{,
       title = {semhelpinghands: Helper Functions for Structural Equation Modeling},
       author = {Shu Fai Cheung},
       year = {2026},
-      note = {R package version 0.1.13},
+      note = {R package version 0.1.14},
       url = {https://sfcheung.github.io/semhelpinghands/},
     }
