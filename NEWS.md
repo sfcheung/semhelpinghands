@@ -1,3 +1,13 @@
+# semhelpinghands 0.1.14.1
+
+## Miscellaneous
+
+- The argument `allow_incomplete` of
+  `ptable_to_syntax()` will
+  no longer support `lavaan` 0.7-1 and
+  later version.
+  (0.1.14.1)
+
 # semhelpinghands 0.1.14
 
 ## Miscellaneous
