@@ -1,6 +1,6 @@
 Package: semhelpinghands
 Title: Helper Functions for Structural Equation Modeling
-Version: 0.1.14
+Version: 0.1.14.1
 Authors@R: person(given = "Shu Fai",
            family = "Cheung",
            role = c("aut", "cre"),
@@ -19,7 +19,6 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Suggests:
     rmarkdown,
     knitr,
@@ -35,3 +34,4 @@ Imports:
     ggrepel,
     utils
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0

@@ -138,7 +138,7 @@ in each sample.
 
 A more reliable way is to use
 function like
-\code{\link[lavaan:bootstrap]{lavaan::bootstrapLavaan()}}.
+\code{\link[lavaan:bootstrapLavaan]{lavaan::bootstrapLavaan()}}.
 Nevertheless, this simple function is
 good enough for some simple scenarios,
 and does not require repeating

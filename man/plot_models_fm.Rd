@@ -51,7 +51,7 @@ is 2.}
 \item{position_dodge}{Offsetting the
 label of a model from the point.
 Default is .5. Used by
-\code{\link[ggrepel:geom_text_repel]{ggrepel::geom_label_repel()}}.}
+\code{\link[ggrepel:geom_label_repel]{ggrepel::geom_label_repel()}}.}
 
 \item{include_model_values}{If \code{TRUE}
 , the values of the models on

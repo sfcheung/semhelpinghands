@@ -134,7 +134,7 @@ a named vector.
 \details{
 This set of wrapper
 functions are for functions like
-\code{\link[lavaan:bootstrap]{lavaan::bootstrapLavaan()}} that
+\code{\link[lavaan:bootstrapLavaan]{lavaan::bootstrapLavaan()}} that
 require users to supply a function
 that receives
 a \code{lavaan}-class object and returns

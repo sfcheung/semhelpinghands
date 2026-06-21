@@ -1,3 +1,7 @@
+skip_if(packageVersion("lavaan") >= "0.7.1")
+
+# `allow_incomplete` is no longer supported in lavaan 0.7.1
+
 library(testthat)
 
 library(lavaan)
