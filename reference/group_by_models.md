@@ -74,6 +74,7 @@ this function.
 ## Examples
 
 ``` r
+
 library(lavaan)
 set.seed(5478374)
 n <- 50

@@ -13,6 +13,7 @@ will be introduced in details in forthcoming article dedicated to them.
 Let’s load the package first, and also load `lavaan`.
 
 ``` r
+
 library(semhelpinghands)
 #> 
 #> Attaching package: 'semhelpinghands'
@@ -41,6 +42,7 @@ group variable (`gp`).
 First a single sample model:
 
 ``` r
+
 data(dvs_ivs)
 mod <-
 "
@@ -56,6 +58,7 @@ fit <- sem(model = mod,
 The parameter estimates tables:
 
 ``` r
+
 est <- parameterEstimates(fit)
 est
 #>    lhs op rhs    est    se      z pvalue ci.lower ci.upper
@@ -81,6 +84,7 @@ est
 A two-sample model is also fitted to the dataset:
 
 ``` r
+
 fit_gp <- sem(model = mod,
               data = dvs_ivs,
               group = "gp",
@@ -90,6 +94,7 @@ fit_gp <- sem(model = mod,
 This is the parameter estimates table:
 
 ``` r
+
 est_gp <- parameterEstimates(fit_gp)
 est_gp
 #>    lhs op rhs block group    est    se      z pvalue ci.lower ci.upper
@@ -151,6 +156,7 @@ them mentally. Here comes
 [`add_sig()`](https://sfcheung.github.io/semhelpinghands/reference/add_sig.md):
 
 ``` r
+
 add_sig(est)
 #>    lhs op rhs    est sig    se      z pvalue ci.lower ci.upper
 #> 1   y1  ~  x1  0.206 *   0.087  2.354  0.019    0.034    0.377
@@ -178,6 +184,7 @@ bootstrapping confidence intervals are used (but same results in this
 example):
 
 ``` r
+
 add_sig(est,
         use = c("pvalue", "ci"))
 #>    lhs op rhs    est sig  ci    se      z pvalue ci.lower ci.upper
@@ -203,6 +210,7 @@ add_sig(est,
 It also works on the standardized solution:
 
 ``` r
+
 std <- standardizedSolution(fit)
 add_sig(std)
 #>    lhs op rhs est.std sig    se      z pvalue ci.lower ci.upper
@@ -240,6 +248,7 @@ operators (`op`), “dependent variables” (`lhs`), and “independent
 variables” (`rhs`).
 
 ``` r
+
 filter_by(est,
           op = "~")
 #>   lhs op rhs   est    se     z pvalue ci.lower ci.upper
@@ -255,6 +264,7 @@ filter_by(est,
 It also supports filtering by group using group labels:
 
 ``` r
+
 filter_by(est_gp,
           op = "~",
           group = "gp1",
@@ -283,6 +293,7 @@ and
 are for:
 
 ``` r
+
 group_by_dvs(est)
 #>    iv est_y1 est_y2 est_y3
 #> x1 x1  0.206  0.149     --
@@ -299,6 +310,7 @@ group_by_ivs(est)
 They also supports extracting another column:
 
 ``` r
+
 group_by_dvs(est,
              col_name = "pvalue")
 #>    iv pvalue_y1 pvalue_y2 pvalue_y3
@@ -328,6 +340,7 @@ groups. I wrote
 for this task, to compare results side-by-side:
 
 ``` r
+
 group_by_groups(est_gp)
 #>    lhs op rhs  est_1  est_2
 #> 1   y1  ~  x1  0.210  0.258
@@ -358,6 +371,7 @@ group_by_groups(est_gp)
 It also supports extracting several columns:
 
 ``` r
+
 group_by_groups(est_gp,
                 col_names = c("est", "pvalue"))
 #>    lhs op rhs  est_1  est_2 pvalue_1 pvalue_2
@@ -389,6 +403,7 @@ group_by_groups(est_gp,
 If the fit object is used, it can print group labels:
 
 ``` r
+
 group_by_groups(fit_gp,
                 col_names = c("est", "pvalue"))
 #>    lhs op rhs est_gp1 est_gp2 pvalue_gp1 pvalue_gp2
@@ -432,6 +447,7 @@ wrote
 Suppose this is the other model fitted:
 
 ``` r
+
 mod2 <-
 "
 y1 ~ x1 + x2 + x3
@@ -468,6 +484,7 @@ These two models have no nested relationships. To compare the estimates,
 can be used:
 
 ``` r
+
 group_by_models(list(Model1 = est,
                      Model2 = est2))
 #>    lhs op rhs est_Model1 est_Model2
@@ -495,6 +512,7 @@ group_by_models(list(Model1 = est,
 It can also compare several columns:
 
 ``` r
+
 group_by_models(list(Model1 = est,
                      Model2 = est2),
                 col_names = c("est", "pvalue"))
@@ -534,6 +552,7 @@ used on the output of some other functions that manipulate a parameter
 estimates table.
 
 ``` r
+
 out <- group_by_groups(est_gp,
                        col_names = c("est", "pvalue"))
 out <- filter_by(out,
@@ -578,6 +597,7 @@ of the functions that manipulate parameter estimates tables. For
 example:
 
 ``` r
+
 est_gp |>
   add_sig() |>
   group_by_groups(col_names = c("est", "pvalue", "sig"),
@@ -602,6 +622,7 @@ estimate results to the methods used,
 can be used as a quick way to compare results from different methods.
 
 ``` r
+
 out <- compare_estimators(fit,
          estimator = c("ML", "GLS", "MLR"))
 group_by_models(out,
@@ -638,6 +659,7 @@ output of
 [`compare_estimators()`](https://sfcheung.github.io/semhelpinghands/reference/compare_estimators.md):
 
 ``` r
+
 se_ratios(out,
           reference = "ML")
 #>    lhs op rhs se_ML se_GLS se_MLR ratio_ML ratio_GLS ratio_MLR
@@ -736,6 +758,7 @@ estimator. Instead of finding them from the output of
 some of them in one table for a quick overview. This is an example:
 
 ``` r
+
 data(dvs_ivs)
 mod <-
 "

@@ -40,8 +40,7 @@ and related helpers, from the package
 In `lavaan`, even with `se = "bootstrap"`, the confidence intervals in
 the standardized solution are *not* bootstrap confidence intervals. This
 is a problem when researchers want to form bootstrap confidence
-intervals for parameters such as a *standardized* indirect
-effect.[¹](#fn1)
+intervals for parameters such as a *standardized* indirect effect.[^1]
 
 The function
 [`standardizedSolution_boot_ci()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
@@ -56,6 +55,7 @@ A mediation model example modified from the official `lavaan` website is
 used (<https://lavaan.ugent.be/tutorial/mediation.html>).
 
 ``` r
+
 library(lavaan)
 set.seed(1234)
 n <- 100
@@ -84,6 +84,7 @@ This model is fitted with `se = "bootstrap"` and 5000 replication.
 (Change `ncpus` to a value appropriate for the system running it.)
 
 ``` r
+
 fit <- sem(model,
            data = Data,
            se = "bootstrap",
@@ -100,6 +101,7 @@ This is the standardized solution with delta-method confidence
 intervals.
 
 ``` r
+
 standardizedSolution(fit)
 #>     lhs op     rhs label est.std    se      z pvalue ci.lower ci.upper
 #> 1     Y  ~       X     c   0.054 0.118  0.461  0.645   -0.176    0.285
@@ -121,6 +123,7 @@ instead of
 [`lavaan::standardizedSolution()`](https://rdrr.io/pkg/lavaan/man/standardizedSolution.html):
 
 ``` r
+
 library(semhelpinghands)
 ci_boot <- standardizedSolution_boot_ci(fit)
 ci_boot
@@ -164,6 +167,7 @@ supports printing the results in a text Format similar to the summary of
 directly and add `output = "text"`:
 
 ``` r
+
 print(ci_boot,
       output = "text")
 #> 
@@ -234,11 +238,9 @@ structural equation modelling: A simplified workflow using the R package
 semboottools. *Behavior Research Methods*, *58*(2), 38.
 <https://doi.org/10.3758/s13428-025-02911-z>
 
-------------------------------------------------------------------------
-
-1.  In `lavaan`, if bootstrapping is requested, the standard errors and
-    confidence intervals in the standardized solutions are computed by
-    delta method using the variance-covariance matrix of the bootstrap
-    estimates. The intervals are symmetric about the point estimates and
-    are not the bootstrap percentile confidence intervals users expect
-    when bootstrapping is conducted.
+[^1]: In `lavaan`, if bootstrapping is requested, the standard errors
+    and confidence intervals in the standardized solutions are computed
+    by delta method using the variance-covariance matrix of the
+    bootstrap estimates. The intervals are symmetric about the point
+    estimates and are not the bootstrap percentile confidence intervals
+    users expect when bootstrapping is conducted.

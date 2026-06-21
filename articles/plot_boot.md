@@ -45,6 +45,7 @@ A mediation model example modified from the official `lavaan` website is
 used (<https://lavaan.ugent.be/tutorial/mediation.html>).
 
 ``` r
+
 library(lavaan)
 set.seed(12345)
 n <- 100
@@ -72,6 +73,7 @@ This model is fitted with `se = "bootstrap"` and 5000 replication.
 (Change `ncpus` to a value appropriate for the system running it.)
 
 ``` r
+
 fit <- sem(model,
            data = Data,
            se = "bootstrap",
@@ -87,6 +89,7 @@ failed runs will not be used in forming the confidence intervals.)
 This is the bootstrap confidence intervals:
 
 ``` r
+
 parameterEstimates(fit)
 #>     lhs op     rhs label   est    se     z pvalue ci.lower ci.upper
 #> 1     Y  ~       X     c 0.008 0.071 0.117  0.906   -0.135    0.141
@@ -110,6 +113,7 @@ The following is a sample call to plot the bootstrap estimates of the
 `b` path:
 
 ``` r
+
 library(semhelpinghands)
 plot_boot(fit,
           param = "b",
@@ -159,9 +163,10 @@ Only the bootstrap estimates of free parameters are stored by `lavaan`.
 To plot the distribution of bootstrap estimates, call
 [`store_boot_def()`](https://sfcheung.github.io/semhelpinghands/reference/store_boot_def.md)
 first to compute the bootstrap estimates of user-defined parameters and
-store them back to the output of `lavaan`.[¹](#fn1)
+store them back to the output of `lavaan`.[^1]
 
 ``` r
+
 fit <- store_boot_def(fit)
 ```
 
@@ -171,6 +176,7 @@ can be used again. For example, to plot the distribution of `ab`, the
 indirect effect, just set `param` to `"ab"`.
 
 ``` r
+
 plot_boot(fit,
           param = "ab",
           standardized = FALSE,
@@ -191,9 +197,10 @@ standardized regression coefficients, correlations, and standardized
 indirect effect, first call
 [`store_boot_est_std()`](https://sfcheung.github.io/semhelpinghands/reference/standardizedSolution_boot_ci.md)
 to compute the bootstrap estimates in the standardized solution and
-store them back to the output of `lavaan`.[²](#fn2)
+store them back to the output of `lavaan`.[^2]
 
 ``` r
+
 fit <- store_boot_est_std(fit)
 ```
 
@@ -204,6 +211,7 @@ standardized indirect effect, just set `param` to `"ab"` *and* set
 `standardized` to `TRUE`:
 
 ``` r
+
 plot_boot(fit,
           param = "ab",
           standardized = TRUE,
@@ -219,6 +227,7 @@ distribution in the standardized solution. For example, this is the plot
 of the bootstrap estimates of the standardized path from `M` to `Y`:
 
 ``` r
+
 plot_boot(fit,
           param = "b",
           standardized = TRUE,
@@ -253,12 +262,10 @@ structural equation modelling: A simplified workflow using the R package
 semboottools. *Behavior Research Methods*, *58*(2), 38.
 <https://doi.org/10.3758/s13428-025-02911-z>
 
-------------------------------------------------------------------------
+[^1]: The estimates are stored in a slot for external functions and do
+    not affect the output of `lavaan` in other ways.
 
-1.  The estimates are stored in a slot for external functions and do not
-    affect the output of `lavaan` in other ways.
-
-2.  Like
+[^2]: Like
     [`store_boot_def()`](https://sfcheung.github.io/semhelpinghands/reference/store_boot_def.md),
     the estimates are stored in a slot for external functions and do not
     affect the output of `lavaan` in other ways.

@@ -96,6 +96,7 @@ Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 ## Examples
 
 ``` r
+
 # Adapted from the example for CFA in lavaan::cfa().
 # Using only two of the factors
 library(lavaan)

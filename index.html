@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Helper Functions for Structural Equation Modeling">
 <meta name="description" content="An assortment of helper functions for doing structural equation modeling, mainly by lavaan for now. Most of them are time-saving functions for common tasks in doing structural equation modeling and reading the output. This package is not for functions that implement advanced statistical procedures. It is a light-weight package for simple functions that do simple tasks conveniently, with as few dependencies as possible.">
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">semhelpinghands</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.14.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,7 @@
 <img src="logo.png" class="logo" alt=""><h1 id="semhelpinghands-">semhelpinghands <a class="anchor" aria-label="anchor" href="#semhelpinghands-"></a>
 </h1>
 </div>
-<p>(Version 0.1.14 updated on 2026-02-09, <a href="https://sfcheung.github.io/semhelpinghands/news/index.html">release history</a>)</p>
+<p>(Version 0.1.14.1 updated on 2026-06-21, <a href="https://sfcheung.github.io/semhelpinghands/news/index.html">release history</a>)</p>
 <p>This package is an assortment of time-saving helper functions for doing structural equation modeling (SEM), mainly by <code><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan::lavaan()</a></code> and its wrappers, such as <code><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">lavaan::sem()</a></code> and <code><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">lavaan::cfa()</a></code>. This package is not for implementing advanced statistical procedures. This should be the job of excellent packages such as <code>semTools</code>. These helper functions are for tasks that come in handy (at least to me) when doing SEM. They are usually used <em>during</em> the data analysis phase, not for publishing or presenting results.</p>
 <p>Many of the tasks can be done by base R code or by <code>dplyr</code> functions. However, these functions may help users who are not familiar with R programming or use R only occasionally to do these tasks without writing their own code, or for people like me who know how to do this using base R but do not want to write the code every time.</p>
 <p>I intentionally use base R if possible because I want to keep <code>semhelpinghands</code> a light weight package, depending on as few other packages as possible, so that I do not need to worry about deprecated functions or updates in other packages that break things, defeating the “time saving” purpose of this package.</p>

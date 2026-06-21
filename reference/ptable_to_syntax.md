@@ -33,7 +33,9 @@ compare_ptables(object1, object2)
 
   Whether incomplete parameter table formed by
   [`lavaan::lavParseModelString()`](https://rdrr.io/pkg/lavaan/man/model.syntax.html)
-  with `as.data.frame. = TRUE` is allowed. Default if `FALSE`.
+  with `as.data.frame. = TRUE` is allowed. Default if `FALSE`. NOTE:
+  This feature will not be supported in `lavaan` 0.7-1 and future
+  versions.
 
 - object1:
 
@@ -147,6 +149,7 @@ inspired by a discussion at the Google Group
 ## Examples
 
 ``` r
+
 library(lavaan)
 
 mod <-

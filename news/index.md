@@ -1,6 +1,16 @@
 # Changelog
 
+## semhelpinghands 0.1.14.1
+
+### Miscellaneous
+
+- The argument `allow_incomplete` of
+  [`ptable_to_syntax()`](https://sfcheung.github.io/semhelpinghands/reference/ptable_to_syntax.md)
+  will no longer support `lavaan` 0.7-1 and later version. (0.1.14.1)
+
 ## semhelpinghands 0.1.14
+
+CRAN release: 2026-02-10
 
 ### Miscellaneous
 

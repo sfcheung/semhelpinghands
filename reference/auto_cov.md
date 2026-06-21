@@ -67,6 +67,7 @@ Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 ## Examples
 
 ``` r
+
 library(lavaan)
 set.seed(8976223)
 n <- 100

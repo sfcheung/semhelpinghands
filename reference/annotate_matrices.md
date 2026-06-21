@@ -68,6 +68,7 @@ Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 ## Examples
 
 ``` r
+
 # Adapted from https://lavaan.ugent.be/tutorial/cfa.html
 
 library(lavaan)
