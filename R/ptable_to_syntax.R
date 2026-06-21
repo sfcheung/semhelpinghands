@@ -131,6 +131,8 @@
 #' by [lavaan::lavParseModelString()]
 #' with `as.data.frame. = TRUE` is
 #' allowed. Default if `FALSE`.
+#' NOTE: This feature will not be supported
+#' in `lavaan` 0.7-1 and future versions.
 #'
 #' @param object1 The first `lavaan`
 #' parameter table, to be compared with
@@ -204,6 +206,11 @@ ptable_to_syntax <- function(object,
         names_eqs_y <- lavaan::lavNames(object, "eqs.y")
       } else if (inherits(object, "data.frame") &&
                  !inherits(object, "lavaan.data.frame")) {
+        if (allow_incomplete &&
+            (utils::packageVersion("lavaan") >= "0.7.1")) {
+          stop("The argument 'allow_incomplete' is ",
+               "not supported in lavaan 0.7-1 and later version.")
+        }
         if (!allow_incomplete) {
             stop("Object may be an incomplete parameter table ",
                  "but 'allow_incomplete' is FALSE.")
