@@ -1,6 +1,8 @@
 # Changelog
 
-## semhelpinghands 0.1.14.1
+## semhelpinghands 0.1.15
+
+CRAN release: 2026-07-08
 
 ### Miscellaneous
 
