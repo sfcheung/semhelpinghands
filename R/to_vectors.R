@@ -433,7 +433,7 @@ vec_compRelSEM <- function(object,
         stop("Please install 'semTools' first.")
     }
   ## run old version when user has an old semTools installed
-  if (utils::packageDescription("semTools", fields = "Version") < "0.5-8") {
+  if (utils::packageVersion("semTools") < "0.5-8") {
     return(vec_compRelSEM_old(object, ...))
   }
   ## else, run the new version:

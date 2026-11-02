@@ -211,7 +211,7 @@ library(semTools)
 test_that("compRelSEM", {
   # Enable the tests again after the next version of semTools is on CRAN
   skip_on_cran()
-  if (utils::packageDescription("semTools", fields = "Version") < "0.5-8") {
+  if (utils::packageVersion("semTools") < "0.5-8") {
     expect_equal(vec_compRelSEM(fit_cfa),
                  compRelSEM(fit_cfa),
                  ignore_attr = TRUE)
