@@ -47,16 +47,20 @@ export(vec_lavTestWald)
 export(vec_rsquare)
 export(vec_sample_var)
 export(vec_sample_vcov)
-importFrom(graphics,abline)
-importFrom(graphics,axTicks)
-importFrom(graphics,axis)
-importFrom(graphics,hist)
-importFrom(graphics,lines)
-importFrom(graphics,mtext)
-importFrom(graphics,par)
-importFrom(graphics,title)
+importFrom(graphics,
+  abline,
+  axTicks,
+  axis,
+  hist,
+  lines,
+  mtext,
+  par,
+  title
+)
 importFrom(lavaan,coef)
 importFrom(rlang,.data)
-importFrom(stats,qqline)
-importFrom(stats,qqnorm)
-importFrom(stats,setNames)
+importFrom(stats,
+  qqline,
+  qqnorm,
+  setNames
+)
