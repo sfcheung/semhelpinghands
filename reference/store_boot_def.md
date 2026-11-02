@@ -112,7 +112,7 @@ fit <- sem(model, data = dat, fixed.x = FALSE,
            se = "boot",
            bootstrap = 100)
 summary(fit)
-#> lavaan 0.6-21 ended normally after 1 iteration
+#> lavaan 0.7-3 ended normally after 1 iteration
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -122,6 +122,11 @@ summary(fit)
 #> 
 #> Model Test User Model:
 #>                                                       
+#>   Test statistic                                 0.020
+#>   Degrees of freedom                                 1
+#>   P-value (Chi-square)                           0.887
+#>                                                       
+#>   Browne's residual (NT model-based) test             
 #>   Test statistic                                 0.020
 #>   Degrees of freedom                                 1
 #>   P-value (Chi-square)                           0.887

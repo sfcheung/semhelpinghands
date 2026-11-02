@@ -86,7 +86,7 @@ Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 ``` r
 
 library(lavaan)
-#> This is lavaan 0.6-21
+#> This is lavaan 0.7-3
 #> lavaan is FREE software! Please report any bugs.
 set.seed(5478374)
 n <- 50

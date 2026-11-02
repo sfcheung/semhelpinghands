@@ -112,7 +112,7 @@ fit_h <- record_history(fit)
 fit_h
 #> Original call:
 #> lavaan::lavaan(model = HS.model, data = HolzingerSwineford1939, 
-#>     model.type = "cfa", int.ov.free = TRUE, int.lv.free = FALSE, 
+#>     model.type = "cfa", cmd = "cfa", int.ov.free = TRUE, int.lv.free = FALSE, 
 #>     auto.fix.first = TRUE, auto.fix.single = TRUE, auto.var = TRUE, 
 #>     auto.cov.lv.x = TRUE, auto.cov.y = TRUE, auto.th = TRUE, 
 #>     auto.delta = TRUE, auto.efa = TRUE)

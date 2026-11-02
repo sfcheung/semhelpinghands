@@ -114,7 +114,7 @@ fit1 <- sem(mod1, dat, meanstructure = TRUE, fixed.x = FALSE)
 
 # No manual covariances
 fit
-#> lavaan 0.6-21 ended normally after 15 iterations
+#> lavaan 0.7-3 ended normally after 15 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -127,10 +127,15 @@ fit
 #>   Test statistic                                 5.863
 #>   Degrees of freedom                                 4
 #>   P-value (Chi-square)                           0.210
+#>                                                       
+#>   Browne's residual (NT model-based) test             
+#>   Test statistic                                 5.687
+#>   Degrees of freedom                                 4
+#>   P-value (Chi-square)                           0.224
 
 # Automatically generated covariances
 fit_cov
-#> lavaan 0.6-21 ended normally after 23 iterations
+#> lavaan 0.7-3 ended normally after 24 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -143,10 +148,15 @@ fit_cov
 #>   Test statistic                                 0.152
 #>   Degrees of freedom                                 1
 #>   P-value (Chi-square)                           0.696
+#>                                                       
+#>   Browne's residual (NT model-based) test             
+#>   Test statistic                                 0.152
+#>   Degrees of freedom                                 1
+#>   P-value (Chi-square)                           0.696
 
 # Manually added covariances
 fit1
-#> lavaan 0.6-21 ended normally after 23 iterations
+#> lavaan 0.7-3 ended normally after 23 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -156,6 +166,11 @@ fit1
 #> 
 #> Model Test User Model:
 #>                                                       
+#>   Test statistic                                 0.152
+#>   Degrees of freedom                                 1
+#>   P-value (Chi-square)                           0.696
+#>                                                       
+#>   Browne's residual (NT model-based) test             
 #>   Test statistic                                 0.152
 #>   Degrees of freedom                                 1
 #>   P-value (Chi-square)                           0.696

@@ -96,15 +96,15 @@ fit <- cfa(HS.model, data = HolzingerSwineford1939)
 
 tmp <- show_more_options(fit)
 tmp
-#>  Options                             Call    Actual  
-#>  Estimator(s)                        default ML      
-#>  Standard Error (SE)                 default standard
-#>  Model Test Statistic(s)             default standard
-#>  How Missing Data is Handled         default listwise
-#>  Information Matrix (for SE)         default expected
-#>  Information Matrix (for Model Test) default expected
-#>  Mean Structure                      default No      
-#>  'x' Fixed                           default FALSE   
+#>  Options                             Call    Actual                            
+#>  Estimator(s)                        default ML                                
+#>  Standard Error (SE)                 default standard                          
+#>  Model Test Statistic(s)             default standard, browne.residual.nt.model
+#>  How Missing Data is Handled         default listwise                          
+#>  Information Matrix (for SE)         default expected                          
+#>  Information Matrix (for Model Test) default expected                          
+#>  Mean Structure                      default No                                
+#>  'x' Fixed                           default FALSE                             
 
 fit <- cfa(HS.model, data = HolzingerSwineford1939, estimator = "MLR")
 show_more_options(fit)

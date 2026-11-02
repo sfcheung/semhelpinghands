@@ -1,5 +1,15 @@
 # Changelog
 
+## semhelpinghands 0.1.15.1
+
+### Miscellaneous
+
+- Replaced
+  [`packageDescription()`](https://rdrr.io/r/utils/packageDescription.html)
+  by
+  [`packageVersion()`](https://rdrr.io/r/utils/packageDescription.html)
+  in some tests and checks. (0.1.15.1)
+
 ## semhelpinghands 0.1.15
 
 CRAN release: 2026-07-08

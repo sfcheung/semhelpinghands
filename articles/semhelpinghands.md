@@ -21,7 +21,7 @@ library(semhelpinghands)
 #> 
 #>     sort_by
 library(lavaan)
-#> This is lavaan 0.6-21
+#> This is lavaan 0.7-3
 #> lavaan is FREE software! Please report any bugs.
 ```
 
@@ -769,14 +769,14 @@ y3 ~ y2 + x2
 fit_default <- sem(model = mod,
                    data = dvs_ivs)
 show_more_options(fit_default)
-#>  Options                             Call    Actual  
-#>  Estimator(s)                        default ML      
-#>  Standard Error (SE)                 default standard
-#>  Model Test Statistic(s)             default standard
-#>  How Missing Data is Handled         default listwise
-#>  Information Matrix (for SE)         default expected
-#>  Information Matrix (for Model Test) default expected
-#>  Mean Structure                      default No      
+#>  Options                             Call    Actual                            
+#>  Estimator(s)                        default ML                                
+#>  Standard Error (SE)                 default standard                          
+#>  Model Test Statistic(s)             default standard, browne.residual.nt.model
+#>  How Missing Data is Handled         default listwise                          
+#>  Information Matrix (for SE)         default expected                          
+#>  Information Matrix (for Model Test) default expected                          
+#>  Mean Structure                      default No                                
 #>  'x' Fixed                           default TRUE
 fit_MLR <- sem(model = mod,
                data = dvs_ivs,

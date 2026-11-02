@@ -180,7 +180,7 @@ fit <- sem(model, data = dat, fixed.x = FALSE,
            se = "boot",
            bootstrap = 100)
 summary(fit)
-#> lavaan 0.6-21 ended normally after 1 iteration
+#> lavaan 0.7-3 ended normally after 1 iteration
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -190,6 +190,11 @@ summary(fit)
 #> 
 #> Model Test User Model:
 #>                                                       
+#>   Test statistic                                 0.020
+#>   Degrees of freedom                                 1
+#>   P-value (Chi-square)                           0.887
+#>                                                       
+#>   Browne's residual (NT model-based) test             
 #>   Test statistic                                 0.020
 #>   Degrees of freedom                                 1
 #>   P-value (Chi-square)                           0.887
@@ -221,12 +226,12 @@ summary(fit)
 std <- standardizedSolution_boot_ci(fit)
 std
 #>   lhs op rhs label est.std    se      z pvalue ci.lower ci.upper boot.ci.lower
-#> 1   m  ~   x     a   0.229 0.127  1.800  0.072   -0.020    0.477        -0.041
-#> 2   y  ~   m     b   0.198 0.118  1.684  0.092   -0.032    0.429        -0.024
-#> 3   m ~~   m         0.948 0.058 16.325  0.000    0.834    1.062         0.793
-#> 4   y ~~   y         0.961 0.047 20.595  0.000    0.869    1.052         0.785
+#> 1   m  ~   x     a   0.229 0.124  1.845  0.065   -0.041    0.454        -0.041
+#> 2   y  ~   m     b   0.198 0.114  1.736  0.083   -0.024    0.464        -0.024
+#> 3   m ~~   m         0.948 0.057 16.599  0.000    0.793    1.000         0.793
+#> 4   y ~~   y         0.961 0.052 18.434  0.000    0.785    1.000         0.785
 #> 5   x ~~   x         1.000 0.000     NA     NA    1.000    1.000            NA
-#> 6  ab := a*b    ab   0.045 0.040  1.130  0.259   -0.033    0.124        -0.007
+#> 6  ab := a*b    ab   0.045 0.043  1.053  0.292   -0.007    0.164        -0.007
 #>   boot.ci.upper boot.se
 #> 1         0.454   0.125
 #> 2         0.464   0.115

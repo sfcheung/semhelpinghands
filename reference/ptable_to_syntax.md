@@ -187,7 +187,7 @@ cat(mod_chk, sep = "\n")
 # Need to call lavaan() directly
 fit_chk <- lavaan(mod_chk, data = HolzingerSwineford1939)
 fit_chk
-#> lavaan 0.6-21 ended normally after 33 iterations
+#> lavaan 0.7-3 ended normally after 33 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -200,8 +200,13 @@ fit_chk
 #>   Test statistic                                85.782
 #>   Degrees of freedom                                24
 #>   P-value (Chi-square)                           0.000
+#>                                                       
+#>   Browne's residual (NT model-based) test             
+#>   Test statistic                                82.239
+#>   Degrees of freedom                                24
+#>   P-value (Chi-square)                           0.000
 fit
-#> lavaan 0.6-21 ended normally after 33 iterations
+#> lavaan 0.7-3 ended normally after 33 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -212,6 +217,11 @@ fit
 #> Model Test User Model:
 #>                                                       
 #>   Test statistic                                85.782
+#>   Degrees of freedom                                24
+#>   P-value (Chi-square)                           0.000
+#>                                                       
+#>   Browne's residual (NT model-based) test             
+#>   Test statistic                                82.239
 #>   Degrees of freedom                                24
 #>   P-value (Chi-square)                           0.000
 # Compare the parameter table:
