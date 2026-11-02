@@ -1,3 +1,12 @@
+# semhelpinghands 0.1.15.1
+
+## Miscellaneous
+
+- Replaced `packageDescription()`
+  by `packageVersion()` in some tests
+  and checks.
+  (0.1.15.1)
+
 # semhelpinghands 0.1.15
 
 ## Miscellaneous
